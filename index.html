@@ -764,29 +764,71 @@
     sizePc();
     window.addEventListener('resize', sizePc);
 
-    // Build point cloud: pole + crossarm + insulators + transformer can, in local coords [-1,1]
+    // Build point cloud: pole, crossarm, insulators, transformer can, plus ground/road/vegetation and wires
     var points = [];
     var i;
+
+    // vertical pole
     for(i = 0; i < 260; i++){
       var h = -1 + (i/259)*2;
       var jitter = (Math.random()-0.5)*0.02;
       var ang = Math.random()*Math.PI*2;
       points.push({x:Math.cos(ang)*0.05+jitter, y:h, z:Math.sin(ang)*0.05, c:'pole'});
     }
-    for(i = 0; i < 90; i++){
-      var t = (i/89 - 0.5) * 1.2;
-      var ang2 = Math.random()*Math.PI*2;
-      points.push({x:t, y:0.62+Math.cos(ang2)*0.035, z:Math.sin(ang2)*0.035, c:'arm'});
+
+    // crossarm
+    for(i = 0; i < 100; i++){
+      var t = (i/99 - 0.5) * 1.3;
+      points.push({x:t, y:0.62 + (Math.random()-0.5)*0.01, z:(Math.random()-0.5)*0.02, c:'arm'});
     }
+
+    // insulators and conductors
     [-0.5, 0, 0.5].forEach(function(px){
       for(i = 0; i < 18; i++){
         points.push({x:px+(Math.random()-0.5)*0.03, y:0.68 + (i/17)*0.14, z:(Math.random()-0.5)*0.03, c:'ins'});
       }
     });
+    var wireCount = 180;
+    for(i = 0; i < wireCount; i++){
+      var t = i/(wireCount-1);
+      var x = -0.65 + t * 1.3;
+      var y = 0.72 + Math.sin(t*Math.PI)*0.02;
+      points.push({x:x + (Math.random()-0.5)*0.01, y:y + (Math.random()-0.5)*0.01, z:0.035 + (Math.random()-0.5)*0.007, c:'conductor'});
+      points.push({x:x + (Math.random()-0.5)*0.01, y:y - 0.08 + (Math.random()-0.5)*0.01, z:0.015 + (Math.random()-0.5)*0.005, c:'comm'});
+      if(i % 12 === 0){
+        points.push({x:x + (Math.random()-0.5)*0.02, y:y + 0.03 + (Math.random()-0.5)*0.01, z:0.032 + (Math.random()-0.5)*0.008, c:'ins'});
+        points.push({x:x + (Math.random()-0.5)*0.02, y:y + 0.01 + (Math.random()-0.5)*0.01, z:0.028 + (Math.random()-0.5)*0.006, c:'ins'});
+      }
+    }
+
+    // transformer and hardware around the pole
     for(i = 0; i < 130; i++){
       var ang3 = Math.random()*Math.PI*2;
-      var hh = -0.55 + Math.random()*0.5;
-      points.push({x:0.28+Math.cos(ang3)*0.16, y:hh, z:0.15+Math.sin(ang3)*0.16, c:'tx'});
+      var hh = -0.35 + Math.random()*0.5;
+      points.push({x:0.18+Math.cos(ang3)*0.10, y:hh, z:0.10+Math.sin(ang3)*0.10, c:'tx'});
+    }
+
+    // ground plane
+    for(i = 0; i < 420; i++){
+      var gx = (Math.random()-0.5) * 2.4;
+      var gz = (Math.random()-0.5) * 2.4;
+      var gy = -1.02 + (Math.random()-0.5)*0.01;
+      points.push({x:gx, y:gy, z:gz, c:'ground'});
+    }
+
+    // road surface
+    for(i = 0; i < 90; i++){
+      var rx = -0.9 + Math.random()*1.8;
+      var rz = -0.18 + (Math.random()-0.5)*0.08;
+      points.push({x:rx, y:-1.01 + (Math.random()-0.5)*0.003, z:rz, c:'road'});
+    }
+
+    // vegetation clusters
+    for(i = 0; i < 260; i++){
+      var vx = -0.85 + Math.random()*1.7;
+      var vz = 0.18 + (Math.random()-0.5)*0.5;
+      var vy = -0.88 + Math.random()*0.24;
+      points.push({x:vx, y:vy, z:vz, c:'vegetation'});
     }
 
     var angle = 0.6, autoSpin = 0.0035, dragging = false, lastX = 0, velocity = 0;
@@ -831,7 +873,15 @@
     }
 
     var colorMap = {
-      pole: [255,176,32], arm:[255,176,32], ins:[244,246,242], tx:[45,212,191]
+      pole: [255,176,32],
+      arm: [255,176,32],
+      ins: [244,246,242],
+      tx: [45,212,191],
+      conductor: [255,220,120],
+      comm: [110,215,255],
+      ground: [90,110,85],
+      road: [120,125,130],
+      vegetation: [72,158,74]
     };
 
     function drawPc(){
@@ -894,12 +944,13 @@
     }
 
     var rampStops = [
-      {t:0.00, rgb:[16,92,110]},
-      {t:0.22, rgb:[22,140,120]},
-      {t:0.42, rgb:[95,180,70]},
-      {t:0.62, rgb:[215,180,55]},
-      {t:0.82, rgb:[224,144,64]},
-      {t:1.00, rgb:[247,236,215]}
+      {t:0.00, rgb:[19,86,94]},       // wet lowland / marsh
+      {t:0.20, rgb:[56,142,84]},      // grass and vegetation
+      {t:0.38, rgb:[96,174,88]},      // denser vegetation
+      {t:0.58, rgb:[174,165,76]},     // meadow / field
+      {t:0.76, rgb:[203,150,70]},     // dry scrub / dirt
+      {t:0.90, rgb:[216,129,58]},     // upland earth
+      {t:1.00, rgb:[245,230,205]}     // rocky high ground
     ];
     function rampColor(t){
       for(var i = 0; i < rampStops.length-1; i++){
@@ -941,11 +992,33 @@
           var t = Math.min(1, (bandIdx[idx] + 0.5) / bandsCount);
           var col = rampColor(t);
 
+          var nx = x/W, ny = y/H;
+          var road = (Math.abs(Math.sin((ny*7 + seed[0])*4 + nx*1.8)) < 0.035 && nx > 0.12 && nx < 0.88) ||
+                     (Math.abs(Math.sin((nx*8 + seed[1])*3 + ny*1.2)) < 0.03 && ny > 0.15 && ny < 0.82);
+          var vegetation = !road && t < 0.66 && Math.abs(Math.sin(nx*4.5 + seed[2])*Math.cos(ny*5.2 + seed[3])) > 0.45;
+          var scrub = !road && t > 0.55 && t < 0.84 && Math.abs(Math.sin(nx*5 + seed[1])*Math.cos(ny*4.2 + seed[0])) > 0.52;
+
+          if(road){
+            col = [104,110,118];
+          } else if(vegetation){
+            col[0] = Math.max(24, col[0] - 10);
+            col[1] = Math.min(220, col[1] + 30);
+            col[2] = Math.max(35, col[2] - 16);
+          } else if(scrub){
+            col[0] = Math.min(255, col[0] + 18);
+            col[1] = Math.max(100, col[1] - 12);
+            col[2] = Math.max(40, col[2] - 10);
+          }
+
           var xl = x > 0 ? idx-1 : idx, xr = x < W-1 ? idx+1 : idx;
           var yu = y > 0 ? idx-W : idx, yd = y < H-1 ? idx+W : idx;
           var dx = elevFeet[xr] - elevFeet[xl];
           var dy = elevFeet[yd] - elevFeet[yu];
           var shade = Math.max(0.62, Math.min(1.38, 0.72 - dx*1.3 - dy*0.9));
+
+          if(road){
+            shade = Math.max(0.85, Math.min(1.15, shade * 1.05));
+          }
 
           var isEdge = bandIdx[idx] !== bandIdx[xl] || bandIdx[idx] !== bandIdx[yu];
           var lineMul = isEdge ? 0.72 : 1;
@@ -981,17 +1054,34 @@
 
     function drawPoles(){
       var poleH = 10;
-      fCtx.lineWidth = 1;
-      fCtx.strokeStyle = 'rgba(255,176,32,0.55)';
+
+      // power wire
+      fCtx.lineWidth = 2;
+      fCtx.strokeStyle = 'rgba(255,190,80,0.85)';
       fCtx.beginPath();
       for(var i = 0; i < poles.length; i++){
         var x = poles[i].fx*W, y = poles[i].fy*H - poleH;
         if(i === 0){ fCtx.moveTo(x, y); continue; }
         var px = poles[i-1].fx*W, py = poles[i-1].fy*H - poleH;
-        var sagX = (px+x)/2, sagY = Math.max(py,y) + 3;
+        var sagX = (px+x)/2, sagY = Math.max(py,y) + 4;
         fCtx.quadraticCurveTo(sagX, sagY, x, y);
       }
       fCtx.stroke();
+
+      // communications line below the power wire
+      fCtx.lineWidth = 1.4;
+      fCtx.strokeStyle = 'rgba(118,210,255,0.9)';
+      fCtx.setLineDash([6, 5]);
+      fCtx.beginPath();
+      for(var j = 0; j < poles.length; j++){
+        var x2 = poles[j].fx*W, y2 = poles[j].fy*H - poleH + 6;
+        if(j === 0){ fCtx.moveTo(x2, y2); continue; }
+        var px2 = poles[j-1].fx*W, py2 = poles[j-1].fy*H - poleH + 6;
+        var sagX2 = (px2+x2)/2, sagY2 = Math.max(py2,y2) + 4;
+        fCtx.quadraticCurveTo(sagX2, sagY2, x2, y2);
+      }
+      fCtx.stroke();
+      fCtx.setLineDash([]);
 
       var submerged = 0;
       for(var k = 0; k < poles.length; k++){
@@ -1003,6 +1093,7 @@
         if(flooded) submerged++;
         var col = flooded ? '235,90,66' : '255,176,32';
 
+        // pole mast
         fCtx.strokeStyle = 'rgba('+col+',0.95)';
         fCtx.lineWidth = 1.3;
         fCtx.beginPath();
@@ -1012,6 +1103,7 @@
         fCtx.lineTo(x+4, y-poleH);
         fCtx.stroke();
 
+        // pole base
         fCtx.beginPath();
         fCtx.arc(x, y, flooded ? 2.4 : 1.6, 0, Math.PI*2);
         fCtx.fillStyle = 'rgba('+col+',1)';
