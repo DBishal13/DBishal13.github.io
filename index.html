@@ -67,8 +67,7 @@
     background:var(--nav-bg); backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
-  .nav-name{font-family:'Space Grotesk'; font-weight:600; font-size:23px;}
+  nav .wrap{display:flex; align-items:center; justify-content:flex-end; height:64px;}
   .nav-links{display:flex; gap:19px; list-style:none;}
   .nav-links a{font-size:14.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--text-dim); transition:color .2s; white-space:nowrap;}
   .nav-links a:hover{color:var(--amber);}
@@ -112,6 +111,7 @@
   .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fa8a0; animation:pulse 1.6s infinite;}
   .drag-hint{position:absolute; top:12px; right:12px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.6;}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.2;}}
+  .hero-name{font-family:'Space Grotesk'; font-weight:600; font-size:26px; margin-bottom:14px;}
   .eyebrow{
     font-family:'JetBrains Mono'; font-size:14.5px; color:var(--amber);
     letter-spacing:0.06em; margin-bottom:22px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
@@ -163,7 +163,7 @@
     width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius);
     filter:grayscale(30%) contrast(1.05); border:1px solid var(--line);
   }
-  .about-body p{color:var(--text-dim); margin-bottom:12px; max-width:640px;}
+  .about-body p{color:var(--text-dim); margin-bottom:12px; max-width:860px;}
   .about-body strong{color:var(--text); font-weight:500;}
   .location-tag{
     font-family:'JetBrains Mono'; font-size:14px; color:var(--text-dim);
@@ -182,7 +182,7 @@
   .role li::before{content:'—'; position:absolute; left:0; color:var(--teal);}
 
   /* ---------- Builds ---------- */
-  .sec-intro{color:var(--text-dim); font-size:17.5px; max-width:700px; margin-bottom:26px;}
+  .sec-intro{color:var(--text-dim); font-size:17.5px; max-width:900px; margin-bottom:26px;}
   .build{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:30px; margin-bottom:20px;}
   .build:last-child{margin-bottom:0;}
   .build-head{display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:12px; flex-wrap:wrap;}
@@ -226,7 +226,7 @@
   .btn-mini:hover{border-color:var(--amber); color:var(--amber);}
 
   /* ---------- Work grids ---------- */
-  .note{color:var(--text-dim); font-size:16.5px; margin-bottom:24px; max-width:640px;}
+  .note{color:var(--text-dim); font-size:16.5px; margin-bottom:24px; max-width:860px;}
   .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
   @media (max-width:900px){ .work-grid{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:600px){ .work-grid{grid-template-columns:1fr;} }
@@ -268,7 +268,6 @@
 
 <nav>
   <div class="wrap">
-    <a href="#top" class="nav-name">Bishal Dhungana</a>
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
@@ -299,6 +298,7 @@
   <canvas class="bg-canvas" id="heroBg"></canvas>
   <div class="wrap hero-grid">
     <div class="hero-text">
+      <div class="hero-name">Bishal Dhungana</div>
       <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
       <h1>Turning raw spatial data into systems that hold up for <em>real infrastructure.</em></h1>
       <p class="lede">Geospatial Data Scientist working across LiDAR, aerial imagery, computer vision, and agentic AI systems — from field survey through production platforms supporting critical utility infrastructure.</p>
