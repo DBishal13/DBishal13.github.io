@@ -86,7 +86,7 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    position:relative; padding:132px 0 56px; overflow:hidden;
+    position:relative; padding:96px 0 56px; overflow:hidden;
     border-bottom:1px solid var(--line);
   }
   .hero canvas.bg-canvas{
@@ -146,8 +146,8 @@
   @media (max-width:900px){ .readout{grid-template-columns:repeat(2,1fr); row-gap:20px;} .readout div:nth-child(2n+1){border-left:none; padding-left:0;} }
 
   /* ---------- Section shell ---------- */
-  section{padding:64px 0; border-bottom:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:30px; flex-wrap:wrap; gap:12px;}
+  section{padding:48px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;}
   .sec-tag{font-family:'JetBrains Mono'; font-size:14.5px; color:var(--teal); letter-spacing:0.06em; text-transform:uppercase;}
   .sec-head h2{font-size:32px;}
 
@@ -157,12 +157,7 @@
   @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
 
   /* ---------- About ---------- */
-  .about-grid{display:grid; grid-template-columns:200px 1fr; gap:32px;}
-  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
-  .about-photo{
-    width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius);
-    filter:grayscale(30%) contrast(1.05); border:1px solid var(--line);
-  }
+  .about-grid{display:grid; grid-template-columns:1fr; gap:32px;}
   .about-body p{color:var(--text-dim); margin-bottom:12px; max-width:100%;}
   .about-body strong{color:var(--text); font-weight:500;}
   .location-tag{
@@ -331,7 +326,6 @@
       </div>
     </div>
     <div class="about-grid">
-      <img class="about-photo" src="assets/img/pp.JPG" alt="Bishal Dhungana">
       <div class="about-body">
         <p><strong>I work at the intersection of geospatial engineering, applied AI, and the software/platform work that ties them together</strong> — currently as a Data Scientist at The Spear Group, supporting Florida Power &amp; Light's FPLAir/NextVision program, where I lead AI/ML image recognition workflows for power equipment assessment and build the geospatial data pipelines, infrastructure-as-code, and internal platform tooling behind them.</p>
         <p>My background started in the field: control and topographic surveys, GNSS and UAV data collection, and geodatabase design in Nepal, before an MSc in Geosciences (GIS concentration) at Florida Atlantic University sharpened the AI/ML and geospatial data engineering side. That combination — knowing how spatial data is actually collected and knowing how to build production systems on top of it — is the throughline across everything I build.</p>
