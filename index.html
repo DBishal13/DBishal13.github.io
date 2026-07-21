@@ -1,985 +1,1110 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<script>
+  if(localStorage.getItem('theme') === 'light'){
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+</script>
+<title>Bishal Dhungana — Geospatial Data Scientist</title>
+<meta name="description" content="Geospatial Data Scientist working across AI/ML, LiDAR, agentic systems, and geospatial infrastructure for critical utility and hazard systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1210;
+    --surface:#141c19;
+    --surface-2:#1a2420;
+    --line: rgba(237,239,234,0.12);
+    --text:#f4f6f2;
+    --text-dim:#b7c1ba;
+    --amber:#ffb020;
+    --teal:#2dd4bf;
+    --on-accent:#0c1210;
+    --nav-bg: rgba(12,18,16,0.85);
+    --radius: 2px;
+    --maxw: 1200px;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"]{
+    --bg:#f4f2ec;
+    --surface:#ffffff;
+    --surface-2:#eae7dc;
+    --line: rgba(20,32,28,0.12);
+    --text:#141f1a;
+    --text-dim:#4d5851;
+    --amber:#b8560a;
+    --teal:#1f8a7a;
+    --on-accent:#fbf7ee;
+    --nav-bg: rgba(244,242,236,0.85);
+    color-scheme: light;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.65;
+    font-size:20px;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  ::selection{background:var(--amber); color:var(--on-accent);}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
 
-  <title>Bishal Dhungana</title>                                                                                                                                                                                              
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  /* ---------- Nav ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:var(--nav-bg); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-name{font-family:'Space Grotesk'; font-weight:600; font-size:23px;}
+  .nav-links{display:flex; gap:19px; list-style:none;}
+  .nav-links a{font-size:14.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--text-dim); transition:color .2s; white-space:nowrap;}
+  .nav-links a:hover{color:var(--amber);}
+  @media (max-width:980px){ .nav-links{display:none;} }
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="https://www.fau.edu/public-affairs/images/spirit-mark2.png" rel="apple-touch-icon">
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .nepal-toggle{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:34px; height:34px; border:1px solid var(--line); border-radius:50%;
+    background:var(--surface-2); color:var(--text-dim); cursor:pointer; transition:.2s; flex-shrink:0;
+  }
+  .nepal-toggle:hover{border-color:var(--amber); color:var(--amber);}
+  .nepal-toggle__icon{display:none; line-height:0;}
+  :root:not([data-theme="light"]) .nepal-toggle__sun{display:flex;}
+  :root[data-theme="light"] .nepal-toggle__moon{display:flex;}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; padding:132px 0 56px; overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero canvas.bg-canvas{
+    position:absolute; inset:0; width:100%; height:100%; z-index:0;
+    opacity:0.5;
+  }
+  .hero .wrap{position:relative; z-index:1;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:36px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero-visual{position:relative;}
+  .hero-visual canvas{
+    width:100%; aspect-ratio:4/5; display:block; touch-action:none; cursor:grab;
+    border:1px solid var(--line); border-radius:var(--radius);
+    background-color:#0e1613;
+    background-image:radial-gradient(circle at 50% 42%, rgba(45,212,191,0.14), transparent 70%);
+  }
+  .hero-visual canvas:active{cursor:grabbing;}
+  .scan-label{
+    position:absolute; bottom:12px; left:12px; font-family:'JetBrains Mono'; font-size:10.5px;
+    letter-spacing:0.06em; color:#5fa8a0; display:flex; align-items:center; gap:7px; text-transform:uppercase;
+  }
+  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fa8a0; animation:pulse 1.6s infinite;}
+  .drag-hint{position:absolute; top:12px; right:12px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.6;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.2;}}
+  .eyebrow{
+    font-family:'JetBrains Mono'; font-size:14.5px; color:var(--amber);
+    letter-spacing:0.06em; margin-bottom:22px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .eyebrow span{min-width:0; overflow-wrap:break-word;}
+  .eyebrow::before{content:''; width:22px; height:1px; background:var(--amber); display:inline-block;}
+  .hero h1{
+    font-size:clamp(38px, 5.6vw, 62px); line-height:1.06; max-width:820px; margin-bottom:18px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--amber);
+  }
+  .hero p.lede{
+    font-size:20px; color:var(--text-dim); max-width:620px; margin-bottom:28px;
+  }
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
+  .btn{
+    font-family:'JetBrains Mono'; font-size:15px; padding:13px 22px; border:1px solid var(--line);
+    border-radius:var(--radius); transition:.2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--amber); color:var(--on-accent); border-color:var(--amber); font-weight:500;}
+  .btn-primary:hover{background:#ffc250;}
+  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  .readout{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--line);
+  }
+  .readout div{padding:16px 0 0; border-left:1px solid var(--line); padding-left:16px;}
+  .readout div:first-child{border-left:none; padding-left:0;}
+  .readout .num{font-family:'Space Grotesk'; font-size:32px; color:var(--amber); font-weight:600;}
+  .readout .label{font-family:'JetBrains Mono'; font-size:13.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.03em; margin-top:4px;}
+  @media (max-width:900px){ .readout{grid-template-columns:repeat(2,1fr); row-gap:20px;} .readout div:nth-child(2n+1){border-left:none; padding-left:0;} }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  /* ---------- Section shell ---------- */
+  section{padding:64px 0; border-bottom:1px solid var(--line);}
+  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:30px; flex-wrap:wrap; gap:12px;}
+  .sec-tag{font-family:'JetBrains Mono'; font-size:14.5px; color:var(--teal); letter-spacing:0.06em; text-transform:uppercase;}
+  .sec-head h2{font-size:36px;}
 
-  <!-- =======================================================
-  * Template Name: iPortfolio
-  * Updated: Jul 27 2023 with Bootstrap v5.3.1
-  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  /* ---------- Scroll reveal ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:200px 1fr; gap:32px;}
+  @media (max-width:760px){ .about-grid{grid-template-columns:1fr;} }
+  .about-photo{
+    width:100%; aspect-ratio:1; object-fit:cover; border-radius:var(--radius);
+    filter:grayscale(30%) contrast(1.05); border:1px solid var(--line);
+  }
+  .about-body p{color:var(--text-dim); margin-bottom:12px; max-width:640px;}
+  .about-body strong{color:var(--text); font-weight:500;}
+  .location-tag{
+    font-family:'JetBrains Mono'; font-size:14px; color:var(--text-dim);
+    margin-top:16px; display:flex; gap:18px; flex-wrap:wrap;
+  }
+
+  /* ---------- Experience ---------- */
+  .role{padding:22px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:200px 1fr; gap:30px;}
+  .role:first-of-type{border-top:none;}
+  @media (max-width:760px){ .role{grid-template-columns:1fr; gap:10px;} }
+  .role-meta .dates{font-family:'JetBrains Mono'; font-size:14.5px; color:var(--amber);}
+  .role-meta .org{color:var(--text-dim); font-size:16.5px; margin-top:4px;}
+  .role-title{font-family:'Space Grotesk'; font-size:23px; margin-bottom:10px;}
+  .role ul{list-style:none;}
+  .role li{position:relative; padding-left:18px; margin-bottom:9px; color:var(--text-dim); font-size:17.5px;}
+  .role li::before{content:'—'; position:absolute; left:0; color:var(--teal);}
+
+  /* ---------- Builds ---------- */
+  .sec-intro{color:var(--text-dim); font-size:17.5px; max-width:700px; margin-bottom:26px;}
+  .build{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:30px; margin-bottom:20px;}
+  .build:last-child{margin-bottom:0;}
+  .build-head{display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:12px; flex-wrap:wrap;}
+  .build h3{font-size:23px;}
+  .build .stack{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 18px;}
+  .build p.desc{color:var(--text-dim); font-size:17px; margin-bottom:0; max-width:760px;}
+
+  /* ---------- Skills ---------- */
+  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:760px){ .skill-groups{grid-template-columns:1fr;} }
+  .skill-group h4{font-size:15px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; font-family:'JetBrains Mono'; font-weight:500;}
+  .skill-group .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:'JetBrains Mono'; font-size:14.5px; padding:7px 12px; background:var(--surface-2);
+    border:1px solid var(--line); border-radius:var(--radius); color:var(--text-dim);
+  }
+
+  /* ---------- Simulation ---------- */
+  .sim-panel{display:grid; grid-template-columns:1fr 260px; gap:26px; align-items:start;}
+  @media (max-width:820px){ .sim-panel{grid-template-columns:1fr;} }
+  .sim-canvas-wrap{border:1px solid var(--line); background:#141c19; padding:44px 20px 64px; perspective:1300px; overflow:hidden;}
+  .sim-canvas-wrap canvas{
+    width:100%; height:auto; display:block; border-radius:var(--radius);
+    transform:rotateX(46deg) scale(1.08); transform-origin:50% 100%;
+    box-shadow:0 55px 70px -35px rgba(0,0,0,0.75), 0 0 0 1px rgba(237,239,234,0.08);
+    transition:transform .4s ease;
+  }
+  .sim-canvas-wrap:hover canvas{transform:rotateX(36deg) scale(1.08);}
+  @media (prefers-reduced-motion: reduce){ .sim-canvas-wrap canvas{transition:none;} }
+  .sim-controls{display:flex; flex-direction:column; gap:20px;}
+  .sim-controls label{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:10px;}
+  .sim-controls label span{color:var(--amber);}
+  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:2px; background:var(--line); outline:none; border-radius:2px;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--amber); cursor:pointer; border:2px solid var(--bg); box-shadow:0 0 0 1px var(--amber);}
+  input[type=range]::-moz-range-thumb{width:14px; height:14px; border-radius:50%; background:var(--amber); cursor:pointer; border:2px solid var(--bg);}
+  .sim-readout{font-family:'JetBrains Mono'; font-size:13px; color:var(--text-dim); padding-top:16px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:16px;}
+  .sim-readout strong{color:var(--amber); font-size:24px; display:block; font-family:'Space Grotesk'; margin-top:4px; font-weight:600;}
+  .sim-readout .sim-sub{text-align:right;}
+  .sim-caption{font-size:12.5px; line-height:1.5; color:var(--text-dim); opacity:0.75;}
+  .btn-mini{font-family:'JetBrains Mono'; font-size:12.5px; padding:9px 14px; border:1px solid var(--line); align-self:flex-start; transition:.2s; background:none; color:var(--text); cursor:pointer;}
+  .btn-mini:hover{border-color:var(--amber); color:var(--amber);}
+
+  /* ---------- Work grids ---------- */
+  .note{color:var(--text-dim); font-size:16.5px; margin-bottom:24px; max-width:640px;}
+  .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){ .work-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .work-grid{grid-template-columns:1fr;} }
+  .work-card{background:var(--bg); padding:20px;}
+  .work-card .cat{font-family:'JetBrains Mono'; font-size:11.5px; color:var(--teal); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;}
+  .work-card h4{font-size:16px; margin-bottom:7px; line-height:1.3;}
+  .work-card p{color:var(--text-dim); font-size:14.5px; line-height:1.55;}
+  @media (min-width:901px){ #systems .work-grid .work-card:last-child{grid-column:1 / -1;} }
+
+  .work-grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:760px){ .work-grid-2{grid-template-columns:1fr;} }
+  .work-grid-2 .work-card h4{font-size:18px; margin-bottom:8px;}
+  .work-grid-2 .work-card p{font-size:15.5px; margin-bottom:14px;}
+  .work-grid-2 .work-card a{font-family:'JetBrains Mono'; font-size:14px; color:var(--amber);}
+  .work-grid-2 .work-card a:hover{text-decoration:underline;}
+
+  /* ---------- Publications / Credentials ---------- */
+  .pub{padding:18px 0; border-top:1px solid var(--line); font-size:16.5px; color:var(--text-dim);}
+  .pub:first-child{border-top:none;}
+  .pub a{color:var(--amber);}
+  .pub .tag-status{font-family:'JetBrains Mono'; font-size:11.5px; text-transform:uppercase; color:var(--teal); margin-left:8px;}
+  .cred-list{columns:2; column-gap:40px;}
+  @media (max-width:600px){ .cred-list{columns:1;} }
+  .cred-list li{list-style:none; font-size:15.5px; color:var(--text-dim); padding:8px 0; border-bottom:1px solid var(--line); break-inside:avoid;}
+
+  /* ---------- Contact ---------- */
+  .contact-inner{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;}
+  .contact h2{font-size:clamp(34px,5vw,50px); max-width:600px; margin-bottom:18px;}
+  .contact p{color:var(--text-dim); max-width:480px;}
+  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:'JetBrains Mono'; font-size:16px;}
+  .contact-links a{color:var(--text-dim); transition:.2s;}
+  .contact-links a:hover{color:var(--amber);}
+
+  footer{padding:18px 0; text-align:center;}
+  footer p{color:var(--text-dim); font-size:13.5px; font-family:'JetBrains Mono';}
+</style>
 </head>
-
 <body>
 
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+<nav>
+  <div class="wrap">
+    <a href="#top" class="nav-name">Bishal Dhungana</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#builds">Builds</a></li>
+        <li><a href="#systems">Systems</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nepal-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">
+        <span class="nepal-toggle__icon nepal-toggle__sun" title="Light mode">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
+            <path d="M12 2L13.16 7.65L17 3.34L15.18 8.82L20.66 7L16.35 10.84L22 12L16.35 13.16L20.66 17L15.18 15.18L17 20.66L13.16 16.35L12 22L10.84 16.35L7 20.66L8.82 15.18L3.34 17L7.65 13.16L2 12L7.65 10.84L3.34 7L8.82 8.82L7 3.34L10.84 7.65Z"></path>
+          </svg>
+        </span>
+        <span class="nepal-toggle__icon nepal-toggle__moon" title="Dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</nav>
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
+<header class="hero" id="top">
+  <canvas class="bg-canvas" id="heroBg"></canvas>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
+      <h1>Turning raw spatial data into systems that hold up for <em>real infrastructure.</em></h1>
+      <p class="lede">Geospatial Data Scientist working across LiDAR, aerial imagery, computer vision, and agentic AI systems — from field survey through production platforms supporting critical utility infrastructure.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="https://github.com/DBishal13" target="_blank">GitHub ↗</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/dbishal" target="_blank">LinkedIn ↗</a>
+      </div>
+      <div class="readout">
+        <div><div class="num" data-count="30" data-suffix="+">0</div><div class="label">Asset Types Classified</div></div>
+        <div><div class="num" data-count="400" data-suffix="+">0</div><div class="label">Condition Classes</div></div>
+        <div><div class="num" data-count="3" data-suffix="M">0</div><div class="label">Addresses Geocoded</div></div>
+        <div><div class="num" data-count="20" data-suffix="+">0</div><div class="label">Platform Components Built</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <canvas id="pointCloud"></canvas>
+      <div class="scan-label">Simulated LiDAR scan</div>
+      <div class="drag-hint mono">drag to rotate</div>
+    </div>
+  </div>
+</header>
 
-      <div class="profile">
-        <img src="assets/img/pp.JPG" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">Bishal Dhungana</a></h1>
-        <div class="social-links mt-3 text-center">
-          <!--<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <!--<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>-->
-          <a href="https://github.com/DBishal13" class="github" target="_blank"><i class="bx bxl-github"></i></a>
-          <a href="https://www.linkedin.com/in/dbishal" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">01 — About</div>
+        <h2>Field-to-production, end to end</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <img class="about-photo" src="assets/img/pp.JPG" alt="Bishal Dhungana">
+      <div class="about-body">
+        <p><strong>I work at the intersection of geospatial engineering, applied AI, and the software/platform work that ties them together</strong> — currently as a Data Scientist at The Spear Group, supporting Florida Power &amp; Light's FPLAir/NextVision program, where I lead AI/ML image recognition workflows for power equipment assessment and build the geospatial data pipelines, infrastructure-as-code, and internal platform tooling behind them.</p>
+        <p>My background started in the field: control and topographic surveys, GNSS and UAV data collection, and geodatabase design in Nepal, before an MSc in Geosciences (GIS concentration) at Florida Atlantic University sharpened the AI/ML and geospatial data engineering side. That combination — knowing how spatial data is actually collected and knowing how to build production systems on top of it — is the throughline across everything I build.</p>
+        <p>Day to day that means moving fluidly between layers: writing the Python/PyTorch models, designing the AWS CDK infrastructure they run on, building the FastAPI/React consoles that operate them, and — increasingly — building LLM agents that let people query all of it in plain English. I'm FAA Part 107 certified and hold graduate research contributions in flood hazard exposure modeling.</p>
+        <div class="location-tag">
+          <span>beesal13dh@gmail.com</span>
+          <span>561-713-5428</span>
+          <span>FAA Part 107 — Remote Pilot</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <nav id="navbar" class="nav-menu navbar">
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">02 — Experience</div>
+        <h2>Professional experience</h2>
+      </div>
+    </div>
+
+    <div class="role reveal">
+      <div class="role-meta">
+        <div class="dates mono">APR 2025 — PRESENT</div>
+        <div class="org">The Spear Group, on behalf of FPL</div>
+      </div>
+      <div>
+        <div class="role-title">Data Scientist (Geospatial and AI)</div>
         <ul>
-          <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-          <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Resume</span></a></li>
-          <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-          <li><a href="#certificate" class="nav-link scrollto"><i class="bx-book-content"></i> <span>Certificates</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+          <li>Technical lead for AI/ML image recognition workflows — deep learning models for power equipment segmentation, damage detection, and classification across 30+ asset types and 400+ condition classes.</li>
+          <li>Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment abstractions used across ML and application workloads.</li>
+          <li>Built a modular enterprise data integration platform (Python, SQL, DuckDB) handling taxonomy alignment, schema publishing, and quality validation.</li>
+          <li>Developed a FastAPI/React API operations console with shared authentication and environment-aware routing for cross-team API management.</li>
+          <li>Design and manage enterprise geospatial infrastructure: spatial databases (PostgreSQL/PostGIS), feature services, and cloud-native pipelines on AWS (Lambda, S3, SageMaker).</li>
+          <li>Build GIS applications with Esri technologies (ArcGIS Enterprise, Experience Builder, Dashboards) for infrastructure monitoring and disaster response.</li>
         </ul>
-      </nav><!-- .nav-menu -->
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="hero-container" data-aos="fade-in">
-      <h1>Bishal Dhungana</h1>
-      <p>I'm <span class="typed" data-typed-items="Geospatial Data Scientist, AI/ML Engineer, Cloud Infrastructure Architect"></span></p>
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>About</h2>
-          <p>
-		  </p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4" data-aos="fade-right">
-            <img src="assets/img/pp.JPG" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>Geospatial Data Scientist & AI/ML Specialist</h3>
-            <p class="fst-italic">
-              I'm a Geospatial Data Scientist with expertise in AI/ML, geoAI, and cloud infrastructure, combining deep knowledge of GIS and remote sensing with advanced deep learning and data engineering capabilities.
-		My journey has been fueled by a strong curiosity about the Earth’s dynamic systems and a desire to use technology to address complex environmental challenges.
-		With a solid foundation in Python, PostgreSQL/PostGIS, WebGIS, ArcGIS, LiDAR, machine learning, and cloud computing (AWS), 
-		I specialize in transforming geospatial data into actionable insights for natural hazard assessment, infrastructure resilience, and sustainable development.
-		I’ve built tools for automated LiDAR classification, interactive web mapping, and cloud-optimized geospatial workflows, working at the intersection of data science and environmental impact.
-		My research interests are understanding how geospatial technologies can advance environmental justice, particularly in supporting equitable disaster response and resilience planning for vulnerable communities.
-		My ultimate goal is to leverage geospatial intelligence to bridge the gap between science, policy, and people, empowering decision-makers with data that matters.
-            </p>
-            <p class="fst-italic">
-              Outside the academic realm, I find immense joy in the beautiful game of soccer. Traveling is another love of mine,
-              allowing me to explore new landscapes, cultures, and geological wonders. Witnessing the Earth's diverse environments firsthand 
-              inspires my academic pursuits and provides a broader perspective on our planet's intricate systems.
-                  </p>
-			
-            <div class="row">
-              <div class="col-lg-6">
-                <ul>
-                  <!--<li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>-->
-                  <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>West Palm Beach, FL, USA</span></li>
-						  <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>beesal13dh@gmail.com</span></li>
-                 <!-- <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span><a href="https://dbishal13.github.io" target="_blank">dbishal13.github.io</a></span></li> -->
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Experience:</strong> <span>3+ Years</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>MS Geosciences</span></li>
-                  <!--<li><i class="bi bi-chevron-right"></i> <strong>Work Availability:</strong><span style="padding: 2px; border-radius: 6px; color: white; background-color: #0cd095;">From Summer 2024</span></li>
-                  <!--<li><i class="bi bi-chevron-right"></i> <strong>Availability:</strong> <span>Open to Work</span></li>-->
-                </ul>
-              </div>
-            </div>
-            <h3>Geospatial Data Scientist & AI/ML Lead</h3>
-            <p>As a Technical Lead for AI/ML image recognition workflows at FPL (via The Spear Group), I design and validate deep learning models for power equipment segmentation, damage detection, and classification across 30+ asset types. I architect end-to-end geospatial data pipelines, manage enterprise infrastructure using AWS (Lambda, S3, SageMaker), and develop scalable solutions leveraging PostgreSQL/PostGIS, Python, and cloud-native technologies. I collaboratively build GIS applications using Esri technologies (ArcGIS Enterprise, Experience Builder, Dashboards) for infrastructure monitoring and disaster response, while translating business requirements into technical solutions and driving product development initiatives.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Skills Section ======= -->
-    <section id="skills" class="skills section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Skills</h2>
-          <p></p>
-        </div>
-
-        <div class="row skills-content">
-
-          <div class="col-lg-6" data-aos="fade-up">
-
-            <div class="progress">
-              <span class="skill">ArcGIS Desktop <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Web GIS <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-		  
-            <div class="progress">
-              <span class="skill">PostgreSQL/PostGIS <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">LiDAR <i class="val">100%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="75"></div>
-              </div>
-            </div>
- 
-          </div>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-
-            <div class="progress">
-              <span class="skill">Python <i class="val">90%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Deep Learning/AI <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Open Source GIS <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-            </div>
-
-            <div class="progress">
-              <span class="skill">Cloud Computing <i class="val">80%</i></span>
-              <div class="progress-bar-wrap">
-                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="65"></div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Skills Section -->
-
-    <!-- ======= Resume Section ======= -->
-    <section id="resume" class="resume">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Resume</h2>
-          <p>Geospatial Data Scientist, GeoAI enthusiast with 3+ years of experience and expertise in ArcGIS </p>
-        </div>
-		
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-up">
-            <h3 class="resume-title">Summary</h3>
-            <div class="resume-item pb-0">
-              <h4>Bishal Dhungana</h4>
-              <p><em>Geospatial Data Scientist with 3+ years of experience combining deep expertise in AI/ML, geoAI, and cloud infrastructure. Technical lead for deep learning model development and validation in computer vision applications. Proficient in end-to-end data pipeline engineering, AWS cloud solutions, PostgreSQL/PostGIS databases, and Esri GIS technologies. Demonstrated expertise in image recognition, LiDAR processing, spatial analysis, remote sensing, and translating complex technical solutions into business value. Excels at designing scalable cloud-native architectures and building product-facing technical solutions for infrastructure resilience and modernization.</em></p>
-              <ul>
-                <li>Jupiter West, FL</li>
-                <li>bdhungana2023@fau.edu</li>
-				
-              </ul>
-            </div>
-
-            <h3 class="resume-title">Education</h3>
-            <div class="resume-item">
-              <h4>Master of Science in Geosciences - GIS Concentration</h4>
-              <h5>2023 - 2024</h5>
-              <p><em>Florida Atlantic University, Boca Raton, FL</em></p>
-              <p><em>Charles E. Schmidt College of Science, Florida Atlantic University, Boca Raton, FL 33431, USA</em></p>
-              <p>Grade: 4.0/4.0</p>
-              <p>Major Courses: GIS, Geospatial Databases, Spatial Data Analysis, Programming in GIS with Python, WebGIS, Graduate Research, Flood Risk Assessment</p>
-              
-            </div>
-            <div class="resume-item">
-              <h4>Bachelor of Geomatics Engineering</h4>
-              <h5>2016 - 2021</h5>
-              <p><em>Tribhuvan University, Western Regional Campus, Nepal</em></p>
-              <p>Thesis: Application of DGPS and UAVs in Cadastral Survey, their Comparative Study and Statistical Analysis<p>
-		        <p>Grade: 3.64/4.0<p>
-			        <p>Major Courses: Fundamentals of Programming with C, Object Oriented Programming with C++, GIS, Design and 
-                Implementation of GIS, Computation Techniques, Numerical Methods, Cartography, Remote Sensing, 
-                Photogrammetry, Probability and Statistics, Object Oriented Programming, Python for Geospatial Applications</p>
-            </div>
-            <div class="col-lg-11" data-aos="fade-up" data-aos-delay="100">
-              <h3 class="resume-title">Training & portfolio</h3>
-            <div class="resume-item">
-              <h5>Esri Moocs:</h5>
-                <li><strong> </strong>Cartography, Spatial Data Science, Going Places with Spatial Analysis, Transform AEC Projects with GIS and
-                BIM, Imagery in Action, WebGIS Basics, GIS in Climate Action</li>
-                <ul></ul>
-            <h5>Coursera portfolio</h5>
-                <li>Geographic Information System Specialization (GIS), by UC Davies</li>
-                <li>GIS Mapping and Spatial Analysis Specialization, by University of Toronto</li>
-                <li>Data Science: Foundations using R Specialization, by John Hopkins University</li>
-                <li>Machine Learning Specialization, by DeepLearning.AI</li>
-                <li>Remote Sensing Image Acquisition, Analysis and Application, by UNSW Canberra</li>
-                <li>Introduction to Databases, by Meta</li>
-                <ul></ul>
-            <h5>NASA ARSET Trainings:</h5>
-            <li>NASA Earth Observations for Energy Management</li>
-            <li>Satellite Remote Sensing for Measuring Urban Heat Islands and Constructing Heat Vulnerability Indices </li>
-            <li>Evaluating Ecosystem Services with Remote Sensing</li>
-            <li>Monitoring and Modeling Floods Using Earth Observations</li>
-            <li>Monitoring Water Quality of Inland Lakes using Remote Sensing</li>
-            <li>Accessing and Analyzing Air Quality Data from Geostationary Satellites</li>
-            <li>Selecting Climate Change Projection Sets for Mitigation, Adaptation, and Risk Management Applications</li>
-            <li>Application of NASA SPoRT-Land Information System (SPoRT-LIS) Soil Moisture Data for Drought</li>
-            <li>Satellite Data for Air Quality Environmental Justice and Equity Applications</li>
-            <li>Building Climate Risk Assessments from Local Vulnerability and Exposure</li>
-            <li>Transforming Earth Observation (EO) Data into Building Infrastructure Data Sets for Disaster Risk Modeling</li>
-            <li>Assessing the Impacts of Fires on Watershed Health</li>
-            <li>Fundamentals of Machine Learning for Earth Science</li>
-        </div>
-        </div>
-        </div>
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="resume-title">Professional Experience</h3>
-		<div class="resume-item">
-		  <h4>Data Scientist (Geospatial and AI)</h4>
-		  <h5>April 2025 - Present</h5>
-		  <p><em>The Spear Group – On Behalf of Florida Power and Light (FPLAir / NextVision), Jupiter West, FL</em></p>
-		  <ul>
-		    <li>Technical lead for AI/ML image recognition workflows, designing and validating deep learning models for power equipment segmentation, damage detection, and classification across 30+ asset types and 400+ condition classes.</li>
-		    <li>Served as product-facing technical lead for image and metadata management portals, translating business requirements into technical solutions; partnered with developers on API design, testing, and system enhancements.</li>
-		    <li>Led the design and implementation of image data pipelines, including metadata schema development, conditional assessment data integration, and large-scale image ingestion.</li>
-		    <li>Coordinated with global vendors on AI model development initiatives, driving model validation, benchmarking, and feedback cycles.</li>
-		    <li>Develop and maintain end-to-end geospatial data pipelines for GIS and LiDAR workflows, integrating deep learning models for image analysis and predictive modeling.</li>
-		    <li>Design and manage enterprise geospatial infrastructure, including spatial databases (PostgreSQL/PostGIS) and cloud-native architectures using AWS (Lambda, S3, SageMaker).</li>
-		    <li>Build and deploy GIS applications using Esri technologies (ArcGIS Enterprise/Online, Experience Builder, Dashboards); collaborate with cross-functional teams on interactive, data-driven solutions.</li>
-		  </ul>
-		</div>
-		<div class="resume-item">
-              <h4>Associate Geospatial Analyst</h4>
-              <h5>Sep 2024 - Mar 2025</h5>
-              <p><em>The Spear Group - On Behalf of Florida Power & Light</em></p>
-              <ul>
-		<li>Conducted quality control (QA/QC) of LiDAR-derived power grid data to ensure integrity and accuracy for infrastructure resilience initiatives like pole hardening.</li>
-		<li>Managed PostgreSQL/PostGIS databases, optimized Cloud-Optimized GeoTIFFs, and implemented automated workflows using FME to streamline data storage and access.</li>
-		<li>Supported restoration efforts by developing spatial data products using Web Maps, ArcGIS Dashboards, and static mapping to enhance situational awareness during Hurricane Milton.</li>
-		<li>Automated data processing workflows and geospatial analyses using Python, ArcPy, and Model Builder, improving operational efficiency and data consistency.</li>              </ul>
-          </div>
-          <div class="resume-item">
-              <h4>Graduate Research Assistant</h4>
-              <h5>Jan 2023 - Aug 2024</h5>
-              <p><em>Center for Water Resiliency and Risk Reduction, Florida Atlantic University, Boca Raton, FL</em></p>
-              <ul>
-                  <li>Directed advanced flood risk assessment projects, utilizing Esri Model Builder, Python automation and geospatial analysis to enhance efficiency and accuracy in flood modeling predictions for multiple Florida communities.</li>
-                  <li>Implemented GIS with hydraulic/hydrologic models using FEMA methods, significantly improving flood area prediction accuracy through spatial analysis and statistical modeling.</li>
-                  <li>Developed and managed an automated geoprocessing pipeline in ArcGIS Pro, reducing processing times by 50%, enhancing data management, and generating comprehensive flood risk reports.</li>
-                  <li>Provided extensive training and support in flood mapping and prediction, developing tutorials, semi-automated report generation, and delivering presentations.</li>
-              </ul>
-          </div>
-          <div class="resume-item">
-              <h4>Graduate Teaching Assistant</h4>
-              <h5>May 2023 - Jul 2023</h5>
-              <p><em>Florida Atlantic University, Boca Raton, FL</em></p>
-              <ul>
-                  <li>Conducted GIS lab classes, managed troubleshooting of technical issues in ArcGIS Pro, and graded lab assignments.</li>
-              </ul>
-          </div>
-          <div class="resume-item">
-              <h4>Geomatics Engineer</h4>
-              <h5>Dec 2021 - Dec 2022</h5>
-              <p><em>Freelance, Myagdi, Nepal</em></p>
-              <ul>
-                  <li>Served as a GIS expert for the Survey Department of Nepal, training over 40 local officials in spatial analysis, database management, and mapping.</li>
-                  <li>Led a survey team for municipal road surveys, creating detailed maps and longitudinal/cross-section drawings.</li>
-                  <li>Performed GPS-based survey of important landmarks and prepared a tourist map for a municipality.</li>
-                  <li>Performed UAV-based survey for topographic and local resource mapping for a local unit of Myagdi district.</li>
-              </ul>
-          </div>
-          <div class="resume-item">
-              <h4>GIS Intern</h4>
-              <h5>Dec 2020 - Nov 2021</h5>
-              <p><em>ADMC Engineering Pvt. Ltd., Kathmandu, Nepal</em></p>
-              <ul>
-                  <li>Designed and developed an integrated geodatabase for a municipality, incorporating data from land use, soil, land capability, cadastral parcels, and resources.</li>
-                  <li>Implemented topological and attribute rules to ensure data integrity, conducting data review, and rectifying errors.</li>
-                  <li>Conducted surveying for topographic mapping, road construction, and transmission lines using differential GNSS and UAV technology.</li>
-                  <li>Prepared report drafts and presented findings to stakeholders.</li>
-              </ul>
-          </div>
-      </div>
-
-	<div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="resume-title">Publications</h3>
-		<div class="resume-item">
-			<ul>
-    <li>Dhungana, B.; Liu, W. Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. 
-	    ISPRS Int. J. Geo-Inf. 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">https://doi.org/10.3390/ijgi13090339</a>.</li>
-</ul>
-	 </div>
-      </div>
-      
-          <div class="col-lg-14" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Personal and Course Projects</h3>
-            <div class="resume-item">
-              <ul>
-		<li>FPL Customers Restoration Dashboard: Dashboard for Real-time County Wise Visualization of Number of Customers Affected, 
-			Restored and Out of Service Status by Using Enterprise Feature Service and ArcGIS Enterprise</li>
-              <li>Air Pollution in Florida: Dashboard for Visualization of Mean Daily Average Fine Particular Matter (PM2.5) with 
-                Automatic Update Tool</li>
-              <li>Predictive Modeling of Voter Turnout (2016) Distribution at Census Tract Level for Florida Using Forest-Based
-                Classification and Regression</li>
-              <li>Suitable Locations for Corporate Headquarters with Minimal Carbon Footprint in Hardee County, Florida: A
-                Suitability Modeling Approach</li>
-              <li>Agricultural Land Suitability Analysis Based on Physical Factors: A Case Study of Makwanpur District, Nepal</li>
-              <li>Multi-temporal land cover mapping and prediction using Google Earth Engine</li>
-              <li>Dynamic time series web map dashboard for visualizing population trends in Nepal (1981 to 2011)</li>
-              <li>Covid spread web-mapping and updating using Leaflet and GeoDjango</li>
-              <li>Real-time Geo-spatial data visualization with Google Data Studio, Folium, Kepler GL, and Jupyter Lab using Python</li>
-              <li>Analyze Covid-19 Geo-spatial data with Python</li>
-              <li>AI-Powered Chest Disease Detection and Classification</li>
-              <li>Climate Geo-spatial Analysis on Python with Xarray</li>
-              <li>Getting Started with BigQuery GIS for Data Analysts</li>
-              <li>Deep Learning with PyTorch: Image Segmentation</li>
-              <li>UAV flight planning, image capture, and processing: Orthophoto generation of Pashchimanchal Campus</li>
-              <li>LIDAR(LAS) dataset processing-creation of intensity images, DSM/DEM generation.</li>
-              <li>Inundation Mapping using SAR image in Google Earth Engine</li>
-              <li>Footprint mapping in flood-prone regions of Gaur, Nepal in OSM</li>
-              <li>Hydrological modeling and simulation using HEC-RAS and inundation mapping using ArcGIS</li></li>
-            </ul>
-          </div>
-          <div class="col-lg-14" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="resume-title">Professional Development and Community Engagement</h3>
-            <div class="resume-item">
-            <ul>
-            <li>Science Olympiad 2024 - Supervisor at the Road Scholar competition at Florida Atlantic University</li>
-            <li>Florida Society of Geographers Annual Conference 2024: Poster Presentation Competition - Winner</li>
-            <li>FOSS4G NA Baltimore 2023 - Attended and volunteered</li>
-            <li>South Florida GIS Expo 2023 - Volunteered as a moderator</li>
-            <li>Science Olympiad 2023 - Supervisor at the Road Scholar competition at Florida Atlantic University</li>
-            <li>Explore FAU 2023 - Representing Geosciences department at Florida Atlantic University</li>
-            <li>Festivals of Nations, 2023 - Florida Atlantic University</li>
-            <li>Relief Fund Collection: Landslide-affected people & for a student needing aortic valve replacement surgery</li>
-            <li>Annual Engineering expo: Vector and Vector 2.0 - Pokhara</li>
-            <li>Member - Nepali Student Association (NSA) at Florida Atlantic University</li>
-            </ul>
-        </div>
-        </div>
-        
-    </section><!-- End Resume Section -->
-
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Portfolio</h2>
-          <p>I have mostly worked in GIS and Remote Sensing, flood simulation, and statistical analysis. Though I am not allowed to share
-		  the work I have done for my organizations, following are some projects from different workshops, training, and course projects</p>
-        </div>
-
-        <div class="row" data-aos="fade-up">
-          <div class="col-lg-12 d-flex justify-content-center">
-            <ul id="portfolio-flters">
-             <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">GIS and Remote Sensing</li>
-              <li data-filter=".filter-card">Web Development</li>
-              <li data-filter=".filter-web">Others</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-0.png" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-0.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Watershed Master Plan(WMP) for Sarasota City, FL"><i class="bx bx-plus"></i></a>
-                <a href="https://arcg.is/1yTmD8" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Using GIS to Address Climate Change"><i class="bx bx-plus"></i></a>
-                <a href="https://arcg.is/OPbKL" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Story of US Population Change"><i class="bx bx-plus"></i></a>
-                <a href="https://arcg.is/1O4Xu1" title="More Details" target = "_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Historical Natural Disasters in USA"><i class="bx bx-plus"></i></a>
-                <a href="https://experience.arcgis.com/experience/7bbef03b4c6440aaa8c1046a3d37f82b/" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Air Pollution in Florida in Last Decade, Ozone vs. PM2.5"><i class="bx bx-plus"></i></a>
-                <a href="https://experience.arcgis.com/experience/cf5957553b7844e68c3cf0db59d9db84/" title="More Details" target = "_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="3D Visualization: States Population and Population Density"><i class="bx bx-plus"></i></a>
-                <a href="https://arcg.is/0ymO84" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="3D Fun Park Design using ArcGIS Web Scene"><i class="bx bx-plus"></i></a>
-                <a href="https://arcg.is/1TnTGf0" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Dashboard for Visualizing PM 2.5 Daily Average in Florida"><i class="bx bx-plus"></i></a>
-                <a href="https://www.arcgis.com/apps/dashboards/86dded39a6a54a189f41cbf08cc29e67" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Analog Clock"><i class="bx bx-plus"></i></a>
-                <a href="https://github.com/DBishal13/Analog-clock" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Calculator"><i class="bx bx-plus"></i></a>
-                <a href="https://github.com/DBishal13/Calculator" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-10.png" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-10.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Data Engineering and Vizualization"><i class="bx bx-plus"></i></a>
-                <a href="https://github.com/DBishal13/Data-Engineering-and-Vizualization" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/portfolio-12.png" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-12.png" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Analyzing Covid-19 Geospatial Data with Python"><i class="bx bx-plus"></i></a>
-                <a href="https://github.com/DBishal13/Covid19-GeoVisualisation" title="More Details" target="_blank"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
-
-    <!-- ======= certificate Section ======= -->
-    <section id="certificate" class="certificate section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Certificates</h2>
-          <p>I have attended numerous online and in-person training, webinars, and workshops that have helped me sharpen my skills in the geospatial field</p>
-
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-card">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_4.jpg" class="img-fluid" alt="">
-
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-                
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-               
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-               
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/ARSET CERTIFICATE_9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/ARSET CERTIFICATE_9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_16.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_16.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_10.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_10.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_11.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_11.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_12.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_12.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_13.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_13.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_14.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_14.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_15.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_15.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_18.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_18.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_17.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_17.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Coursera_19.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Coursera_19.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-2 col-md-4 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/portfolio/Mooc_8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/Mooc_8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section><!-- End portfolio Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Please take a moment to provide your details and inquiries by filling out the contact form below. I'll get back to you as soon as possible.</p>
-        </div>
-
-        <div class="row" data-aos="fade-in">
-
-          <div class="col-lg-5 d-flex align-items-stretch">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Boca Raton, Florida, FL 33486</p>
-              </div>
-
-              <div class="email">
-                
-                <h4>Email:</h4>
-				<i class="bi bi-envelope"></i>
-                <p>bdhungana2023@fau.edu</p>
-				<i class="bi bi-envelope"></i>
-				<p>beesal13dh@gmail.com</p>
-              </div>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d28597.008864227268!2d-80.1171319!3d26.3709526!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d91e0333f8aa69%3A0x52043ea122f5fb6a!2sFlorida%20Atlantic%20University!5e0!3m2!1sen!2sus!4v1702441942805!5m2!1sen!2sus" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-          </div>
-
-          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfZTQgpXEYvaWy82jedHqKhwAzNPye8bzIW-_R083yy4m-c8A/viewform?usp=pp_url frameborder="0" style="border:0; width: 100%; height: 750px;" allowfullscreen></iframe>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Contact Section -->
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>iPortfolio</span></strong>
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with a working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End  Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div class="role reveal">
+      <div class="role-meta">
+        <div class="dates mono">SEP 2024 — MAR 2025</div>
+        <div class="org">The Spear Group, on behalf of FPL</div>
+      </div>
+      <div>
+        <div class="role-title">Associate Geospatial Analyst</div>
+        <ul>
+          <li>QA/QC of LiDAR-derived power grid data for infrastructure resilience initiatives, including pole hardening.</li>
+          <li>Managed PostGIS databases and automated data workflows (FME, Python, ArcPy); supported Hurricane Milton restoration with real-time spatial dashboards.</li>
+          <li>Built a FastAPI geospatial processing sidecar for heavier geoprocessing and format conversion tasks.</li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.umd.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+    <div class="role reveal">
+      <div class="role-meta">
+        <div class="dates mono">JAN 2023 — AUG 2024</div>
+        <div class="org">Florida Atlantic University</div>
+      </div>
+      <div>
+        <div class="role-title">Graduate Research Assistant</div>
+        <ul>
+          <li>Led FEMA-based flood risk assessment projects across multiple Florida communities, cutting geoprocessing time 50% via ArcGIS Pro automation.</li>
+          <li>Built a Python geocoding tool processing 3M addresses with open-source libraries, replacing a paid service — 3 months to 1 week turnaround, $20K saved.</li>
+        </ul>
+      </div>
+    </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <div class="role reveal">
+      <div class="role-meta">
+        <div class="dates mono">2020 — 2022</div>
+        <div class="org">Freelance &amp; ADMC Engineering, Nepal</div>
+      </div>
+      <div>
+        <div class="role-title">Geomatics Engineer / GIS Intern</div>
+        <ul>
+          <li>Led survey teams for municipal road, GNSS, and UAV-based topographic surveys; trained 40+ officials in spatial analysis for Nepal's Survey Department.</li>
+          <li>Designed integrated municipal geodatabases with topology/attribute integrity rules.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="builds">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">03 — Featured Builds</div>
+        <h2>Agentic AI systems</h2>
+      </div>
+    </div>
+    <p class="sec-intro reveal">Two self-directed builds applying LLM agents and RAG to real problems — documented honestly, including the bugs I hit and how I fixed them. Both run entirely locally via Ollama: no API keys, no usage cost.</p>
+
+    <div class="build reveal">
+      <div class="build-head">
+        <div><h3>Geospatial Data Copilot</h3></div>
+        <a class="btn btn-ghost" href="https://github.com/DBishal13/geospatial-data-copilot" target="_blank">Repo ↗</a>
+      </div>
+      <p class="desc">A natural-language interface over spatial/infrastructure data. Ask a question in plain English about San Francisco's utility infrastructure — a local LLM agent (LangGraph ReAct, Ollama llama3.1:8b) translates it into a spatial SQL query, runs it, and answers with a natural-language summary and an interactive map. Seeded with ~1,500 real utility assets pulled live from OpenStreetMap's Overpass API.</p>
+      <div class="stack">
+        <span class="tag">LangGraph</span><span class="tag">Ollama</span><span class="tag">DuckDB + spatial</span>
+        <span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Folium</span>
+        <span class="tag">Chroma</span>
+      </div>
+    </div>
+
+    <div class="build reveal">
+      <div class="build-head">
+        <div><h3>Conversational AI Assistant</h3></div>
+        <a class="btn btn-ghost" href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a>
+      </div>
+      <p class="desc">A LangChain-based RAG chatbot that indexes local documents into a Chroma vector store and answers questions in a context-aware, multi-turn conversation — grounding every answer in retrieved source material and citing which files it used. Runs entirely locally via Ollama.</p>
+      <div class="stack">
+        <span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span>
+        <span class="tag">Streamlit</span><span class="tag">Python CLI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="systems">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">04 — Systems &amp; Platform Engineering</div>
+        <h2>What sits behind the models</h2>
+      </div>
+    </div>
+    <p class="sec-intro reveal">Production AI needs infrastructure, data pipelines, and internal tooling around it. This is a selection of the platform-layer components I've built to support enterprise geospatial and AI systems.</p>
+    <div class="work-grid">
+      <div class="work-card reveal"><div class="cat">Cloud Infrastructure</div><h4>Cloud Infrastructure Components</h4><p>AWS CDK component framework with enterprise naming, tagging, and deployment abstractions for ML and app workloads.</p></div>
+      <div class="work-card reveal"><div class="cat">Data Integration</div><h4>Enterprise Data Integration Platform</h4><p>Modular platform for taxonomy alignment, schema publishing, quality validation, and operational patch workflows (Python, SQL, DuckDB).</p></div>
+      <div class="work-card reveal"><div class="cat">Developer Platform</div><h4>API Operations Console</h4><p>CLI and web console for environment-aware API operations with shared authentication and endpoint tooling (FastAPI, React, Typer).</p></div>
+      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
+      <div class="work-card reveal"><div class="cat">Computer Vision</div><h4>Utility Asset Detection Inference Service</h4><p>ONNX-based object detection package for utility equipment with COCO JSON output and optional visualization.</p></div>
+      <div class="work-card reveal"><div class="cat">Integration Toolkit</div><h4>API + Taxonomy Integration Toolkit</h4><p>Reusable package for API extraction, taxonomy joins, metadata patching, and downstream publishing automation.</p></div>
+      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Integration Boundaries Layer</h4><p>Boundary-focused architecture separating API adapters, data sync logic, and publishing interfaces from generic scripts.</p></div>
+      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Quality &amp; Remediation Script Layer</h4><p>Modular script layer for analysis, checks, loaders, fixes, and patch orchestration with migration-safe wrappers.</p></div>
+      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Geospatial Processing Sidecar</h4><p>Optional FastAPI sidecar for heavier geospatial processing, conversion runtimes, and algorithm endpoints.</p></div>
+      <div class="work-card reveal"><div class="cat">Service</div><h4>Analytics Summary API</h4><p>Focused API exposing health, pagination, and entity summary endpoints for analytics demos and stakeholder review.</p></div>
+      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Pre-Production Mapping API</h4><p>Local map and API demo environment for assignment workflows, status transitions, and pre-publish validation.</p></div>
+      <div class="work-card reveal"><div class="cat">Product</div><h4>Notebook-Embedded GIS Widget</h4><p>Jupyter integration embedding the full GIS app with two-way project state sync for notebook-driven workflows.</p></div>
+      <div class="work-card reveal"><div class="cat">Frontend</div><h4>Operator Workflow Frontend</h4><p>React/TypeScript (Vite) frontend for validating operator lifecycle actions before production integration.</p></div>
+      <div class="work-card reveal"><div class="cat">Operations</div><h4>Operations Dashboard Workstream</h4><p>Storm and pilot deployment dashboard monorepo combining ArcGIS runbooks, SQL and shell automation, and demo APIs.</p></div>
+      <div class="work-card reveal"><div class="cat">ML Project</div><h4>Applied ML Project Template</h4><p>Data science workspace scaffold for experimentation, feature engineering, and model lifecycle workflows.</p></div>
+      <div class="work-card reveal"><div class="cat">Documentation</div><h4>Delivery Runbooks &amp; Release Standards</h4><p>Structured runbooks, standards, acceptance gates, and deployment checklists for end-to-end delivery governance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">05 — Toolkit</div>
+        <h2>What I build with</h2>
+      </div>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h4>AI / ML / Agents</h4>
+        <div class="tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
+          <span class="tag">Computer Vision</span><span class="tag">ONNX</span><span class="tag">LangChain</span>
+          <span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">Chroma</span><span class="tag">Ollama</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Geospatial</h4>
+        <div class="tags">
+          <span class="tag">ArcGIS Enterprise</span><span class="tag">PostGIS</span><span class="tag">LiDAR / PDAL</span>
+          <span class="tag">GeoPandas</span><span class="tag">GDAL</span><span class="tag">FME</span><span class="tag">DuckDB Spatial</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Platform / Engineering</h4>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">AWS / CDK</span>
+          <span class="tag">React / TypeScript</span><span class="tag">SQL</span><span class="tag">R</span><span class="tag">Typer / CLI Tooling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="simulation">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">06 — Simulation</div>
+        <h2>Flood inundation model</h2>
+      </div>
+    </div>
+    <p class="note reveal">A small browser-side terrain model in the spirit of the FEMA-based hydrologic exposure work below — procedurally generated elevation, not the published dataset. Drag the slider to raise sea level and watch inundation spread.</p>
+    <div class="sim-panel reveal">
+      <div class="sim-canvas-wrap">
+        <canvas id="floodCanvas" width="640" height="300"></canvas>
+      </div>
+      <div class="sim-controls">
+        <div>
+          <label for="seaLevel">Sea level rise — <span id="seaLevelVal">0.0</span> ft</label>
+          <input type="range" id="seaLevel" min="0" max="15" step="0.1" value="0">
+        </div>
+        <div class="sim-readout">
+          <div>Inundated area<strong id="inundatedPct">0%</strong></div>
+          <div class="sim-sub">Peak elevation<strong id="peakElev">—</strong></div>
+        </div>
+        <button class="btn-mini mono" id="regenTerrain" type="button">↺ Regenerate terrain</button>
+        <p class="sim-caption">Color ramp: low-lying green → upland tan/white. Blue = below current sea level.</p>
+        <p class="sim-caption" id="polesStatus" style="color:var(--amber); opacity:1;">Utility corridor: 0 of 7 poles below sea level</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">07 — Research &amp; Selected Work</div>
+        <h2>Publications &amp; academic projects</h2>
+      </div>
+    </div>
+    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported. Below is research and academic/course work I can share in full.</p>
+
+    <div class="reveal" style="margin-bottom:36px;">
+      <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
+      <div class="pub">Contributing author, documentation — <a href="https://github.com/DBishal13/pywmp_documentation" target="_blank">PyWMP ↗</a>, an open-source Python watershed modeling and planning tool (Florida Atlantic University).<span class="tag-status">Unpublished, ongoing</span></div>
+    </div>
+
+    <div class="work-grid-2 reveal">
+      <div class="work-card"><h4>Multi-temporal Land Cover Mapping</h4><p>Land cover classification and change prediction using Google Earth Engine.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+      <div class="work-card"><h4>LiDAR Point Cloud Processing</h4><p>Intensity image generation and DSM/DEM derivation from LAS datasets.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+      <div class="work-card"><h4>UAV Orthophoto Generation</h4><p>Flight planning, image capture, and processing for a full campus orthophoto — Pashchimanchal Campus, Nepal.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+      <div class="work-card"><h4>Flood Inundation Mapping, Gaur, Nepal</h4><p>Footprint mapping in flood-prone regions using OpenStreetMap and HEC-RAS hydrologic modeling.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+      <div class="work-card"><h4>Predictive Modeling of Voter Turnout</h4><p>Census-tract-level 2016 turnout prediction for Florida using forest-based classification and regression.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+      <div class="work-card"><h4>Suitable HQ Siting Analysis</h4><p>Suitability modeling for low-carbon-footprint corporate site selection, Hardee County, FL.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-tag">08 — Credentials</div>
+        <h2>Education &amp; certifications</h2>
+      </div>
+    </div>
+    <div class="about-body" style="margin-bottom:36px;">
+      <p><strong>MSc, Geosciences — GIS Concentration</strong> · Florida Atlantic University · 2023–2024 · GPA 4.0/4.0</p>
+      <p><strong>BSc, Geomatics Engineering</strong> · Tribhuvan University, Nepal · 2016–2021 · GPA 3.64/4.0</p>
+    </div>
+    <ul class="cred-list">
+      <li>Machine Learning Specialization — DeepLearning.AI</li>
+      <li>Deep Learning Specialization — DeepLearning.AI</li>
+      <li>GIS Specialization — UC Davis</li>
+      <li>GIS Mapping &amp; Spatial Analysis — U. Toronto</li>
+      <li>Data Science with R — Johns Hopkins</li>
+      <li>Remote Sensing Image Acquisition &amp; Analysis — UNSW Canberra</li>
+      <li>Introduction to Databases — Meta</li>
+      <li>FAA Part 107 — Remote Pilot Certificate</li>
+      <li>NASA ARSET — Flood Monitoring with Earth Observations</li>
+      <li>NASA ARSET — Urban Heat Islands &amp; Heat Vulnerability</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap contact-inner">
+    <div class="contact">
+      <div class="sec-tag" style="margin-bottom:16px;">09 — Contact</div>
+      <h2>Let's talk about what you're building.</h2>
+      <p>Open to Data Science, GIS/Geospatial Engineering, and Data/Platform roles. Based in West Palm Beach, FL.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:beesal13dh@gmail.com">beesal13dh@gmail.com</a>
+      <a href="tel:5617135428">561-713-5428</a>
+      <a href="https://www.linkedin.com/in/dbishal" target="_blank">linkedin.com/in/dbishal</a>
+      <a href="https://github.com/DBishal13" target="_blank">github.com/DBishal13</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© Bishal Dhungana</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Theme toggle ---------- */
+  var themeToggle = document.getElementById('themeToggle');
+  if(themeToggle){
+    themeToggle.addEventListener('click', function(){
+      var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if(isLight){
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  /* ---------- Count-up stats ---------- */
+  var nums = document.querySelectorAll('.num[data-count]');
+  function animateCount(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    if(reduceMotion){ el.textContent = target.toFixed(decimals) + suffix; return; }
+    var start = performance.now(), dur = 1200;
+    function frame(now){
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if(p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if(nums.length){
+    if('IntersectionObserver' in window){
+      var countIo = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ animateCount(e.target); countIo.unobserve(e.target); }
+        });
+      }, {threshold:0.4});
+      nums.forEach(function(el){ countIo.observe(el); });
+    } else {
+      nums.forEach(animateCount);
+    }
+  }
+
+  /* ---------- Hero background: drifting contour lines ---------- */
+  var bgCanvas = document.getElementById('heroBg');
+  if(bgCanvas){
+    var bgCtx = bgCanvas.getContext('2d');
+    var bgDpr = Math.min(window.devicePixelRatio || 1, 2);
+    var bgW, bgH, bgPhase = 0;
+    var mouseX = 0.5, mouseY = 0.5, targetMX = 0.5, targetMY = 0.5;
+
+    function sizeBg(){
+      var rect = bgCanvas.parentElement.getBoundingClientRect();
+      bgW = rect.width; bgH = rect.height;
+      bgCanvas.width = bgW * bgDpr;
+      bgCanvas.height = bgH * bgDpr;
+      bgCtx.setTransform(bgDpr, 0, 0, bgDpr, 0, 0);
+    }
+    sizeBg();
+    window.addEventListener('resize', sizeBg);
+    bgCanvas.parentElement.addEventListener('mousemove', function(e){
+      var rect = bgCanvas.parentElement.getBoundingClientRect();
+      targetMX = (e.clientX - rect.left) / rect.width;
+      targetMY = (e.clientY - rect.top) / rect.height;
+    });
+
+    var bands = [
+      {y:0.84, amp:24, freq:1.6, opacity:0.55, color:'45,212,191'},
+      {y:0.76, amp:28, freq:1.3, opacity:0.45, color:'45,212,191'},
+      {y:0.68, amp:32, freq:1.1, opacity:0.4, color:'45,212,191'},
+      {y:0.60, amp:26, freq:1.4, opacity:0.35, color:'255,176,32'},
+      {y:0.52, amp:30, freq:1.0, opacity:0.26, color:'45,212,191'},
+      {y:0.44, amp:22, freq:1.2, opacity:0.18, color:'45,212,191'}
+    ];
+
+    function drawBg(){
+      bgCtx.clearRect(0,0,bgW,bgH);
+      var parallax = (mouseX - 0.5) * 18;
+      bands.forEach(function(b){
+        bgCtx.beginPath();
+        var baseY = b.y * bgH + (mouseY - 0.5) * 10;
+        for(var x = -20; x <= bgW + 20; x += 8){
+          var y = baseY + Math.sin((x/bgW)*Math.PI*2*b.freq + bgPhase + b.y*4) * b.amp;
+          if(x === -20) bgCtx.moveTo(x + parallax, y);
+          else bgCtx.lineTo(x + parallax, y);
+        }
+        bgCtx.strokeStyle = 'rgba(' + b.color + ',' + b.opacity + ')';
+        bgCtx.lineWidth = 1;
+        bgCtx.stroke();
+      });
+    }
+
+    if(reduceMotion){
+      drawBg();
+    } else {
+      (function loop(){
+        bgPhase += 0.0035;
+        mouseX += (targetMX - mouseX) * 0.04;
+        mouseY += (targetMY - mouseY) * 0.04;
+        drawBg();
+        requestAnimationFrame(loop);
+      })();
+    }
+  }
+
+  /* ---------- Point cloud: simulated LiDAR scan of a utility pole ---------- */
+  var pcCanvas = document.getElementById('pointCloud');
+  if(pcCanvas){
+    var pcCtx = pcCanvas.getContext('2d');
+    var pcDpr = Math.min(window.devicePixelRatio || 1, 2);
+    var pcW = 0, pcH = 0;
+
+    function sizePc(){
+      var rect = pcCanvas.getBoundingClientRect();
+      pcW = rect.width; pcH = rect.height;
+      pcCanvas.width = pcW * pcDpr;
+      pcCanvas.height = pcH * pcDpr;
+      pcCtx.setTransform(pcDpr, 0, 0, pcDpr, 0, 0);
+    }
+    sizePc();
+    window.addEventListener('resize', sizePc);
+
+    // Build point cloud: pole + crossarm + insulators + transformer can, in local coords [-1,1]
+    var points = [];
+    var i;
+    for(i = 0; i < 260; i++){
+      var h = -1 + (i/259)*2;
+      var jitter = (Math.random()-0.5)*0.02;
+      var ang = Math.random()*Math.PI*2;
+      points.push({x:Math.cos(ang)*0.05+jitter, y:h, z:Math.sin(ang)*0.05, c:'pole'});
+    }
+    for(i = 0; i < 90; i++){
+      var t = (i/89 - 0.5) * 1.2;
+      var ang2 = Math.random()*Math.PI*2;
+      points.push({x:t, y:0.62+Math.cos(ang2)*0.035, z:Math.sin(ang2)*0.035, c:'arm'});
+    }
+    [-0.5, 0, 0.5].forEach(function(px){
+      for(i = 0; i < 18; i++){
+        points.push({x:px+(Math.random()-0.5)*0.03, y:0.68 + (i/17)*0.14, z:(Math.random()-0.5)*0.03, c:'ins'});
+      }
+    });
+    for(i = 0; i < 130; i++){
+      var ang3 = Math.random()*Math.PI*2;
+      var hh = -0.55 + Math.random()*0.5;
+      points.push({x:0.28+Math.cos(ang3)*0.16, y:hh, z:0.15+Math.sin(ang3)*0.16, c:'tx'});
+    }
+
+    var angle = 0.6, autoSpin = 0.0035, dragging = false, lastX = 0, velocity = 0;
+    var tiltX = -0.22;
+
+    pcCanvas.addEventListener('pointerdown', function(e){
+      dragging = true; lastX = e.clientX; velocity = 0;
+      pcCanvas.setPointerCapture(e.pointerId);
+    });
+    pcCanvas.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      var dx = e.clientX - lastX;
+      lastX = e.clientX;
+      velocity = dx * 0.008;
+      angle += velocity;
+    });
+    pcCanvas.addEventListener('pointerup', function(){ dragging = false; });
+    pcCanvas.addEventListener('pointercancel', function(){ dragging = false; });
+
+    function projected(){
+      var cos = Math.cos(angle), sin = Math.sin(angle);
+      var cosT = Math.cos(tiltX), sinT = Math.sin(tiltX);
+      var focal = 3.2, R = pcH * 0.40, cx = pcW/2, cy = pcH/2 + pcH*0.06;
+      var out = [];
+      for(var k = 0; k < points.length; k++){
+        var p = points[k];
+        var xr = p.x*cos + p.z*sin;
+        var zr = -p.x*sin + p.z*cos;
+        var yr = p.y*cosT - zr*sinT;
+        var zr2 = p.y*sinT + zr*cosT;
+        var scale = focal / (focal + zr2);
+        out.push({
+          x: cx + xr*scale*R,
+          y: cy - yr*scale*R,
+          scale: scale,
+          depth: zr2,
+          c: p.c
+        });
+      }
+      out.sort(function(a,b){ return b.depth - a.depth; });
+      return out;
+    }
+
+    var colorMap = {
+      pole: [255,176,32], arm:[255,176,32], ins:[244,246,242], tx:[45,212,191]
+    };
+
+    function drawPc(){
+      pcCtx.clearRect(0,0,pcW,pcH);
+      var pts = projected();
+      for(var k = 0; k < pts.length; k++){
+        var pt = pts[k];
+        var col = colorMap[pt.c];
+        var alpha = Math.max(0.25, Math.min(1, pt.scale));
+        var r = Math.max(0.6, 1.9 * pt.scale);
+        pcCtx.beginPath();
+        pcCtx.arc(pt.x, pt.y, r, 0, Math.PI*2);
+        pcCtx.fillStyle = 'rgba(' + col.join(',') + ',' + alpha + ')';
+        pcCtx.fill();
+      }
+    }
+
+    if(reduceMotion){
+      drawPc();
+    } else {
+      (function loopPc(){
+        if(!dragging){
+          velocity *= 0.94;
+          angle += autoSpin + velocity;
+        }
+        drawPc();
+        requestAnimationFrame(loopPc);
+      })();
+    }
+  }
+
+  /* ---------- Flood inundation simulation ---------- */
+  var floodCanvas = document.getElementById('floodCanvas');
+  if(floodCanvas){
+    var fCtx = floodCanvas.getContext('2d');
+    var W = floodCanvas.width, H = floodCanvas.height;
+    var maxFeet = 15;
+    var bandsCount = 10;
+    var seed = [0,0,0,0];
+    var elevFeet = new Float32Array(W*H);
+    var bandIdx = new Int16Array(W*H);
+    var maxElevFound = 0;
+    var terrainCache = document.createElement('canvas');
+    terrainCache.width = W; terrainCache.height = H;
+    var terrainCtx = terrainCache.getContext('2d');
+
+    function randomizeSeed(){
+      seed = [Math.random()*10, Math.random()*10, Math.random()*10, Math.random()*10];
+    }
+    function elevationAt(nx, ny){
+      // coastline runs roughly along the left edge (ocean); noise perturbs the shoreline
+      var shoreWiggle = 0.16*Math.sin(ny*6.5+seed[0]) + 0.09*Math.sin(ny*13+seed[1]*2) + 0.05*Math.sin(ny*23-seed[2]);
+      var coast = (nx - 0.24) - shoreWiggle;
+      var land = Math.max(0, coast);
+      var hills = 0.22*Math.sin(nx*7+seed[2])*Math.cos(ny*5+seed[3])
+        + 0.12*Math.sin(nx*13+seed[1]+ny*4)
+        + 0.07*Math.sin(nx*21-seed[0]+ny*9);
+      var v = land*1.3 + hills*Math.min(1, land*3.2);
+      return Math.max(0, Math.min(1, v));
+    }
+
+    var rampStops = [
+      {t:0.00, rgb:[16,92,110]},
+      {t:0.22, rgb:[22,140,120]},
+      {t:0.42, rgb:[95,180,70]},
+      {t:0.62, rgb:[215,180,55]},
+      {t:0.82, rgb:[224,144,64]},
+      {t:1.00, rgb:[247,236,215]}
+    ];
+    function rampColor(t){
+      for(var i = 0; i < rampStops.length-1; i++){
+        var a = rampStops[i], b = rampStops[i+1];
+        if(t >= a.t && t <= b.t){
+          var f = (t-a.t)/(b.t-a.t);
+          return [
+            a.rgb[0]+(b.rgb[0]-a.rgb[0])*f,
+            a.rgb[1]+(b.rgb[1]-a.rgb[1])*f,
+            a.rgb[2]+(b.rgb[2]-a.rgb[2])*f
+          ];
+        }
+      }
+      return rampStops[rampStops.length-1].rgb;
+    }
+
+    function buildGrid(){
+      maxElevFound = 0;
+      for(var y = 0; y < H; y++){
+        for(var x = 0; x < W; x++){
+          var elev = elevationAt(x/W, y/H) * maxFeet;
+          var idx = y*W+x;
+          elevFeet[idx] = elev;
+          bandIdx[idx] = Math.floor((elev/maxFeet) * bandsCount);
+          if(elev > maxElevFound) maxElevFound = elev;
+        }
+      }
+      var peakEl = document.getElementById('peakElev');
+      if(peakEl) peakEl.textContent = maxElevFound.toFixed(1) + ' ft';
+      paintTerrain();
+    }
+
+    function paintTerrain(){
+      var img = terrainCtx.createImageData(W, H);
+      var data = img.data;
+      for(var y = 0; y < H; y++){
+        for(var x = 0; x < W; x++){
+          var idx = y*W+x;
+          var t = Math.min(1, (bandIdx[idx] + 0.5) / bandsCount);
+          var col = rampColor(t);
+
+          var xl = x > 0 ? idx-1 : idx, xr = x < W-1 ? idx+1 : idx;
+          var yu = y > 0 ? idx-W : idx, yd = y < H-1 ? idx+W : idx;
+          var dx = elevFeet[xr] - elevFeet[xl];
+          var dy = elevFeet[yd] - elevFeet[yu];
+          var shade = Math.max(0.62, Math.min(1.38, 0.72 - dx*1.3 - dy*0.9));
+
+          var isEdge = bandIdx[idx] !== bandIdx[xl] || bandIdx[idx] !== bandIdx[yu];
+          var lineMul = isEdge ? 0.72 : 1;
+
+          var p = idx*4;
+          data[p]   = Math.max(0, Math.min(255, col[0]*shade*lineMul));
+          data[p+1] = Math.max(0, Math.min(255, col[1]*shade*lineMul));
+          data[p+2] = Math.max(0, Math.min(255, col[2]*shade*lineMul));
+          data[p+3] = 255;
+        }
+      }
+      terrainCtx.putImageData(img, 0, 0);
+    }
+
+    var slider = document.getElementById('seaLevel');
+    var seaLevelVal = document.getElementById('seaLevelVal');
+    var pctEl = document.getElementById('inundatedPct');
+    var regenBtn = document.getElementById('regenTerrain');
+    var targetLevel = 0, displayedLevel = 0, shimmer = 0;
+    var userControl = false, autoStartTime = null;
+
+    var waterCell = 4;
+    var waterCols = Math.floor(W/waterCell), waterRows = Math.floor(H/waterCell);
+    var cellPattern = new Float32Array(waterCols*waterRows);
+    for(var i = 0; i < cellPattern.length; i++) cellPattern[i] = Math.random();
+
+    // A utility corridor climbing away from the coast — poles/wires, LiDAR-survey style
+    var poles = [
+      {fx:0.30, fy:0.82}, {fx:0.39, fy:0.72}, {fx:0.48, fy:0.62}, {fx:0.57, fy:0.52},
+      {fx:0.66, fy:0.41}, {fx:0.75, fy:0.31}, {fx:0.84, fy:0.21}
+    ];
+    var polesStatusEl = document.getElementById('polesStatus');
+
+    function drawPoles(){
+      var poleH = 10;
+      fCtx.lineWidth = 1;
+      fCtx.strokeStyle = 'rgba(255,176,32,0.55)';
+      fCtx.beginPath();
+      for(var i = 0; i < poles.length; i++){
+        var x = poles[i].fx*W, y = poles[i].fy*H - poleH;
+        if(i === 0){ fCtx.moveTo(x, y); continue; }
+        var px = poles[i-1].fx*W, py = poles[i-1].fy*H - poleH;
+        var sagX = (px+x)/2, sagY = Math.max(py,y) + 3;
+        fCtx.quadraticCurveTo(sagX, sagY, x, y);
+      }
+      fCtx.stroke();
+
+      var submerged = 0;
+      for(var k = 0; k < poles.length; k++){
+        var pt = poles[k];
+        var x = pt.fx*W, y = pt.fy*H;
+        var sx = Math.max(0, Math.min(W-1, Math.round(x)));
+        var sy = Math.max(0, Math.min(H-1, Math.round(y)));
+        var flooded = elevFeet[sy*W+sx] <= displayedLevel;
+        if(flooded) submerged++;
+        var col = flooded ? '235,90,66' : '255,176,32';
+
+        fCtx.strokeStyle = 'rgba('+col+',0.95)';
+        fCtx.lineWidth = 1.3;
+        fCtx.beginPath();
+        fCtx.moveTo(x, y);
+        fCtx.lineTo(x, y - poleH);
+        fCtx.moveTo(x-4, y-poleH);
+        fCtx.lineTo(x+4, y-poleH);
+        fCtx.stroke();
+
+        fCtx.beginPath();
+        fCtx.arc(x, y, flooded ? 2.4 : 1.6, 0, Math.PI*2);
+        fCtx.fillStyle = 'rgba('+col+',1)';
+        fCtx.fill();
+
+        if(flooded){
+          fCtx.beginPath();
+          fCtx.arc(x, y, 5.5, 0, Math.PI*2);
+          fCtx.strokeStyle = 'rgba(235,90,66,0.45)';
+          fCtx.lineWidth = 1;
+          fCtx.stroke();
+        }
+      }
+      if(polesStatusEl){
+        polesStatusEl.textContent = 'Utility corridor: ' + submerged + ' of ' + poles.length + ' poles below sea level';
+      }
+    }
+
+    function render(){
+      fCtx.drawImage(terrainCache, 0, 0);
+      var flooded = 0;
+      var shimmerT = Math.sin(shimmer);
+      for(var wy = 0; wy < waterRows; wy++){
+        for(var wx = 0; wx < waterCols; wx++){
+          var sx = Math.min(W-1, wx*waterCell + (waterCell>>1));
+          var sy = Math.min(H-1, wy*waterCell + (waterCell>>1));
+          var elev = elevFeet[sy*W+sx];
+          if(elev <= displayedLevel){
+            flooded++;
+            var px = wx*waterCell, py = wy*waterCell;
+            var shore = elev > displayedLevel - 0.5;
+            var pattern = cellPattern[wy*waterCols+wx];
+            var wa = 0.42 + shimmerT*0.05*pattern + (1-pattern)*0.05;
+            fCtx.fillStyle = shore ? 'rgba(210,232,238,0.62)' : 'rgba(30,140,220,' + wa.toFixed(3) + ')';
+            fCtx.fillRect(px, py, waterCell+1, waterCell+1);
+          }
+        }
+      }
+      drawPoles();
+      var pct = Math.round((flooded/(waterCols*waterRows))*100);
+      pctEl.textContent = pct + '%';
+    }
+
+    function takeControl(){
+      userControl = true;
+    }
+
+    function loopFlood(now){
+      if(!userControl){
+        if(autoStartTime === null) autoStartTime = now || performance.now();
+        var t = ((now || performance.now()) - autoStartTime) / 1000;
+        targetLevel = 5.5 + 4.5*Math.sin(t*0.22);
+      }
+      displayedLevel += (targetLevel - displayedLevel) * 0.05;
+      shimmer += 0.04;
+      render();
+      if(!userControl && slider){
+        slider.value = displayedLevel.toFixed(1);
+        seaLevelVal.textContent = displayedLevel.toFixed(1);
+      }
+      requestAnimationFrame(loopFlood);
+    }
+
+    if(slider){
+      slider.addEventListener('pointerdown', takeControl);
+      slider.addEventListener('input', function(){
+        takeControl();
+        targetLevel = parseFloat(slider.value);
+        seaLevelVal.textContent = targetLevel.toFixed(1);
+      });
+    }
+    if(regenBtn){
+      regenBtn.addEventListener('click', function(){
+        randomizeSeed();
+        buildGrid();
+      });
+    }
+
+    randomizeSeed();
+    buildGrid();
+    if(reduceMotion){
+      displayedLevel = targetLevel;
+      render();
+      slider && slider.addEventListener('input', function(){
+        displayedLevel = targetLevel;
+        render();
+      });
+    } else {
+      requestAnimationFrame(loopFlood);
+    }
+  }
+})();
+</script>
 
 </body>
-
 </html>
