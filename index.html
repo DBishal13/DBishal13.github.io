@@ -417,10 +417,10 @@
     <div class="sec-head reveal">
       <div>
         <div class="sec-tag">03 — Featured Builds</div>
-        <h2>Agentic AI systems</h2>
+        <h2>Self-directed AI &amp; NLP projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Two self-directed builds applying LLM agents and RAG to real problems — documented honestly, including the bugs I hit and how I fixed them. Both run entirely locally via Ollama: no API keys, no usage cost.</p>
+    <p class="sec-intro reveal">Self-directed builds spanning agentic AI, RAG, and applied NLP tooling — documented honestly, including the bugs I hit and how I fixed them. The first two run entirely locally via Ollama: no API keys, no usage cost.</p>
 
     <div class="build reveal">
       <div class="build-head">
@@ -444,6 +444,18 @@
       <div class="stack">
         <span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span>
         <span class="tag">Streamlit</span><span class="tag">Python CLI</span>
+      </div>
+    </div>
+
+    <div class="build reveal">
+      <div class="build-head">
+        <div><h3>RomanNepaliAI</h3></div>
+        <a class="btn btn-ghost" href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a>
+      </div>
+      <p class="desc">A Nepali translation and transliteration toolkit built to help non-Nepali speakers follow along with Nepali movies, songs, and skits. A hand-written rule-based engine converts romanized Nepali — including inconsistent, texting-style spelling — to Devanagari entirely client-side in the browser, live, with no server calls. A separate CLI batch-translates full SRT subtitle files through pluggable backends (a free stub, Google Translate, or a local Hugging Face MT model), with automatic line-wrapping and caption-merging normalization. A small FastAPI service, deployed on Render, powers the optional translation step behind the static demo.</p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Hugging Face Transformers</span>
+        <span class="tag">Vanilla JS</span><span class="tag">pytest</span><span class="tag">GitHub Actions</span>
       </div>
     </div>
   </div>
