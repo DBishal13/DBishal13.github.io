@@ -615,6 +615,7 @@
 
 <footer>
   <p>© Bishal Dhungana</p>
+  <p>View count: <span id="gc-view-count">…</span></p>
 </footer>
 
 <script>
@@ -1194,6 +1195,12 @@
 
 <!-- Privacy-friendly visitor analytics (GoatCounter) -->
 <script data-goatcounter="https://gisus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+fetch('https://gisus.goatcounter.com/counter/TOTAL.json')
+  .then(function(r){ return r.json(); })
+  .then(function(d){ document.getElementById('gc-view-count').textContent = d.count; })
+  .catch(function(){});
+</script>
 
 </body>
 </html>
