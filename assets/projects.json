@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T01:34:03.715369Z",
+  "generated_at": "2026-07-28T02:01:32.745519Z",
   "repos": [
     {
       "name": "3d-export",
@@ -101,129 +101,12 @@
       "stars": 0
     },
     {
-      "name": "pywmp_devdoc_tracker",
-      "description": null,
-      "url": "https://github.com/DBishal13/pywmp_devdoc_tracker",
-      "homepage": null,
-      "language": null,
-      "pushed_at": "2025-09-22T20:39:20Z",
-      "stars": 0
-    },
-    {
       "name": "Air-Pollution-in-Florida",
       "description": "Air Pollution in Florida: Dashboard for Visualization of Mean Daily  Average Fine Particular Matter (PM2.5) with Automatic Update Tool",
       "url": "https://github.com/DBishal13/Air-Pollution-in-Florida",
       "homepage": null,
       "language": null,
       "pushed_at": "2024-05-29T04:22:38Z",
-      "stars": 0
-    },
-    {
-      "name": "Voter-Turnout-Prediction-Florida",
-      "description": null,
-      "url": "https://github.com/DBishal13/Voter-Turnout-Prediction-Florida",
-      "homepage": null,
-      "language": null,
-      "pushed_at": "2024-05-23T07:38:36Z",
-      "stars": 0
-    },
-    {
-      "name": "AgriculturalSuitability",
-      "description": "Agricultural Land Suitability Analysis Based on Physical Factors: A case study of Makwanpur District, Nepal",
-      "url": "https://github.com/DBishal13/AgriculturalSuitability",
-      "homepage": null,
-      "language": null,
-      "pushed_at": "2024-05-23T07:12:28Z",
-      "stars": 0
-    },
-    {
-      "name": "Data-Engineering-and-Vizualization",
-      "description": null,
-      "url": "https://github.com/DBishal13/Data-Engineering-and-Vizualization",
-      "homepage": null,
-      "language": "Jupyter Notebook",
-      "pushed_at": "2024-05-23T05:01:11Z",
-      "stars": 0
-    },
-    {
-      "name": "Covid19-GeoVisualisation",
-      "description": null,
-      "url": "https://github.com/DBishal13/Covid19-GeoVisualisation",
-      "homepage": null,
-      "language": "Jupyter Notebook",
-      "pushed_at": "2024-05-23T04:53:48Z",
-      "stars": 0
-    },
-    {
-      "name": "rstrokeprediction",
-      "description": "This R Markdown file contains the report of the data analysis done for the project on building and deploying a stroke prediction model in R. It contains analysis such as data exploration, summary statistics, and building the prediction models.",
-      "url": "https://github.com/DBishal13/rstrokeprediction",
-      "homepage": null,
-      "language": "HTML",
-      "pushed_at": "2024-05-12T01:08:39Z",
-      "stars": 0
-    },
-    {
-      "name": "Calculator",
-      "description": "This is a project made using html, css and javascript.",
-      "url": "https://github.com/DBishal13/Calculator",
-      "homepage": null,
-      "language": "HTML",
-      "pushed_at": "2023-12-05T02:56:00Z",
-      "stars": 0
-    },
-    {
-      "name": "Analog-Clock",
-      "description": "This is a project made using html, css and javascript.",
-      "url": "https://github.com/DBishal13/Analog-Clock",
-      "homepage": null,
-      "language": "HTML",
-      "pushed_at": "2023-12-04T21:42:47Z",
-      "stars": 0
-    },
-    {
-      "name": "EDA-PM2.5",
-      "description": null,
-      "url": "https://github.com/DBishal13/EDA-PM2.5",
-      "homepage": null,
-      "language": "R",
-      "pushed_at": "2023-08-18T19:53:37Z",
-      "stars": 0
-    },
-    {
-      "name": "EDA_R",
-      "description": null,
-      "url": "https://github.com/DBishal13/EDA_R",
-      "homepage": null,
-      "language": "R",
-      "pushed_at": "2023-08-18T18:29:20Z",
-      "stars": 0
-    },
-    {
-      "name": "Getting-and-Cleaning-Data-Coursera-Project",
-      "description": null,
-      "url": "https://github.com/DBishal13/Getting-and-Cleaning-Data-Coursera-Project",
-      "homepage": null,
-      "language": "R",
-      "pushed_at": "2023-08-13T21:41:56Z",
-      "stars": 0
-    },
-    {
-      "name": "RProgramming",
-      "description": "R Programming Week 3 Assignment",
-      "url": "https://github.com/DBishal13/RProgramming",
-      "homepage": null,
-      "language": "R",
-      "pushed_at": "2023-07-18T05:30:41Z",
-      "stars": 0
-    },
-    {
-      "name": "ArcGIS_Raster_Layout",
-      "description": "Codes for raster manipulation, symbology and map layouts in ArcGIS Pro",
-      "url": "https://github.com/DBishal13/ArcGIS_Raster_Layout",
-      "homepage": null,
-      "language": "Jupyter Notebook",
-      "pushed_at": "2023-06-04T19:26:59Z",
       "stars": 0
     }
   ]
