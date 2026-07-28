@@ -1,0 +1,113 @@
+{
+  "generated_at": "2026-07-27T22:32:20Z",
+  "repos": [
+    {
+      "name": "3d-export",
+      "description": "A Python-first tool to generate land cover exports and quickly create a 3D-style PNG from Sentinel-2 land cover tiles. Inspired by the original rayshader R workflow.",
+      "url": "https://github.com/DBishal13/3d-export",
+      "homepage": "https://dbishal13.github.io/3d-export/",
+      "language": "Python",
+      "pushed_at": "2026-07-27T22:32:20Z",
+      "stars": 0
+    },
+    {
+      "name": "gtfs-transit-platform",
+      "description": "A generalized data-engineering and geospatial-analytics platform for GTFS transit feeds — ingest any agency's schedule data, run spatial and service-quality analysis, and explore results in an interactive map app.",
+      "url": "https://github.com/DBishal13/gtfs-transit-platform",
+      "homepage": "https://dbishal13.github.io/gtfs-transit-platform/",
+      "language": "Python",
+      "pushed_at": "2026-07-27T21:44:41Z",
+      "stars": 0
+    },
+    {
+      "name": "GeoCoder",
+      "description": "Tools for turning a spreadsheet of US street addresses into geocoded points using free Nominatim and Overpass OpenStreetMap APIs.",
+      "url": "https://github.com/DBishal13/GeoCoder",
+      "homepage": "https://dbishal13.github.io/GeoCoder/",
+      "language": "Jupyter Notebook",
+      "pushed_at": "2026-07-27T21:19:55Z",
+      "stars": 0
+    },
+    {
+      "name": "3DEP-Lidar-Terrain-Builder",
+      "description": "Generate DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3D Elevation Program (3DEP) lidar for a user-defined area of interest.",
+      "url": "https://github.com/DBishal13/3DEP-Lidar-Terrain-Builder",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushed_at": "2026-07-27T21:09:40Z",
+      "stars": 0
+    },
+    {
+      "name": "Road-Centerline",
+      "description": "Extract road centerlines from polygon geometries (road contours) — worldwide, in any input CRS, in any format geopandas can read.",
+      "url": "https://github.com/DBishal13/Road-Centerline",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-07-23T05:39:13Z",
+      "stars": 0
+    },
+    {
+      "name": "hazard-mcp",
+      "description": "MCP server unifying multiple US hazard APIs: OpenFEMA disaster declarations, USGS earthquake feeds, NOAA river gauges, NWS alerts, and NASA fire/wildfire events.",
+      "url": "https://github.com/DBishal13/hazard-mcp",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-07-23T05:13:19Z",
+      "stars": 0
+    },
+    {
+      "name": "surge-exposure",
+      "description": "Data-engineering pipeline ingesting NOAA storm surge risk layers and flood-inundation polygons, overlaying against building footprints to score per-asset exposure.",
+      "url": "https://github.com/DBishal13/surge-exposure",
+      "homepage": "https://dbishal13.github.io/surge-exposure/",
+      "language": "Python",
+      "pushed_at": "2026-07-23T05:04:09Z",
+      "stars": 0
+    },
+    {
+      "name": "geospatial-data-copilot",
+      "description": "Natural-language interface over spatial/infrastructure data — a local LLM agent translates plain-English questions into spatial SQL and answers with a map.",
+      "url": "https://github.com/DBishal13/geospatial-data-copilot",
+      "homepage": "https://dbishal13.github.io/geospatial-data-copilot/",
+      "language": "Python",
+      "pushed_at": "2026-07-22T16:21:39Z",
+      "stars": 0
+    },
+    {
+      "name": "RomanNepaliAI",
+      "description": "Tools for working with Nepali text: transliteration (romanized Nepali ↔ Devanagari) and translation (Nepali ↔ English), live in-browser and via CLI.",
+      "url": "https://github.com/DBishal13/RomanNepaliAI",
+      "homepage": "https://dbishal13.github.io/RomanNepaliAI/",
+      "language": "Python",
+      "pushed_at": "2026-07-22T05:33:36Z",
+      "stars": 0
+    },
+    {
+      "name": "conversational-ai-assistant",
+      "description": "LangChain-based conversational chatbot with retrieval-augmented generation (RAG), indexing local documents into a Chroma vector store.",
+      "url": "https://github.com/DBishal13/conversational-ai-assistant",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-07-21T03:31:35Z",
+      "stars": 0
+    },
+    {
+      "name": "pywmp_documentation",
+      "description": "Documentation for pyWMP, an open-source Python watershed modeling and planning tool.",
+      "url": "https://github.com/DBishal13/pywmp_documentation",
+      "homepage": "https://dbishal13.github.io/pywmp_documentation/",
+      "language": "HTML",
+      "pushed_at": "2026-06-22T11:57:01Z",
+      "stars": 0
+    },
+    {
+      "name": "pywmp_devdoc_tracker",
+      "description": null,
+      "url": "https://github.com/DBishal13/pywmp_devdoc_tracker",
+      "homepage": null,
+      "language": null,
+      "pushed_at": "2025-09-22T20:39:20Z",
+      "stars": 0
+    }
+  ]
+}
