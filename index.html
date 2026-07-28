@@ -89,6 +89,13 @@
     position:relative; padding:96px 0 56px; overflow:hidden;
     border-bottom:1px solid var(--line);
   }
+  .hero::before{
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(255,176,32,0.10), transparent 60%),
+      radial-gradient(760px 640px at 88% 30%, rgba(45,212,191,0.14), transparent 62%),
+      radial-gradient(1100px 500px at 50% 115%, rgba(45,212,191,0.06), transparent 65%);
+  }
   .hero canvas.bg-canvas{
     position:absolute; inset:0; width:100%; height:100%; z-index:0;
     opacity:0.5;
@@ -98,10 +105,12 @@
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
   .hero-visual{position:relative;}
   .hero-visual canvas{
-    width:100%; aspect-ratio:4/5; display:block; touch-action:none; cursor:grab;
+    width:100%; aspect-ratio:6/5; display:block; touch-action:none; cursor:grab;
     border:1px solid var(--line); border-radius:var(--radius);
     background-color:#0e1613;
-    background-image:radial-gradient(circle at 50% 42%, rgba(45,212,191,0.14), transparent 70%);
+    background-image:
+      radial-gradient(circle at 50% 38%, rgba(45,212,191,0.16), transparent 68%),
+      radial-gradient(circle at 78% 82%, rgba(255,176,32,0.08), transparent 55%);
   }
   .hero-visual canvas:active{cursor:grabbing;}
   .scan-label{
@@ -125,7 +134,12 @@
     font-style:normal; color:var(--amber);
   }
   .hero p.lede{
-    font-size:17px; color:var(--text-dim); max-width:900px; margin-bottom:28px;
+    font-size:17px; color:var(--text-dim); max-width:900px; margin-bottom:20px;
+  }
+  .role-pills{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
+  .role-pills span{
+    font-size:12px; padding:7px 13px; border:1px solid var(--line); border-radius:999px;
+    color:var(--text-dim); background:rgba(255,255,255,0.02); letter-spacing:0.02em;
   }
   .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
   .btn{
@@ -351,8 +365,11 @@
     <div class="hero-text">
       <div class="hero-name">Bishal Dhungana</div>
       <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
-      <h1>Turning raw spatial data into systems that hold up for <em>real infrastructure.</em></h1>
-      <p class="lede">Geospatial Data Scientist working across LiDAR, aerial imagery, computer vision, and agentic AI systems — from field survey through production platforms supporting critical utility infrastructure.</p>
+      <h1>Turning imagery and LiDAR into cloud systems that run <em>real infrastructure.</em></h1>
+      <p class="lede">Geospatial Data Scientist working end to end — computer vision on drone imagery and LiDAR, AWS cloud pipelines and infrastructure-as-code, and the AI agents that tie it together — from field survey to production platforms protecting critical utility infrastructure.</p>
+      <div class="role-pills mono">
+        <span>Computer Vision</span><span>LiDAR / Point Clouds</span><span>Cloud &amp; AWS</span><span>Geospatial Data Engineering</span><span>Agentic AI</span>
+      </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
         <a class="btn btn-ghost" href="#contact">Get in touch</a>
@@ -1003,8 +1020,35 @@
       {y:0.44, amp:22, freq:1.2, opacity:0.18, color:'45,212,191'}
     ];
 
+    var gridSpacing = 34;
+
+    function drawGrid(){
+      var parallax = (mouseX - 0.5) * 10;
+      var offX = ((-mouseX*gridSpacing*0.4) % gridSpacing + gridSpacing) % gridSpacing;
+      var offY = ((-mouseY*gridSpacing*0.4) % gridSpacing + gridSpacing) % gridSpacing;
+      bgCtx.fillStyle = 'rgba(45,212,191,0.4)';
+      for(var gy = -gridSpacing + offY; gy < bgH + gridSpacing; gy += gridSpacing){
+        for(var gx = -gridSpacing + offX; gx < bgW + gridSpacing; gx += gridSpacing){
+          bgCtx.fillRect(gx + parallax*0.3, gy, 1.4, 1.4);
+        }
+      }
+    }
+
+    function drawSweep(){
+      var t = (bgPhase * 10) % 1; // 0..1 loop
+      var sweepX = t * (bgW + 400) - 200;
+      var grad = bgCtx.createLinearGradient(sweepX - 130, 0, sweepX + 130, 0);
+      grad.addColorStop(0, 'rgba(255,176,32,0)');
+      grad.addColorStop(0.5, 'rgba(255,176,32,0.10)');
+      grad.addColorStop(1, 'rgba(255,176,32,0)');
+      bgCtx.fillStyle = grad;
+      bgCtx.fillRect(0, 0, bgW, bgH);
+    }
+
     function drawBg(){
       bgCtx.clearRect(0,0,bgW,bgH);
+      drawGrid();
+      drawSweep();
       var parallax = (mouseX - 0.5) * 18;
       bands.forEach(function(b){
         bgCtx.beginPath();
@@ -1095,30 +1139,30 @@
     }
 
     // ground plane
-    for(i = 0; i < 420; i++){
-      var gx = (Math.random()-0.5) * 2.4;
-      var gz = (Math.random()-0.5) * 2.4;
+    for(i = 0; i < 480; i++){
+      var gx = (Math.random()-0.5) * 1.9;
+      var gz = (Math.random()-0.5) * 1.9;
       var gy = -1.02 + (Math.random()-0.5)*0.01;
       points.push({x:gx, y:gy, z:gz, c:'ground'});
     }
 
     // road surface
     for(i = 0; i < 90; i++){
-      var rx = -0.9 + Math.random()*1.8;
-      var rz = -0.18 + (Math.random()-0.5)*0.08;
+      var rx = -0.72 + Math.random()*1.44;
+      var rz = -0.16 + (Math.random()-0.5)*0.07;
       points.push({x:rx, y:-1.01 + (Math.random()-0.5)*0.003, z:rz, c:'road'});
     }
 
     // vegetation clusters
-    for(i = 0; i < 260; i++){
-      var vx = -0.85 + Math.random()*1.7;
-      var vz = 0.18 + (Math.random()-0.5)*0.5;
+    for(i = 0; i < 300; i++){
+      var vx = -0.68 + Math.random()*1.36;
+      var vz = 0.15 + (Math.random()-0.5)*0.42;
       var vy = -0.88 + Math.random()*0.24;
       points.push({x:vx, y:vy, z:vz, c:'vegetation'});
     }
 
     var angle = 0.6, autoSpin = 0.0035, dragging = false, lastX = 0, velocity = 0;
-    var tiltX = -0.22;
+    var tiltX = -0.30;
 
     pcCanvas.addEventListener('pointerdown', function(e){
       dragging = true; lastX = e.clientX; velocity = 0;
@@ -1137,7 +1181,7 @@
     function projected(){
       var cos = Math.cos(angle), sin = Math.sin(angle);
       var cosT = Math.cos(tiltX), sinT = Math.sin(tiltX);
-      var focal = 3.2, R = pcH * 0.40, cx = pcW/2, cy = pcH/2 + pcH*0.06;
+      var focal = 3.2, R = pcH * 0.42, cx = pcW/2, cy = pcH/2 + pcH*0.02;
       var out = [];
       for(var k = 0; k < points.length; k++){
         var p = points[k];
