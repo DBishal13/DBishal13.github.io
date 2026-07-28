@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-07-27T22:32:20Z",
+  "generated_at": "2026-07-28T01:34:03.715369Z",
   "repos": [
     {
       "name": "3d-export",
-      "description": "A Python-first tool to generate land cover exports and quickly create a 3D-style PNG from Sentinel-2 land cover tiles. Inspired by the original rayshader R workflow.",
+      "description": "A Python-first tool to generate land cover exports and quickly create a 3D-style PNG from Sentinel-2 land cover tiles.  Inspired by the original rayshader R workflow.",
       "url": "https://github.com/DBishal13/3d-export",
       "homepage": "https://dbishal13.github.io/3d-export/",
       "language": "Python",
-      "pushed_at": "2026-07-27T22:32:20Z",
+      "pushed_at": "2026-07-28T01:28:22Z",
       "stars": 0
     },
     {
       "name": "gtfs-transit-platform",
-      "description": "A generalized data-engineering and geospatial-analytics platform for GTFS transit feeds — ingest any agency's schedule data, run spatial and service-quality analysis, and explore results in an interactive map app.",
+      "description": "A generalized data-engineering and geospatial-analytics platform for GTFS transit feeds \u2014 ingest any agency's schedule data, run real spatial and service-quality analysis on it, and explore the results in an interactive map app deployed straight from this repo to GitHub Pages.",
       "url": "https://github.com/DBishal13/gtfs-transit-platform",
       "homepage": "https://dbishal13.github.io/gtfs-transit-platform/",
       "language": "Python",
@@ -21,7 +21,7 @@
     },
     {
       "name": "GeoCoder",
-      "description": "Tools for turning a spreadsheet of US street addresses into geocoded points using free Nominatim and Overpass OpenStreetMap APIs.",
+      "description": "Tools for turning a spreadsheet of US street addresses into geocoded points (and optionally OSM building footprint polygons), using the free Nominatim and Overpass OpenStreetMap APIs. No API key required for either service.",
       "url": "https://github.com/DBishal13/GeoCoder",
       "homepage": "https://dbishal13.github.io/GeoCoder/",
       "language": "Jupyter Notebook",
@@ -30,7 +30,7 @@
     },
     {
       "name": "3DEP-Lidar-Terrain-Builder",
-      "description": "Generate DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3D Elevation Program (3DEP) lidar for a user-defined area of interest.",
+      "description": "Generate DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3D Elevation Program (3DEP) lidar for a user-defined area of interest (AOI).",
       "url": "https://github.com/DBishal13/3DEP-Lidar-Terrain-Builder",
       "homepage": null,
       "language": "Jupyter Notebook",
@@ -39,7 +39,7 @@
     },
     {
       "name": "Road-Centerline",
-      "description": "Extract road centerlines from polygon geometries (road contours) — worldwide, in any input CRS, in any format geopandas can read.",
+      "description": "Extract road centerlines from polygon geometries (road contours) \u2014 worldwide, in any input CRS, in any format geopandas can read or write.",
       "url": "https://github.com/DBishal13/Road-Centerline",
       "homepage": null,
       "language": "Python",
@@ -48,7 +48,7 @@
     },
     {
       "name": "hazard-mcp",
-      "description": "MCP server unifying multiple US hazard APIs: OpenFEMA disaster declarations, USGS earthquake feeds, NOAA river gauges, NWS alerts, and NASA fire/wildfire events.",
+      "description": "An MCP server (Python, FastMCP) that unifies multiple US hazard APIs behind a single agent-facing interface: OpenFEMA disaster declarations + NFIP claims, USGS earthquake GeoJSON feeds, NOAA NWPS river gauges + live flood-inundation extent, NWS weather alerts, and NASA EONET wildfire events + FIRMS fire detections.",
       "url": "https://github.com/DBishal13/hazard-mcp",
       "homepage": null,
       "language": "Python",
@@ -57,7 +57,7 @@
     },
     {
       "name": "surge-exposure",
-      "description": "Data-engineering pipeline ingesting NOAA storm surge risk layers and flood-inundation polygons, overlaying against building footprints to score per-asset exposure.",
+      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
       "url": "https://github.com/DBishal13/surge-exposure",
       "homepage": "https://dbishal13.github.io/surge-exposure/",
       "language": "Python",
@@ -66,7 +66,7 @@
     },
     {
       "name": "geospatial-data-copilot",
-      "description": "Natural-language interface over spatial/infrastructure data — a local LLM agent translates plain-English questions into spatial SQL and answers with a map.",
+      "description": "A natural-language interface over spatial/infrastructure data. Ask a question in plain English about San Francisco's utility infrastructure (poles, transmission towers, transformers) \u2014 a local LLM agent translates it into a spatial SQL query, runs it, and answers with a natural-language summary and an optional interactive map.",
       "url": "https://github.com/DBishal13/geospatial-data-copilot",
       "homepage": "https://dbishal13.github.io/geospatial-data-copilot/",
       "language": "Python",
@@ -75,7 +75,7 @@
     },
     {
       "name": "RomanNepaliAI",
-      "description": "Tools for working with Nepali text: transliteration (romanized Nepali ↔ Devanagari) and translation (Nepali ↔ English), live in-browser and via CLI.",
+      "description": "Tools for working with Nepali text in three directions: transliteration (romanized Nepali \u2194 Devanagari script, same language) and translation (Nepali \u2194 English, different languages). Built for subtitles, texting-style Nepali, and general text, with a CLI, a web demo, and a small backend API.",
       "url": "https://github.com/DBishal13/RomanNepaliAI",
       "homepage": "https://dbishal13.github.io/RomanNepaliAI/",
       "language": "Python",
@@ -84,7 +84,7 @@
     },
     {
       "name": "conversational-ai-assistant",
-      "description": "LangChain-based conversational chatbot with retrieval-augmented generation (RAG), indexing local documents into a Chroma vector store.",
+      "description": "A LangChain-based conversational chatbot with retrieval-augmented generation (RAG). It indexes local documents into a Chroma vector database for semantic search, and answers questions in a context-aware, multi-turn conversation \u2014 grounding every answer in the retrieved source material and citing which file(s) it used.",
       "url": "https://github.com/DBishal13/conversational-ai-assistant",
       "homepage": null,
       "language": "Python",
@@ -93,7 +93,7 @@
     },
     {
       "name": "pywmp_documentation",
-      "description": "Documentation for pyWMP, an open-source Python watershed modeling and planning tool.",
+      "description": "documentations for pyWMP",
       "url": "https://github.com/DBishal13/pywmp_documentation",
       "homepage": "https://dbishal13.github.io/pywmp_documentation/",
       "language": "HTML",
@@ -107,6 +107,123 @@
       "homepage": null,
       "language": null,
       "pushed_at": "2025-09-22T20:39:20Z",
+      "stars": 0
+    },
+    {
+      "name": "Air-Pollution-in-Florida",
+      "description": "Air Pollution in Florida: Dashboard for Visualization of Mean Daily  Average Fine Particular Matter (PM2.5) with Automatic Update Tool",
+      "url": "https://github.com/DBishal13/Air-Pollution-in-Florida",
+      "homepage": null,
+      "language": null,
+      "pushed_at": "2024-05-29T04:22:38Z",
+      "stars": 0
+    },
+    {
+      "name": "Voter-Turnout-Prediction-Florida",
+      "description": null,
+      "url": "https://github.com/DBishal13/Voter-Turnout-Prediction-Florida",
+      "homepage": null,
+      "language": null,
+      "pushed_at": "2024-05-23T07:38:36Z",
+      "stars": 0
+    },
+    {
+      "name": "AgriculturalSuitability",
+      "description": "Agricultural Land Suitability Analysis Based on Physical Factors: A case study of Makwanpur District, Nepal",
+      "url": "https://github.com/DBishal13/AgriculturalSuitability",
+      "homepage": null,
+      "language": null,
+      "pushed_at": "2024-05-23T07:12:28Z",
+      "stars": 0
+    },
+    {
+      "name": "Data-Engineering-and-Vizualization",
+      "description": null,
+      "url": "https://github.com/DBishal13/Data-Engineering-and-Vizualization",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushed_at": "2024-05-23T05:01:11Z",
+      "stars": 0
+    },
+    {
+      "name": "Covid19-GeoVisualisation",
+      "description": null,
+      "url": "https://github.com/DBishal13/Covid19-GeoVisualisation",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushed_at": "2024-05-23T04:53:48Z",
+      "stars": 0
+    },
+    {
+      "name": "rstrokeprediction",
+      "description": "This R Markdown file contains the report of the data analysis done for the project on building and deploying a stroke prediction model in R. It contains analysis such as data exploration, summary statistics, and building the prediction models.",
+      "url": "https://github.com/DBishal13/rstrokeprediction",
+      "homepage": null,
+      "language": "HTML",
+      "pushed_at": "2024-05-12T01:08:39Z",
+      "stars": 0
+    },
+    {
+      "name": "Calculator",
+      "description": "This is a project made using html, css and javascript.",
+      "url": "https://github.com/DBishal13/Calculator",
+      "homepage": null,
+      "language": "HTML",
+      "pushed_at": "2023-12-05T02:56:00Z",
+      "stars": 0
+    },
+    {
+      "name": "Analog-Clock",
+      "description": "This is a project made using html, css and javascript.",
+      "url": "https://github.com/DBishal13/Analog-Clock",
+      "homepage": null,
+      "language": "HTML",
+      "pushed_at": "2023-12-04T21:42:47Z",
+      "stars": 0
+    },
+    {
+      "name": "EDA-PM2.5",
+      "description": null,
+      "url": "https://github.com/DBishal13/EDA-PM2.5",
+      "homepage": null,
+      "language": "R",
+      "pushed_at": "2023-08-18T19:53:37Z",
+      "stars": 0
+    },
+    {
+      "name": "EDA_R",
+      "description": null,
+      "url": "https://github.com/DBishal13/EDA_R",
+      "homepage": null,
+      "language": "R",
+      "pushed_at": "2023-08-18T18:29:20Z",
+      "stars": 0
+    },
+    {
+      "name": "Getting-and-Cleaning-Data-Coursera-Project",
+      "description": null,
+      "url": "https://github.com/DBishal13/Getting-and-Cleaning-Data-Coursera-Project",
+      "homepage": null,
+      "language": "R",
+      "pushed_at": "2023-08-13T21:41:56Z",
+      "stars": 0
+    },
+    {
+      "name": "RProgramming",
+      "description": "R Programming Week 3 Assignment",
+      "url": "https://github.com/DBishal13/RProgramming",
+      "homepage": null,
+      "language": "R",
+      "pushed_at": "2023-07-18T05:30:41Z",
+      "stars": 0
+    },
+    {
+      "name": "ArcGIS_Raster_Layout",
+      "description": "Codes for raster manipulation, symbology and map layouts in ArcGIS Pro",
+      "url": "https://github.com/DBishal13/ArcGIS_Raster_Layout",
+      "homepage": null,
+      "language": "Jupyter Notebook",
+      "pushed_at": "2023-06-04T19:26:59Z",
       "stars": 0
     }
   ]
