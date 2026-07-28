@@ -175,6 +175,8 @@
   .role ul{list-style:none;}
   .role li{position:relative; padding-left:18px; margin-bottom:9px; color:var(--text-dim); font-size:16px;}
   .role li::before{content:'—'; position:absolute; left:0; color:var(--teal);}
+  .role-sub{font-size:11.5px; color:var(--amber); text-transform:uppercase; letter-spacing:0.06em; margin:18px 0 8px;}
+  .role-sub:first-of-type{margin-top:0;}
 
   /* ---------- Builds ---------- */
   .sec-intro{color:var(--text-dim); font-size:16px; max-width:100%; margin-bottom:26px;}
@@ -185,9 +187,69 @@
   .build .stack{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 18px;}
   .build p.desc{color:var(--text-dim); font-size:17px; margin-bottom:0; max-width:100%;}
 
+  /* ---------- Filter tabs ---------- */
+  .filter-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;}
+  .filter-tab{
+    font-family:'JetBrains Mono'; font-size:12.5px; padding:9px 16px; border:1px solid var(--line);
+    border-radius:999px; background:var(--surface-2); color:var(--text-dim); cursor:pointer; transition:.2s;
+    text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .filter-tab:hover{border-color:var(--amber); color:var(--text);}
+  .filter-tab.active{background:var(--amber); color:var(--on-accent); border-color:var(--amber); font-weight:500;}
+
+  /* ---------- Project grid (Builds) ---------- */
+  .project-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:20px;}
+  .project-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px;
+    display:flex; flex-direction:column; position:relative; overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .project-card::before{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s;
+    background:radial-gradient(480px circle at var(--mx,50%) var(--my,0%), rgba(255,176,32,0.10), transparent 45%);
+  }
+  .project-card:hover::before{opacity:1;}
+  .project-card:hover{transform:translateY(-4px); border-color:var(--amber); box-shadow:0 24px 44px -26px rgba(0,0,0,0.55);}
+  .project-card.is-hidden{display:none;}
+  .project-card__top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
+  .project-card__cat{font-family:'JetBrains Mono'; font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em;}
+  .project-card h3{font-size:19.5px; margin-bottom:10px;}
+  .project-card p.desc{color:var(--text-dim); font-size:15px; margin-bottom:16px; flex:1;}
+  .project-card .stack{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;}
+  .project-card .stack .tag{font-size:12.5px; padding:5px 10px;}
+  .project-card__actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;}
+  .btn-sm{font-size:12.5px; padding:9px 14px;}
+
+  .live-badge{
+    font-family:'JetBrains Mono'; font-size:10.5px; color:#5fd68a; display:inline-flex; align-items:center; gap:6px;
+    text-transform:uppercase; letter-spacing:0.05em; flex-shrink:0;
+  }
+  .live-badge::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fd68a; animation:pulse 1.6s infinite; flex-shrink:0;}
+
+  /* ---------- Live GitHub feed ---------- */
+  .gh-live{margin-top:44px; padding-top:30px; border-top:1px dashed var(--line);}
+  .gh-live__head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;}
+  .gh-live__head h4{
+    font-family:'JetBrains Mono'; font-size:13px; color:var(--text-dim); text-transform:uppercase;
+    letter-spacing:0.05em; display:flex; align-items:center; gap:10px; font-weight:500;
+  }
+  .gh-live__meta{font-size:11.5px; color:var(--text-dim); opacity:0.65;}
+  .gh-live-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px;}
+  .gh-live-card{border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; background:var(--surface-2); transition:.2s;}
+  .gh-live-card:hover{border-color:var(--teal);}
+  .gh-live-card h5{font-size:14.5px; margin-bottom:7px; font-family:'JetBrains Mono'; font-weight:500;}
+  .gh-live-card h5 a{color:var(--text);}
+  .gh-live-card h5 a:hover{color:var(--amber);}
+  .gh-live-card p{font-size:13px; color:var(--text-dim); margin-bottom:12px; line-height:1.55;}
+  .gh-live-card .meta{display:flex; justify-content:space-between; gap:10px; font-size:11px; color:var(--text-dim); font-family:'JetBrains Mono'; opacity:0.7;}
+  .gh-live-card .meta a{color:var(--teal);}
+  .gh-live-empty{font-size:13.5px; color:var(--text-dim); font-family:'JetBrains Mono'; opacity:0.65;}
+
   /* ---------- Skills ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-  @media (max-width:760px){ .skill-groups{grid-template-columns:1fr;} }
+  .skill-groups{display:grid; grid-template-columns:repeat(5,1fr); gap:20px;}
+  @media (max-width:1150px){ .skill-groups{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:760px){ .skill-groups{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .skill-groups{grid-template-columns:1fr;} }
   .skill-group h4{font-size:15px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; font-family:'JetBrains Mono'; font-weight:500;}
   .skill-group .tags{display:flex; flex-wrap:wrap; gap:8px;}
   .tag{
@@ -231,13 +293,6 @@
   .work-card p{color:var(--text-dim); font-size:14.5px; line-height:1.55;}
   @media (min-width:901px){ #systems .work-grid .work-card:last-child{grid-column:1 / -1;} }
 
-  .work-grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media (max-width:760px){ .work-grid-2{grid-template-columns:1fr;} }
-  .work-grid-2 .work-card h4{font-size:18px; margin-bottom:8px;}
-  .work-grid-2 .work-card p{font-size:15.5px; margin-bottom:14px;}
-  .work-grid-2 .work-card a{font-family:'JetBrains Mono'; font-size:14px; color:var(--amber);}
-  .work-grid-2 .work-card a:hover{text-decoration:underline;}
-
   /* ---------- Publications / Credentials ---------- */
   .pub{padding:18px 0; border-top:1px solid var(--line); font-size:16.5px; color:var(--text-dim);}
   .pub:first-child{border-top:none;}
@@ -272,6 +327,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener" style="color:var(--amber);">Resume ↓</a></li>
       </ul>
       <button class="nepal-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">
         <span class="nepal-toggle__icon nepal-toggle__sun" title="Light mode">
@@ -298,15 +354,16 @@
       <h1>Turning raw spatial data into systems that hold up for <em>real infrastructure.</em></h1>
       <p class="lede">Geospatial Data Scientist working across LiDAR, aerial imagery, computer vision, and agentic AI systems — from field survey through production platforms supporting critical utility infrastructure.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-primary" href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
         <a class="btn btn-ghost" href="https://github.com/DBishal13" target="_blank">GitHub ↗</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/dbishal" target="_blank">LinkedIn ↗</a>
       </div>
       <div class="readout">
-        <div><div class="num" data-count="30" data-suffix="+">0</div><div class="label">Asset Types Classified</div></div>
-        <div><div class="num" data-count="400" data-suffix="+">0</div><div class="label">Condition Classes</div></div>
+        <div><div class="num" data-count="8" data-suffix="M+">0</div><div class="label">Drone Images Pipelined</div></div>
+        <div><div class="num" data-count="350" data-suffix="K+">0</div><div class="label">Condition Reports Joined</div></div>
+        <div><div class="num" data-count="25" data-suffix="+">0</div><div class="label">Asset Types Modeled</div></div>
         <div><div class="num" data-count="3" data-suffix="M">0</div><div class="label">Addresses Geocoded</div></div>
-        <div><div class="num" data-count="20" data-suffix="+">0</div><div class="label">Platform Components Built</div></div>
       </div>
     </div>
     <div class="hero-visual">
@@ -327,9 +384,9 @@
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p><strong>I work at the intersection of geospatial engineering, applied AI, and the software/platform work that ties them together</strong> — currently as a Data Scientist at The Spear Group, supporting Florida Power &amp; Light's FPLAir/NextVision program, where I lead AI/ML image recognition workflows for power equipment assessment and build the geospatial data pipelines, infrastructure-as-code, and internal platform tooling behind them.</p>
-        <p>My background started in the field: control and topographic surveys, GNSS and UAV data collection, and geodatabase design in Nepal, before an MSc in Geosciences (GIS concentration) at Florida Atlantic University sharpened the AI/ML and geospatial data engineering side. That combination — knowing how spatial data is actually collected and knowing how to build production systems on top of it — is the throughline across everything I build.</p>
-        <p>Day to day that means moving fluidly between layers: writing the Python/PyTorch models, designing the AWS CDK infrastructure they run on, building the FastAPI/React consoles that operate them, and — increasingly — building LLM agents that let people query all of it in plain English. I'm FAA Part 107 certified and hold graduate research contributions in flood hazard exposure modeling.</p>
+        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering</strong> — currently as a Data Scientist at The Spear Group, technical lead across Florida Power &amp; Light's AI-based infrastructure inspection program. I set technical requirements, build the data pipelines and cloud infrastructure behind the program, and serve as subject-matter expert through vendor model development. I also build the GIS applications used for infrastructure monitoring and disaster response — including a portal used during Hurricane Milton.</p>
+        <p>My background started in the field: GNSS and UAV survey, municipal geodatabase design, and control surveys as a Geomatics Engineer in Nepal — before graduate research at Florida Atlantic University on flood hazard modeling and environmental justice sharpened the AI/ML and geospatial data engineering side. That research led to a peer-reviewed publication on flood hazard exposure and social vulnerability in the U.S., and I'm a co-author on <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework, with the accompanying manuscript currently under peer review.</p>
+        <p>Outside of work I contribute to open-source geospatial and AI tools — a published Python package for road-centerline extraction, agentic AI systems for querying spatial and hazard data, and a flood/storm-surge exposure pipeline for utility assets, among others below. I'm FAA Part 107 certified.</p>
         <div class="location-tag">
           <span>beesal13dh@gmail.com</span>
           <span>561-713-5428</span>
@@ -355,14 +412,33 @@
         <div class="org">The Spear Group, on behalf of FPL</div>
       </div>
       <div>
-        <div class="role-title">Data Scientist (Geospatial and AI)</div>
+        <div class="role-title">Data Scientist — Geospatial &amp; AI</div>
+        <p style="color:var(--text-dim); font-size:15px; margin:-4px 0 16px; max-width:640px;">Technical lead across FPL's AI and geospatial infrastructure inspection program — from vendor selection through data engineering to production deployment.</p>
+
+        <div class="role-sub mono">Program &amp; Vendor</div>
         <ul>
-          <li>Technical lead for AI/ML image recognition workflows — deep learning models for power equipment segmentation, damage detection, and classification across 30+ asset types and 400+ condition classes.</li>
-          <li>Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment abstractions used across ML and application workloads.</li>
-          <li>Built a modular enterprise data integration platform (Python, SQL, DuckDB) handling taxonomy alignment, schema publishing, and quality validation.</li>
-          <li>Developed a FastAPI/React API operations console with shared authentication and environment-aware routing for cross-team API management.</li>
-          <li>Design and manage enterprise geospatial infrastructure: spatial databases (PostgreSQL/PostGIS), feature services, and cloud-native pipelines on AWS (Lambda, S3, SageMaker).</li>
-          <li>Build GIS applications with Esri technologies (ArcGIS Enterprise, Experience Builder, Dashboards) for infrastructure monitoring and disaster response.</li>
+          <li>Contributed to technical requirements during initial RFP preparation for a multi-million dollar AI vendor engagement covering infrastructure inspection.</li>
+          <li>Serve as subject-matter expert through vendor model development, coordinating validation and benchmarking against enterprise requirements.</li>
+        </ul>
+
+        <div class="role-sub mono">Data Engineering for AI</div>
+        <ul>
+          <li>Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition assessment reports through spatial and temporal joins, writing enriched results back via batched API calls.</li>
+          <li>Set technical standards for two vendor-developed models: an asset detection model (25+ equipment types) and a switch-state classification model (open/closed).</li>
+          <li>Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so internal teams and vendors could pull images by asset, condition, or class instead of searching by hand.</li>
+        </ul>
+
+        <div class="role-sub mono">Platform &amp; Infrastructure</div>
+        <ul>
+          <li>Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.</li>
+          <li>Built a modular data integration platform (Python, SQL, DuckDB) for schema publishing and quality validation, plus a FastAPI/React API console for cross-team management.</li>
+          <li>Automated integration of image metadata and model-generated detection annotations into an Esri PostGIS geodatabase for geospatial analysis of model output.</li>
+          <li>Manage spatial databases (PostgreSQL/PostGIS), feature services, and cloud-native architecture on AWS (Lambda, S3, SageMaker).</li>
+        </ul>
+
+        <div class="role-sub mono">Applications</div>
+        <ul>
+          <li>Built GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards) for infrastructure monitoring and disaster response — including a portal used during Hurricane Milton to track impact, restoration, and crew deployment.</li>
         </ul>
       </div>
     </div>
@@ -375,9 +451,10 @@
       <div>
         <div class="role-title">Associate Geospatial Analyst</div>
         <ul>
-          <li>QA/QC of LiDAR-derived power grid data for infrastructure resilience initiatives, including pole hardening.</li>
-          <li>Managed PostGIS databases and automated data workflows (FME, Python, ArcPy); supported Hurricane Milton restoration with real-time spatial dashboards.</li>
-          <li>Built a FastAPI geospatial processing sidecar for heavier geoprocessing and format conversion tasks.</li>
+          <li>Led QA/QC of LiDAR-derived power grid data for infrastructure resilience work, including pole hardening.</li>
+          <li>Managed PostGIS databases and automated QA workflows in FME to streamline data storage and validation.</li>
+          <li>Built a FastAPI sidecar for heavier geoprocessing and format conversion.</li>
+          <li>Automated geospatial workflows in Python, ArcPy, and Model Builder to improve consistency across teams.</li>
         </ul>
       </div>
     </div>
@@ -390,22 +467,26 @@
       <div>
         <div class="role-title">Graduate Research Assistant</div>
         <ul>
-          <li>Led FEMA-based flood risk assessment projects across multiple Florida communities, cutting geoprocessing time 50% via ArcGIS Pro automation.</li>
-          <li>Built a Python geocoding tool processing 3M addresses with open-source libraries, replacing a paid service — 3 months to 1 week turnaround, $20K saved.</li>
+          <li>Led flood risk research using FEMA hydrologic and hydraulic methods, resulting in a peer-reviewed publication on flood hazard exposure and social vulnerability across the U.S.</li>
+          <li>Researched environmental justice, looking at how disparities in disaster impact relate to geospatial and socioeconomic variables.</li>
+          <li>Built an automated geoprocessing pipeline in ArcGIS Pro, cutting processing time by 50%.</li>
+          <li>Built a Python geocoding tool to process 3 million addresses, replacing a paid service — cut turnaround from 3 months to 1 week and saved $20K in licensing costs.</li>
         </ul>
       </div>
     </div>
 
     <div class="role reveal">
       <div class="role-meta">
-        <div class="dates mono">2020 — 2022</div>
+        <div class="dates mono">DEC 2020 — DEC 2022</div>
         <div class="org">Freelance &amp; ADMC Engineering, Nepal</div>
       </div>
       <div>
         <div class="role-title">Geomatics Engineer / GIS Intern</div>
         <ul>
-          <li>Led survey teams for municipal road, GNSS, and UAV-based topographic surveys; trained 40+ officials in spatial analysis for Nepal's Survey Department.</li>
-          <li>Designed integrated municipal geodatabases with topology/attribute integrity rules.</li>
+          <li>Led survey teams for municipal road, control, and construction surveys; ran GNSS landmark surveys and UAV topographic surveys.</li>
+          <li>Designed municipal geodatabases (land use, soil, cadastral, resource maps) with topology and attribute rules.</li>
+          <li>Served as GIS expert for Nepal's Survey Department land use hand-over program, training 40+ officials and engineers in spatial analysis and database management.</li>
+          <li>Ran topographic mapping and transmission line surveys using differential GNSS and UAV technology.</li>
         </ul>
       </div>
     </div>
@@ -417,49 +498,153 @@
     <div class="sec-head reveal">
       <div>
         <div class="sec-tag">03 — Featured Builds</div>
-        <h2>Self-directed AI &amp; NLP projects</h2>
+        <h2>Self-directed AI &amp; geospatial projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Self-directed builds spanning agentic AI, RAG, and applied NLP tooling — documented honestly, including the bugs I hit and how I fixed them. The first two run entirely locally via Ollama: no API keys, no usage cost.</p>
+    <p class="sec-intro reveal">Open-source contributions built outside of my employment — agentic AI over spatial/hazard data, a published Python package, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
 
-    <div class="build reveal">
-      <div class="build-head">
-        <div><h3>Geospatial Data Copilot</h3></div>
-        <a class="btn btn-ghost" href="https://github.com/DBishal13/geospatial-data-copilot" target="_blank">Repo ↗</a>
-      </div>
-      <p class="desc">A natural-language interface over spatial/infrastructure data. Ask a question in plain English about San Francisco's utility infrastructure — a local LLM agent (LangGraph ReAct, Ollama llama3.1:8b) translates it into a spatial SQL query, runs it, and answers with a natural-language summary and an interactive map. Seeded with ~1,500 real utility assets pulled live from OpenStreetMap's Overpass API.</p>
-      <div class="stack">
-        <span class="tag">LangGraph</span><span class="tag">Ollama</span><span class="tag">DuckDB + spatial</span>
-        <span class="tag">FastAPI</span><span class="tag">Streamlit</span><span class="tag">Folium</span>
-        <span class="tag">Chroma</span>
-      </div>
+    <div class="filter-tabs reveal" role="tablist" aria-label="Filter projects by category">
+      <button class="filter-tab active" data-filter="all" type="button">All</button>
+      <button class="filter-tab" data-filter="agent" type="button">AI &amp; Agents</button>
+      <button class="filter-tab" data-filter="geo" type="button">Geospatial</button>
+      <button class="filter-tab" data-filter="web" type="button">Web Tools</button>
     </div>
 
-    <div class="build reveal">
-      <div class="build-head">
-        <div><h3>Conversational AI Assistant</h3></div>
-        <a class="btn btn-ghost" href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a>
-      </div>
-      <p class="desc">A LangChain-based RAG chatbot that indexes local documents into a Chroma vector store and answers questions in a context-aware, multi-turn conversation — grounding every answer in retrieved source material and citing which files it used. Runs entirely locally via Ollama.</p>
-      <div class="stack">
-        <span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span>
-        <span class="tag">Streamlit</span><span class="tag">Python CLI</span>
-      </div>
-    </div>
+    <div class="project-grid" id="projectGrid">
 
-    <div class="build reveal">
-      <div class="build-head">
-        <div><h3>RomanNepaliAI</h3></div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn btn-ghost" href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost" href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a>
+      <article class="project-card reveal" data-cat="geo">
+        <div class="project-card__top">
+          <span class="project-card__cat">Geospatial · PyPI Package</span>
+          <span class="live-badge" style="display:none;">Live</span>
         </div>
+        <h3>Road-Centerline</h3>
+        <p class="desc">A published Python package that extracts road centerlines from polygon geometries — worldwide, in any input CRS, in any format GeoPandas can read. CLI and Python API, computed via medial-axis skeletonization.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">GeoPandas</span><span class="tag">pygeoops</span><span class="tag">PyProj</span><span class="tag">PyPI</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/Road-Centerline" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="agent geo">
+        <div class="project-card__top">
+          <span class="project-card__cat">AI Agent · MCP Server</span>
+          <span class="live-badge" style="display:none;">Live</span>
+        </div>
+        <h3>HazardMCP</h3>
+        <p class="desc">An MCP server unifying FEMA, USGS, NOAA, NWS, and NASA hazard data behind a single AI-agent interface — one-call location risk summaries and map rendering, compatible with Claude Desktop.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">FastMCP</span><span class="tag">Folium</span><span class="tag">Docker</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/hazard-mcp" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="geo">
+        <div class="project-card__top">
+          <span class="project-card__cat">Geospatial · Data Pipeline</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>SurgeExposure</h3>
+        <p class="desc">A cloud-native pipeline overlaying NOAA storm-surge and flood-inundation data against Overture Maps building footprints, scoring per-asset flood exposure across 8 coastal regions — with a map and API.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">DuckDB Spatial</span><span class="tag">FastAPI</span><span class="tag">PostGIS</span><span class="tag">AWS</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/surge-exposure/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/surge-exposure" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="geo">
+        <div class="project-card__top">
+          <span class="project-card__cat">Geospatial · LiDAR</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>3DEP LiDAR Terrain Builder</h3>
+        <p class="desc">Generates DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3DEP lidar. Draw an area of interest in the browser; it generates a configured local script — no data ever uploads.</p>
+        <div class="stack"><span class="tag">PDAL</span><span class="tag">GDAL</span><span class="tag">RichDEM</span><span class="tag">AWS EPT/S3</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/3DEP-Lidar-Terrain-Builder/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/3DEP-Lidar-Terrain-Builder" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="agent geo">
+        <div class="project-card__top">
+          <span class="project-card__cat">AI Agent · RAG</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>Geospatial Data Copilot</h3>
+        <p class="desc">Ask a plain-English question about San Francisco's utility infrastructure — a local LLM agent (LangGraph ReAct, Ollama) translates it to spatial SQL, runs it, and answers with a summary and interactive map. No API keys.</p>
+        <div class="stack"><span class="tag">LangGraph</span><span class="tag">Ollama</span><span class="tag">DuckDB Spatial</span><span class="tag">Chroma</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/geospatial-data-copilot/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/geospatial-data-copilot" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="geo web">
+        <div class="project-card__top">
+          <span class="project-card__cat">Geospatial · Web Tool</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>GeoCoder</h3>
+        <p class="desc">Converts a spreadsheet of US street addresses into geocoded points and building footprint polygons using free Nominatim and Overpass APIs — as a no-install web app or a scriptable Jupyter notebook.</p>
+        <div class="stack"><span class="tag">GeoPandas</span><span class="tag">Nominatim / Overpass</span><span class="tag">Static Web App</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/GeoCoder/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/GeoCoder" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="agent">
+        <div class="project-card__top">
+          <span class="project-card__cat">AI Agent · RAG</span>
+          <span class="live-badge" style="display:none;">Live</span>
+        </div>
+        <h3>Conversational AI Assistant</h3>
+        <p class="desc">A LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation — every answer grounded in retrieved source material, with citations. Runs entirely locally via Ollama.</p>
+        <div class="stack"><span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span><span class="tag">Streamlit</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="geo web">
+        <div class="project-card__top">
+          <span class="project-card__cat">Geospatial · Data Platform</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>GTFS Transit Platform</h3>
+        <p class="desc">A generalized data-engineering and analytics platform for GTFS transit feeds — ingest any agency's schedule data, measure headways, stop coverage, and spacing anomalies, and explore results in an interactive map app.</p>
+        <div class="stack"><span class="tag">PostGIS</span><span class="tag">React / TypeScript</span><span class="tag">MapLibre GL</span><span class="tag">PMTiles</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="web">
+        <div class="project-card__top">
+          <span class="project-card__cat">Web Tool · NLP</span>
+          <span class="live-badge">Live</span>
+        </div>
+        <h3>RomanNepaliAI</h3>
+        <p class="desc">Converts romanized Nepali — including inconsistent, texting-style spelling — to Devanagari live, entirely client-side. A CLI batch-translates SRT subtitles through pluggable backends with caption-merging normalization.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Hugging Face</span><span class="tag">Vanilla JS</span></div>
+        <div class="project-card__actions">
+          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live Demo ↗</a>
+          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a>
+        </div>
+      </article>
+
+    </div>
+    <p class="gh-live-empty reveal" id="filterEmpty" style="display:none; margin-top:14px;">No projects in this category yet.</p>
+
+    <div class="gh-live reveal">
+      <div class="gh-live__head">
+        <h4><span class="live-badge">Live</span> Straight from GitHub — auto-refreshes daily</h4>
+        <span class="gh-live__meta mono" id="ghLiveMeta"></span>
       </div>
-      <p class="desc">A Nepali translation and transliteration toolkit built to help non-Nepali speakers follow along with Nepali movies, songs, and skits. A hand-written rule-based engine converts romanized Nepali — including inconsistent, texting-style spelling — to Devanagari entirely client-side in the browser, live, with no server calls. A separate CLI batch-translates full SRT subtitle files through pluggable backends (a free stub, Google Translate, or a local Hugging Face MT model), with automatic line-wrapping and caption-merging normalization. A small FastAPI service, deployed on Render, powers the optional translation step behind the static demo.</p>
-      <div class="stack">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Hugging Face Transformers</span>
-        <span class="tag">Vanilla JS</span><span class="tag">pytest</span><span class="tag">GitHub Actions</span>
-      </div>
+      <div class="gh-live-grid" id="ghLiveGrid"></div>
+      <p class="gh-live-empty" id="ghLiveEmpty" style="display:none;">Nothing new outside the projects above — check back after the next public repo ships.</p>
     </div>
   </div>
 </section>
@@ -484,10 +669,10 @@
       <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Quality &amp; Remediation Script Layer</h4><p>Modular script layer for analysis, checks, loaders, fixes, and patch orchestration with migration-safe wrappers.</p></div>
       <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Geospatial Processing Sidecar</h4><p>Optional FastAPI sidecar for heavier geospatial processing, conversion runtimes, and algorithm endpoints.</p></div>
       <div class="work-card reveal"><div class="cat">Service</div><h4>Analytics Summary API</h4><p>Focused API exposing health, pagination, and entity summary endpoints for analytics demos and stakeholder review.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Pre-Production Mapping API</h4><p>Local map and API demo environment for assignment workflows, status transitions, and pre-publish validation.</p></div>
-      <div class="work-card reveal"><div class="cat">Product</div><h4>Notebook-Embedded GIS Widget</h4><p>Jupyter integration embedding the full GIS app with two-way project state sync for notebook-driven workflows.</p></div>
-      <div class="work-card reveal"><div class="cat">Frontend</div><h4>Operator Workflow Frontend</h4><p>React/TypeScript (Vite) frontend for validating operator lifecycle actions before production integration.</p></div>
-      <div class="work-card reveal"><div class="cat">Operations</div><h4>Operations Dashboard Workstream</h4><p>Storm and pilot deployment dashboard monorepo combining ArcGIS runbooks, SQL and shell automation, and demo APIs.</p></div>
+      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Image–Report Fusion Pipeline</h4><p>Joins 8M+ drone inspection images with 350K+ historical condition assessment reports via spatial and temporal joins, writing enriched metadata back through batched API calls.</p></div>
+      <div class="work-card reveal"><div class="cat">Internal Tooling</div><h4>Training Data Console</h4><p>Streamlit app letting internal teams and AI vendors pull training images by asset, condition, or class across 25+ asset types and 400+ condition classes — instead of searching the full image set by hand.</p></div>
+      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Model Output Geodatabase Sync</h4><p>Automated integration of image metadata and model-generated detection annotations into an Esri PostGIS geodatabase, so vendor model output can be analyzed geospatially.</p></div>
+      <div class="work-card reveal"><div class="cat">Disaster Response</div><h4>Hurricane Milton Response Portal</h4><p>ArcGIS Experience Builder/Dashboards portal used during Hurricane Milton to track storm impact, restoration progress, and crew deployment in real time.</p></div>
       <div class="work-card reveal"><div class="cat">ML Project</div><h4>Applied ML Project Template</h4><p>Data science workspace scaffold for experimentation, feature engineering, and model lifecycle workflows.</p></div>
       <div class="work-card reveal"><div class="cat">Documentation</div><h4>Delivery Runbooks &amp; Release Standards</h4><p>Structured runbooks, standards, acceptance gates, and deployment checklists for end-to-end delivery governance.</p></div>
     </div>
@@ -507,22 +692,39 @@
         <h4>AI / ML / Agents</h4>
         <div class="tags">
           <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
-          <span class="tag">Computer Vision</span><span class="tag">ONNX</span><span class="tag">LangChain</span>
-          <span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">Chroma</span><span class="tag">Ollama</span>
+          <span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">RAG</span>
+          <span class="tag">Model Context Protocol</span><span class="tag">Vector Databases</span>
         </div>
       </div>
       <div class="skill-group reveal">
         <h4>Geospatial</h4>
         <div class="tags">
-          <span class="tag">ArcGIS Enterprise</span><span class="tag">PostGIS</span><span class="tag">LiDAR / PDAL</span>
-          <span class="tag">GeoPandas</span><span class="tag">GDAL</span><span class="tag">FME</span><span class="tag">DuckDB Spatial</span>
+          <span class="tag">ArcGIS Pro / Enterprise / Online</span><span class="tag">PostGIS</span><span class="tag">DuckDB Spatial</span>
+          <span class="tag">GDAL</span><span class="tag">PDAL</span><span class="tag">GeoPandas</span>
+          <span class="tag">LiDAR / Point Cloud</span><span class="tag">Overture Maps</span>
         </div>
       </div>
       <div class="skill-group reveal">
-        <h4>Platform / Engineering</h4>
+        <h4>Engineering</h4>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">AWS / CDK</span>
-          <span class="tag">React / TypeScript</span><span class="tag">SQL</span><span class="tag">R</span><span class="tag">Typer / CLI Tooling</span>
+          <span class="tag">Python</span><span class="tag">JavaScript / TypeScript</span><span class="tag">R</span>
+          <span class="tag">SQL</span><span class="tag">FastAPI</span><span class="tag">React</span>
+          <span class="tag">ETL Pipelines</span><span class="tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Cloud</h4>
+        <div class="tags">
+          <span class="tag">AWS Lambda</span><span class="tag">S3</span><span class="tag">SageMaker</span>
+          <span class="tag">ECR / ECS</span><span class="tag">AWS CDK</span><span class="tag">Docker</span>
+          <span class="tag">IAM</span><span class="tag">VPC / Network Security</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Field</h4>
+        <div class="tags">
+          <span class="tag">GNSS / GPS Survey</span><span class="tag">UAV Survey (FAA Part 107)</span>
+          <span class="tag">Differential GNSS</span><span class="tag">Geodatabase Design</span>
         </div>
       </div>
     </div>
@@ -567,20 +769,10 @@
         <h2>Publications &amp; academic projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported. Below is research and academic/course work I can share in full.</p>
+    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported — publications below are what I can share in full.</p>
 
-    <div class="reveal" style="margin-bottom:36px;">
+    <div class="reveal">
       <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
-      <div class="pub">Contributing author, documentation — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, an open-source Python watershed modeling and planning tool (Florida Atlantic University).<span class="tag-status">Unpublished, ongoing</span></div>
-    </div>
-
-    <div class="work-grid-2 reveal">
-      <div class="work-card"><h4>Multi-temporal Land Cover Mapping</h4><p>Land cover classification and change prediction using Google Earth Engine.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
-      <div class="work-card"><h4>LiDAR Point Cloud Processing</h4><p>Intensity image generation and DSM/DEM derivation from LAS datasets.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
-      <div class="work-card"><h4>UAV Orthophoto Generation</h4><p>Flight planning, image capture, and processing for a full campus orthophoto — Pashchimanchal Campus, Nepal.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
-      <div class="work-card"><h4>Flood Inundation Mapping, Gaur, Nepal</h4><p>Footprint mapping in flood-prone regions using OpenStreetMap and HEC-RAS hydrologic modeling.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
-      <div class="work-card"><h4>Predictive Modeling of Voter Turnout</h4><p>Census-tract-level 2016 turnout prediction for Florida using forest-based classification and regression.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
-      <div class="work-card"><h4>Suitable HQ Siting Analysis</h4><p>Suitability modeling for low-carbon-footprint corporate site selection, Hardee County, FL.</p><a href="https://github.com/DBishal13" target="_blank">View on GitHub ↗</a></div>
     </div>
   </div>
 </section>
@@ -664,6 +856,90 @@
     revealEls.forEach(function(el){ io.observe(el); });
   } else {
     revealEls.forEach(function(el){ el.classList.add('visible'); });
+  }
+
+  /* ---------- Builds: filter tabs ---------- */
+  var filterTabs = document.querySelectorAll('.filter-tab');
+  var projectCards = document.querySelectorAll('.project-card');
+  var filterEmpty = document.getElementById('filterEmpty');
+  filterTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      filterTabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var filter = tab.getAttribute('data-filter');
+      var visible = 0;
+      projectCards.forEach(function(card){
+        var cats = (card.getAttribute('data-cat') || '').split(' ');
+        var show = filter === 'all' || cats.indexOf(filter) !== -1;
+        card.classList.toggle('is-hidden', !show);
+        if(show) visible++;
+      });
+      if(filterEmpty) filterEmpty.style.display = visible ? 'none' : 'block';
+    });
+  });
+
+  /* ---------- Builds: card hover spotlight ---------- */
+  if(window.matchMedia('(hover: hover)').matches){
+    projectCards.forEach(function(card){
+      card.addEventListener('pointermove', function(e){
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
+      });
+    });
+  }
+
+  /* ---------- Builds: live GitHub feed ---------- */
+  var ghGrid = document.getElementById('ghLiveGrid');
+  if(ghGrid){
+    var CURATED = ['road-centerline','hazard-mcp','surge-exposure','3dep-lidar-terrain-builder',
+      'geospatial-data-copilot','geocoder','conversational-ai-assistant','gtfs-transit-platform',
+      'romannepaliai','3d-export','pywmp_documentation'];
+
+    function timeAgo(iso){
+      if(!iso) return '';
+      var diff = Date.now() - new Date(iso).getTime();
+      var days = Math.floor(diff / 86400000);
+      if(days < 1) return 'today';
+      if(days === 1) return '1 day ago';
+      if(days < 30) return days + ' days ago';
+      var months = Math.floor(days / 30);
+      if(months < 12) return months + (months === 1 ? ' month ago' : ' months ago');
+      var years = Math.floor(months / 12);
+      return years + (years === 1 ? ' year ago' : ' years ago');
+    }
+
+    fetch('assets/projects.json', {cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function(data){
+        var repos = (data.repos || []).filter(function(r){
+          return CURATED.indexOf(r.name.toLowerCase()) === -1;
+        });
+
+        var metaEl = document.getElementById('ghLiveMeta');
+        if(metaEl && data.generated_at){ metaEl.textContent = 'Updated ' + timeAgo(data.generated_at); }
+
+        if(!repos.length){
+          document.getElementById('ghLiveEmpty').style.display = 'block';
+          return;
+        }
+
+        ghGrid.innerHTML = repos.slice(0, 6).map(function(r){
+          var desc = r.description || 'No description yet.';
+          var link = r.homepage || r.url;
+          var linkLabel = r.homepage ? 'Live ↗' : 'Repo ↗';
+          return '<div class="gh-live-card">' +
+            '<h5><a href="' + r.url + '" target="_blank">' + r.name + '</a></h5>' +
+            '<p>' + desc + '</p>' +
+            '<div class="meta"><span>' + (r.language || '—') + ' · ' + timeAgo(r.pushed_at) + '</span>' +
+            '<a href="' + link + '" target="_blank">' + linkLabel + '</a></div>' +
+          '</div>';
+        }).join('');
+      })
+      .catch(function(){
+        var emptyEl = document.getElementById('ghLiveEmpty');
+        if(emptyEl){ emptyEl.textContent = 'Live feed unavailable right now — browse everything on GitHub.'; emptyEl.style.display = 'block'; }
+      });
   }
 
   /* ---------- Count-up stats ---------- */

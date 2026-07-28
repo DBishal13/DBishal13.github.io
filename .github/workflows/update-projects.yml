@@ -1,0 +1,81 @@
+name: Update GitHub projects feed
+
+on:
+  schedule:
+    - cron: '17 13 * * *'   # daily, ~09:17 America/New_York (EDT)
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/update-projects.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch public repos and build assets/projects.json
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 <<'PY'
+          import json
+          import os
+          import urllib.request
+          from datetime import datetime, timezone
+
+          USERNAME = "DBishal13"
+          EXCLUDE_NAMES = {USERNAME.lower(), f"{USERNAME.lower()}.github.io"}
+
+          headers = {"Accept": "application/vnd.github+json"}
+          token = os.environ.get("GH_TOKEN")
+          if token:
+              headers["Authorization"] = f"Bearer {token}"
+
+          req = urllib.request.Request(
+              f"https://api.github.com/users/{USERNAME}/repos?per_page=100&sort=updated",
+              headers=headers,
+          )
+          with urllib.request.urlopen(req) as resp:
+              repos = json.load(resp)
+
+          out = []
+          for r in repos:
+              if r.get("fork") or r.get("archived"):
+                  continue
+              if r["name"].lower() in EXCLUDE_NAMES:
+                  continue
+              out.append({
+                  "name": r["name"],
+                  "description": r.get("description"),
+                  "url": r["html_url"],
+                  "homepage": r.get("homepage") or None,
+                  "language": r.get("language"),
+                  "pushed_at": r.get("pushed_at"),
+                  "stars": r.get("stargazers_count", 0),
+              })
+
+          out.sort(key=lambda r: r["pushed_at"] or "", reverse=True)
+
+          payload = {
+              "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+              "repos": out,
+          }
+
+          os.makedirs("assets", exist_ok=True)
+          with open("assets/projects.json", "w") as f:
+              json.dump(payload, f, indent=2)
+              f.write("\n")
+          PY
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/projects.json
+          git diff --cached --quiet || git commit -m "chore: refresh live GitHub projects feed"
+          git push
