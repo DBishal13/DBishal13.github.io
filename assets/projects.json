@@ -1,13 +1,22 @@
 {
-  "generated_at": "2026-07-28T15:36:26.995515Z",
+  "generated_at": "2026-07-29T15:21:25.240198Z",
   "repos": [
     {
       "name": "3d-export",
-      "description": "A Python-first tool to generate land cover exports and quickly create a 3D-style PNG from Sentinel-2 land cover tiles.  Inspired by the original rayshader R workflow.",
+      "description": "A Python-first tool to generate land cover exports and quickly create a 3D-style PNG from Sentinel-2 land cover tiles. Inspired by the original rayshader R workflow.",
       "url": "https://github.com/DBishal13/3d-export",
       "homepage": "https://dbishal13.github.io/3d-export/",
       "language": "Python",
-      "pushed_at": "2026-07-28T15:35:00Z",
+      "pushed_at": "2026-07-28T20:46:37Z",
+      "stars": 0
+    },
+    {
+      "name": "RomanNepaliAI",
+      "description": "Tools for working with Nepali text in three directions: transliteration (romanized Nepali \u2194 Devanagari script, same language) and translation (Nepali \u2194 English, different languages). Built for subtitles, texting-style Nepali, and general text, with a CLI, a web demo, and a small backend API.",
+      "url": "https://github.com/DBishal13/RomanNepaliAI",
+      "homepage": "https://dbishal13.github.io/RomanNepaliAI/",
+      "language": "Python",
+      "pushed_at": "2026-07-28T20:37:48Z",
       "stars": 0
     },
     {
@@ -71,15 +80,6 @@
       "homepage": "https://dbishal13.github.io/geospatial-data-copilot/",
       "language": "Python",
       "pushed_at": "2026-07-22T16:21:39Z",
-      "stars": 0
-    },
-    {
-      "name": "RomanNepaliAI",
-      "description": "Tools for working with Nepali text in three directions: transliteration (romanized Nepali \u2194 Devanagari script, same language) and translation (Nepali \u2194 English, different languages). Built for subtitles, texting-style Nepali, and general text, with a CLI, a web demo, and a small backend API.",
-      "url": "https://github.com/DBishal13/RomanNepaliAI",
-      "homepage": "https://dbishal13.github.io/RomanNepaliAI/",
-      "language": "Python",
-      "pushed_at": "2026-07-22T05:33:36Z",
       "stars": 0
     },
     {
