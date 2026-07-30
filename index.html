@@ -539,7 +539,7 @@
         <h2>Self-directed AI &amp; geospatial projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Open-source contributions built outside of my employment — agentic AI over spatial/hazard data, a published Python package, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
+    <p class="sec-intro reveal">Open-source contributions built outside of my employment, focused on hazard-resilient geospatial AI and critical infrastructure — a published Python package, agentic AI over spatial/hazard data, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
 
     <div class="filter-tabs reveal" role="tablist" aria-label="Filter projects by category">
       <button class="filter-tab active" data-filter="all" type="button">All</button>
@@ -632,49 +632,37 @@
         </div>
       </article>
 
-      <article class="project-card reveal" data-cat="agent">
-        <div class="project-card__top">
-          <span class="project-card__cat">AI Agent · RAG</span>
-          <span class="live-badge" style="display:none;">Live</span>
-        </div>
-        <h3>Conversational AI Assistant</h3>
-        <p class="desc">A LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation — every answer grounded in retrieved source material, with citations. Runs entirely locally via Ollama.</p>
-        <div class="stack"><span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span><span class="tag">Streamlit</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="geo web">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · Data Platform</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>GTFS Transit Platform</h3>
-        <p class="desc">A generalized data-engineering and analytics platform for GTFS transit feeds — ingest any agency's schedule data, measure headways, stop coverage, and spacing anomalies, and explore results in an interactive map app.</p>
-        <div class="stack"><span class="tag">PostGIS</span><span class="tag">React / TypeScript</span><span class="tag">MapLibre GL</span><span class="tag">PMTiles</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="web">
-        <div class="project-card__top">
-          <span class="project-card__cat">Web Tool · NLP</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>RomanNepaliAI</h3>
-        <p class="desc">Converts romanized Nepali — including inconsistent, texting-style spelling — to Devanagari live, entirely client-side. A CLI batch-translates SRT subtitles through pluggable backends with caption-merging normalization.</p>
-        <div class="stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Hugging Face</span><span class="tag">Vanilla JS</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
     </div>
     <p class="gh-live-empty reveal" id="filterEmpty" style="display:none; margin-top:14px;">No projects in this category yet.</p>
+
+    <div class="gh-live reveal">
+      <div class="gh-live__head">
+        <h4>Other builds</h4>
+        <span class="gh-live__meta mono">Outside the core hazard/geospatial focus — still real, shipped work</span>
+      </div>
+      <div class="gh-live-grid">
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">GTFS Transit Platform</a></h5>
+          <p>Data-engineering and analytics platform for GTFS transit feeds — headways, stop coverage, and spacing anomalies, explored in an interactive map app.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/3d-export" target="_blank">3d-export</a></h5>
+          <p>3D-style land cover export from Sentinel-2 tiles, clipped to any country and automated via GitHub Actions — a modernized take on the rayshader R workflow.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/3d-export" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/3d-export/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">RomanNepaliAI</a></h5>
+          <p>Converts romanized Nepali to Devanagari live, client-side, plus a CLI that batch-translates SRT subtitles through pluggable backends.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Conversational AI Assistant</a></h5>
+          <p>LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation, citing sources. Runs locally via Ollama.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a></div>
+        </div>
+      </div>
+    </div>
 
     <div class="gh-live reveal">
       <div class="gh-live__head">
@@ -695,24 +683,12 @@
         <h2>What sits behind the models</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Production AI needs infrastructure, data pipelines, and internal tooling around it. This is a selection of the platform-layer components I've built to support enterprise geospatial and AI systems.</p>
+    <p class="sec-intro reveal">The Experience section above covers the program-level work — this is a few platform-layer components that don't fit neatly into a resume bullet.</p>
     <div class="work-grid">
       <div class="work-card reveal"><div class="cat">Cloud Infrastructure</div><h4>Cloud Infrastructure Components</h4><p>AWS CDK component framework with enterprise naming, tagging, and deployment abstractions for ML and app workloads.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Integration</div><h4>Enterprise Data Integration Platform</h4><p>Modular platform for taxonomy alignment, schema publishing, quality validation, and operational patch workflows (Python, SQL, DuckDB).</p></div>
-      <div class="work-card reveal"><div class="cat">Developer Platform</div><h4>API Operations Console</h4><p>CLI and web console for environment-aware API operations with shared authentication and endpoint tooling (FastAPI, React, Typer).</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
       <div class="work-card reveal"><div class="cat">Computer Vision</div><h4>Utility Asset Detection Inference Service</h4><p>ONNX-based object detection package for utility equipment with COCO JSON output and optional visualization.</p></div>
+      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
       <div class="work-card reveal"><div class="cat">Integration Toolkit</div><h4>API + Taxonomy Integration Toolkit</h4><p>Reusable package for API extraction, taxonomy joins, metadata patching, and downstream publishing automation.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Integration Boundaries Layer</h4><p>Boundary-focused architecture separating API adapters, data sync logic, and publishing interfaces from generic scripts.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Quality &amp; Remediation Script Layer</h4><p>Modular script layer for analysis, checks, loaders, fixes, and patch orchestration with migration-safe wrappers.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Geospatial Processing Sidecar</h4><p>Optional FastAPI sidecar for heavier geospatial processing, conversion runtimes, and algorithm endpoints.</p></div>
-      <div class="work-card reveal"><div class="cat">Service</div><h4>Analytics Summary API</h4><p>Focused API exposing health, pagination, and entity summary endpoints for analytics demos and stakeholder review.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Image–Report Fusion Pipeline</h4><p>Joins 8M+ drone inspection images with 350K+ historical condition assessment reports via spatial and temporal joins, writing enriched metadata back through batched API calls.</p></div>
-      <div class="work-card reveal"><div class="cat">Internal Tooling</div><h4>Training Data Console</h4><p>Streamlit app letting internal teams and AI vendors pull training images by asset, condition, or class across 25+ asset types and 400+ condition classes — instead of searching the full image set by hand.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Model Output Geodatabase Sync</h4><p>Automated integration of image metadata and model-generated detection annotations into an Esri PostGIS geodatabase, so vendor model output can be analyzed geospatially.</p></div>
-      <div class="work-card reveal"><div class="cat">Disaster Response</div><h4>Hurricane Milton Response Portal</h4><p>ArcGIS Experience Builder/Dashboards portal used during Hurricane Milton to track storm impact, restoration progress, and crew deployment in real time.</p></div>
-      <div class="work-card reveal"><div class="cat">ML Project</div><h4>Applied ML Project Template</h4><p>Data science workspace scaffold for experimentation, feature engineering, and model lifecycle workflows.</p></div>
-      <div class="work-card reveal"><div class="cat">Documentation</div><h4>Delivery Runbooks &amp; Release Standards</h4><p>Structured runbooks, standards, acceptance gates, and deployment checklists for end-to-end delivery governance.</p></div>
     </div>
   </div>
 </section>
@@ -811,6 +787,7 @@
 
     <div class="reveal">
       <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
+      <div class="pub">Co-author, open-source software — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, a Python watershed modeling and planning framework (Florida Atlantic University).<span class="tag-status">Manuscript in preparation</span></div>
     </div>
   </div>
 </section>
