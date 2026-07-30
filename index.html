@@ -103,23 +103,41 @@
   .hero .wrap{position:relative; z-index:1;}
   .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:36px; align-items:center;}
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero-visual{position:relative;}
+  .hero-visual{position:relative; animation:floatY 8s ease-in-out infinite;}
   .hero-visual canvas{
     width:100%; aspect-ratio:6/5; display:block; touch-action:none; cursor:grab;
-    border:1px solid var(--line); border-radius:var(--radius);
-    background-color:#0e1613;
-    background-image:
-      radial-gradient(circle at 50% 38%, rgba(45,212,191,0.16), transparent 68%),
-      radial-gradient(circle at 78% 82%, rgba(255,176,32,0.08), transparent 55%);
+    background:none; border:none;
   }
   .hero-visual canvas:active{cursor:grabbing;}
   .scan-label{
-    position:absolute; bottom:12px; left:12px; font-family:'JetBrains Mono'; font-size:10.5px;
-    letter-spacing:0.06em; color:#5fa8a0; display:flex; align-items:center; gap:7px; text-transform:uppercase;
+    position:absolute; bottom:8px; right:2px; font-family:'JetBrains Mono'; font-size:10.5px;
+    letter-spacing:0.06em; color:#7fc4bc; display:flex; align-items:center; gap:7px; text-transform:uppercase;
+    text-shadow:0 1px 6px rgba(0,0,0,0.8);
   }
-  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fa8a0; animation:pulse 1.6s infinite;}
-  .drag-hint{position:absolute; top:12px; right:12px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.6;}
+  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fd68a; animation:pulse 1.6s infinite;}
+  .drag-hint{position:absolute; top:0; right:2px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.55; text-shadow:0 1px 6px rgba(0,0,0,0.8);}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.2;}}
+  @keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);}}
+
+  /* ---------- Floating domain badges ---------- */
+  .float-badge{
+    position:absolute; display:flex; align-items:center; gap:8px; padding:8px 13px;
+    background:rgba(20,28,25,0.55); border:1px solid rgba(237,239,234,0.16); border-radius:999px;
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    font-family:'JetBrains Mono'; font-size:11.5px; letter-spacing:0.02em; color:var(--text);
+    box-shadow:0 14px 30px -14px rgba(0,0,0,0.6); pointer-events:none;
+    animation:floatY 6.5s ease-in-out infinite;
+  }
+  :root[data-theme="light"] .float-badge{background:rgba(255,255,255,0.65); border-color:rgba(20,32,28,0.14);}
+  .float-badge .dot{width:7px; height:7px; border-radius:50%; flex-shrink:0;}
+  .badge-ai{top:6%; left:1%; animation-delay:-1.2s; animation-duration:7.2s;}
+  .badge-ai .dot{background:#ffb020; box-shadow:0 0 8px rgba(255,176,32,0.8);}
+  .badge-cloud{top:58%; right:1%; animation-delay:-3.4s; animation-duration:8s;}
+  .badge-cloud .dot{background:#2dd4bf; box-shadow:0 0 8px rgba(45,212,191,0.8);}
+  .badge-cv{bottom:9%; left:2%; animation-delay:-5s; animation-duration:6.8s;}
+  .badge-cv .dot{background:#6ed7ff; box-shadow:0 0 8px rgba(110,215,255,0.8);}
+  @media (max-width:560px){ .float-badge{display:none;} }
+  @media (prefers-reduced-motion: reduce){ .hero-visual, .float-badge{animation:none;} }
   .hero-name{font-family:'Space Grotesk'; font-weight:800; letter-spacing:-0.01em; font-size:clamp(48px, 6vw, 72px); margin-bottom:14px;}
   .eyebrow{
     font-family:'JetBrains Mono'; font-size:13px; color:var(--amber);
@@ -387,6 +405,9 @@
       <canvas id="pointCloud"></canvas>
       <div class="scan-label">Simulated LiDAR scan</div>
       <div class="drag-hint mono">drag to rotate</div>
+      <div class="float-badge badge-ai"><span class="dot"></span>AI Agents · LangGraph</div>
+      <div class="float-badge badge-cloud"><span class="dot"></span>Cloud · AWS Lambda / S3</div>
+      <div class="float-badge badge-cv"><span class="dot"></span>Computer Vision · PyTorch</div>
     </div>
   </div>
 </header>
@@ -1045,7 +1066,72 @@
       bgCtx.fillRect(0, 0, bgW, bgH);
     }
 
-    function drawBg(){
+    /* ---------- Drone flyovers ---------- */
+    var drones = [];
+    var nextDroneAt = performance.now() + 1500 + Math.random()*2500;
+
+    function spawnDrone(now){
+      var dir = Math.random() < 0.5 ? 1 : -1;
+      drones.push({
+        x: dir === 1 ? -40 : bgW + 40,
+        y0: bgH * (0.08 + Math.random()*0.30),
+        dir: dir,
+        speed: 0.028 + Math.random()*0.018,
+        bobAmp: 6 + Math.random()*8,
+        bobFreq: 0.0016 + Math.random()*0.001,
+        spawnTime: now,
+        scale: 0.8 + Math.random()*0.6
+      });
+    }
+
+    function drawDrone(d, now){
+      var y = d.y0 + Math.sin((now - d.spawnTime) * d.bobFreq) * d.bobAmp;
+      var s = d.scale;
+      var facing = d.dir; // 1 = flying right, -1 = flying left
+      bgCtx.save();
+      bgCtx.translate(d.x, y);
+      bgCtx.scale(facing * s, s);
+      bgCtx.strokeStyle = 'rgba(200,225,220,0.42)';
+      bgCtx.lineWidth = 1;
+      // arms
+      [[-9,-7],[9,-7],[-9,7],[9,7]].forEach(function(arm){
+        bgCtx.beginPath();
+        bgCtx.moveTo(0,0);
+        bgCtx.lineTo(arm[0], arm[1]);
+        bgCtx.stroke();
+        bgCtx.beginPath();
+        bgCtx.arc(arm[0], arm[1], 2.6, 0, Math.PI*2);
+        bgCtx.strokeStyle = 'rgba(200,225,220,0.34)';
+        bgCtx.stroke();
+      });
+      // body
+      bgCtx.fillStyle = 'rgba(210,230,226,0.5)';
+      bgCtx.beginPath();
+      bgCtx.arc(0, 0, 2.4, 0, Math.PI*2);
+      bgCtx.fill();
+      // blinking anti-collision light
+      var blink = (Math.sin((now - d.spawnTime) * 0.01) + 1) / 2;
+      if(blink > 0.72){
+        bgCtx.fillStyle = 'rgba(255,120,90,' + (0.35 + blink*0.5).toFixed(2) + ')';
+        bgCtx.beginPath();
+        bgCtx.arc(0, 3, 1.6, 0, Math.PI*2);
+        bgCtx.fill();
+      }
+      bgCtx.restore();
+    }
+
+    function updateDrones(now, dt){
+      if(now >= nextDroneAt && drones.length < 2){
+        spawnDrone(now);
+        nextDroneAt = now + 9000 + Math.random()*9000;
+      }
+      drones = drones.filter(function(d){
+        d.x += d.dir * d.speed * dt;
+        return d.x > -60 && d.x < bgW + 60;
+      });
+    }
+
+    function drawBg(now){
       bgCtx.clearRect(0,0,bgW,bgH);
       drawGrid();
       drawSweep();
@@ -1062,16 +1148,22 @@
         bgCtx.lineWidth = 1;
         bgCtx.stroke();
       });
+      drones.forEach(function(d){ drawDrone(d, now); });
     }
 
     if(reduceMotion){
-      drawBg();
+      drawBg(performance.now());
     } else {
-      (function loop(){
+      var lastT = performance.now();
+      (function loop(now){
+        now = now || performance.now();
+        var dt = Math.min(64, now - lastT);
+        lastT = now;
         bgPhase += 0.0035;
         mouseX += (targetMX - mouseX) * 0.04;
         mouseY += (targetMY - mouseY) * 0.04;
-        drawBg();
+        updateDrones(now, dt);
+        drawBg(now);
         requestAnimationFrame(loop);
       })();
     }
