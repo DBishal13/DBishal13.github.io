@@ -103,23 +103,41 @@
   .hero .wrap{position:relative; z-index:1;}
   .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:36px; align-items:center;}
   @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero-visual{position:relative;}
+  .hero-visual{position:relative; animation:floatY 8s ease-in-out infinite;}
   .hero-visual canvas{
     width:100%; aspect-ratio:6/5; display:block; touch-action:none; cursor:grab;
-    border:1px solid var(--line); border-radius:var(--radius);
-    background-color:#0e1613;
-    background-image:
-      radial-gradient(circle at 50% 38%, rgba(45,212,191,0.16), transparent 68%),
-      radial-gradient(circle at 78% 82%, rgba(255,176,32,0.08), transparent 55%);
+    background:none; border:none;
   }
   .hero-visual canvas:active{cursor:grabbing;}
   .scan-label{
-    position:absolute; bottom:12px; left:12px; font-family:'JetBrains Mono'; font-size:10.5px;
-    letter-spacing:0.06em; color:#5fa8a0; display:flex; align-items:center; gap:7px; text-transform:uppercase;
+    position:absolute; bottom:8px; right:2px; font-family:'JetBrains Mono'; font-size:10.5px;
+    letter-spacing:0.06em; color:#7fc4bc; display:flex; align-items:center; gap:7px; text-transform:uppercase;
+    text-shadow:0 1px 6px rgba(0,0,0,0.8);
   }
-  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fa8a0; animation:pulse 1.6s infinite;}
-  .drag-hint{position:absolute; top:12px; right:12px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.6;}
+  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fd68a; animation:pulse 1.6s infinite;}
+  .drag-hint{position:absolute; top:0; right:2px; font-family:'JetBrains Mono'; font-size:10px; color:#a9b3ac; opacity:0.55; text-shadow:0 1px 6px rgba(0,0,0,0.8);}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.2;}}
+  @keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);}}
+
+  /* ---------- Floating domain badges ---------- */
+  .float-badge{
+    position:absolute; display:flex; align-items:center; gap:8px; padding:8px 13px;
+    background:rgba(20,28,25,0.55); border:1px solid rgba(237,239,234,0.16); border-radius:999px;
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    font-family:'JetBrains Mono'; font-size:11.5px; letter-spacing:0.02em; color:var(--text);
+    box-shadow:0 14px 30px -14px rgba(0,0,0,0.6); pointer-events:none;
+    animation:floatY 6.5s ease-in-out infinite;
+  }
+  :root[data-theme="light"] .float-badge{background:rgba(255,255,255,0.65); border-color:rgba(20,32,28,0.14);}
+  .float-badge .dot{width:7px; height:7px; border-radius:50%; flex-shrink:0;}
+  .badge-ai{top:6%; left:1%; animation-delay:-1.2s; animation-duration:7.2s;}
+  .badge-ai .dot{background:#ffb020; box-shadow:0 0 8px rgba(255,176,32,0.8);}
+  .badge-cloud{top:58%; right:1%; animation-delay:-3.4s; animation-duration:8s;}
+  .badge-cloud .dot{background:#2dd4bf; box-shadow:0 0 8px rgba(45,212,191,0.8);}
+  .badge-cv{bottom:9%; left:2%; animation-delay:-5s; animation-duration:6.8s;}
+  .badge-cv .dot{background:#6ed7ff; box-shadow:0 0 8px rgba(110,215,255,0.8);}
+  @media (max-width:560px){ .float-badge{display:none;} }
+  @media (prefers-reduced-motion: reduce){ .hero-visual, .float-badge{animation:none;} }
   .hero-name{font-family:'Space Grotesk'; font-weight:800; letter-spacing:-0.01em; font-size:clamp(48px, 6vw, 72px); margin-bottom:14px;}
   .eyebrow{
     font-family:'JetBrains Mono'; font-size:13px; color:var(--amber);
@@ -387,6 +405,9 @@
       <canvas id="pointCloud"></canvas>
       <div class="scan-label">Simulated LiDAR scan</div>
       <div class="drag-hint mono">drag to rotate</div>
+      <div class="float-badge badge-ai"><span class="dot"></span>AI Agents · LangGraph</div>
+      <div class="float-badge badge-cloud"><span class="dot"></span>Cloud · AWS Lambda / S3</div>
+      <div class="float-badge badge-cv"><span class="dot"></span>Computer Vision · PyTorch</div>
     </div>
   </div>
 </header>
@@ -406,7 +427,6 @@
         <p>Outside of work I contribute to open-source geospatial and AI tools — a published Python package for road-centerline extraction, agentic AI systems for querying spatial and hazard data, and a flood/storm-surge exposure pipeline for utility assets, among others below. I'm FAA Part 107 certified.</p>
         <div class="location-tag">
           <span>beesal13dh@gmail.com</span>
-          <span>561-713-5428</span>
           <span>FAA Part 107 — Remote Pilot</span>
         </div>
       </div>
@@ -518,7 +538,7 @@
         <h2>Self-directed AI &amp; geospatial projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Open-source contributions built outside of my employment — agentic AI over spatial/hazard data, a published Python package, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
+    <p class="sec-intro reveal">Open-source contributions built outside of my employment, focused on hazard-resilient geospatial AI and critical infrastructure — a published Python package, agentic AI over spatial/hazard data, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
 
     <div class="filter-tabs reveal" role="tablist" aria-label="Filter projects by category">
       <button class="filter-tab active" data-filter="all" type="button">All</button>
@@ -611,49 +631,37 @@
         </div>
       </article>
 
-      <article class="project-card reveal" data-cat="agent">
-        <div class="project-card__top">
-          <span class="project-card__cat">AI Agent · RAG</span>
-          <span class="live-badge" style="display:none;">Live</span>
-        </div>
-        <h3>Conversational AI Assistant</h3>
-        <p class="desc">A LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation — every answer grounded in retrieved source material, with citations. Runs entirely locally via Ollama.</p>
-        <div class="stack"><span class="tag">LangChain (LCEL)</span><span class="tag">Ollama</span><span class="tag">Chroma</span><span class="tag">Streamlit</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="geo web">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · Data Platform</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>GTFS Transit Platform</h3>
-        <p class="desc">A generalized data-engineering and analytics platform for GTFS transit feeds — ingest any agency's schedule data, measure headways, stop coverage, and spacing anomalies, and explore results in an interactive map app.</p>
-        <div class="stack"><span class="tag">PostGIS</span><span class="tag">React / TypeScript</span><span class="tag">MapLibre GL</span><span class="tag">PMTiles</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="web">
-        <div class="project-card__top">
-          <span class="project-card__cat">Web Tool · NLP</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>RomanNepaliAI</h3>
-        <p class="desc">Converts romanized Nepali — including inconsistent, texting-style spelling — to Devanagari live, entirely client-side. A CLI batch-translates SRT subtitles through pluggable backends with caption-merging normalization.</p>
-        <div class="stack"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Hugging Face</span><span class="tag">Vanilla JS</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
     </div>
     <p class="gh-live-empty reveal" id="filterEmpty" style="display:none; margin-top:14px;">No projects in this category yet.</p>
+
+    <div class="gh-live reveal">
+      <div class="gh-live__head">
+        <h4>Other builds</h4>
+        <span class="gh-live__meta mono">Outside the core hazard/geospatial focus — still real, shipped work</span>
+      </div>
+      <div class="gh-live-grid">
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">GTFS Transit Platform</a></h5>
+          <p>Data-engineering and analytics platform for GTFS transit feeds — headways, stop coverage, and spacing anomalies, explored in an interactive map app.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/3d-export" target="_blank">3d-export</a></h5>
+          <p>3D-style land cover export from Sentinel-2 tiles, clipped to any country and automated via GitHub Actions — a modernized take on the rayshader R workflow.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/3d-export" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/3d-export/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">RomanNepaliAI</a></h5>
+          <p>Converts romanized Nepali to Devanagari live, client-side, plus a CLI that batch-translates SRT subtitles through pluggable backends.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live ↗</a></div>
+        </div>
+        <div class="gh-live-card">
+          <h5><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Conversational AI Assistant</a></h5>
+          <p>LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation, citing sources. Runs locally via Ollama.</p>
+          <div class="meta"><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a></div>
+        </div>
+      </div>
+    </div>
 
     <div class="gh-live reveal">
       <div class="gh-live__head">
@@ -674,24 +682,12 @@
         <h2>What sits behind the models</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Production AI needs infrastructure, data pipelines, and internal tooling around it. This is a selection of the platform-layer components I've built to support enterprise geospatial and AI systems.</p>
+    <p class="sec-intro reveal">The Experience section above covers the program-level work — this is a few platform-layer components that don't fit neatly into a resume bullet.</p>
     <div class="work-grid">
       <div class="work-card reveal"><div class="cat">Cloud Infrastructure</div><h4>Cloud Infrastructure Components</h4><p>AWS CDK component framework with enterprise naming, tagging, and deployment abstractions for ML and app workloads.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Integration</div><h4>Enterprise Data Integration Platform</h4><p>Modular platform for taxonomy alignment, schema publishing, quality validation, and operational patch workflows (Python, SQL, DuckDB).</p></div>
-      <div class="work-card reveal"><div class="cat">Developer Platform</div><h4>API Operations Console</h4><p>CLI and web console for environment-aware API operations with shared authentication and endpoint tooling (FastAPI, React, Typer).</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
       <div class="work-card reveal"><div class="cat">Computer Vision</div><h4>Utility Asset Detection Inference Service</h4><p>ONNX-based object detection package for utility equipment with COCO JSON output and optional visualization.</p></div>
+      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
       <div class="work-card reveal"><div class="cat">Integration Toolkit</div><h4>API + Taxonomy Integration Toolkit</h4><p>Reusable package for API extraction, taxonomy joins, metadata patching, and downstream publishing automation.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Integration Boundaries Layer</h4><p>Boundary-focused architecture separating API adapters, data sync logic, and publishing interfaces from generic scripts.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Quality &amp; Remediation Script Layer</h4><p>Modular script layer for analysis, checks, loaders, fixes, and patch orchestration with migration-safe wrappers.</p></div>
-      <div class="work-card reveal"><div class="cat">Subsystem</div><h4>Geospatial Processing Sidecar</h4><p>Optional FastAPI sidecar for heavier geospatial processing, conversion runtimes, and algorithm endpoints.</p></div>
-      <div class="work-card reveal"><div class="cat">Service</div><h4>Analytics Summary API</h4><p>Focused API exposing health, pagination, and entity summary endpoints for analytics demos and stakeholder review.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Image–Report Fusion Pipeline</h4><p>Joins 8M+ drone inspection images with 350K+ historical condition assessment reports via spatial and temporal joins, writing enriched metadata back through batched API calls.</p></div>
-      <div class="work-card reveal"><div class="cat">Internal Tooling</div><h4>Training Data Console</h4><p>Streamlit app letting internal teams and AI vendors pull training images by asset, condition, or class across 25+ asset types and 400+ condition classes — instead of searching the full image set by hand.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Model Output Geodatabase Sync</h4><p>Automated integration of image metadata and model-generated detection annotations into an Esri PostGIS geodatabase, so vendor model output can be analyzed geospatially.</p></div>
-      <div class="work-card reveal"><div class="cat">Disaster Response</div><h4>Hurricane Milton Response Portal</h4><p>ArcGIS Experience Builder/Dashboards portal used during Hurricane Milton to track storm impact, restoration progress, and crew deployment in real time.</p></div>
-      <div class="work-card reveal"><div class="cat">ML Project</div><h4>Applied ML Project Template</h4><p>Data science workspace scaffold for experimentation, feature engineering, and model lifecycle workflows.</p></div>
-      <div class="work-card reveal"><div class="cat">Documentation</div><h4>Delivery Runbooks &amp; Release Standards</h4><p>Structured runbooks, standards, acceptance gates, and deployment checklists for end-to-end delivery governance.</p></div>
     </div>
   </div>
 </section>
@@ -790,6 +786,7 @@
 
     <div class="reveal">
       <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
+      <div class="pub">Co-author, open-source software — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, a Python watershed modeling and planning framework (Florida Atlantic University).<span class="tag-status">Manuscript in preparation</span></div>
     </div>
   </div>
 </section>
@@ -830,7 +827,6 @@
     </div>
     <div class="contact-links">
       <a href="mailto:beesal13dh@gmail.com">beesal13dh@gmail.com</a>
-      <a href="tel:5617135428">561-713-5428</a>
       <a href="https://www.linkedin.com/in/dbishal" target="_blank">linkedin.com/in/dbishal</a>
       <a href="https://github.com/DBishal13" target="_blank">github.com/DBishal13</a>
     </div>
@@ -1045,7 +1041,72 @@
       bgCtx.fillRect(0, 0, bgW, bgH);
     }
 
-    function drawBg(){
+    /* ---------- Drone flyovers ---------- */
+    var drones = [];
+    var nextDroneAt = performance.now() + 1500 + Math.random()*2500;
+
+    function spawnDrone(now){
+      var dir = Math.random() < 0.5 ? 1 : -1;
+      drones.push({
+        x: dir === 1 ? -40 : bgW + 40,
+        y0: bgH * (0.08 + Math.random()*0.30),
+        dir: dir,
+        speed: 0.028 + Math.random()*0.018,
+        bobAmp: 6 + Math.random()*8,
+        bobFreq: 0.0016 + Math.random()*0.001,
+        spawnTime: now,
+        scale: 0.8 + Math.random()*0.6
+      });
+    }
+
+    function drawDrone(d, now){
+      var y = d.y0 + Math.sin((now - d.spawnTime) * d.bobFreq) * d.bobAmp;
+      var s = d.scale;
+      var facing = d.dir; // 1 = flying right, -1 = flying left
+      bgCtx.save();
+      bgCtx.translate(d.x, y);
+      bgCtx.scale(facing * s, s);
+      bgCtx.strokeStyle = 'rgba(200,225,220,0.42)';
+      bgCtx.lineWidth = 1;
+      // arms
+      [[-9,-7],[9,-7],[-9,7],[9,7]].forEach(function(arm){
+        bgCtx.beginPath();
+        bgCtx.moveTo(0,0);
+        bgCtx.lineTo(arm[0], arm[1]);
+        bgCtx.stroke();
+        bgCtx.beginPath();
+        bgCtx.arc(arm[0], arm[1], 2.6, 0, Math.PI*2);
+        bgCtx.strokeStyle = 'rgba(200,225,220,0.34)';
+        bgCtx.stroke();
+      });
+      // body
+      bgCtx.fillStyle = 'rgba(210,230,226,0.5)';
+      bgCtx.beginPath();
+      bgCtx.arc(0, 0, 2.4, 0, Math.PI*2);
+      bgCtx.fill();
+      // blinking anti-collision light
+      var blink = (Math.sin((now - d.spawnTime) * 0.01) + 1) / 2;
+      if(blink > 0.72){
+        bgCtx.fillStyle = 'rgba(255,120,90,' + (0.35 + blink*0.5).toFixed(2) + ')';
+        bgCtx.beginPath();
+        bgCtx.arc(0, 3, 1.6, 0, Math.PI*2);
+        bgCtx.fill();
+      }
+      bgCtx.restore();
+    }
+
+    function updateDrones(now, dt){
+      if(now >= nextDroneAt && drones.length < 2){
+        spawnDrone(now);
+        nextDroneAt = now + 9000 + Math.random()*9000;
+      }
+      drones = drones.filter(function(d){
+        d.x += d.dir * d.speed * dt;
+        return d.x > -60 && d.x < bgW + 60;
+      });
+    }
+
+    function drawBg(now){
       bgCtx.clearRect(0,0,bgW,bgH);
       drawGrid();
       drawSweep();
@@ -1062,16 +1123,22 @@
         bgCtx.lineWidth = 1;
         bgCtx.stroke();
       });
+      drones.forEach(function(d){ drawDrone(d, now); });
     }
 
     if(reduceMotion){
-      drawBg();
+      drawBg(performance.now());
     } else {
-      (function loop(){
+      var lastT = performance.now();
+      (function loop(now){
+        now = now || performance.now();
+        var dt = Math.min(64, now - lastT);
+        lastT = now;
         bgPhase += 0.0035;
         mouseX += (targetMX - mouseX) * 0.04;
         mouseY += (targetMY - mouseY) * 0.04;
-        drawBg();
+        updateDrones(now, dt);
+        drawBg(now);
         requestAnimationFrame(loop);
       })();
     }
