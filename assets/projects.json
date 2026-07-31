@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T15:24:38.867554Z",
+  "generated_at": "2026-07-31T15:30:51.754517Z",
   "repos": [
     {
       "name": "3d-export",
@@ -7,7 +7,7 @@
       "url": "https://github.com/DBishal13/3d-export",
       "homepage": "https://dbishal13.github.io/3d-export/",
       "language": "Python",
-      "pushed_at": "2026-07-28T20:46:37Z",
+      "pushed_at": "2026-07-30T22:38:28Z",
       "stars": 0
     },
     {
@@ -16,7 +16,7 @@
       "url": "https://github.com/DBishal13/RomanNepaliAI",
       "homepage": "https://dbishal13.github.io/RomanNepaliAI/",
       "language": "Python",
-      "pushed_at": "2026-07-28T20:37:48Z",
+      "pushed_at": "2026-07-30T21:31:04Z",
       "stars": 0
     },
     {
@@ -62,7 +62,7 @@
       "homepage": null,
       "language": "Python",
       "pushed_at": "2026-07-23T05:13:19Z",
-      "stars": 0
+      "stars": 1
     },
     {
       "name": "surge-exposure",
