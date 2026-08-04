@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-08-03T15:56:01.521744Z",
+  "generated_at": "2026-08-04T15:37:27.858565Z",
   "repos": [
+    {
+      "name": "surge-exposure",
+      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
+      "url": "https://github.com/DBishal13/surge-exposure",
+      "homepage": "https://dbishal13.github.io/surge-exposure/",
+      "language": "Python",
+      "pushed_at": "2026-08-03T20:15:08Z",
+      "stars": 2
+    },
     {
       "name": "Road-Centerline",
       "description": "Extract road centerlines from polygon geometries (road contours) \u2014 worldwide, in any input CRS, in any format geopandas can read or write.",
@@ -63,15 +72,6 @@
       "language": "Python",
       "pushed_at": "2026-07-23T05:13:19Z",
       "stars": 1
-    },
-    {
-      "name": "surge-exposure",
-      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
-      "url": "https://github.com/DBishal13/surge-exposure",
-      "homepage": "https://dbishal13.github.io/surge-exposure/",
-      "language": "Python",
-      "pushed_at": "2026-07-23T05:04:09Z",
-      "stars": 0
     },
     {
       "name": "geospatial-data-copilot",
