@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-14T14:26:54.736116Z",
+  "generated_at": "2026-08-15T13:45:22.436140Z",
   "repos": [
     {
       "name": "compound-risk-pbc",
-      "description": null,
+      "description": "A small client-side web application for visualizing compound risk (probability-based combination) using interactive charts and a lightweight UI.",
       "url": "https://github.com/DBishal13/compound-risk-pbc",
       "homepage": "https://dbishal13.github.io/compound-risk-pbc/",
       "language": "JavaScript",
-      "pushed_at": "2026-08-13T22:40:31Z",
+      "pushed_at": "2026-08-14T14:58:45Z",
       "stars": 0
     },
     {
