@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-08-22T13:45:37.455073Z",
+  "generated_at": "2026-08-23T13:47:18.312828Z",
   "repos": [
+    {
+      "name": "wildfire-copilot",
+      "description": "Agentic RAG over Wildfire Risk & Utility Vegetation Data",
+      "url": "https://github.com/DBishal13/wildfire-copilot",
+      "homepage": "https://wildfire-copilot.onrender.com/app",
+      "language": "Python",
+      "pushed_at": "2026-08-23T00:12:58Z",
+      "stars": 1
+    },
     {
       "name": "geomlint",
       "description": null,
