@@ -1,0 +1,13 @@
+{
+  "output": "Bishal_Dhungana_Geo.pdf",
+  "label_override": "Geospatial / GIS Applications Engineer",
+  "summary": "Geospatial professional with hands-on experience across the full GIS stack: enterprise application development, spatial database administration, geoprocessing automation, and data quality assurance for critical utility infrastructure. I build and deploy GIS applications using Esri technologies, manage enterprise geodatabases, and work hands-on with ArcGIS Utility Network for electric utility asset and network modeling.",
+  "skill_groups": ["Geospatial", "Data Engineering", "Cloud & DevOps", "Generative AI & Agentic Systems"],
+  "work_highlights": {
+    "0": [6, 2, 5],
+    "1": [0, 1, 2],
+    "2": [0, 1],
+    "3": [1, 2]
+  },
+  "projects": ["Road-Centerline", "HazardMCP", "SurgeExposure", "3DEP LiDAR Terrain Builder", "GeoCoder", "GTFS Transit Platform"]
+}

@@ -1,0 +1,13 @@
+{
+  "output": "Bishal_Dhungana_GE.pdf",
+  "label_override": "Geomatics Engineer — UAV, GNSS & LiDAR",
+  "summary": "Geomatics Engineer with hands-on experience in UAV mapping (FAA Part 107 certified), GNSS/GPS survey, and LiDAR point cloud processing. I currently lead QA/QC of LiDAR-derived data for electric utility infrastructure, verifying positional accuracy and processing point clouds to support pole hardening and grid resilience work. My background spans field survey, terrain modeling, and geodatabase design, from control surveys and UAV topographic mapping in Nepal to production LiDAR workflows for a major U.S. utility.",
+  "skill_groups": ["Field", "Geospatial", "Data Engineering", "Cloud & DevOps"],
+  "work_highlights": {
+    "0": [2, 5, 6],
+    "1": [0, 1, 2],
+    "2": [0, 1, 2],
+    "3": [0, 1, 2]
+  },
+  "projects": ["3DEP LiDAR Terrain Builder", "3d-export", "Road-Centerline"]
+}

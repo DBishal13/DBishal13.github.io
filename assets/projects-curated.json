@@ -1,0 +1,170 @@
+{
+  "projects": [
+    {
+      "name": "SurgeExposure",
+      "repo": "DBishal13/surge-exposure",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo"],
+      "cat_label": "Geospatial · Data Pipeline",
+      "description": "A cloud-native pipeline overlaying NOAA storm-surge and flood-inundation data against Overture Maps building footprints, scoring per-asset flood exposure across 8 coastal regions — with a map and API.",
+      "stack": ["Python", "DuckDB Spatial", "FastAPI", "PostGIS", "AWS"],
+      "live_url": "https://dbishal13.github.io/surge-exposure/",
+      "live_label": "Live Demo",
+      "thumbnail": "assets/img/projects/surge-exposure.jpg"
+    },
+    {
+      "name": "wildfire-copilot",
+      "repo": "DBishal13/wildfire-copilot",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["agent", "geo"],
+      "cat_label": "AI Agent · Wildfire Risk",
+      "description": "A LangGraph agent for utility wildfire risk — combines a trained XGBoost susceptibility model with live NASA/NWS hazard feeds and RAG over real wildfire-mitigation filings to answer plain-English risk questions and prioritize inspections.",
+      "stack": ["LangGraph", "XGBoost", "RAG", "FastAPI"],
+      "live_url": "https://wildfire-copilot.onrender.com/app",
+      "live_label": "Live Demo",
+      "thumbnail": "assets/img/projects/wildfire-copilot.jpg"
+    },
+    {
+      "name": "geomlint",
+      "repo": "DBishal13/geomlint",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo"],
+      "cat_label": "Geospatial · PyPI Package",
+      "description": "A CI-first data-quality linter for vector geospatial files — catches invalid geometry, CRS confusion, and topology errors that mainstream data-observability tools skip. No GDAL required; pip install and it runs anywhere pip does.",
+      "stack": ["Python", "Shapely", "PyProj", "PyPI", "CLI"],
+      "docs_url": "https://dbishal13.github.io/geomlint/",
+      "docs_label": "Docs",
+      "thumbnail": "assets/img/projects/geomlint.jpg"
+    },
+    {
+      "name": "Geospatial Data Copilot",
+      "repo": "DBishal13/geospatial-data-copilot",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["agent", "geo"],
+      "cat_label": "AI Agent · RAG",
+      "description": "Ask a plain-English question about San Francisco's utility infrastructure — a local LLM agent (LangGraph ReAct, Ollama) translates it to spatial SQL, runs it, and answers with a summary and interactive map. No API keys.",
+      "stack": ["LangGraph", "Ollama", "DuckDB Spatial", "Chroma"],
+      "live_url": "https://dbishal13.github.io/geospatial-data-copilot/",
+      "live_label": "Live Demo",
+      "thumbnail": "assets/img/projects/geospatial-data-copilot.jpg"
+    },
+    {
+      "name": "HazardMCP",
+      "repo": "DBishal13/hazard-mcp",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["agent", "geo"],
+      "cat_label": "AI Agent · MCP Server",
+      "description": "An MCP server unifying FEMA, USGS, NOAA, NWS, and NASA hazard data behind a single AI-agent interface — one-call location risk summaries and map rendering, compatible with Claude Desktop.",
+      "stack": ["Python", "FastMCP", "Folium", "Docker"]
+    },
+    {
+      "name": "Road-Centerline",
+      "repo": "DBishal13/Road-Centerline",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo"],
+      "cat_label": "Geospatial · PyPI Package",
+      "description": "A published Python package that extracts road centerlines from polygon geometries — worldwide, in any input CRS, in any format GeoPandas can read. CLI and Python API, computed via medial-axis skeletonization.",
+      "stack": ["Python", "GeoPandas", "pygeoops", "PyProj", "PyPI"]
+    },
+    {
+      "name": "3DEP LiDAR Terrain Builder",
+      "repo": "DBishal13/3DEP-Lidar-Terrain-Builder",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo"],
+      "cat_label": "Geospatial · LiDAR",
+      "description": "Generates DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3DEP lidar. Draw an area of interest in the browser; it generates a configured local script — no data ever uploads.",
+      "stack": ["PDAL", "GDAL", "RichDEM", "AWS EPT/S3"],
+      "live_url": "https://dbishal13.github.io/3DEP-Lidar-Terrain-Builder/",
+      "live_label": "Live Demo",
+      "thumbnail": "assets/img/projects/3dep-lidar-terrain-builder.jpg"
+    },
+    {
+      "name": "GeoCoder",
+      "repo": "DBishal13/GeoCoder",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo", "web"],
+      "cat_label": "Geospatial · Web Tool",
+      "description": "Converts a spreadsheet of US street addresses into geocoded points and building footprint polygons using free Nominatim and Overpass APIs — as a no-install web app or a scriptable Jupyter notebook.",
+      "stack": ["GeoPandas", "Nominatim / Overpass", "Static Web App"],
+      "live_url": "https://dbishal13.github.io/GeoCoder/",
+      "live_label": "Live Demo",
+      "thumbnail": "assets/img/projects/geocoder.jpg"
+    },
+    {
+      "name": "GTFS Transit Platform",
+      "repo": "DBishal13/gtfs-transit-platform",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "Data-engineering and analytics platform for GTFS transit feeds — headways, stop coverage, and spacing anomalies, explored in an interactive map app.",
+      "live_url": "https://dbishal13.github.io/gtfs-transit-platform/"
+    },
+    {
+      "name": "3d-export",
+      "repo": "DBishal13/3d-export",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "3D-style land cover export from Sentinel-2 tiles, clipped to any country and automated via GitHub Actions — a modernized take on the rayshader R workflow.",
+      "live_url": "https://dbishal13.github.io/3d-export/",
+      "thumbnail": "assets/img/projects/3d-export.jpg"
+    },
+    {
+      "name": "RomanNepaliAI",
+      "repo": "DBishal13/RomanNepaliAI",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "Converts romanized Nepali to Devanagari live, client-side, plus a CLI that batch-translates SRT subtitles through pluggable backends.",
+      "live_url": "https://dbishal13.github.io/RomanNepaliAI/",
+      "thumbnail": "assets/img/projects/romannepaliai.jpg"
+    },
+    {
+      "name": "Conversational AI Assistant",
+      "repo": "DBishal13/conversational-ai-assistant",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation, citing sources. Runs locally via Ollama."
+    },
+    {
+      "name": "compound-risk-pbc",
+      "repo": "DBishal13/compound-risk-pbc",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "Client-side visualization tool for compound risk scoring — interactive charts over probability-based combination models.",
+      "live_url": "https://dbishal13.github.io/compound-risk-pbc/",
+      "thumbnail": "assets/img/projects/compound-risk-pbc.jpg"
+    },
+    {
+      "name": "fv-gwr",
+      "repo": "DBishal13/fv-gwr",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "Analysis code behind a peer-reviewed study on urban–rural flood hazard exposure and social vulnerability across the U.S."
+    },
+    {
+      "name": "Air-Pollution-in-Florida",
+      "repo": "DBishal13/Air-Pollution-in-Florida",
+      "visibility": "public",
+      "tier": "shipped",
+      "description": "Dashboard visualizing daily mean PM2.5 across Florida with an automated update pipeline."
+    },
+    {
+      "name": "groundtruth",
+      "visibility": "private",
+      "tier": "working",
+      "description": "An agentic tool-execution layer that wraps every LLM-driven GIS operation in deterministic CRS resolution, geometry validation, and topology checks."
+    },
+    {
+      "name": "vecinity",
+      "visibility": "private",
+      "tier": "working",
+      "description": "A vector index that spatially partitions as it searches, instead of bolting H3 cell IDs onto a generic ANN index as a metadata filter."
+    }
+  ]
+}

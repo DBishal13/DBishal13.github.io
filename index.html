@@ -232,17 +232,20 @@
   /* ---------- Project grid (Builds) ---------- */
   .project-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:20px;}
   .project-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:0;
     display:flex; flex-direction:column; position:relative; overflow:hidden;
     transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
   .project-card::before{
     content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s;
     background:radial-gradient(480px circle at var(--mx,50%) var(--my,0%), rgba(255,176,32,0.10), transparent 45%);
+    z-index:1;
   }
   .project-card:hover::before{opacity:1;}
   .project-card:hover{transform:translateY(-4px); border-color:var(--amber); box-shadow:0 24px 44px -26px rgba(0,0,0,0.55);}
   .project-card.is-hidden{display:none;}
+  .project-card__thumb{width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-bottom:1px solid var(--line); background:var(--surface-2);}
+  .project-card__body{padding:26px; display:flex; flex-direction:column; flex:1;}
   .project-card__top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
   .project-card__cat{font-family:'JetBrains Mono'; font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em;}
   .project-card h3{font-size:19.5px; margin-bottom:10px;}
@@ -267,8 +270,10 @@
   }
   .gh-live__meta{font-size:11.5px; color:var(--text-dim); opacity:0.65;}
   .gh-live-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px;}
-  .gh-live-card{border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; background:var(--surface-2); transition:.2s;}
+  .gh-live-card{border:1px solid var(--line); border-radius:var(--radius); padding:0; background:var(--surface-2); transition:.2s; overflow:hidden;}
   .gh-live-card:hover{border-color:var(--teal);}
+  .gh-live-card__thumb{width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-bottom:1px solid var(--line);}
+  .gh-live-card__body{padding:16px 18px;}
   .gh-live-card h5{font-size:14.5px; margin-bottom:7px; font-family:'JetBrains Mono'; font-weight:500;}
   .gh-live-card h5 a{color:var(--text);}
   .gh-live-card h5 a:hover{color:var(--amber);}
@@ -276,9 +281,14 @@
   .gh-live-card .meta{display:flex; justify-content:space-between; gap:10px; font-size:11px; color:var(--text-dim); font-family:'JetBrains Mono'; opacity:0.7;}
   .gh-live-card .meta a{color:var(--teal);}
   .gh-live-empty{font-size:13.5px; color:var(--text-dim); font-family:'JetBrains Mono'; opacity:0.65;}
+  .gh-live-card.is-working{border-style:dashed;}
+  .gh-live-card .working-badge{
+    font-family:'JetBrains Mono'; font-size:10.5px; color:var(--amber); text-transform:uppercase;
+    letter-spacing:0.05em; display:block; margin-bottom:8px;
+  }
 
   /* ---------- Skills ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(5,1fr); gap:20px;}
+  .skill-groups{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
   @media (max-width:1150px){ .skill-groups{grid-template-columns:repeat(3,1fr);} }
   @media (max-width:760px){ .skill-groups{grid-template-columns:repeat(2,1fr);} }
   @media (max-width:520px){ .skill-groups{grid-template-columns:1fr;} }
@@ -288,31 +298,6 @@
     font-family:'JetBrains Mono'; font-size:14.5px; padding:7px 12px; background:var(--surface-2);
     border:1px solid var(--line); border-radius:var(--radius); color:var(--text-dim);
   }
-
-  /* ---------- Simulation ---------- */
-  .sim-panel{display:grid; grid-template-columns:1fr 260px; gap:26px; align-items:start;}
-  @media (max-width:820px){ .sim-panel{grid-template-columns:1fr;} }
-  .sim-canvas-wrap{border:1px solid var(--line); background:#141c19; padding:44px 20px 64px; perspective:1300px; overflow:hidden;}
-  .sim-canvas-wrap canvas{
-    width:100%; height:auto; display:block; border-radius:var(--radius);
-    transform:rotateX(46deg) scale(1.08); transform-origin:50% 100%;
-    box-shadow:0 55px 70px -35px rgba(0,0,0,0.75), 0 0 0 1px rgba(237,239,234,0.08);
-    transition:transform .4s ease;
-  }
-  .sim-canvas-wrap:hover canvas{transform:rotateX(36deg) scale(1.08);}
-  @media (prefers-reduced-motion: reduce){ .sim-canvas-wrap canvas{transition:none;} }
-  .sim-controls{display:flex; flex-direction:column; gap:20px;}
-  .sim-controls label{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:10px;}
-  .sim-controls label span{color:var(--amber);}
-  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:2px; background:var(--line); outline:none; border-radius:2px;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:var(--amber); cursor:pointer; border:2px solid var(--bg); box-shadow:0 0 0 1px var(--amber);}
-  input[type=range]::-moz-range-thumb{width:14px; height:14px; border-radius:50%; background:var(--amber); cursor:pointer; border:2px solid var(--bg);}
-  .sim-readout{font-family:'JetBrains Mono'; font-size:13px; color:var(--text-dim); padding-top:16px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:flex-end; gap:16px;}
-  .sim-readout strong{color:var(--amber); font-size:24px; display:block; font-family:'Space Grotesk'; margin-top:4px; font-weight:600;}
-  .sim-readout .sim-sub{text-align:right;}
-  .sim-caption{font-size:12.5px; line-height:1.5; color:var(--text-dim); opacity:0.75;}
-  .btn-mini{font-family:'JetBrains Mono'; font-size:12.5px; padding:9px 14px; border:1px solid var(--line); align-self:flex-start; transition:.2s; background:none; color:var(--text); cursor:pointer;}
-  .btn-mini:hover{border-color:var(--amber); color:var(--amber);}
 
   /* ---------- Work grids ---------- */
   .note{color:var(--text-dim); font-size:15.5px; margin-bottom:24px; max-width:100%;}
@@ -384,7 +369,7 @@
       <div class="hero-name">Bishal Dhungana</div>
       <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
       <h1>Turning imagery and LiDAR into cloud systems that run <em>real infrastructure.</em></h1>
-      <p class="lede">Geospatial Data Scientist working end to end — computer vision on drone imagery and LiDAR, AWS cloud pipelines and infrastructure-as-code, and the AI agents that tie it together — from field survey to production platforms protecting critical utility infrastructure.</p>
+      <p class="lede">Geospatial Data Scientist working end to end — computer vision on drone imagery and LiDAR (including a detection model I personally trained and deployed to production on AWS SageMaker), cloud pipelines and infrastructure-as-code, and the AI agents that tie it together — from field survey to production platforms protecting critical utility infrastructure.</p>
       <div class="role-pills mono">
         <span>Computer Vision</span><span>LiDAR / Point Clouds</span><span>Cloud &amp; AWS</span><span>Geospatial Data Engineering</span><span>Agentic AI</span>
       </div>
@@ -422,9 +407,7 @@
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering</strong> — currently as a Data Scientist at The Spear Group, technical lead across Florida Power &amp; Light's AI-based infrastructure inspection program. I set technical requirements, build the data pipelines and cloud infrastructure behind the program, and serve as subject-matter expert through vendor model development. I also build the GIS applications used for infrastructure monitoring and disaster response — including a portal used during Hurricane Milton.</p>
-        <p>My background started in the field: GNSS and UAV survey, municipal geodatabase design, and control surveys as a Geomatics Engineer in Nepal — before graduate research at Florida Atlantic University on flood hazard modeling and environmental justice sharpened the AI/ML and geospatial data engineering side. That research led to a peer-reviewed publication on flood hazard exposure and social vulnerability in the U.S., and I'm a co-author on <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework, with the accompanying manuscript currently under peer review.</p>
-        <p>Outside of work I contribute to open-source geospatial and AI tools — a published Python package for road-centerline extraction, agentic AI systems for querying spatial and hazard data, and a flood/storm-surge exposure pipeline for utility assets, among others below. I'm FAA Part 107 certified.</p>
+        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering</strong> — currently as a Data Scientist at Florida Power &amp; Light, technical lead across their AI-based infrastructure inspection program, building the data pipelines and GIS applications behind it, plus a computer vision model I personally trained and deployed to production. My background started in the field as a Geomatics Engineer in Nepal, then sharpened through flood-hazard research at Florida Atlantic University, which led to a peer-reviewed publication and a co-authorship on <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework. Outside of work I build open-source geospatial AI tools — see Featured Builds below.</p>
         <div class="location-tag">
           <span>beesal13dh@gmail.com</span>
           <span>FAA Part 107 — Remote Pilot</span>
@@ -446,36 +429,36 @@
     <div class="role reveal">
       <div class="role-meta">
         <div class="dates mono">APR 2025 — PRESENT</div>
-        <div class="org">The Spear Group, on behalf of FPL</div>
+        <div class="org">Florida Power &amp; Light - Contract</div>
       </div>
       <div>
         <div class="role-title">Data Scientist — Geospatial &amp; AI</div>
-        <p style="color:var(--text-dim); font-size:15px; margin:-4px 0 16px; max-width:640px;">Technical lead across FPL's AI and geospatial infrastructure inspection program — from vendor selection through data engineering to production deployment.</p>
 
         <div class="role-sub mono">Program &amp; Vendor</div>
         <ul>
-          <li>Contributed to technical requirements during initial RFP preparation for a multi-million dollar AI vendor engagement covering infrastructure inspection.</li>
-          <li>Serve as subject-matter expert through vendor model development, coordinating validation and benchmarking against enterprise requirements.</li>
+          <li>Contributed technical requirements for a multi-million dollar AI vendor engagement, then served as subject-matter expert through model development, validation, and benchmarking.</li>
+        </ul>
+
+        <div class="role-sub mono">Machine Learning</div>
+        <ul>
+          <li>Separately trained and deployed a custom equipment detection and segmentation model to production using AWS SageMaker across dev, test, and prod environments, running continuously on utility inspection and storm-response imagery.</li>
         </ul>
 
         <div class="role-sub mono">Data Engineering for AI</div>
         <ul>
-          <li>Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition assessment reports through spatial and temporal joins, writing enriched results back via batched API calls.</li>
-          <li>Set technical standards for two vendor-developed models: an asset detection model (25+ equipment types) and a switch-state classification model (open/closed).</li>
-          <li>Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so internal teams and vendors could pull images by asset, condition, or class instead of searching by hand.</li>
+          <li>Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition reports via spatial/temporal joins, writing enriched results back through batched API calls.</li>
+          <li>Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so teams could pull images by asset or class instead of searching by hand.</li>
         </ul>
 
         <div class="role-sub mono">Platform &amp; Infrastructure</div>
         <ul>
           <li>Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.</li>
-          <li>Built a modular data integration platform (Python, SQL, DuckDB) for schema publishing and quality validation, plus a FastAPI/React API console for cross-team management.</li>
-          <li>Automated integration of image metadata and model-generated detection annotations into an Esri PostGIS geodatabase for geospatial analysis of model output.</li>
-          <li>Manage spatial databases (PostgreSQL/PostGIS), feature services, and cloud-native architecture on AWS (Lambda, S3, SageMaker).</li>
+          <li>Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.</li>
         </ul>
 
         <div class="role-sub mono">Applications</div>
         <ul>
-          <li>Built GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards) for infrastructure monitoring and disaster response — including a portal used during Hurricane Milton to track impact, restoration, and crew deployment.</li>
+          <li>Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response — engineering spatial web portals used in real time during Hurricane Milton to track structural impacts, outages, and crew deployment.</li>
         </ul>
       </div>
     </div>
@@ -483,15 +466,14 @@
     <div class="role reveal">
       <div class="role-meta">
         <div class="dates mono">SEP 2024 — MAR 2025</div>
-        <div class="org">The Spear Group, on behalf of FPL</div>
+        <div class="org">Florida Power &amp; Light - Contract</div>
       </div>
       <div>
         <div class="role-title">Associate Geospatial Analyst</div>
         <ul>
           <li>Led QA/QC of LiDAR-derived power grid data for infrastructure resilience work, including pole hardening.</li>
-          <li>Managed PostGIS databases and automated QA workflows in FME to streamline data storage and validation.</li>
+          <li>Managed PostgreSQL/PostGIS databases, optimized Cloud-Optimized GeoTIFFs, and automated QA workflows in FME, ArcPy, and Model Builder to streamline data storage and validation.</li>
           <li>Built a FastAPI sidecar for heavier geoprocessing and format conversion.</li>
-          <li>Automated geospatial workflows in Python, ArcPy, and Model Builder to improve consistency across teams.</li>
         </ul>
       </div>
     </div>
@@ -504,10 +486,9 @@
       <div>
         <div class="role-title">Graduate Research Assistant</div>
         <ul>
-          <li>Led flood risk research using FEMA hydrologic and hydraulic methods, resulting in a peer-reviewed publication on flood hazard exposure and social vulnerability across the U.S.</li>
-          <li>Researched environmental justice, looking at how disparities in disaster impact relate to geospatial and socioeconomic variables.</li>
-          <li>Built an automated geoprocessing pipeline in ArcGIS Pro, cutting processing time by 50%.</li>
-          <li>Built a Python geocoding tool to process 3 million addresses, replacing a paid service — cut turnaround from 3 months to 1 week and saved $20K in licensing costs.</li>
+          <li>Led flood risk research using FEMA hydrologic/hydraulic methods, resulting in a peer-reviewed publication on flood hazard exposure and social vulnerability — including environmental justice disparities in disaster impact.</li>
+          <li>Built an automated ArcGIS Pro geoprocessing pipeline, cutting processing time by 50%.</li>
+          <li>Built a Python geocoding tool processing 3 million addresses, replacing a paid service — cut turnaround from 3 months to 1 week and saved $20K in licensing.</li>
         </ul>
       </div>
     </div>
@@ -520,10 +501,9 @@
       <div>
         <div class="role-title">Geomatics Engineer / GIS Intern</div>
         <ul>
-          <li>Led survey teams for municipal road, control, and construction surveys; ran GNSS landmark surveys and UAV topographic surveys.</li>
+          <li>Led survey teams for municipal road, control, and construction surveys, including GNSS landmark and UAV topographic/transmission-line surveys.</li>
           <li>Designed municipal geodatabases (land use, soil, cadastral, resource maps) with topology and attribute rules.</li>
-          <li>Served as GIS expert for Nepal's Survey Department land use hand-over program, training 40+ officials and engineers in spatial analysis and database management.</li>
-          <li>Ran topographic mapping and transmission line surveys using differential GNSS and UAV technology.</li>
+          <li>Served as GIS expert for Nepal's Survey Department land-use hand-over program, training 40+ officials in spatial analysis and database management.</li>
         </ul>
       </div>
     </div>
@@ -538,7 +518,7 @@
         <h2>Self-directed AI &amp; geospatial projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Open-source contributions built outside of my employment, focused on hazard-resilient geospatial AI and critical infrastructure — a published Python package, agentic AI over spatial/hazard data, and full data-to-map pipelines. Most ship with a live demo; nothing here requires an API key to try.</p>
+    <p class="sec-intro reveal">Open-source contributions built outside of my employment, focused on hazard-resilient geospatial AI and critical infrastructure. Most ship with a live demo; nothing here requires an API key to try.</p>
 
     <div class="filter-tabs reveal" role="tablist" aria-label="Filter projects by category">
       <button class="filter-tab active" data-filter="all" type="button">All</button>
@@ -547,120 +527,23 @@
       <button class="filter-tab" data-filter="web" type="button">Web Tools</button>
     </div>
 
-    <div class="project-grid" id="projectGrid">
-
-      <article class="project-card reveal" data-cat="geo">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · PyPI Package</span>
-          <span class="live-badge" style="display:none;">Live</span>
-        </div>
-        <h3>Road-Centerline</h3>
-        <p class="desc">A published Python package that extracts road centerlines from polygon geometries — worldwide, in any input CRS, in any format GeoPandas can read. CLI and Python API, computed via medial-axis skeletonization.</p>
-        <div class="stack"><span class="tag">Python</span><span class="tag">GeoPandas</span><span class="tag">pygeoops</span><span class="tag">PyProj</span><span class="tag">PyPI</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/Road-Centerline" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="agent geo">
-        <div class="project-card__top">
-          <span class="project-card__cat">AI Agent · MCP Server</span>
-          <span class="live-badge" style="display:none;">Live</span>
-        </div>
-        <h3>HazardMCP</h3>
-        <p class="desc">An MCP server unifying FEMA, USGS, NOAA, NWS, and NASA hazard data behind a single AI-agent interface — one-call location risk summaries and map rendering, compatible with Claude Desktop.</p>
-        <div class="stack"><span class="tag">Python</span><span class="tag">FastMCP</span><span class="tag">Folium</span><span class="tag">Docker</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/hazard-mcp" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="geo">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · Data Pipeline</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>SurgeExposure</h3>
-        <p class="desc">A cloud-native pipeline overlaying NOAA storm-surge and flood-inundation data against Overture Maps building footprints, scoring per-asset flood exposure across 8 coastal regions — with a map and API.</p>
-        <div class="stack"><span class="tag">Python</span><span class="tag">DuckDB Spatial</span><span class="tag">FastAPI</span><span class="tag">PostGIS</span><span class="tag">AWS</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/surge-exposure/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/surge-exposure" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="geo">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · LiDAR</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>3DEP LiDAR Terrain Builder</h3>
-        <p class="desc">Generates DEM, DSM, hillshade, slope, aspect, and contour products from USGS 3DEP lidar. Draw an area of interest in the browser; it generates a configured local script — no data ever uploads.</p>
-        <div class="stack"><span class="tag">PDAL</span><span class="tag">GDAL</span><span class="tag">RichDEM</span><span class="tag">AWS EPT/S3</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/3DEP-Lidar-Terrain-Builder/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/3DEP-Lidar-Terrain-Builder" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="agent geo">
-        <div class="project-card__top">
-          <span class="project-card__cat">AI Agent · RAG</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>Geospatial Data Copilot</h3>
-        <p class="desc">Ask a plain-English question about San Francisco's utility infrastructure — a local LLM agent (LangGraph ReAct, Ollama) translates it to spatial SQL, runs it, and answers with a summary and interactive map. No API keys.</p>
-        <div class="stack"><span class="tag">LangGraph</span><span class="tag">Ollama</span><span class="tag">DuckDB Spatial</span><span class="tag">Chroma</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/geospatial-data-copilot/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/geospatial-data-copilot" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-      <article class="project-card reveal" data-cat="geo web">
-        <div class="project-card__top">
-          <span class="project-card__cat">Geospatial · Web Tool</span>
-          <span class="live-badge">Live</span>
-        </div>
-        <h3>GeoCoder</h3>
-        <p class="desc">Converts a spreadsheet of US street addresses into geocoded points and building footprint polygons using free Nominatim and Overpass APIs — as a no-install web app or a scriptable Jupyter notebook.</p>
-        <div class="stack"><span class="tag">GeoPandas</span><span class="tag">Nominatim / Overpass</span><span class="tag">Static Web App</span></div>
-        <div class="project-card__actions">
-          <a class="btn btn-primary btn-sm" href="https://dbishal13.github.io/GeoCoder/" target="_blank">Live Demo ↗</a>
-          <a class="btn btn-ghost btn-sm" href="https://github.com/DBishal13/GeoCoder" target="_blank">Repo ↗</a>
-        </div>
-      </article>
-
-    </div>
+    <div class="project-grid" id="projectGrid"></div>
     <p class="gh-live-empty reveal" id="filterEmpty" style="display:none; margin-top:14px;">No projects in this category yet.</p>
 
     <div class="gh-live reveal">
       <div class="gh-live__head">
-        <h4>Other builds</h4>
+        <h4>Also shipped</h4>
         <span class="gh-live__meta mono">Outside the core hazard/geospatial focus — still real, shipped work</span>
       </div>
-      <div class="gh-live-grid">
-        <div class="gh-live-card">
-          <h5><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">GTFS Transit Platform</a></h5>
-          <p>Data-engineering and analytics platform for GTFS transit feeds — headways, stop coverage, and spacing anomalies, explored in an interactive map app.</p>
-          <div class="meta"><a href="https://github.com/DBishal13/gtfs-transit-platform" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/gtfs-transit-platform/" target="_blank">Live ↗</a></div>
-        </div>
-        <div class="gh-live-card">
-          <h5><a href="https://github.com/DBishal13/3d-export" target="_blank">3d-export</a></h5>
-          <p>3D-style land cover export from Sentinel-2 tiles, clipped to any country and automated via GitHub Actions — a modernized take on the rayshader R workflow.</p>
-          <div class="meta"><a href="https://github.com/DBishal13/3d-export" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/3d-export/" target="_blank">Live ↗</a></div>
-        </div>
-        <div class="gh-live-card">
-          <h5><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">RomanNepaliAI</a></h5>
-          <p>Converts romanized Nepali to Devanagari live, client-side, plus a CLI that batch-translates SRT subtitles through pluggable backends.</p>
-          <div class="meta"><a href="https://github.com/DBishal13/RomanNepaliAI" target="_blank">Repo ↗</a><a href="https://dbishal13.github.io/RomanNepaliAI/" target="_blank">Live ↗</a></div>
-        </div>
-        <div class="gh-live-card">
-          <h5><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Conversational AI Assistant</a></h5>
-          <p>LangChain RAG chatbot with a history-aware retriever for multi-turn, context-grounded conversation, citing sources. Runs locally via Ollama.</p>
-          <div class="meta"><a href="https://github.com/DBishal13/conversational-ai-assistant" target="_blank">Repo ↗</a></div>
-        </div>
+      <div class="gh-live-grid" id="shippedGrid"></div>
+    </div>
+
+    <div class="gh-live reveal">
+      <div class="gh-live__head">
+        <h4>Currently building</h4>
+        <span class="gh-live__meta mono">Private repos, in active development — details intentionally light</span>
       </div>
+      <div class="gh-live-grid" id="workingGrid"></div>
     </div>
 
     <div class="gh-live reveal">
@@ -702,35 +585,49 @@
     </div>
     <div class="skill-groups">
       <div class="skill-group reveal">
-        <h4>AI / ML / Agents</h4>
+        <h4>Machine Learning &amp; Computer Vision</h4>
         <div class="tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span>
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow/Keras</span><span class="tag">Ultralytics</span>
+          <span class="tag">YOLO</span><span class="tag">RT-DETR</span><span class="tag">Detectron2</span>
+          <span class="tag">ResNet</span><span class="tag">XGBoost</span><span class="tag">OpenCV</span><span class="tag">ONNX</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Generative AI &amp; Agentic Systems</h4>
+        <div class="tags">
           <span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">RAG</span>
-          <span class="tag">Model Context Protocol</span><span class="tag">Vector Databases</span>
+          <span class="tag">Model Context Protocol</span><span class="tag">FastMCP</span><span class="tag">Vector Databases</span>
+          <span class="tag">Ollama</span><span class="tag">Chroma</span><span class="tag">Hugging Face Transformers</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Data Engineering</h4>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">ETL/ELT Pipelines</span>
+          <span class="tag">DuckDB</span><span class="tag">Databricks</span><span class="tag">Data Lakes</span><span class="tag">Parquet</span>
         </div>
       </div>
       <div class="skill-group reveal">
         <h4>Geospatial</h4>
         <div class="tags">
-          <span class="tag">ArcGIS Pro / Enterprise / Online</span><span class="tag">PostGIS</span><span class="tag">DuckDB Spatial</span>
-          <span class="tag">GDAL</span><span class="tag">PDAL</span><span class="tag">GeoPandas</span>
-          <span class="tag">LiDAR / Point Cloud</span><span class="tag">Overture Maps</span>
+          <span class="tag">ArcGIS Pro / Enterprise / Online</span><span class="tag">Utility Network</span><span class="tag">PostGIS</span>
+          <span class="tag">DuckDB Spatial</span><span class="tag">GDAL</span><span class="tag">PDAL</span><span class="tag">GeoPandas</span>
+          <span class="tag">Shapely</span><span class="tag">PyProj</span><span class="tag">LiDAR / Point Cloud</span><span class="tag">Overture Maps</span>
+          <span class="tag">Cloud-Optimized GeoTIFF</span><span class="tag">Folium</span><span class="tag">FME</span>
         </div>
       </div>
       <div class="skill-group reveal">
-        <h4>Engineering</h4>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">JavaScript / TypeScript</span><span class="tag">R</span>
-          <span class="tag">SQL</span><span class="tag">FastAPI</span><span class="tag">React</span>
-          <span class="tag">ETL Pipelines</span><span class="tag">CI/CD</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Cloud</h4>
+        <h4>Cloud &amp; DevOps</h4>
         <div class="tags">
           <span class="tag">AWS Lambda</span><span class="tag">S3</span><span class="tag">SageMaker</span>
           <span class="tag">ECR / ECS</span><span class="tag">AWS CDK</span><span class="tag">Docker</span>
-          <span class="tag">IAM</span><span class="tag">VPC / Network Security</span>
+          <span class="tag">IAM</span><span class="tag">VPC / Network Security</span><span class="tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h4>Software Engineering</h4>
+        <div class="tags">
+          <span class="tag">JavaScript / TypeScript</span><span class="tag">R</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Streamlit</span>
         </div>
       </div>
       <div class="skill-group reveal">
@@ -744,41 +641,11 @@
   </div>
 </section>
 
-<section id="simulation">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">06 — Simulation</div>
-        <h2>Flood inundation model</h2>
-      </div>
-    </div>
-    <p class="note reveal">A small browser-side terrain model in the spirit of the FEMA-based hydrologic exposure work below — procedurally generated elevation, not the published dataset. Drag the slider to raise sea level and watch inundation spread.</p>
-    <div class="sim-panel reveal">
-      <div class="sim-canvas-wrap">
-        <canvas id="floodCanvas" width="640" height="300"></canvas>
-      </div>
-      <div class="sim-controls">
-        <div>
-          <label for="seaLevel">Sea level rise — <span id="seaLevelVal">0.0</span> ft</label>
-          <input type="range" id="seaLevel" min="0" max="15" step="0.1" value="0">
-        </div>
-        <div class="sim-readout">
-          <div>Inundated area<strong id="inundatedPct">0%</strong></div>
-          <div class="sim-sub">Peak elevation<strong id="peakElev">—</strong></div>
-        </div>
-        <button class="btn-mini mono" id="regenTerrain" type="button">↺ Regenerate terrain</button>
-        <p class="sim-caption">Color ramp: low-lying green → upland tan/white. Blue = below current sea level.</p>
-        <p class="sim-caption" id="polesStatus" style="color:var(--amber); opacity:1;">Utility corridor: 0 of 7 poles below sea level</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="research">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="sec-tag">07 — Research &amp; Selected Work</div>
+        <div class="sec-tag">06 — Research &amp; Selected Work</div>
         <h2>Publications &amp; academic projects</h2>
       </div>
     </div>
@@ -786,7 +653,7 @@
 
     <div class="reveal">
       <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
-      <div class="pub">Co-author, open-source software — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, a Python watershed modeling and planning framework (Florida Atlantic University).<span class="tag-status">Manuscript in preparation</span></div>
+      <div class="pub">Co-author, open-source software — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, a Python watershed modeling and planning framework (Florida Atlantic University).<span class="tag-status">Manuscript in review</span></div>
     </div>
   </div>
 </section>
@@ -795,7 +662,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="sec-tag">08 — Credentials</div>
+        <div class="sec-tag">07 — Credentials</div>
         <h2>Education &amp; certifications</h2>
       </div>
     </div>
@@ -804,6 +671,7 @@
       <p><strong>BSc, Geomatics Engineering</strong> · Tribhuvan University, Nepal · 2016–2021 · GPA 3.64/4.0</p>
     </div>
     <ul class="cred-list">
+      <li>The Rise of the AI Data Engineer Bootcamp (2026)</li>
       <li>Machine Learning Specialization — DeepLearning.AI</li>
       <li>Deep Learning Specialization — DeepLearning.AI</li>
       <li>GIS Specialization — UC Davis</li>
@@ -812,16 +680,16 @@
       <li>Remote Sensing Image Acquisition &amp; Analysis — UNSW Canberra</li>
       <li>Introduction to Databases — Meta</li>
       <li>FAA Part 107 — Remote Pilot Certificate</li>
-      <li>NASA ARSET — Flood Monitoring with Earth Observations</li>
-      <li>NASA ARSET — Urban Heat Islands &amp; Heat Vulnerability</li>
     </ul>
+    <p style="color:var(--text-dim); font-size:14.5px; margin-top:18px; max-width:720px;"><strong style="color:var(--text);">NASA ARSET Certifications (12)</strong> — applied remote sensing training across climate risk assessment &amp; projection, disaster &amp; building-infrastructure risk modeling, wildfire and watershed impacts, ecosystem services, air quality (geostationary satellites &amp; environmental justice), water quality (inland lakes &amp; SeaDAS), soil moisture/drought, flood monitoring &amp; modeling, and urban heat vulnerability.</p>
+    <p style="color:var(--text-dim); font-size:14.5px; margin-top:10px; max-width:720px;"><strong style="color:var(--text);">Esri Training Certifications (8)</strong> — GIS Basics, Cartography, Spatial Data Science, Imagery Analysis, Spatial Analysis, GIS for Climate Action, GIS/BIM integration for AEC, and deep-learning object classification in ArcGIS Pro.</p>
   </div>
 </section>
 
 <section id="contact" style="border-bottom:none;">
   <div class="wrap contact-inner">
     <div class="contact">
-      <div class="sec-tag" style="margin-bottom:16px;">09 — Contact</div>
+      <div class="sec-tag" style="margin-bottom:16px;">08 — Contact</div>
       <h2>Let's talk about what you're building.</h2>
       <p>Open to Data Science, GIS/Geospatial Engineering, and Data/Platform roles. Based in West Palm Beach, FL.</p>
     </div>
@@ -871,89 +739,167 @@
     revealEls.forEach(function(el){ el.classList.add('visible'); });
   }
 
-  /* ---------- Builds: filter tabs ---------- */
-  var filterTabs = document.querySelectorAll('.filter-tab');
-  var projectCards = document.querySelectorAll('.project-card');
-  var filterEmpty = document.getElementById('filterEmpty');
-  filterTabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      filterTabs.forEach(function(t){ t.classList.remove('active'); });
-      tab.classList.add('active');
-      var filter = tab.getAttribute('data-filter');
-      var visible = 0;
-      projectCards.forEach(function(card){
-        var cats = (card.getAttribute('data-cat') || '').split(' ');
-        var show = filter === 'all' || cats.indexOf(filter) !== -1;
-        card.classList.toggle('is-hidden', !show);
-        if(show) visible++;
-      });
-      if(filterEmpty) filterEmpty.style.display = visible ? 'none' : 'block';
-    });
-  });
-
-  /* ---------- Builds: card hover spotlight ---------- */
-  if(window.matchMedia('(hover: hover)').matches){
-    projectCards.forEach(function(card){
-      card.addEventListener('pointermove', function(e){
-        var rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-        card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-      });
+  /* ---------- Builds: helpers ---------- */
+  function timeAgo(iso){
+    if(!iso) return '';
+    var diff = Date.now() - new Date(iso).getTime();
+    var days = Math.floor(diff / 86400000);
+    if(days < 1) return 'today';
+    if(days === 1) return '1 day ago';
+    if(days < 30) return days + ' days ago';
+    var months = Math.floor(days / 30);
+    if(months < 12) return months + (months === 1 ? ' month ago' : ' months ago');
+    var years = Math.floor(months / 12);
+    return years + (years === 1 ? ' year ago' : ' years ago');
+  }
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>]/g, function(c){
+      return c === '&' ? '&amp;' : c === '<' ? '&lt;' : '&gt;';
     });
   }
 
-  /* ---------- Builds: live GitHub feed ---------- */
-  var ghGrid = document.getElementById('ghLiveGrid');
-  if(ghGrid){
-    var CURATED = ['road-centerline','hazard-mcp','surge-exposure','3dep-lidar-terrain-builder',
-      'geospatial-data-copilot','geocoder','conversational-ai-assistant','gtfs-transit-platform',
-      'romannepaliai','3d-export','pywmp_documentation'];
+  /* ---------- Builds: curated projects (flagship / shipped / working) ---------- */
+  var curatedNames = [];
+  fetch('assets/projects-curated.json', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(data){
+      var projects = data.projects || [];
+      curatedNames = projects.map(function(p){
+        var slug = p.repo ? p.repo.split('/').pop() : p.name;
+        return slug.toLowerCase();
+      });
 
-    function timeAgo(iso){
-      if(!iso) return '';
-      var diff = Date.now() - new Date(iso).getTime();
-      var days = Math.floor(diff / 86400000);
-      if(days < 1) return 'today';
-      if(days === 1) return '1 day ago';
-      if(days < 30) return days + ' days ago';
-      var months = Math.floor(days / 30);
-      if(months < 12) return months + (months === 1 ? ' month ago' : ' months ago');
-      var years = Math.floor(months / 12);
-      return years + (years === 1 ? ' year ago' : ' years ago');
-    }
+      var flagshipGrid = document.getElementById('projectGrid');
+      var shippedGrid = document.getElementById('shippedGrid');
+      var workingGrid = document.getElementById('workingGrid');
 
-    fetch('assets/projects.json', {cache:'no-store'})
-      .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function(data){
-        var repos = (data.repos || []).filter(function(r){
-          return CURATED.indexOf(r.name.toLowerCase()) === -1;
-        });
+      var flagship = projects.filter(function(p){ return p.tier === 'flagship'; });
+      var shipped = projects.filter(function(p){ return p.tier === 'shipped'; });
+      var working = projects.filter(function(p){ return p.tier === 'working'; });
 
-        var metaEl = document.getElementById('ghLiveMeta');
-        if(metaEl && data.generated_at){ metaEl.textContent = 'Updated ' + timeAgo(data.generated_at); }
+      if(flagshipGrid){
+        flagshipGrid.innerHTML = flagship.map(function(p){
+          var repoUrl = p.repo ? 'https://github.com/' + p.repo : null;
+          var actions = '';
+          if(p.live_url) actions += '<a class="btn btn-primary btn-sm" href="' + esc(p.live_url) + '" target="_blank">' + esc(p.live_label || 'Live Demo') + ' ↗</a>';
+          if(p.docs_url) actions += '<a class="btn btn-primary btn-sm" href="' + esc(p.docs_url) + '" target="_blank">' + esc(p.docs_label || 'Docs') + ' ↗</a>';
+          if(repoUrl) actions += '<a class="btn btn-ghost btn-sm" href="' + esc(repoUrl) + '" target="_blank">Repo ↗</a>';
+          var thumb = p.thumbnail ? '<img class="project-card__thumb" src="' + esc(p.thumbnail) + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' : '';
+          return '<article class="project-card reveal visible" data-cat="' + esc((p.category || []).join(' ')) + '">' +
+            thumb +
+            '<div class="project-card__body">' +
+            '<div class="project-card__top">' +
+              '<span class="project-card__cat">' + esc(p.cat_label || '') + '</span>' +
+              '<span class="live-badge"' + (p.live_url ? '' : ' style="display:none;"') + '>Live</span>' +
+            '</div>' +
+            '<h3>' + esc(p.name) + '</h3>' +
+            '<p class="desc">' + esc(p.description) + '</p>' +
+            '<div class="stack">' + (p.stack || []).map(function(t){ return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
+            '<div class="project-card__actions">' + actions + '</div>' +
+            '</div>' +
+          '</article>';
+        }).join('');
+      }
 
-        if(!repos.length){
-          document.getElementById('ghLiveEmpty').style.display = 'block';
-          return;
-        }
-
-        ghGrid.innerHTML = repos.slice(0, 6).map(function(r){
-          var desc = r.description || 'No description yet.';
-          var link = r.homepage || r.url;
-          var linkLabel = r.homepage ? 'Live ↗' : 'Repo ↗';
+      if(shippedGrid){
+        shippedGrid.innerHTML = shipped.map(function(p){
+          var repoUrl = p.repo ? 'https://github.com/' + p.repo : null;
+          var links = '';
+          if(repoUrl) links += '<a href="' + esc(repoUrl) + '" target="_blank">Repo ↗</a>';
+          if(p.live_url) links += '<a href="' + esc(p.live_url) + '" target="_blank">Live ↗</a>';
+          var thumb = p.thumbnail ? '<img class="gh-live-card__thumb" src="' + esc(p.thumbnail) + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' : '';
           return '<div class="gh-live-card">' +
-            '<h5><a href="' + r.url + '" target="_blank">' + r.name + '</a></h5>' +
-            '<p>' + desc + '</p>' +
-            '<div class="meta"><span>' + (r.language || '—') + ' · ' + timeAgo(r.pushed_at) + '</span>' +
-            '<a href="' + link + '" target="_blank">' + linkLabel + '</a></div>' +
+            thumb +
+            '<div class="gh-live-card__body">' +
+            '<h5>' + (repoUrl ? '<a href="' + esc(repoUrl) + '" target="_blank">' + esc(p.name) + '</a>' : esc(p.name)) + '</h5>' +
+            '<p>' + esc(p.description) + '</p>' +
+            '<div class="meta">' + links + '</div>' +
+            '</div>' +
           '</div>';
         }).join('');
-      })
-      .catch(function(){
-        var emptyEl = document.getElementById('ghLiveEmpty');
-        if(emptyEl){ emptyEl.textContent = 'Live feed unavailable right now — browse everything on GitHub.'; emptyEl.style.display = 'block'; }
+      }
+
+      if(workingGrid){
+        workingGrid.innerHTML = working.map(function(p){
+          return '<div class="gh-live-card is-working">' +
+            '<div class="gh-live-card__body">' +
+            '<span class="working-badge">Private · In progress</span>' +
+            '<h5>' + esc(p.name) + '</h5>' +
+            '<p>' + esc(p.description) + '</p>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      /* filter tabs + hover spotlight, wired after flagship cards exist */
+      var filterTabs = document.querySelectorAll('.filter-tab');
+      var projectCards = document.querySelectorAll('.project-card');
+      var filterEmpty = document.getElementById('filterEmpty');
+      filterTabs.forEach(function(tab){
+        tab.addEventListener('click', function(){
+          filterTabs.forEach(function(t){ t.classList.remove('active'); });
+          tab.classList.add('active');
+          var filter = tab.getAttribute('data-filter');
+          var visible = 0;
+          projectCards.forEach(function(card){
+            var cats = (card.getAttribute('data-cat') || '').split(' ');
+            var show = filter === 'all' || cats.indexOf(filter) !== -1;
+            card.classList.toggle('is-hidden', !show);
+            if(show) visible++;
+          });
+          if(filterEmpty) filterEmpty.style.display = visible ? 'none' : 'block';
+        });
       });
-  }
+      if(window.matchMedia('(hover: hover)').matches){
+        projectCards.forEach(function(card){
+          card.addEventListener('pointermove', function(e){
+            var rect = card.getBoundingClientRect();
+            card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
+            card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
+          });
+        });
+      }
+    })
+    .catch(function(){ /* curated list unavailable — sections stay empty, live feed below still works */ })
+    .finally(function(){
+      /* ---------- Builds: live GitHub feed (fallback for anything not yet curated) ---------- */
+      var ghGrid = document.getElementById('ghLiveGrid');
+      if(!ghGrid) return;
+      var EXTRA_EXCLUDE = ['pywmp_documentation'];
+
+      fetch('assets/projects.json', {cache:'no-store'})
+        .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function(data){
+          var repos = (data.repos || []).filter(function(r){
+            var n = r.name.toLowerCase();
+            return curatedNames.indexOf(n) === -1 && EXTRA_EXCLUDE.indexOf(n) === -1;
+          });
+
+          var metaEl = document.getElementById('ghLiveMeta');
+          if(metaEl && data.generated_at){ metaEl.textContent = 'Updated ' + timeAgo(data.generated_at); }
+
+          if(!repos.length){
+            document.getElementById('ghLiveEmpty').style.display = 'block';
+            return;
+          }
+
+          ghGrid.innerHTML = repos.slice(0, 6).map(function(r){
+            var desc = r.description || 'No description yet.';
+            var link = r.homepage || r.url;
+            var linkLabel = r.homepage ? 'Live ↗' : 'Repo ↗';
+            return '<div class="gh-live-card">' +
+              '<h5><a href="' + r.url + '" target="_blank">' + esc(r.name) + '</a></h5>' +
+              '<p>' + esc(desc) + '</p>' +
+              '<div class="meta"><span>' + esc(r.language || '—') + ' · ' + timeAgo(r.pushed_at) + '</span>' +
+              '<a href="' + link + '" target="_blank">' + linkLabel + '</a></div>' +
+            '</div>';
+          }).join('');
+        })
+        .catch(function(){
+          var emptyEl = document.getElementById('ghLiveEmpty');
+          if(emptyEl){ emptyEl.textContent = 'Live feed unavailable right now — browse everything on GitHub.'; emptyEl.style.display = 'block'; }
+        });
+    });
 
   /* ---------- Count-up stats ---------- */
   var nums = document.querySelectorAll('.num[data-count]');
@@ -1310,288 +1256,6 @@
     }
   }
 
-  /* ---------- Flood inundation simulation ---------- */
-  var floodCanvas = document.getElementById('floodCanvas');
-  if(floodCanvas){
-    var fCtx = floodCanvas.getContext('2d');
-    var W = floodCanvas.width, H = floodCanvas.height;
-    var maxFeet = 15;
-    var bandsCount = 10;
-    var seed = [0,0,0,0];
-    var elevFeet = new Float32Array(W*H);
-    var bandIdx = new Int16Array(W*H);
-    var maxElevFound = 0;
-    var terrainCache = document.createElement('canvas');
-    terrainCache.width = W; terrainCache.height = H;
-    var terrainCtx = terrainCache.getContext('2d');
-
-    function randomizeSeed(){
-      seed = [Math.random()*10, Math.random()*10, Math.random()*10, Math.random()*10];
-    }
-    function elevationAt(nx, ny){
-      // coastline runs roughly along the left edge (ocean); noise perturbs the shoreline
-      var shoreWiggle = 0.16*Math.sin(ny*6.5+seed[0]) + 0.09*Math.sin(ny*13+seed[1]*2) + 0.05*Math.sin(ny*23-seed[2]);
-      var coast = (nx - 0.24) - shoreWiggle;
-      var land = Math.max(0, coast);
-      var hills = 0.22*Math.sin(nx*7+seed[2])*Math.cos(ny*5+seed[3])
-        + 0.12*Math.sin(nx*13+seed[1]+ny*4)
-        + 0.07*Math.sin(nx*21-seed[0]+ny*9);
-      var v = land*1.3 + hills*Math.min(1, land*3.2);
-      return Math.max(0, Math.min(1, v));
-    }
-
-    var rampStops = [
-      {t:0.00, rgb:[19,86,94]},       // wet lowland / marsh
-      {t:0.20, rgb:[56,142,84]},      // grass and vegetation
-      {t:0.38, rgb:[96,174,88]},      // denser vegetation
-      {t:0.58, rgb:[174,165,76]},     // meadow / field
-      {t:0.76, rgb:[203,150,70]},     // dry scrub / dirt
-      {t:0.90, rgb:[216,129,58]},     // upland earth
-      {t:1.00, rgb:[245,230,205]}     // rocky high ground
-    ];
-    function rampColor(t){
-      for(var i = 0; i < rampStops.length-1; i++){
-        var a = rampStops[i], b = rampStops[i+1];
-        if(t >= a.t && t <= b.t){
-          var f = (t-a.t)/(b.t-a.t);
-          return [
-            a.rgb[0]+(b.rgb[0]-a.rgb[0])*f,
-            a.rgb[1]+(b.rgb[1]-a.rgb[1])*f,
-            a.rgb[2]+(b.rgb[2]-a.rgb[2])*f
-          ];
-        }
-      }
-      return rampStops[rampStops.length-1].rgb;
-    }
-
-    function buildGrid(){
-      maxElevFound = 0;
-      for(var y = 0; y < H; y++){
-        for(var x = 0; x < W; x++){
-          var elev = elevationAt(x/W, y/H) * maxFeet;
-          var idx = y*W+x;
-          elevFeet[idx] = elev;
-          bandIdx[idx] = Math.floor((elev/maxFeet) * bandsCount);
-          if(elev > maxElevFound) maxElevFound = elev;
-        }
-      }
-      var peakEl = document.getElementById('peakElev');
-      if(peakEl) peakEl.textContent = maxElevFound.toFixed(1) + ' ft';
-      paintTerrain();
-    }
-
-    function paintTerrain(){
-      var img = terrainCtx.createImageData(W, H);
-      var data = img.data;
-      for(var y = 0; y < H; y++){
-        for(var x = 0; x < W; x++){
-          var idx = y*W+x;
-          var t = Math.min(1, (bandIdx[idx] + 0.5) / bandsCount);
-          var col = rampColor(t);
-
-          var nx = x/W, ny = y/H;
-          var road = (Math.abs(Math.sin((ny*7 + seed[0])*4 + nx*1.8)) < 0.035 && nx > 0.12 && nx < 0.88) ||
-                     (Math.abs(Math.sin((nx*8 + seed[1])*3 + ny*1.2)) < 0.03 && ny > 0.15 && ny < 0.82);
-          var vegetation = !road && t < 0.66 && Math.abs(Math.sin(nx*4.5 + seed[2])*Math.cos(ny*5.2 + seed[3])) > 0.45;
-          var scrub = !road && t > 0.55 && t < 0.84 && Math.abs(Math.sin(nx*5 + seed[1])*Math.cos(ny*4.2 + seed[0])) > 0.52;
-
-          if(road){
-            col = [104,110,118];
-          } else if(vegetation){
-            col[0] = Math.max(24, col[0] - 10);
-            col[1] = Math.min(220, col[1] + 30);
-            col[2] = Math.max(35, col[2] - 16);
-          } else if(scrub){
-            col[0] = Math.min(255, col[0] + 18);
-            col[1] = Math.max(100, col[1] - 12);
-            col[2] = Math.max(40, col[2] - 10);
-          }
-
-          var xl = x > 0 ? idx-1 : idx, xr = x < W-1 ? idx+1 : idx;
-          var yu = y > 0 ? idx-W : idx, yd = y < H-1 ? idx+W : idx;
-          var dx = elevFeet[xr] - elevFeet[xl];
-          var dy = elevFeet[yd] - elevFeet[yu];
-          var shade = Math.max(0.62, Math.min(1.38, 0.72 - dx*1.3 - dy*0.9));
-
-          if(road){
-            shade = Math.max(0.85, Math.min(1.15, shade * 1.05));
-          }
-
-          var isEdge = bandIdx[idx] !== bandIdx[xl] || bandIdx[idx] !== bandIdx[yu];
-          var lineMul = isEdge ? 0.72 : 1;
-
-          var p = idx*4;
-          data[p]   = Math.max(0, Math.min(255, col[0]*shade*lineMul));
-          data[p+1] = Math.max(0, Math.min(255, col[1]*shade*lineMul));
-          data[p+2] = Math.max(0, Math.min(255, col[2]*shade*lineMul));
-          data[p+3] = 255;
-        }
-      }
-      terrainCtx.putImageData(img, 0, 0);
-    }
-
-    var slider = document.getElementById('seaLevel');
-    var seaLevelVal = document.getElementById('seaLevelVal');
-    var pctEl = document.getElementById('inundatedPct');
-    var regenBtn = document.getElementById('regenTerrain');
-    var targetLevel = 0, displayedLevel = 0, shimmer = 0;
-    var userControl = false, autoStartTime = null;
-
-    var waterCell = 4;
-    var waterCols = Math.floor(W/waterCell), waterRows = Math.floor(H/waterCell);
-    var cellPattern = new Float32Array(waterCols*waterRows);
-    for(var i = 0; i < cellPattern.length; i++) cellPattern[i] = Math.random();
-
-    // A utility corridor climbing away from the coast — poles/wires, LiDAR-survey style
-    var poles = [
-      {fx:0.30, fy:0.82}, {fx:0.39, fy:0.72}, {fx:0.48, fy:0.62}, {fx:0.57, fy:0.52},
-      {fx:0.66, fy:0.41}, {fx:0.75, fy:0.31}, {fx:0.84, fy:0.21}
-    ];
-    var polesStatusEl = document.getElementById('polesStatus');
-
-    function drawPoles(){
-      var poleH = 10;
-
-      // power wire
-      fCtx.lineWidth = 2;
-      fCtx.strokeStyle = 'rgba(255,190,80,0.85)';
-      fCtx.beginPath();
-      for(var i = 0; i < poles.length; i++){
-        var x = poles[i].fx*W, y = poles[i].fy*H - poleH;
-        if(i === 0){ fCtx.moveTo(x, y); continue; }
-        var px = poles[i-1].fx*W, py = poles[i-1].fy*H - poleH;
-        var sagX = (px+x)/2, sagY = Math.max(py,y) + 4;
-        fCtx.quadraticCurveTo(sagX, sagY, x, y);
-      }
-      fCtx.stroke();
-
-      // communications line below the power wire
-      fCtx.lineWidth = 1.4;
-      fCtx.strokeStyle = 'rgba(118,210,255,0.9)';
-      fCtx.setLineDash([6, 5]);
-      fCtx.beginPath();
-      for(var j = 0; j < poles.length; j++){
-        var x2 = poles[j].fx*W, y2 = poles[j].fy*H - poleH + 6;
-        if(j === 0){ fCtx.moveTo(x2, y2); continue; }
-        var px2 = poles[j-1].fx*W, py2 = poles[j-1].fy*H - poleH + 6;
-        var sagX2 = (px2+x2)/2, sagY2 = Math.max(py2,y2) + 4;
-        fCtx.quadraticCurveTo(sagX2, sagY2, x2, y2);
-      }
-      fCtx.stroke();
-      fCtx.setLineDash([]);
-
-      var submerged = 0;
-      for(var k = 0; k < poles.length; k++){
-        var pt = poles[k];
-        var x = pt.fx*W, y = pt.fy*H;
-        var sx = Math.max(0, Math.min(W-1, Math.round(x)));
-        var sy = Math.max(0, Math.min(H-1, Math.round(y)));
-        var flooded = elevFeet[sy*W+sx] <= displayedLevel;
-        if(flooded) submerged++;
-        var col = flooded ? '235,90,66' : '255,176,32';
-
-        // pole mast
-        fCtx.strokeStyle = 'rgba('+col+',0.95)';
-        fCtx.lineWidth = 1.3;
-        fCtx.beginPath();
-        fCtx.moveTo(x, y);
-        fCtx.lineTo(x, y - poleH);
-        fCtx.moveTo(x-4, y-poleH);
-        fCtx.lineTo(x+4, y-poleH);
-        fCtx.stroke();
-
-        // pole base
-        fCtx.beginPath();
-        fCtx.arc(x, y, flooded ? 2.4 : 1.6, 0, Math.PI*2);
-        fCtx.fillStyle = 'rgba('+col+',1)';
-        fCtx.fill();
-
-        if(flooded){
-          fCtx.beginPath();
-          fCtx.arc(x, y, 5.5, 0, Math.PI*2);
-          fCtx.strokeStyle = 'rgba(235,90,66,0.45)';
-          fCtx.lineWidth = 1;
-          fCtx.stroke();
-        }
-      }
-      if(polesStatusEl){
-        polesStatusEl.textContent = 'Utility corridor: ' + submerged + ' of ' + poles.length + ' poles below sea level';
-      }
-    }
-
-    function render(){
-      fCtx.drawImage(terrainCache, 0, 0);
-      var flooded = 0;
-      var shimmerT = Math.sin(shimmer);
-      for(var wy = 0; wy < waterRows; wy++){
-        for(var wx = 0; wx < waterCols; wx++){
-          var sx = Math.min(W-1, wx*waterCell + (waterCell>>1));
-          var sy = Math.min(H-1, wy*waterCell + (waterCell>>1));
-          var elev = elevFeet[sy*W+sx];
-          if(elev <= displayedLevel){
-            flooded++;
-            var px = wx*waterCell, py = wy*waterCell;
-            var shore = elev > displayedLevel - 0.5;
-            var pattern = cellPattern[wy*waterCols+wx];
-            var wa = 0.42 + shimmerT*0.05*pattern + (1-pattern)*0.05;
-            fCtx.fillStyle = shore ? 'rgba(210,232,238,0.62)' : 'rgba(30,140,220,' + wa.toFixed(3) + ')';
-            fCtx.fillRect(px, py, waterCell+1, waterCell+1);
-          }
-        }
-      }
-      drawPoles();
-      var pct = Math.round((flooded/(waterCols*waterRows))*100);
-      pctEl.textContent = pct + '%';
-    }
-
-    function takeControl(){
-      userControl = true;
-    }
-
-    function loopFlood(now){
-      if(!userControl){
-        if(autoStartTime === null) autoStartTime = now || performance.now();
-        var t = ((now || performance.now()) - autoStartTime) / 1000;
-        targetLevel = 5.5 + 4.5*Math.sin(t*0.22);
-      }
-      displayedLevel += (targetLevel - displayedLevel) * 0.05;
-      shimmer += 0.04;
-      render();
-      if(!userControl && slider){
-        slider.value = displayedLevel.toFixed(1);
-        seaLevelVal.textContent = displayedLevel.toFixed(1);
-      }
-      requestAnimationFrame(loopFlood);
-    }
-
-    if(slider){
-      slider.addEventListener('pointerdown', takeControl);
-      slider.addEventListener('input', function(){
-        takeControl();
-        targetLevel = parseFloat(slider.value);
-        seaLevelVal.textContent = targetLevel.toFixed(1);
-      });
-    }
-    if(regenBtn){
-      regenBtn.addEventListener('click', function(){
-        randomizeSeed();
-        buildGrid();
-      });
-    }
-
-    randomizeSeed();
-    buildGrid();
-    if(reduceMotion){
-      displayedLevel = targetLevel;
-      render();
-      slider && slider.addEventListener('input', function(){
-        displayedLevel = targetLevel;
-        render();
-      });
-    } else {
-      requestAnimationFrame(loopFlood);
-    }
-  }
 })();
 </script>
 

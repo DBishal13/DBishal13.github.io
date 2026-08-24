@@ -29,7 +29,7 @@ jobs:
           from datetime import datetime, timezone
 
           USERNAME = "DBishal13"
-          EXCLUDE_NAMES = {USERNAME.lower(), f"{USERNAME.lower()}.github.io"}
+          EXCLUDE_NAMES = {USERNAME.lower(), f"{USERNAME.lower()}.github.io", "pywmp_documentation"}
 
           headers = {"Accept": "application/vnd.github+json"}
           token = os.environ.get("GH_TOKEN")

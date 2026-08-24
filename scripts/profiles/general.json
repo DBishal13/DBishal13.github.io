@@ -1,0 +1,13 @@
+{
+  "output": "Bishal_Dhungana.pdf",
+  "label_override": "Geospatial Data Scientist | AI | Cloud",
+  "summary": "Geospatial Data Scientist working across GIS, applied AI/ML, and cloud data platform engineering, with a focus on disaster resilience and critical infrastructure. I combine field survey and remote sensing origins with production software engineering: building AI-driven inspection systems, geospatial data pipelines, and cloud infrastructure for a major electric utility, while maintaining a parallel practice of published open-source research and tools. Comfortable moving fluidly between data science, data engineering, GIS development, and geomatics depending on what a problem needs.",
+  "skill_groups": ["Machine Learning & Computer Vision", "Generative AI & Agentic Systems", "Data Engineering", "Geospatial", "Cloud & DevOps", "Field"],
+  "work_highlights": {
+    "0": [0, 1, 2, 4, 6],
+    "1": [0, 1],
+    "2": [0, 2],
+    "3": [0, 1]
+  },
+  "projects": ["SurgeExposure", "wildfire-copilot", "geomlint"]
+}
