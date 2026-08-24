@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T14:04:11.439727Z",
+  "generated_at": "2026-08-24T20:33:56.588500Z",
   "repos": [
     {
       "name": "wildfire-copilot",
@@ -12,7 +12,7 @@
     },
     {
       "name": "geomlint",
-      "description": null,
+      "description": "Continuous validity, topology, and CRS-sanity checks for vector geospatial data \u2014 Monte Carlo for geometry columns.",
       "url": "https://github.com/DBishal13/geomlint",
       "homepage": null,
       "language": "Python",
@@ -125,15 +125,6 @@
       "homepage": null,
       "language": "Python",
       "pushed_at": "2026-07-21T03:31:35Z",
-      "stars": 0
-    },
-    {
-      "name": "pywmp_documentation",
-      "description": "documentations for pyWMP",
-      "url": "https://github.com/DBishal13/pywmp_documentation",
-      "homepage": "https://dbishal13.github.io/pywmp_documentation/",
-      "language": "HTML",
-      "pushed_at": "2026-06-22T11:57:01Z",
       "stars": 0
     },
     {
