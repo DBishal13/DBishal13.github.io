@@ -1,7 +1,7 @@
 {
   "output": "Bishal_Dhungana_AI.pdf",
   "label_override": "Data Scientist — AI / Computer Vision",
-  "summary": "Data Scientist with hands-on experience building computer vision and generative AI systems in production, plus the data pipelines and cloud infrastructure that support them. I work daily in Python, PyTorch/TensorFlow, and LangChain, and I've trained and deployed my own detection and segmentation model to production using AWS SageMaker. Hands-on with modern detection and segmentation architectures (YOLO, RT-DETR, Detectron2, ResNet) and agentic AI systems (RAG, MCP, LLM tool-use).",
+  "summary": "Data Scientist with hands-on experience building computer vision and generative AI systems in production, plus the data pipelines and cloud infrastructure that support them. I work daily in Python, PyTorch/TensorFlow, and LangChain, and I've trained and deployed a custom detection and segmentation model to production using AWS SageMaker. Hands-on with modern detection and segmentation architectures (YOLO, RT-DETR, Detectron2, ResNet) and agentic AI systems (RAG, MCP, LLM tool-use).",
   "skill_groups": ["Machine Learning & Computer Vision", "Generative AI & Agentic Systems", "Data Engineering", "Cloud & DevOps"],
   "work_highlights": {
     "0": [0, 1, 2, 4, 5],

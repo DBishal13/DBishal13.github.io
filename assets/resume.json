@@ -21,7 +21,7 @@
       "endDate": null,
       "highlights": [
         "Contributed technical requirements for a multi-million dollar AI vendor engagement, then served as subject-matter expert through model development, validation, and benchmarking.",
-        "Separately trained and deployed my own equipment detection and segmentation model to production using AWS SageMaker across dev, test, and prod environments, running continuously on utility inspection and storm-response imagery.",
+        "Separately trained and deployed a custom equipment detection and segmentation model to production using AWS SageMaker across dev, test, and prod environments, running continuously on utility inspection and storm-response imagery.",
         "Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition reports via spatial/temporal joins, writing enriched results back through batched API calls.",
         "Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so teams could pull images by asset or class instead of searching by hand.",
         "Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.",
