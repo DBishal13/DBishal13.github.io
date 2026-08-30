@@ -45,8 +45,7 @@ RULE = colors.HexColor("#444444")
 LINK_COLOR = "#1F3864"
 
 styles = {
-    "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=16, leading=19, textColor=NAVY, alignment=TA_CENTER, spaceAfter=2),
-    "label": ParagraphStyle("label", fontName="Helvetica", fontSize=10.5, leading=13, textColor=NAVY, alignment=TA_CENTER, spaceAfter=4),
+    "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=16, leading=19, textColor=NAVY, alignment=TA_CENTER, spaceAfter=6),
     "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=9, leading=12, textColor=INK, alignment=TA_CENTER, spaceAfter=6),
     "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=11, leading=13, textColor=NAVY, spaceBefore=12, spaceAfter=2),
     "summary": ParagraphStyle("summary", fontName="Helvetica", fontSize=10, textColor=INK, leading=13.5, spaceAfter=4),
@@ -119,8 +118,6 @@ def build_story(data, profile):
     basics = data["basics"]
 
     story.append(Paragraph(basics["name"], styles["name"]))
-    label = profile.get("label_override", basics["label"])
-    story.append(Paragraph(label, styles["label"]))
 
     profile_map = {p["network"]: p["url"] for p in basics.get("profiles", [])}
 

@@ -9,5 +9,5 @@
     "2": [1, 2],
     "3": [1]
   },
-  "projects": ["SurgeExposure", "geomlint", "GTFS Transit Platform", "HazardMCP", "Road-Centerline"]
+  "projects": ["SurgeExposure", "geomlint", "GTFS Transit Platform", "HazardMCP", "Road-Centerline", "GeoCoder"]
 }

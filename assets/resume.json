@@ -13,7 +13,7 @@
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=Lhv0gcEAAAAJ" }
     ]
   },
-  "summary": "Geospatial Data Scientist working across applied AI, cloud data platform engineering, and hazard-resilient infrastructure. Technical lead and acting product owner on FPL's AI-based infrastructure inspection program — independently built and deployed a computer vision model to production (AWS SageMaker, ECR), defined the ML scope and data pipelines behind a multi-vendor AI engagement, and built the GIS applications used for real-time disaster response. Background in field geomatics and peer-reviewed flood-hazard research. Open to Data Science, GIS/Geospatial Engineering, and AI/ML roles.",
+  "summary": "Geospatial Data Scientist working across applied AI, cloud data platform engineering, and hazard-resilient infrastructure. As technical lead and acting product owner on FPL's AI-based infrastructure inspection program, I independently built and deployed a computer vision model to production (AWS SageMaker, ECR), defined the ML scope and data pipelines behind a multi-vendor AI engagement, and built the GIS applications used for real-time disaster response. Background in field geomatics and peer-reviewed flood-hazard research. Open to Data Science, GIS/Geospatial Engineering, and AI/ML roles.",
   "work": [
     {
       "company": "Florida Power & Light - Contract",
@@ -23,19 +23,20 @@
       "endDate": null,
       "highlights": [
         "Defined ML scope and technical specs as data scientist/acting product owner for a multi-million-dollar AI vendor engagement; authored RFP requirements and served as technical SME through development and benchmarking.",
-        "Independently built and deployed an overhead switch-state (open/closed) classification model — trained locally, then migrated to AWS (ECR, SageMaker) for production inference.",
-        "Evaluated CV architectures (YOLO, Detectron2, RT-DETR) using a precision/recall/F1 and image-scale methodology I designed; selected RT-DETR for transfer learning and standardized the approach for vendors.",
+        "Independently built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.",
+        "Evaluated CV architectures (YOLO, Detectron2, RT-DETR) using a precision/recall/F1 and image-scale evaluation methodology I designed, producing statistical evaluation reports for leadership; selected RT-DETR for transfer learning and standardized the approach for vendors.",
         "Built an API-based metadata pipeline with spatial (10m/30ft) and temporal (30-day) joins matching 350K+ condition reports to an 8M-image catalog, enriching ~2M images with condition metadata.",
-        "Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline structuring 8M+ images and 65M+ associated annotations, with automatic time/version tracking via FME triggers — designed the schema, migrated v1 to v2, and cut 100+ metadata columns to ~50 with spatial indexing.",
-        "Designed the annotation-storage schema for multiple model versions, and set up the taxonomy as a feature service with editor logging and concurrent multi-user updates, plus a separate read-only REST API for internal teams and vendors — replacing a fragile Excel-based process.",
+        "Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline structuring 8M+ images and 65M+ associated annotations, with automatic time/version tracking via FME triggers. Designed the schema, migrated v1 to v2, and cut 100+ metadata columns to ~50 with spatial indexing.",
+        "Designed the annotation-storage schema for multiple model versions, and set up the taxonomy as a feature service with editor logging and concurrent multi-user updates, plus a separate read-only REST API for internal teams and vendors, replacing a fragile Excel-based process.",
         "Built a Streamlit app (later migrated to Power BI) with REST APIs summarizing dataset availability and taxonomy patterns for leadership.",
-        "Acted as product owner for a dataset-creation plugin (with the enterprise IT team) — defined filters, UI, and delivery logistics — used to deliver 300+ curated imagery datasets to vendors.",
+        "Acted as product owner for a dataset-creation plugin built with the enterprise IT team, defining filters, UI, and delivery logistics, and used it to deliver 300+ curated imagery datasets to vendors.",
         "Evaluated ~20 vendor bids with a GPT-based scoring agent, then audited 3 external ML vendors post-award for licensing compliance, resolving CUDA/GPU and batch-processing mismatches against AWS SageMaker.",
         "Co-developed an equipment detection and segmentation model (with a data scientist and software engineer) spanning 27-30 asset classes, evolving from object detection to segmentation.",
         "Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.",
         "Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.",
-        "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response — spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.",
-        "Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots — real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users."
+        "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.",
+        "Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.",
+        "Built an RFlow-based augmentation pipeline (6x augmentation via flips, brightness, and other transforms) with train/test/validation splits and YOLO-format export."
       ]
     },
     {
@@ -59,7 +60,7 @@
       "highlights": [
         "Directed flood risk assessment projects for multiple Florida communities using FEMA hydrologic and hydraulic (H&amp;H) modeling methods and Python automation.",
         "Built an automated ArcGIS Pro geoprocessing pipeline, cutting processing time by 50%.",
-        "Built a Python geocoding tool processing 3 million addresses, replacing a paid service — cut turnaround from 3 months to 1 week and saved $20K in licensing."
+        "Built a Python geocoding tool processing 3 million addresses, replacing a paid service; cut turnaround from 3 months to 1 week and saved $20K in licensing."
       ]
     },
     {
@@ -106,12 +107,12 @@
     {
       "label": "NASA ARSET Certifications",
       "count": 12,
-      "summary": "Applied remote sensing training (2022–2024) across climate risk assessment & projection, disaster & building-infrastructure risk modeling, wildfire and watershed impacts, ecosystem services, air quality (geostationary satellites & environmental justice), water quality (inland lakes & SeaDAS), soil moisture/drought, flood monitoring & modeling, and urban heat vulnerability."
+      "summary": "Applied remote sensing training (2022-2024) in climate, disaster, and environmental risk modeling."
     },
     {
       "label": "Esri Training Certifications",
       "count": 8,
-      "summary": "GIS Basics, Cartography, Spatial Data Science, Imagery Analysis, Spatial Analysis, GIS for Climate Action, GIS/BIM integration for AEC, and deep-learning object classification in ArcGIS Pro."
+      "summary": "GIS fundamentals, cartography, spatial data science, and imagery analysis."
     }
   ],
   "publications": [

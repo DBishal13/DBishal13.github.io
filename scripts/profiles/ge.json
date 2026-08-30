@@ -9,5 +9,5 @@
     "2": [0, 1, 2],
     "3": [0, 1, 2]
   },
-  "projects": ["3DEP LiDAR Terrain Builder", "3d-export", "Road-Centerline"]
+  "projects": ["3DEP LiDAR Terrain Builder", "3d-export", "Road-Centerline", "fflood-nep"]
 }

@@ -9,5 +9,5 @@
     "2": [0, 1],
     "3": [1, 2]
   },
-  "projects": ["Road-Centerline", "HazardMCP", "SurgeExposure", "fflood-nep", "3DEP LiDAR Terrain Builder", "GeoCoder"]
+  "projects": ["Road-Centerline", "HazardMCP", "SurgeExposure", "fflood-nep", "3DEP LiDAR Terrain Builder", "GeoCoder", "GTFS Transit Platform"]
 }

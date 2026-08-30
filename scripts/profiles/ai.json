@@ -4,10 +4,10 @@
   "summary": "Data Scientist with hands-on experience building and shipping computer vision and generative AI systems, plus the data pipelines and cloud infrastructure that support them. I independently built and deployed a switch-state classification model to production on AWS SageMaker/ECR, benchmarked detection/segmentation architectures (YOLO, RT-DETR, Detectron2) for transfer learning, and defined ML scope for a multi-vendor CV engagement. Also hands-on with agentic AI systems (RAG, MCP, LLM tool-use) and LangChain.",
   "skill_groups": ["Machine Learning & Computer Vision", "Generative AI & Agentic Systems", "Data Engineering", "Cloud & DevOps"],
   "work_highlights": {
-    "0": [0, 1, 2, 9, 8],
+    "0": [1, 14, 2, 9, 8],
     "1": [0, 1],
     "2": [0, 2],
     "3": [0]
   },
-  "projects": ["wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Conversational AI Assistant"]
+  "projects": ["wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Conversational AI Assistant", "RomanNepaliAI"]
 }
