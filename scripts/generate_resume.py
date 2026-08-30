@@ -27,10 +27,11 @@ import os
 from datetime import date
 
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESUME_JSON = os.path.join(ROOT, "assets", "resume.json")
@@ -39,28 +40,26 @@ PROFILES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "profile
 DEFAULT_OUTPUT = os.path.join(ROOT, "assets", "Bishal-Dhungana-Resume.pdf")
 
 INK = colors.HexColor("#1a1a1a")
-DIM = colors.HexColor("#5a5a5a")
-ACCENT = colors.HexColor("#b8560a")
-ACCENT_LINE = colors.HexColor("#e3b088")
-RULE = colors.HexColor("#dddddd")
+NAVY = colors.HexColor("#1F3864")
+RULE = colors.HexColor("#444444")
+LINK_COLOR = "#1F3864"
 
 styles = {
-    "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=24, leading=27, textColor=INK, spaceAfter=3),
-    "label": ParagraphStyle("label", fontName="Helvetica", fontSize=12.5, leading=15, textColor=ACCENT, spaceAfter=8),
-    "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=9.5, leading=13, textColor=DIM, spaceAfter=4),
-    "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=12, leading=14, textColor=ACCENT, spaceBefore=16, spaceAfter=2, tracking=0.5),
-    "summary": ParagraphStyle("summary", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13.5, spaceAfter=4),
-    "role_title": ParagraphStyle("role_title", fontName="Helvetica-Bold", fontSize=10.5, leading=13, textColor=INK, spaceAfter=1),
-    "role_meta": ParagraphStyle("role_meta", fontName="Helvetica-Oblique", fontSize=9, leading=12, textColor=DIM, spaceAfter=4),
-    "bullet": ParagraphStyle("bullet", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13, leftIndent=12, bulletIndent=0, spaceAfter=3),
+    "name": ParagraphStyle("name", fontName="Helvetica-Bold", fontSize=16, leading=19, textColor=NAVY, alignment=TA_CENTER, spaceAfter=2),
+    "label": ParagraphStyle("label", fontName="Helvetica", fontSize=10.5, leading=13, textColor=NAVY, alignment=TA_CENTER, spaceAfter=4),
+    "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=9, leading=12, textColor=INK, alignment=TA_CENTER, spaceAfter=6),
+    "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=11, leading=13, textColor=NAVY, spaceBefore=12, spaceAfter=2),
+    "summary": ParagraphStyle("summary", fontName="Helvetica", fontSize=10, textColor=INK, leading=13.5, spaceAfter=4),
+    "role_title": ParagraphStyle("role_title", fontName="Helvetica-Bold", fontSize=10, leading=12.5, textColor=INK),
+    "role_meta": ParagraphStyle("role_meta", fontName="Helvetica-Oblique", fontSize=9.2, leading=12.5, textColor=INK, alignment=TA_RIGHT),
+    "bullet": ParagraphStyle("bullet", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=12.5, leftIndent=14, spaceAfter=2),
     "edu": ParagraphStyle("edu", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13, spaceAfter=3),
-    "small": ParagraphStyle("small", fontName="Helvetica", fontSize=9, textColor=INK, leading=13, spaceAfter=2),
+    "small": ParagraphStyle("small", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13, spaceAfter=2),
     "project": ParagraphStyle("project", fontName="Helvetica", fontSize=9, textColor=INK, leading=13, spaceAfter=5),
 }
-LINK_COLOR = "#b8560a"
 
 
-def rule(color=RULE, thickness=0.75, space_before=2, space_after=10):
+def rule(color=RULE, thickness=0.75, space_before=2, space_after=8):
     return HRFlowable(width="100%", thickness=thickness, color=color, spaceBefore=space_before, spaceAfter=space_after)
 
 
@@ -98,6 +97,23 @@ def project_line(p):
     return line
 
 
+def job_header_row(job):
+    left = Paragraph(f"{job['title']} — {job['company']}", styles["role_title"])
+    meta = f"{fmt_date(job['startDate'])} – {fmt_date(job['endDate'])}"
+    if job.get("location"):
+        meta = f"{job['location']}  |  {meta}"
+    right = Paragraph(meta, styles["role_meta"])
+    t = Table([[left, right]], colWidths=[4.9 * inch, 2.5 * inch])
+    t.setStyle(TableStyle([
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ]))
+    return t
+
+
 def build_story(data, profile):
     story = []
     basics = data["basics"]
@@ -107,17 +123,21 @@ def build_story(data, profile):
     story.append(Paragraph(label, styles["label"]))
 
     profile_map = {p["network"]: p["url"] for p in basics.get("profiles", [])}
-    contact_bits = [
-        basics["email"],
-        basics["location"],
-        basics["website"].replace("https://", ""),
-    ]
+
+    def linked(url):
+        display = url.replace("https://www.", "").replace("https://", "").rstrip("/")
+        return f'<link href="{url}" color="{LINK_COLOR}"><u>{display}</u></link>'
+
+    contact_bits = [basics["location"]]
+    if basics.get("phone"):
+        contact_bits.append(basics["phone"])
+    contact_bits.append(basics["email"])
     if "LinkedIn" in profile_map:
-        contact_bits.append(profile_map["LinkedIn"].replace("https://www.", "").replace("https://", ""))
+        contact_bits.append(linked(profile_map["LinkedIn"]))
+    contact_bits.append(linked(basics["website"]))
     if "GitHub" in profile_map:
-        contact_bits.append(profile_map["GitHub"].replace("https://", ""))
-    story.append(Paragraph(" &nbsp;·&nbsp; ".join(contact_bits), styles["contact"]))
-    story.append(rule(color=ACCENT_LINE, thickness=1.5, space_before=6, space_after=12))
+        contact_bits.append(linked(profile_map["GitHub"]))
+    story.append(Paragraph(" &nbsp;|&nbsp; ".join(contact_bits), styles["contact"]))
 
     section_header(story, "SUMMARY")
     story.append(Paragraph(profile.get("summary", data["summary"]), styles["summary"]))
@@ -132,8 +152,7 @@ def build_story(data, profile):
     section_header(story, "EXPERIENCE")
     work_filter = profile.get("work_highlights")
     for i, job in enumerate(data["work"]):
-        story.append(Paragraph(f"{job['title']} — {job['company']}", styles["role_title"]))
-        story.append(Paragraph(f"{fmt_date(job['startDate'])} – {fmt_date(job['endDate'])}", styles["role_meta"]))
+        story.append(job_header_row(job))
         indices = work_filter.get(str(i)) if work_filter else None
         highlights = job["highlights"] if indices is None else [job["highlights"][j] for j in indices]
         for h in highlights:
@@ -215,10 +234,10 @@ def main():
     doc = SimpleDocTemplate(
         output_path,
         pagesize=LETTER,
-        topMargin=0.55 * inch,
-        bottomMargin=0.55 * inch,
-        leftMargin=0.65 * inch,
-        rightMargin=0.65 * inch,
+        topMargin=0.45 * inch,
+        bottomMargin=0.45 * inch,
+        leftMargin=0.5 * inch,
+        rightMargin=0.5 * inch,
         title=f"{data['basics']['name']} — Resume",
     )
     doc.build(build_story(data, profile))
