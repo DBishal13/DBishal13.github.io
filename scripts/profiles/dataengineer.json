@@ -4,7 +4,7 @@
   "summary": "Data Engineer with a geospatial specialization, building production data pipelines, cloud infrastructure, and spatial databases at utility scale. I design and maintain ETL/ELT pipelines, infrastructure-as-code frameworks, and data integration platforms handling millions of records with automated quality validation. Comfortable across the full data platform: ingestion, spatial/relational database design, API delivery, and cloud deployment.",
   "skill_groups": ["Data Engineering", "Geospatial", "Cloud & DevOps", "Generative AI & Agentic Systems", "Software Engineering"],
   "work_highlights": {
-    "0": [1, 2, 4, 5],
+    "0": [3, 4, 5, 6],
     "1": [0, 1, 2],
     "2": [1, 2],
     "3": [1]

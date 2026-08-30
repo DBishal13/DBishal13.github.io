@@ -14,6 +14,18 @@
       "thumbnail": "assets/img/projects/surge-exposure.jpg"
     },
     {
+      "name": "fflood-nep",
+      "repo": "DBishal13/fflood-nep",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo"],
+      "cat_label": "Geospatial · Disaster Response",
+      "description": "A reproducible flood-response pipeline for Nepal's August 2026 Rasuwa/Bhote Koshi flash flood — runs Sentinel-1 SAR change detection for flood extent, scores building/road/facility exposure by municipality, and tracks a separate InSAR pipeline for landslide/avalanche source detection. Built and shipped inside the event's first week.",
+      "stack": ["Python", "Sentinel-1 SAR", "STAC", "GDAL", "InSAR"],
+      "live_url": "https://dbishal13.github.io/fflood-nep/",
+      "live_label": "Live Demo"
+    },
+    {
       "name": "wildfire-copilot",
       "repo": "DBishal13/wildfire-copilot",
       "visibility": "public",
@@ -165,6 +177,12 @@
       "visibility": "private",
       "tier": "working",
       "description": "A vector index that spatially partitions as it searches, instead of bolting H3 cell IDs onto a generic ANN index as a metadata filter."
+    },
+    {
+      "name": "fv-gmgwr",
+      "visibility": "private",
+      "tier": "working",
+      "description": "GPU-accelerated Multi-scale Geographically Weighted Regression (MGWR) in PyTorch, extending the modeling approach behind my peer-reviewed flood-exposure paper (Dhungana & Liu, 2024)."
     }
   ]
 }

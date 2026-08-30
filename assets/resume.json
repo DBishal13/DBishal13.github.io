@@ -12,7 +12,7 @@
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=Lhv0gcEAAAAJ" }
     ]
   },
-  "summary": "Geospatial Data Scientist working across applied AI, cloud data platform engineering, and hazard-resilient infrastructure. Technical lead on FPL's AI-based infrastructure inspection program — data pipelines, cloud infrastructure, and GIS applications for disaster response, plus a personally trained and deployed computer vision model in production. Background in field geomatics and peer-reviewed flood-hazard research. Open to Data Science, GIS/Geospatial Engineering, and AI/ML roles.",
+  "summary": "Geospatial Data Scientist working across applied AI, cloud data platform engineering, and hazard-resilient infrastructure. Technical lead and acting product owner on FPL's AI-based infrastructure inspection program — independently built and deployed a computer vision model to production (AWS SageMaker, ECR), defined the ML scope and data pipelines behind a multi-vendor AI engagement, and built the GIS applications used for real-time disaster response. Background in field geomatics and peer-reviewed flood-hazard research. Open to Data Science, GIS/Geospatial Engineering, and AI/ML roles.",
   "work": [
     {
       "company": "Florida Power & Light - Contract",
@@ -20,13 +20,19 @@
       "startDate": "2025-04",
       "endDate": null,
       "highlights": [
-        "Contributed technical requirements for a multi-million dollar AI vendor engagement, then served as subject-matter expert through model development, validation, and benchmarking.",
-        "Separately trained and deployed a custom equipment detection and segmentation model to production using AWS SageMaker across dev, test, and prod environments, running continuously on utility inspection and storm-response imagery.",
-        "Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition reports via spatial/temporal joins, writing enriched results back through batched API calls.",
-        "Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so teams could pull images by asset or class instead of searching by hand.",
+        "Defined ML scope and technical specs as data scientist/acting product owner for a multi-million-dollar AI vendor engagement; authored RFP requirements and served as technical SME through development and benchmarking.",
+        "Independently built and deployed an overhead switch-state (open/closed) classification model — trained locally, then migrated to AWS (ECR, SageMaker) for production inference.",
+        "Evaluated CV architectures (YOLO, Detectron2, RT-DETR) using a precision/recall/F1 and image-scale methodology I designed; selected RT-DETR for transfer learning and standardized the approach for vendors.",
+        "Built an API-based metadata pipeline with spatial (10m/30ft) and temporal (30-day) joins matching 350K+ condition reports to an 8M-image catalog, enriching ~2M images with condition metadata.",
+        "Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline — designed the schema, migrated v1 to v2, and cut 100+ metadata columns to ~50 with spatial indexing and Azure-compatible storage.",
+        "Designed the annotation-storage schema for multiple model versions, and built the taxonomy's operational layer — feature layers, REST APIs, front-end UI, audit logging — replacing a fragile Excel-based process.",
+        "Built a Streamlit app (later migrated to Power BI) with REST APIs summarizing dataset availability and taxonomy patterns for leadership.",
+        "Acted as product owner for a dataset-creation plugin (with the enterprise IT team) — defined filters, UI, and delivery logistics — used to deliver 300+ curated imagery datasets to vendors.",
+        "Evaluated ~20 vendor bids with a GPT-based scoring agent, then audited 3 external ML vendors post-award for licensing compliance, resolving CUDA/GPU and batch-processing mismatches against AWS SageMaker.",
+        "Co-developed an equipment detection and segmentation model (with a data scientist and software engineer) spanning 27-30 asset classes, evolving from object detection to segmentation.",
         "Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.",
         "Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.",
-        "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response — engineering spatial web portals used in real time during Hurricane Milton to track structural impacts, outages, and crew deployment."
+        "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response — spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment."
       ]
     },
     {
@@ -125,5 +131,5 @@
     "Software Engineering": ["JavaScript / TypeScript", "R", "FastAPI", "React", "Streamlit"],
     "Field": ["GNSS / GPS Survey", "UAV Survey (FAA Part 107)", "Differential GNSS", "Geodatabase Design"]
   },
-  "selected_projects": ["SurgeExposure", "wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Road-Centerline", "3DEP LiDAR Terrain Builder", "GeoCoder"]
+  "selected_projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Road-Centerline", "3DEP LiDAR Terrain Builder", "GeoCoder"]
 }
