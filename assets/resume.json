@@ -35,7 +35,7 @@
         "Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.",
         "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.",
         "Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.",
-        "Built an RFlow-based augmentation pipeline (6x augmentation via flips, brightness, and other transforms) with train/test/validation splits and YOLO-format export."
+        "Used Roboflow for annotation and data preparation on both production CV models, including a 6x augmentation pipeline (flips, brightness, and other transforms), train/test/validation splits, and YOLO-format export."
       ]
     },
     {
@@ -129,7 +129,7 @@
     }
   ],
   "skills": {
-    "Machine Learning & Computer Vision": ["PyTorch", "TensorFlow/Keras", "Ultralytics", "YOLO", "RT-DETR", "Detectron2", "Faster/Mask R-CNN", "EfficientDet", "DETR", "MMDetection", "ResNet", "XGBoost", "OpenCV", "ONNX"],
+    "Machine Learning & Computer Vision": ["PyTorch", "TensorFlow/Keras", "Ultralytics", "Roboflow", "YOLO", "RT-DETR", "Detectron2", "Faster/Mask R-CNN", "EfficientDet", "DETR", "MMDetection", "ResNet", "XGBoost", "OpenCV", "ONNX"],
     "Generative AI & Agentic Systems": ["LangChain", "LangGraph", "RAG", "Model Context Protocol", "FastMCP", "Vector Databases", "Ollama", "Chroma", "Hugging Face Transformers"],
     "Data Engineering": ["Python", "SQL", "ETL/ELT Pipelines", "DuckDB", "Databricks", "Data Lakes", "Parquet"],
     "Geospatial": ["ArcGIS Pro / Enterprise / Online", "Utility Network", "PostGIS", "DuckDB Spatial", "GDAL", "PDAL", "GeoPandas", "Shapely", "PyProj", "LiDAR / Point Cloud", "Overture Maps", "Cloud-Optimized GeoTIFF", "Folium", "FME"],
