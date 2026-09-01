@@ -369,7 +369,7 @@
       <div class="hero-name">Bishal Dhungana</div>
       <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
       <h1>Turning imagery and LiDAR into cloud systems that run <em>real infrastructure.</em></h1>
-      <p class="lede">Geospatial Data Scientist working end to end — computer vision on drone imagery and LiDAR (including a detection model I personally trained and deployed to production on AWS SageMaker), cloud pipelines and infrastructure-as-code, and the AI agents that tie it together — from field survey to production platforms protecting critical utility infrastructure.</p>
+      <p class="lede">Geospatial Data Scientist working end to end: computer vision on drone imagery and LiDAR (including a switch-state classification model I independently trained and deployed to production on AWS SageMaker), cloud pipelines and infrastructure-as-code, and the AI agents that tie it together, from field survey to production platforms protecting critical utility infrastructure.</p>
       <div class="role-pills mono">
         <span>Computer Vision</span><span>LiDAR / Point Clouds</span><span>Cloud &amp; AWS</span><span>Geospatial Data Engineering</span><span>Agentic AI</span>
       </div>
@@ -382,7 +382,7 @@
       <div class="readout">
         <div><div class="num" data-count="8" data-suffix="M+">0</div><div class="label">Drone Images Pipelined</div></div>
         <div><div class="num" data-count="350" data-suffix="K+">0</div><div class="label">Condition Reports Joined</div></div>
-        <div><div class="num" data-count="25" data-suffix="+">0</div><div class="label">Asset Types Modeled</div></div>
+        <div><div class="num" data-count="27" data-suffix="+">0</div><div class="label">Asset Types Modeled</div></div>
         <div><div class="num" data-count="3" data-suffix="M">0</div><div class="label">Addresses Geocoded</div></div>
       </div>
     </div>
@@ -407,7 +407,7 @@
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering</strong> — currently as a Data Scientist at Florida Power &amp; Light, technical lead across their AI-based infrastructure inspection program, building the data pipelines and GIS applications behind it, plus a computer vision model I personally trained and deployed to production. My background started in the field as a Geomatics Engineer in Nepal, then sharpened through flood-hazard research at Florida Atlantic University, which led to a peer-reviewed publication and a co-authorship on <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework. Outside of work I build open-source geospatial AI tools — see Featured Builds below.</p>
+        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering.</strong> Currently I'm a Data Scientist and acting product owner at Florida Power &amp; Light, technical lead across their AI-based infrastructure inspection program: building the data pipelines and GIS applications behind it, and independently training and deploying a computer vision model to production. My background started in the field as a Geomatics Engineer in Nepal, then sharpened through flood-hazard research at Florida Atlantic University, which led to a peer-reviewed publication and ongoing work as a core contributor to <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework. Outside of work I build open-source geospatial AI tools, see Featured Builds below.</p>
         <div class="location-tag">
           <span>beesal13dh@gmail.com</span>
           <span>FAA Part 107 — Remote Pilot</span>
@@ -436,18 +436,29 @@
 
         <div class="role-sub mono">Program &amp; Vendor</div>
         <ul>
-          <li>Contributed technical requirements for a multi-million dollar AI vendor engagement, then served as subject-matter expert through model development, validation, and benchmarking.</li>
+          <li>Defined ML scope and technical specs as data scientist/acting product owner for a multi-million-dollar AI vendor engagement; authored RFP requirements and served as technical SME through development and benchmarking.</li>
+          <li>Evaluated ~20 vendor bids with a GPT-based scoring agent, then audited 3 external ML vendors post-award for licensing compliance, resolving CUDA/GPU and batch-processing mismatches against AWS SageMaker.</li>
         </ul>
 
         <div class="role-sub mono">Machine Learning</div>
         <ul>
-          <li>Separately trained and deployed a custom equipment detection and segmentation model to production using AWS SageMaker across dev, test, and prod environments, running continuously on utility inspection and storm-response imagery.</li>
+          <li>Independently built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.</li>
+          <li>Evaluated CV architectures (YOLO, Detectron2, RT-DETR) using a precision/recall/F1 and image-scale evaluation methodology I designed, producing statistical evaluation reports for leadership; selected RT-DETR for transfer learning and standardized the approach for vendors.</li>
+          <li>Built an RFlow-based augmentation pipeline (6x augmentation via flips, brightness, and other transforms) with train/test/validation splits and YOLO-format export.</li>
+          <li>Co-developed an equipment detection and segmentation model (with a data scientist and software engineer) spanning 27-30 asset classes, evolving from object detection to segmentation.</li>
         </ul>
 
         <div class="role-sub mono">Data Engineering for AI</div>
         <ul>
-          <li>Built a pipeline joining 8M+ drone inspection images with 350K+ historical condition reports via spatial/temporal joins, writing enriched results back through batched API calls.</li>
-          <li>Led training dataset delivery across 25+ asset types and 400+ condition classes; built a Streamlit app so teams could pull images by asset or class instead of searching by hand.</li>
+          <li>Built an API-based metadata pipeline with spatial (10m/30ft) and temporal (30-day) joins matching 350K+ condition reports to an 8M-image catalog, enriching ~2M images with condition metadata.</li>
+          <li>Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline structuring 8M+ images and 65M+ associated annotations, with automatic time/version tracking via FME triggers. Designed the schema, migrated v1 to v2, and cut 100+ metadata columns to ~50 with spatial indexing.</li>
+          <li>Designed the annotation-storage schema for multiple model versions, and set up the taxonomy as a feature service with editor logging and concurrent multi-user updates, plus a separate read-only REST API for internal teams and vendors, replacing a fragile Excel-based process.</li>
+        </ul>
+
+        <div class="role-sub mono">Product &amp; Analytics</div>
+        <ul>
+          <li>Built a Streamlit app (later migrated to Power BI) with REST APIs summarizing dataset availability and taxonomy patterns for leadership.</li>
+          <li>Acted as product owner for a dataset-creation plugin built with the enterprise IT team, defining filters, UI, and delivery logistics, and used it to deliver 300+ curated imagery datasets to vendors.</li>
         </ul>
 
         <div class="role-sub mono">Platform &amp; Infrastructure</div>
@@ -458,7 +469,8 @@
 
         <div class="role-sub mono">Applications</div>
         <ul>
-          <li>Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response — engineering spatial web portals used in real time during Hurricane Milton to track structural impacts, outages, and crew deployment.</li>
+          <li>Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.</li>
+          <li>Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.</li>
         </ul>
       </div>
     </div>
@@ -486,9 +498,10 @@
       <div>
         <div class="role-title">Graduate Research Assistant</div>
         <ul>
-          <li>Led flood risk research using FEMA hydrologic/hydraulic methods, resulting in a peer-reviewed publication on flood hazard exposure and social vulnerability — including environmental justice disparities in disaster impact.</li>
+          <li>Directed flood risk assessment projects for multiple Florida communities using FEMA hydrologic and hydraulic (H&amp;H) modeling methods and Python automation.</li>
           <li>Built an automated ArcGIS Pro geoprocessing pipeline, cutting processing time by 50%.</li>
-          <li>Built a Python geocoding tool processing 3 million addresses, replacing a paid service — cut turnaround from 3 months to 1 week and saved $20K in licensing.</li>
+          <li>Built a Python geocoding tool processing 3 million addresses, replacing a paid service; cut turnaround from 3 months to 1 week and saved $20K in licensing.</li>
+          <li>Served as research assistant on FAU's Center for Water Resiliency and Risk Reduction (CWR3) Watershed Master Planning Initiative, a $1.7M FEMA-funded effort to build a statewide Watershed Master Plan template for Florida.</li>
         </ul>
       </div>
     </div>
@@ -504,6 +517,7 @@
           <li>Led survey teams for municipal road, control, and construction surveys, including GNSS landmark and UAV topographic/transmission-line surveys.</li>
           <li>Designed municipal geodatabases (land use, soil, cadastral, resource maps) with topology and attribute rules.</li>
           <li>Served as GIS expert for Nepal's Survey Department land-use hand-over program, training 40+ officials in spatial analysis and database management.</li>
+          <li>Digitized historical land records as part of a national land-use modernization effort, replacing manual paper-based archives.</li>
         </ul>
       </div>
     </div>
@@ -565,7 +579,7 @@
         <h2>What sits behind the models</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">The Experience section above covers the program-level work — this is a few platform-layer components that don't fit neatly into a resume bullet.</p>
+    <p class="sec-intro reveal">The Experience section above covers the program-level work; this is a few platform-layer components that don't fit neatly into a resume bullet.</p>
     <div class="work-grid">
       <div class="work-card reveal"><div class="cat">Cloud Infrastructure</div><h4>Cloud Infrastructure Components</h4><p>AWS CDK component framework with enterprise naming, tagging, and deployment abstractions for ML and app workloads.</p></div>
       <div class="work-card reveal"><div class="cat">Computer Vision</div><h4>Utility Asset Detection Inference Service</h4><p>ONNX-based object detection package for utility equipment with COCO JSON output and optional visualization.</p></div>
@@ -649,11 +663,11 @@
         <h2>Publications &amp; academic projects</h2>
       </div>
     </div>
-    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported — publications below are what I can share in full.</p>
+    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported; publications below are what I can share in full.</p>
 
     <div class="reveal">
       <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
-      <div class="pub">Co-author, open-source software — <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, a Python watershed modeling and planning framework (Florida Atlantic University).<span class="tag-status">Manuscript in review</span></div>
+      <div class="pub">One of four core contributors and one of seven named authors, <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, an open-source Python framework for multi-fidelity 1D, 2D, and hybrid event-based flood modeling (Florida Atlantic University).<span class="tag-status">Manuscript in review</span></div>
     </div>
   </div>
 </section>
