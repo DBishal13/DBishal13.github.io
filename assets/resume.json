@@ -48,7 +48,8 @@
       "highlights": [
         "Led QA/QC of LiDAR-derived power grid data for infrastructure resilience work, including pole hardening.",
         "Managed PostgreSQL/PostGIS databases, optimized Cloud-Optimized GeoTIFFs, and automated QA workflows in FME, ArcPy, and Model Builder to streamline data storage and validation.",
-        "Built a FastAPI sidecar for heavier geoprocessing and format conversion."
+        "Built a FastAPI sidecar for heavier geoprocessing and format conversion.",
+        "Built a suite of LiDAR-based transmission corridor tools: clearance and right-of-way mapping (GeoPandas, pykmz, ArcPy); a point-cloud classification tool extracting pole height, length, top/bottom diameter, tilt, and communication attachment points; a CLI for vegetation-density classification (low/medium/high) supporting vegetation management at FPL's Turkey Point nuclear site; and a terrain-model generation CLI (GDAL, PDAL, GeoPandas) built against corridor LiDAR."
       ]
     },
     {
