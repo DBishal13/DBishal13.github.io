@@ -50,7 +50,8 @@ styles = {
     "section": ParagraphStyle("section", fontName="Helvetica-Bold", fontSize=11, leading=13, textColor=NAVY, spaceBefore=12, spaceAfter=2),
     "summary": ParagraphStyle("summary", fontName="Helvetica", fontSize=10, textColor=INK, leading=13.5, spaceAfter=4),
     "role_title": ParagraphStyle("role_title", fontName="Helvetica-Bold", fontSize=10, leading=12.5, textColor=INK),
-    "role_meta": ParagraphStyle("role_meta", fontName="Helvetica-Oblique", fontSize=9.2, leading=12.5, textColor=INK, alignment=TA_RIGHT),
+    "role_dates": ParagraphStyle("role_dates", fontName="Helvetica", fontSize=9.2, leading=12.5, textColor=INK, alignment=TA_RIGHT),
+    "role_org": ParagraphStyle("role_org", fontName="Helvetica-Oblique", fontSize=9.5, leading=12.5, textColor=INK, spaceAfter=3),
     "bullet": ParagraphStyle("bullet", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=12.5, leftIndent=14, spaceAfter=2),
     "edu": ParagraphStyle("edu", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13, spaceAfter=3),
     "small": ParagraphStyle("small", fontName="Helvetica", fontSize=9.5, textColor=INK, leading=13, spaceAfter=2),
@@ -96,18 +97,39 @@ def project_line(p):
     return line
 
 
-def job_header_row(job):
-    left = Paragraph(f"{job['title']} — {job['company']}", styles["role_title"])
-    meta = f"{fmt_date(job['startDate'])} – {fmt_date(job['endDate'])}"
-    if job.get("location"):
-        meta = f"{job['location']}  |  {meta}"
-    right = Paragraph(meta, styles["role_meta"])
+def job_header(job):
+    left = Paragraph(job["title"], styles["role_title"])
+    dates = f"{fmt_date(job['startDate'])} – {fmt_date(job['endDate'])}"
+    right = Paragraph(dates, styles["role_dates"])
     t = Table([[left, right]], colWidths=[4.9 * inch, 2.5 * inch])
     t.setStyle(TableStyle([
         ("LEFTPADDING", (0, 0), (-1, -1), 0),
         ("RIGHTPADDING", (0, 0), (-1, -1), 0),
         ("TOPPADDING", (0, 0), (-1, -1), 0),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 1),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+    ]))
+    org_line = job["company"]
+    if job.get("location"):
+        org_line += f", {job['location']}"
+    return [t, Paragraph(org_line, styles["role_org"])]
+
+
+def bullet_columns(items, col_width, n_cols=2):
+    rows = -(-len(items) // n_cols)
+    cols = [items[i * rows:(i + 1) * rows] for i in range(n_cols)]
+    table_data = []
+    for r in range(rows):
+        row = []
+        for c in range(n_cols):
+            row.append(Paragraph(f"&bull;&nbsp;&nbsp;{cols[c][r]}", styles["small"]) if r < len(cols[c]) else "")
+        table_data.append(row)
+    t = Table(table_data, colWidths=[col_width] * n_cols)
+    t.setStyle(TableStyle([
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
     ]))
     return t
@@ -149,7 +171,7 @@ def build_story(data, profile):
     section_header(story, "EXPERIENCE")
     work_filter = profile.get("work_highlights")
     for i, job in enumerate(data["work"]):
-        story.append(job_header_row(job))
+        story.extend(job_header(job))
         indices = work_filter.get(str(i)) if work_filter else None
         highlights = job["highlights"] if indices is None else [job["highlights"][j] for j in indices]
         for h in highlights:
@@ -159,15 +181,14 @@ def build_story(data, profile):
     section_header(story, "EDUCATION")
     for ed in data["education"]:
         story.append(Paragraph(
-            f"<b>{ed['studyType']}</b> — {ed['institution']} · {ed['startDate']}–{ed['endDate']} · GPA {ed['gpa']}",
+            f"<b>{ed['studyType']}</b> — {ed['institution']} · {ed['startDate']}–{ed['endDate']}",
             styles["edu"],
         ))
 
     section_header(story, "CERTIFICATIONS &amp; TRAINING")
-    cert_line = " &nbsp;·&nbsp; ".join(data["certifications"])
-    story.append(Paragraph(cert_line, styles["small"]))
+    story.append(bullet_columns(data["certifications"], col_width=3.7 * inch))
     for group in data.get("certification_groups", []):
-        story.append(Paragraph(f"<b>{group['label']} ({group['count']}):</b> {group['summary']}", styles["small"]))
+        story.append(Paragraph(f"&bull;&nbsp;&nbsp;<b>{group['label']} ({group['count']}):</b> {group['summary']}", styles["small"]))
 
     if data.get("publications"):
         section_header(story, "PUBLICATIONS")

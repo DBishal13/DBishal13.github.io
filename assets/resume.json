@@ -3,7 +3,6 @@
     "name": "Bishal Dhungana",
     "label": "Geospatial Data Scientist | AI | Cloud",
     "email": "beesal13dh@gmail.com",
-    "phone": "561-713-5428",
     "location": "West Palm Beach, FL",
     "website": "https://dbishal13.github.io",
     "profiles": [
@@ -17,8 +16,8 @@
   "work": [
     {
       "company": "Florida Power & Light - Contract",
-      "title": "Data Scientist — Geospatial & AI",
-      "location": "Jupiter West, FL",
+      "title": "Data Scientist (Geospatial & AI)",
+      "location": "West Palm Beach, FL",
       "startDate": "2025-04",
       "endDate": null,
       "highlights": [
@@ -42,7 +41,7 @@
     {
       "company": "Florida Power & Light - Contract",
       "title": "Associate Geospatial Analyst",
-      "location": "Jupiter West, FL",
+      "location": "Jupiter, FL",
       "startDate": "2024-09",
       "endDate": "2025-03",
       "highlights": [
@@ -54,7 +53,7 @@
     },
     {
       "company": "Florida Atlantic University",
-      "title": "Graduate Research Assistant",
+      "title": "Research Assistant",
       "location": "Boca Raton, FL",
       "startDate": "2023-01",
       "endDate": "2024-08",
@@ -65,9 +64,9 @@
       ]
     },
     {
-      "company": "Freelance & ADMC Engineering, Nepal",
-      "title": "Geomatics Engineer / GIS Intern",
-      "location": "Nepal",
+      "company": "Freelance Consultant",
+      "title": "Geomatics Engineer",
+      "location": "Kathmandu, Nepal",
       "startDate": "2020-12",
       "endDate": "2022-12",
       "highlights": [
@@ -83,15 +82,13 @@
       "institution": "Florida Atlantic University",
       "studyType": "MSc, Geosciences — GIS Concentration",
       "startDate": "2023",
-      "endDate": "2024",
-      "gpa": "4.0/4.0"
+      "endDate": "2024"
     },
     {
       "institution": "Tribhuvan University, Nepal",
       "studyType": "BSc, Geomatics Engineering",
       "startDate": "2016",
-      "endDate": "2021",
-      "gpa": "3.64/4.0"
+      "endDate": "2021"
     }
   ],
   "certifications": [
@@ -127,7 +124,7 @@
     {
       "name": "PyWMP: A Unified Python Framework for Multi-Fidelity 1D, 2D, and Hybrid Event-Based Flood Modeling",
       "authors": "Mandal, A.K.; Thapa, A.K.; Thapa Chhetri, M.; Dhungana, B.; Bloetscher, F.; Yong, Y.; Su, H.",
-      "venue": "Manuscript in review, DOI pending (archived on Zenodo); ongoing contributor to the open-source PyWMP package",
+      "venue": "Manuscript in review, DOI pending; ongoing contributor to the open-source PyWMP package",
       "url": "https://github.com/mandalanil/pywmp"
     }
   ],
