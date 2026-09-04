@@ -12,14 +12,14 @@
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=Lhv0gcEAAAAJ" }
     ]
   },
-  "summary": "Geospatial Data Scientist working across applied AI, cloud data platform engineering, and hazard-resilient infrastructure. As technical lead and supporting product owner on FPL's AI-based infrastructure inspection program, I independently built and deployed a computer vision model to production (AWS SageMaker, ECR), defined the ML scope and data pipelines behind a multi-vendor AI engagement, and built the GIS applications used for real-time disaster response. Background in field geomatics and peer-reviewed flood-hazard research. Open to Data Science, GIS/Geospatial Engineering, and AI/ML roles.",
+  "summary": "Geospatial and data science professional with 6+ years spanning field survey, enterprise GIS application development, LiDAR/point cloud processing, drone mapping, and applied AI/ML for infrastructure analytics. FAA Part 107 certified, with hands-on experience across ArcMap, ArcGIS Pro/Enterprise, GNSS/GPS and UAV survey, CAD-integrated drafting, and cloud-based data pipelines. Most recently at Florida Power & Light, where I built GIS applications and geospatial data pipelines, led LiDAR QA/QC and automation for utility infrastructure, and developed and deployed machine learning models to production. Background spans control surveys, UAV mapping, and AutoCAD drafting in Nepal to production geospatial and AI workflows for a major U.S. utility. Available immediately.",
   "work": [
     {
       "company": "Florida Power & Light - Contract",
       "title": "Data Scientist (Geospatial & AI)",
       "location": "West Palm Beach, FL",
       "startDate": "2025-04",
-      "endDate": null,
+      "endDate": "2026-08",
       "highlights": [
         "Defined ML scope and technical specs as data scientist/supporting product owner for a multi-million-dollar AI vendor engagement; authored RFP technical requirements and served as technical SME through development and benchmarking.",
         "Independently built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.",
@@ -35,6 +35,7 @@
         "Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.",
         "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.",
         "Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.",
+        "Built a customer outreach site editor, a web app enabling non-GIS staff to update storm outreach locations in real time, removing a bottleneck previously dependent on GIS specialists processing Excel files.",
         "Used Roboflow for annotation and data preparation on both production CV models, including a 6x augmentation pipeline (flips, brightness, and other transforms), train/test/validation splits, and YOLO-format export."
       ]
     },
@@ -45,10 +46,13 @@
       "startDate": "2024-09",
       "endDate": "2025-03",
       "highlights": [
+        "Used AutoCAD Civil 3D for preliminary topography work supporting NextEra Energy infrastructure projects.",
         "Led QA/QC of LiDAR-derived power grid data for infrastructure resilience work, including pole hardening.",
+        "Replaced a manual LAStools/Global Mapper workflow with an automated Python pipeline (PDAL, GeoPandas, ArcPy) handling coordinate transformations, validation, and QC, and deriving both high-resolution and coarser 10ft/30ft topo products for remote areas.",
+        "Built a Python tool (CLI and ArcGIS toolbox) for utility pole clearance measurement, converting LiDAR formats and performing 3D point cloud measurements to populate feature attributes, cutting project time from days to minutes.",
         "Managed PostgreSQL/PostGIS databases, optimized Cloud-Optimized GeoTIFFs, and automated QA workflows in FME, ArcPy, and Model Builder to streamline data storage and validation.",
         "Built a FastAPI sidecar for heavier geoprocessing and format conversion.",
-        "Built a suite of LiDAR-based transmission corridor tools: clearance and right-of-way mapping (GeoPandas, pykml, ArcPy); a point-cloud classification tool extracting pole height, length, top/bottom diameter, tilt, and communication attachment points; a CLI for vegetation-density classification (low/medium/high) supporting vegetation management at FPL's Turkey Point nuclear site; and a terrain-model generation CLI (GDAL, PDAL, GeoPandas) built against corridor LiDAR."
+        "Built a suite of LiDAR-based transmission corridor tools: clearance and right-of-way mapping (GeoPandas, pykml, ArcPy); a point-cloud classification tool extracting pole height, length, top/bottom diameter, tilt, wire span, and communication attachment points, used on a Key West fiber attachment project and exported as visualized KML; a CLI for vegetation-density classification (low/medium/high) supporting vegetation management at FPL's Turkey Point nuclear site; and a terrain-model generation CLI (GDAL, PDAL, GeoPandas) built against corridor LiDAR."
       ]
     },
     {
@@ -70,7 +74,8 @@
       "startDate": "2020-12",
       "endDate": "2022-12",
       "highlights": [
-        "Led survey teams for municipal road, control, and construction surveys, including GNSS landmark and UAV topographic/transmission-line surveys.",
+        "Led survey teams for municipal road, control, and construction surveys, including GNSS landmark and UAV topographic/transmission-line surveys, and drone photogrammetry for orthomosaic mapping.",
+        "Used AutoCAD for construction and road survey drafting, including plan and profile drawings for municipal projects.",
         "Designed municipal geodatabases (land use, soil, cadastral, resource maps) with topology and attribute rules.",
         "Served as GIS expert for Nepal's Survey Department land-use hand-over program, training 40+ officials in spatial analysis and database management.",
         "Digitized historical land records as part of a national land-use modernization effort, replacing manual paper-based archives."
@@ -132,10 +137,12 @@
     "Machine Learning & Computer Vision": ["PyTorch", "TensorFlow/Keras", "Ultralytics", "Roboflow", "YOLO", "RT-DETR", "Detectron2", "Faster/Mask R-CNN", "EfficientDet", "DETR", "MMDetection", "ResNet", "XGBoost", "OpenCV", "ONNX"],
     "Generative AI & Agentic Systems": ["LangChain", "LangGraph", "RAG", "Model Context Protocol", "FastMCP", "Vector Databases", "Ollama", "Chroma", "Hugging Face Transformers"],
     "Data Engineering": ["Python", "SQL", "ETL/ELT Pipelines", "DuckDB", "Databricks", "Data Lakes", "Parquet"],
-    "Geospatial": ["ArcGIS Pro / Enterprise / Online", "Utility Network", "PostGIS", "DuckDB Spatial", "GDAL", "PDAL", "GeoPandas", "Shapely", "PyProj", "LiDAR / Point Cloud", "Overture Maps", "Cloud-Optimized GeoTIFF", "Folium", "FME"],
+    "Geospatial": ["ArcMap", "ArcGIS Pro / Enterprise / Online", "Utility Network", "PostGIS", "DuckDB Spatial", "GDAL", "PDAL", "GeoPandas", "Shapely", "PyProj", "LiDAR / Point Cloud", "Global Mapper", "LAStools", "Overture Maps", "Cloud-Optimized GeoTIFF", "Folium", "FME"],
+    "Drone & Photogrammetry": ["Pix4D", "DroneDeploy", "Agisoft Metashape", "Orthomosaic Generation", "Point Cloud Processing"],
+    "CAD & Survey Drafting": ["AutoCAD", "AutoCAD Civil 3D"],
     "Cloud & DevOps": ["AWS Lambda", "S3", "SageMaker", "ECR / ECS", "AWS CDK", "Docker", "IAM", "VPC / Network Security", "CI/CD"],
     "Software Engineering": ["JavaScript / TypeScript", "R", "FastAPI", "React", "Streamlit"],
-    "Field": ["GNSS / GPS Survey", "UAV Survey (FAA Part 107)", "Differential GNSS", "Geodatabase Design"]
+    "Field": ["GNSS / GPS Survey", "UAV Survey (FAA Part 107)", "Differential GNSS", "Total Station and Leveling Survey", "Geodatabase Design"]
   },
   "selected_projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Road-Centerline", "3DEP LiDAR Terrain Builder", "GeoCoder"]
 }

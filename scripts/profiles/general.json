@@ -5,9 +5,9 @@
   "skill_groups": ["Machine Learning & Computer Vision", "Generative AI & Agentic Systems", "Data Engineering", "Geospatial", "Cloud & DevOps", "Field"],
   "work_highlights": {
     "0": [0, 1, 3, 7, 12],
-    "1": [0, 1],
+    "1": [1, 4],
     "2": [0, 2],
-    "3": [0, 1]
+    "3": [0, 2]
   },
   "projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Road-Centerline"]
 }
