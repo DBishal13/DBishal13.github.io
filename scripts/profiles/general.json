@@ -9,5 +9,5 @@
     "2": [0, 2],
     "3": [0, 2]
   },
-  "projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "3DEP LiDAR Terrain Builder", "3d-export"]
+  "projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Road-Centerline", "3DEP LiDAR Terrain Builder", "3d-export"]
 }
