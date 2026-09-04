@@ -111,6 +111,18 @@
       "thumbnail": "assets/img/projects/geocoder.jpg"
     },
     {
+      "name": "Databricks AI Capstone",
+      "repo": "DBishal13/databricks-ai-capstone",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["agent"],
+      "cat_label": "AI Agent · Databricks Platform",
+      "description": "Hub for four Databricks platform capstone projects: an Agent Bricks agent over real storm-surge exposure data backed by a Spark pipeline and Lakebase/pgvector, an MCP weather-judgment server, a Lakebase semantic-search app over NWS alerts, and a React/Express ticketing app deployed as a Databricks App.",
+      "stack": ["Databricks", "PySpark", "Agent Bricks", "Lakebase", "MCP"],
+      "live_url": "https://dbishal13.github.io/databricks-ai-capstone/",
+      "live_label": "Live Demo"
+    },
+    {
       "name": "GTFS Transit Platform",
       "repo": "DBishal13/gtfs-transit-platform",
       "visibility": "public",

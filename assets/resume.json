@@ -12,7 +12,7 @@
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?hl=en&user=Lhv0gcEAAAAJ" }
     ]
   },
-  "summary": "Geospatial and data science professional with 6+ years spanning field survey, enterprise GIS application development, LiDAR/point cloud processing, drone mapping, and applied AI/ML for infrastructure analytics. FAA Part 107 certified, with hands-on experience across ArcMap, ArcGIS Pro/Enterprise, GNSS/GPS and UAV survey, CAD-integrated drafting, and cloud-based data pipelines. Most recently at Florida Power & Light, where I built GIS applications and geospatial data pipelines, led LiDAR QA/QC and automation for utility infrastructure, and developed and deployed machine learning models to production. Background spans control surveys, UAV mapping, and AutoCAD drafting in Nepal to production geospatial and AI workflows for a major U.S. utility. Available immediately.",
+  "summary": "Data scientist and geospatial engineer with 5+ years building production ML systems, cloud data platforms, and enterprise GIS applications for critical utility infrastructure. At Florida Power & Light, built and automated cloud data pipelines and data integration platforms (AWS, Databricks, PostGIS), trained and deployed computer vision models to production, and built the geospatial applications and visualization tooling, including ArcGIS Experience Builder, Dashboards, and Streamlit/Power BI, used for real-time infrastructure monitoring and disaster response. Background spans data engineering, applied AI/ML, geospatial systems, and cloud automation for a major U.S. utility. Available immediately.",
   "work": [
     {
       "company": "Florida Power & Light - Contract",
@@ -36,7 +36,8 @@
         "Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.",
         "Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.",
         "Built a customer outreach site editor, a web app enabling non-GIS staff to update storm outreach locations in real time, removing a bottleneck previously dependent on GIS specialists processing Excel files.",
-        "Used Roboflow for annotation and data preparation on both production CV models, including a 6x augmentation pipeline (flips, brightness, and other transforms), train/test/validation splits, and YOLO-format export."
+        "Used Roboflow for annotation and data preparation on both production CV models, including a 6x augmentation pipeline (flips, brightness, and other transforms), train/test/validation splits, and YOLO-format export.",
+        "Conducted exploratory technical work evaluating Databricks for an in-progress migration of FPL's production model deployment pipeline."
       ]
     },
     {
@@ -62,7 +63,7 @@
       "startDate": "2023-01",
       "endDate": "2024-08",
       "highlights": [
-        "Conducted flood risk assessment for 3 Florida communities using FEMA hydrologic and hydraulic (H&amp;H) modeling methods and Python automation, as part of FAU's Center for Water Resiliency and Risk Reduction (CWR3) Watershed Master Planning Initiative, a $1.7M FEMA-funded effort to build a statewide Watershed Master Plan template for Florida.",
+        "Conducted FEMA hydrologic and hydraulic (H&amp;H) flood risk assessments for 3 Florida communities using Python automation, part of FAU's $1.7M FEMA-funded CWR3 Watershed Master Planning Initiative to build a statewide planning template.",
         "Built an automated ArcGIS Pro geoprocessing pipeline, cutting processing time by 50%.",
         "Built a Python geocoding tool processing 3 million addresses, replacing a paid service; cut turnaround from 3 months to 1 week and saved $20K in licensing."
       ]
@@ -101,10 +102,10 @@
     "FAA Part 107 — Remote Pilot Certificate",
     "Machine Learning Specialization — DeepLearning.AI",
     "Deep Learning Specialization — DeepLearning.AI",
-    "GIS Specialization — UC Davis",
+    "Remote Sensing Image Acquisition & Analysis — UNSW Canberra",
     "GIS Mapping & Spatial Analysis — U. Toronto",
     "Data Science with R — Johns Hopkins",
-    "Remote Sensing Image Acquisition & Analysis — UNSW Canberra",
+    "GIS Specialization — UC Davis",
     "Introduction to Databases — Meta"
   ],
   "certification_groups": [
@@ -136,13 +137,13 @@
   "skills": {
     "Machine Learning & Computer Vision": ["PyTorch", "TensorFlow/Keras", "Ultralytics", "Roboflow", "YOLO", "RT-DETR", "Detectron2", "Faster/Mask R-CNN", "EfficientDet", "DETR", "MMDetection", "ResNet", "XGBoost", "OpenCV", "ONNX"],
     "Generative AI & Agentic Systems": ["LangChain", "LangGraph", "RAG", "Model Context Protocol", "FastMCP", "Vector Databases", "Ollama", "Chroma", "Hugging Face Transformers"],
-    "Data Engineering": ["Python", "SQL", "ETL/ELT Pipelines", "DuckDB", "Databricks", "Data Lakes", "Parquet"],
-    "Geospatial": ["ArcMap", "ArcGIS Pro / Enterprise / Online", "Utility Network", "PostGIS", "DuckDB Spatial", "GDAL", "PDAL", "GeoPandas", "Shapely", "PyProj", "LiDAR / Point Cloud", "Global Mapper", "LAStools", "Overture Maps", "Cloud-Optimized GeoTIFF", "Folium", "FME"],
+    "Data Engineering": ["Python", "SQL", "ETL/ELT Pipelines", "PySpark", "DuckDB", "Databricks", "Data Lakes", "Parquet"],
+    "Geospatial": ["ArcGIS Pro / Enterprise / Online", "Utility Network", "PostGIS", "DuckDB Spatial", "GDAL", "PDAL", "GeoPandas", "Shapely", "PyProj", "LiDAR / Point Cloud", "Global Mapper", "LAStools", "Overture Maps", "Cloud-Optimized GeoTIFF", "Folium", "FME"],
     "Drone & Photogrammetry": ["Pix4D", "DroneDeploy", "Agisoft Metashape", "Orthomosaic Generation", "Point Cloud Processing"],
     "CAD & Survey Drafting": ["AutoCAD", "AutoCAD Civil 3D"],
     "Cloud & DevOps": ["AWS Lambda", "S3", "SageMaker", "ECR / ECS", "AWS CDK", "Docker", "IAM", "VPC / Network Security", "CI/CD"],
-    "Software Engineering": ["JavaScript / TypeScript", "R", "FastAPI", "React", "Streamlit"],
+    "Software Engineering": ["JavaScript / TypeScript", "R", "FastAPI", "React", "Streamlit", "Power BI"],
     "Field": ["GNSS / GPS Survey", "UAV Survey (FAA Part 107)", "Differential GNSS", "Total Station and Leveling Survey", "Geodatabase Design"]
   },
-  "selected_projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Road-Centerline", "3DEP LiDAR Terrain Builder", "GeoCoder"]
+  "selected_projects": ["SurgeExposure", "fflood-nep", "wildfire-copilot", "geomlint", "Geospatial Data Copilot", "HazardMCP", "Road-Centerline", "3DEP LiDAR Terrain Builder", "GeoCoder", "Databricks AI Capstone"]
 }
