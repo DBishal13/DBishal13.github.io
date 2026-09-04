@@ -22,7 +22,7 @@
       "endDate": "2026-08",
       "highlights": [
         "Defined ML scope and technical specs as data scientist/supporting product owner for a multi-million-dollar AI vendor engagement; authored RFP technical requirements and served as technical SME through development and benchmarking.",
-        "Independently built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.",
+        "Built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.",
         "Contributed to testing and evaluating CV architectures (YOLO v8/v9/11, Faster/Mask R-CNN, EfficientDet, SSD, DETR/Deformable DETR, Detectron2, MMDetection, RT-DETR) against a precision/recall/F1 and image-scale evaluation methodology co-designed with the team, producing statistical evaluation reports for leadership; selected RT-DETR for transfer learning and standardized the approach for vendors.",
         "Built an API-based metadata pipeline with spatial (10m/30ft) and temporal (30-day) joins matching 350K+ condition reports to an 8M-image catalog, enriching ~2M images with condition metadata.",
         "Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline structuring 8M+ images and 65M+ associated annotations, with automatic time/version tracking via FME triggers. Designed the schema and cut 100+ metadata columns to ~50 with spatial indexing.",
