@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-09-04T16:52:52.082212Z",
+  "generated_at": "2026-09-05T16:06:05.855371Z",
   "repos": [
+    {
+      "name": "databricks-ai-capstone",
+      "description": "Hub for 4 Databricks AI capstone projects: Agent Bricks, Lakebase, Vector Search, MCP, Databricks Apps",
+      "url": "https://github.com/DBishal13/databricks-ai-capstone",
+      "homepage": "https://dbishal13.github.io/databricks-ai-capstone/",
+      "language": "HTML",
+      "pushed_at": "2026-09-04T18:10:52Z",
+      "stars": 0
+    },
+    {
+      "name": "weather-lakebase-app",
+      "description": "Unstructured NWS weather alerts/forecasts -> Lakebase (Postgres+pgvector) -> semantic search REST API",
+      "url": "https://github.com/DBishal13/weather-lakebase-app",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-09-04T17:50:39Z",
+      "stars": 0
+    },
+    {
+      "name": "ticketing-service",
+      "description": "Databricks App (AppKit: React + TypeScript + Express) backed by Lakebase Postgres for AI-assisted support ticketing",
+      "url": "https://github.com/DBishal13/ticketing-service",
+      "homepage": null,
+      "language": "TypeScript",
+      "pushed_at": "2026-09-04T17:50:33Z",
+      "stars": 0
+    },
     {
       "name": "fflood-nep",
       "description": "Sentinel-1 SAR flood-extent mapping for the 2026 Rasuwa/Bhote Koshi flash flood",
@@ -62,6 +89,24 @@
       "homepage": "https://dbishal13.github.io/gtfs-transit-platform/",
       "language": "Python",
       "pushed_at": "2026-08-10T23:56:21Z",
+      "stars": 0
+    },
+    {
+      "name": "weather-mcp-agent",
+      "description": "A weather-forecast MCP server (FastMCP, streamable-HTTP) and a tool-using agent built on top of it \u2014 current conditions, multi-day forecasts, and two \"judgment\" tools (umbrella / travel recommendations) that apply an explicit threshold to the raw forecast instead of just echoing it back. ",
+      "url": "https://github.com/DBishal13/weather-mcp-agent",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-08-10T20:54:39Z",
+      "stars": 0
+    },
+    {
+      "name": "surge-exposure-agent",
+      "description": "An Agent Bricks agent, built on Databricks, that answers questions about real storm-surge exposure data from my surge-exposure pipeline \u2014 a publicly validated storm-surge exposure scoring system for coastal buildings.",
+      "url": "https://github.com/DBishal13/surge-exposure-agent",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-08-10T05:26:53Z",
       "stars": 0
     },
     {
