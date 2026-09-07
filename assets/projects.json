@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-09-06T16:18:34.321992Z",
+  "generated_at": "2026-09-07T18:16:03.450099Z",
   "repos": [
+    {
+      "name": "surge-exposure",
+      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
+      "url": "https://github.com/DBishal13/surge-exposure",
+      "homepage": "https://dbishal13.github.io/surge-exposure/",
+      "language": "Python",
+      "pushed_at": "2026-09-07T05:18:15Z",
+      "stars": 3
+    },
+    {
+      "name": "surge-exposure-agent",
+      "description": "An Agent Bricks agent, built on Databricks, that answers questions about real storm-surge exposure data from my surge-exposure pipeline \u2014 a publicly validated storm-surge exposure scoring system for coastal buildings.",
+      "url": "https://github.com/DBishal13/surge-exposure-agent",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-09-06T20:49:18Z",
+      "stars": 0
+    },
+    {
+      "name": "databricks-ai-capstone",
+      "description": "Hub for 5 Databricks AI projects: Agent Bricks, MLflow/Unity Catalog, Vector Search, Lakebase, Databricks Apps",
+      "url": "https://github.com/DBishal13/databricks-ai-capstone",
+      "homepage": "https://dbishal13.github.io/databricks-ai-capstone/",
+      "language": "HTML",
+      "pushed_at": "2026-09-06T20:49:09Z",
+      "stars": 0
+    },
     {
       "name": "surge-exposure-ml",
       "description": "MLflow + Unity Catalog Model Registry: does a trained model beat surge-exposure-agent's hand-picked heuristic against real FEMA NFIP claims?",
@@ -8,15 +35,6 @@
       "homepage": null,
       "language": "Python",
       "pushed_at": "2026-09-06T16:15:45Z",
-      "stars": 0
-    },
-    {
-      "name": "databricks-ai-capstone",
-      "description": "Hub for 4 Databricks AI capstone projects: Agent Bricks, Lakebase, Vector Search, MCP, Databricks Apps",
-      "url": "https://github.com/DBishal13/databricks-ai-capstone",
-      "homepage": "https://dbishal13.github.io/databricks-ai-capstone/",
-      "language": "HTML",
-      "pushed_at": "2026-09-06T14:49:48Z",
       "stars": 0
     },
     {
@@ -74,15 +92,6 @@
       "stars": 1
     },
     {
-      "name": "surge-exposure",
-      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
-      "url": "https://github.com/DBishal13/surge-exposure",
-      "homepage": "https://dbishal13.github.io/surge-exposure/",
-      "language": "Python",
-      "pushed_at": "2026-08-18T21:23:41Z",
-      "stars": 3
-    },
-    {
       "name": "compound-risk-pbc",
       "description": "A small client-side web application for visualizing compound risk (probability-based combination) using interactive charts and a lightweight UI.",
       "url": "https://github.com/DBishal13/compound-risk-pbc",
@@ -107,15 +116,6 @@
       "homepage": null,
       "language": "Python",
       "pushed_at": "2026-08-10T20:54:39Z",
-      "stars": 0
-    },
-    {
-      "name": "surge-exposure-agent",
-      "description": "An Agent Bricks agent, built on Databricks, that answers questions about real storm-surge exposure data from my surge-exposure pipeline \u2014 a publicly validated storm-surge exposure scoring system for coastal buildings.",
-      "url": "https://github.com/DBishal13/surge-exposure-agent",
-      "homepage": null,
-      "language": "Python",
-      "pushed_at": "2026-08-10T05:26:53Z",
       "stars": 0
     },
     {
