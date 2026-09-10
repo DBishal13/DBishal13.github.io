@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-09-09T17:10:19.325316Z",
+  "generated_at": "2026-09-10T17:01:12.264234Z",
   "repos": [
+    {
+      "name": "groundtruth",
+      "description": "LangGraph for GIS \u2014 a model-agnostic validation layer that catches an LLM's bad CRS, geometry, and topology before it reaches your GIS pipeline.",
+      "url": "https://github.com/DBishal13/groundtruth",
+      "homepage": "https://dbishal13.github.io/groundtruth/",
+      "language": "TypeScript",
+      "pushed_at": "2026-09-09T19:56:17Z",
+      "stars": 0
+    },
     {
       "name": "surge-exposure",
       "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
@@ -89,7 +98,7 @@
       "homepage": null,
       "language": "Python",
       "pushed_at": "2026-08-22T05:30:03Z",
-      "stars": 1
+      "stars": 2
     },
     {
       "name": "compound-risk-pbc",
