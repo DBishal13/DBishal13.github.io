@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-09-25T17:57:58.486517Z",
+  "generated_at": "2026-09-26T17:13:02.151062Z",
   "repos": [
+    {
+      "name": "geomerge",
+      "description": "Topology-preserving offline sync for shared polygon edges.",
+      "url": "https://github.com/DBishal13/geomerge",
+      "homepage": null,
+      "language": "TypeScript",
+      "pushed_at": "2026-09-26T03:33:58Z",
+      "stars": 0
+    },
     {
       "name": "groundtruth",
       "description": "LangGraph for GIS \u2014 a model-agnostic validation layer that catches an LLM's bad CRS, geometry, and topology before it reaches your GIS pipeline.",
