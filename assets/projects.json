@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-09-30T18:27:13.503394Z",
+  "generated_at": "2026-10-01T18:54:29.208860Z",
   "repos": [
+    {
+      "name": "surge-exposure",
+      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
+      "url": "https://github.com/DBishal13/surge-exposure",
+      "homepage": "https://dbishal13.github.io/surge-exposure/",
+      "language": "Python",
+      "pushed_at": "2026-10-01T18:52:37Z",
+      "stars": 5
+    },
     {
       "name": "geomerge",
       "description": "Topology-preserving offline sync for shared polygon edges.",
@@ -18,15 +27,6 @@
       "language": "TypeScript",
       "pushed_at": "2026-09-09T19:56:17Z",
       "stars": 0
-    },
-    {
-      "name": "surge-exposure",
-      "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
-      "url": "https://github.com/DBishal13/surge-exposure",
-      "homepage": "https://dbishal13.github.io/surge-exposure/",
-      "language": "Python",
-      "pushed_at": "2026-09-07T21:02:36Z",
-      "stars": 5
     },
     {
       "name": "surge-exposure-agent",
