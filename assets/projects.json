@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T17:59:55.259883Z",
+  "generated_at": "2026-10-21T18:05:32.914450Z",
   "repos": [
     {
       "name": "surge-exposure",
@@ -9,6 +9,15 @@
       "language": "Python",
       "pushed_at": "2026-10-02T00:30:16Z",
       "stars": 5
+    },
+    {
+      "name": "arset-catalog",
+      "description": "Catalog of NASA ARSET trainings, recordings, instructors, satellites and datasets, with a tracker and static site",
+      "url": "https://github.com/DBishal13/arset-catalog",
+      "homepage": "https://dbishal13.github.io/arset-catalog/",
+      "language": "Python",
+      "pushed_at": "2026-10-01T05:44:53Z",
+      "stars": 0
     },
     {
       "name": "geomerge",
