@@ -1,6 +1,18 @@
 {
   "projects": [
     {
+      "name": "Thirty Maps · #30DayMapChallenge 2026",
+      "visibility": "public",
+      "tier": "flagship",
+      "category": ["geo", "web"],
+      "cat_label": "Cartography · 30 Day Map Challenge",
+      "description": "One interactive map a day through November 2026, each on a different GIS domain and built only from open data: airborne lidar drawn as 10.6 million points, every Atlantic hurricane track since 1851, city growth cut in layers of card. Each day ships as a live web page plus images for social posts, built and released through an automated nightly pipeline with versioned releases.",
+      "stack": ["Python", "WebGL2", "Canvas 2D", "d3", "Cloudflare Workers", "GitHub Actions"],
+      "live_url": "https://30daymappingchallange-2026.geo-gisus.workers.dev/",
+      "live_label": "See the maps",
+      "thumbnail": "assets/img/projects/30daymapchallenge.jpg"
+    },
+    {
       "name": "SurgeExposure",
       "repo": "DBishal13/surge-exposure",
       "visibility": "public",
