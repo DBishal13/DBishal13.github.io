@@ -1,6 +1,15 @@
 {
-  "generated_at": "2026-11-03T20:07:48.408050Z",
+  "generated_at": "2026-11-04T20:26:24.578804Z",
   "repos": [
+    {
+      "name": "hazard-mcp",
+      "description": "An MCP server (Python, FastMCP) that unifies multiple US hazard APIs behind a single agent-facing interface: OpenFEMA disaster declarations + NFIP claims, USGS earthquake GeoJSON feeds, NOAA NWPS river gauges + live flood-inundation extent, NWS weather alerts, and NASA EONET wildfire events + FIRMS fire detections.",
+      "url": "https://github.com/DBishal13/hazard-mcp",
+      "homepage": null,
+      "language": "Python",
+      "pushed_at": "2026-11-04T19:40:37Z",
+      "stars": 1
+    },
     {
       "name": "surge-exposure",
       "description": "A reproducible data-engineering pipeline that ingests NOAA National Storm Surge Risk (MEOW/MOM) layers and NOAA NWPS flood-inundation polygons, overlays them against building/infrastructure footprints from Overture Maps (GeoParquet), and produces per-asset exposure scores plus an interactive map and an API endpoint. Optionally enriched with FEMA NF",
@@ -189,15 +198,6 @@
       "language": "Jupyter Notebook",
       "pushed_at": "2026-07-27T21:09:40Z",
       "stars": 0
-    },
-    {
-      "name": "hazard-mcp",
-      "description": "An MCP server (Python, FastMCP) that unifies multiple US hazard APIs behind a single agent-facing interface: OpenFEMA disaster declarations + NFIP claims, USGS earthquake GeoJSON feeds, NOAA NWPS river gauges + live flood-inundation extent, NWS weather alerts, and NASA EONET wildfire events + FIRMS fire detections.",
-      "url": "https://github.com/DBishal13/hazard-mcp",
-      "homepage": null,
-      "language": "Python",
-      "pushed_at": "2026-07-23T05:13:19Z",
-      "stars": 1
     },
     {
       "name": "geospatial-data-copilot",
