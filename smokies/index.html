@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smokies Trip Planner · Nov 25–29</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1714;--panel:#16211d;--panel2:#1c2a25;--line:#2a3b35;--ink:#e9efe9;--muted:#9db0a6;--amber:#f2b45a;--rust:#d9774b;--moss:#7fb38a;--sky:#8fb8d8;--ridge:#4d6b5f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.45}
+a{color:var(--sky)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:700;margin:0}
+button{font:inherit}
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(15,23,20,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:12px 18px}
+.brand{font-family:Fraunces,serif;font-weight:700;font-size:18px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand svg{width:26px;height:26px}
+.links{display:flex;gap:4px;margin-left:auto}
+.links a{color:var(--muted);text-decoration:none;padding:7px 12px;border-radius:999px;font-size:14px}
+.links a.on{background:var(--panel2);color:var(--ink)}
+.links a:hover{color:var(--ink)}
+.tabbar{display:none}
+@media (max-width:720px){
+  .links{display:none}
+  .tabbar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(15,23,20,.95);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a{flex:1;text-align:center;color:var(--muted);text-decoration:none;font-size:11px;padding:4px 0}
+  .tabbar a span{display:block;font-size:19px;line-height:1.2}
+  .tabbar a.on{color:var(--amber)}
+  main{padding-bottom:80px}
+}
+main{max-width:1100px;margin:0 auto;padding:0 18px 60px}
+.view{display:none;animation:fade .35s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ph{padding:26px 0 14px}
+.ph h1{font-size:32px}
+.ph p{color:var(--muted);margin:6px 0 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:16px}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--panel2);color:var(--muted);border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer}
+.tab.on{background:var(--amber);color:#1b1408;border-color:var(--amber);font-weight:600}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--amber);color:#1b1408;border:0;border-radius:12px;padding:10px 16px;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none}
+.btn.ghost{background:var(--panel2);color:var(--ink);border:1px solid var(--line);font-weight:500}
+.muted{color:var(--muted)}
+.warn{color:#f0a07c}
+.diff{font-size:11px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.d-easy{background:#1d3324;color:#9fd7ab}.d-mod{background:#33301b;color:#e7d27e}.d-hard{background:#3a2219;color:#f0a07c}
+.badge{font-size:12px;padding:3px 9px;border-radius:999px;background:#2b2216;color:var(--amber);border:1px solid #4a3a20}
+.note{background:#1f1a12;border:1px solid #4a3a20;border-radius:12px;padding:10px 12px;font-size:14px;margin-top:10px}
+.note b{color:var(--amber)}
+select,input[type=search]{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;font-size:14px;max-width:100%}
+input[type=range]{width:100%;accent-color:var(--amber)}
+/* hero */
+.hero{position:relative;margin:18px 0 18px;border-radius:24px;overflow:hidden;min-height:330px;background:linear-gradient(180deg,#f2b45a 0%,#d9774b 30%,#5b3a4a 58%,#1b2a33 100%)}
+.hero svg.ridges{position:absolute;inset:auto 0 0 0;width:100%;height:75%}
+.hero .in{position:relative;padding:28px 26px;max-width:560px}
+.hero h1{font-size:44px;line-height:1.05;color:#1b1408}
+.hero .kick{color:#3a2414;font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.hero .cdbox{position:absolute;right:20px;bottom:20px;background:rgba(15,23,20,.75);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:12px 16px;text-align:center}
+.hero .cdbox b{font-family:Fraunces,serif;font-size:40px;color:var(--amber);display:block;line-height:1}
+.hero .cdbox span{font-size:12px;color:var(--muted)}
+.hero .cta{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+@media (max-width:560px){.hero h1{font-size:34px}.hero{min-height:360px}}
+.glance{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:860px){.glance{grid-template-columns:repeat(2,1fr)}}
+.gday{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;transition:.2s;text-align:left;color:inherit}
+.gday:hover{border-color:var(--amber);transform:translateY(-2px)}
+.gday .dl{font-size:12px;color:var(--amber);font-weight:600}
+.gday h3{font-size:16px;margin:4px 0 6px}
+.gday .m{font-size:12px;color:var(--muted)}
+.gday.bday{background:linear-gradient(160deg,#2b2216,#16211d)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin:26px 0 12px}
+.sec-h h2{font-size:22px}
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:860px){.feat{grid-template-columns:1fr}}
+/* wx */
+.wx{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.wxmsg{flex-basis:100%;font-size:13px;color:var(--muted)}
+.wxmsg b{color:#f0a07c}
+/* itinerary */
+.plan{display:grid;grid-template-columns:220px 1fr;gap:16px}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.dnav{display:flex;flex-direction:column;gap:6px}
+@media (max-width:760px){.dnav{flex-direction:row;overflow-x:auto;scrollbar-width:none}}
+.dnav button{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--muted);text-align:left;cursor:pointer;flex:0 0 auto}
+.dnav button b{display:block;color:var(--ink);font-size:14px}
+.dnav button.on{border-color:var(--amber);background:#2b2216}
+.totals{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 6px}
+.totals span{background:var(--panel2);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--muted)}
+.totals span b{color:var(--ink)}
+.totals .hot{color:#f0a07c}
+.tl{position:relative;margin-top:8px}
+.tl:before{content:"";position:absolute;left:69px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.stop{display:grid;grid-template-columns:60px 1fr;gap:20px;padding:10px 0;position:relative}
+.stop:before{content:"";position:absolute;left:65px;top:16px;width:10px;height:10px;border-radius:50%;background:var(--panel);border:2px solid var(--amber)}
+.stop.hike:before{background:var(--amber)}
+.stop .t{color:var(--amber);font-size:13px;font-weight:600;padding-top:2px;text-align:right}
+.stop .n{font-weight:600}
+.stop .d{color:var(--muted);font-size:14px}
+.stop.off .n,.stop.off .d{opacity:.45;text-decoration:line-through}
+.offtag{display:inline-block;font-size:11px;color:#f0a07c;margin-left:6px}
+.lnk{background:none;border:0;color:var(--sky);font-size:13px;cursor:pointer;padding:0;margin-right:12px;text-decoration:underline;text-underline-offset:2px}
+.lnk.mut{color:var(--muted)}
+/* trails grid */
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tools input[type=search]{flex:1;min-width:180px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:900px){.tgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.tgrid{grid-template-columns:1fr}}
+.tc{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;transition:.2s;text-align:left;color:inherit;padding:0}
+.tc:hover{border-color:var(--amber);transform:translateY(-3px)}
+.tc.off{opacity:.5}
+.tc .art{height:96px;display:block;width:100%}
+.tc .b{padding:12px 14px 14px}
+.tc h3{font-size:17px;margin-bottom:2px}
+.tc .m{font-size:12px;color:var(--muted)}
+.tc .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+/* trail page */
+.crumb{padding-top:20px;font-size:13px}
+.crumb a{color:var(--muted);text-decoration:none}
+.thero{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:10px}
+@media (max-width:860px){.thero{grid-template-columns:1fr}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+@media (max-width:480px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--panel2);border-radius:12px;padding:9px 11px}
+.stat b{display:block;font-size:20px;font-family:Fraunces,serif}
+.stat span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+#prof{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+@media (max-width:560px){.row2{grid-template-columns:1fr}}
+.mini{background:var(--panel2);border-radius:12px;padding:11px 13px;font-size:14px}
+.mini .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.mini .v{font-family:Fraunces,serif;font-size:24px;margin:2px 0}
+.adds{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted);margin-top:12px}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+/* map */
+.mapwrap{display:grid;grid-template-columns:1fr 320px;gap:16px}
+@media (max-width:860px){.mapwrap{grid-template-columns:1fr}}
+.map{width:100%;height:auto;display:block;border-radius:14px;background:radial-gradient(ellipse at 55% 45%,#1d2e27 0%,#121c18 70%)}
+.map .road{fill:none;stroke:#c9c1a8;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.map .road.minor{stroke-width:1.4;opacity:.55}
+.map .crest{fill:none;stroke:var(--ridge);stroke-width:7;stroke-linecap:round;opacity:.55}
+.map .trail{fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:4 3;opacity:.55}
+.map .trail.on{opacity:1;stroke-width:3.2;stroke:var(--rust);stroke-dasharray:none}
+.map .trail.off{opacity:.12}
+.map .th{fill:var(--amber);stroke:#0f1714;stroke-width:1.5}
+.map .th.on{fill:var(--rust)}
+.map .th.off{fill:#555}
+.map .town{fill:#e9efe9;font-size:13px;font-weight:600;font-family:Inter,sans-serif}
+.map .peak{fill:var(--moss);font-size:11px;font-style:italic;font-family:Inter,sans-serif}
+.map .hit{fill:transparent;cursor:pointer}
+.map .dot{fill:#fff;stroke:var(--rust);stroke-width:3;pointer-events:none}
+.map .pulse{fill:none;stroke:var(--rust);stroke-width:2;pointer-events:none}
+.mlist{display:flex;flex-direction:column;gap:6px;max-height:520px;overflow:auto}
+.mi{display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer;color:inherit;text-align:left;width:100%}
+.mi.on{border-color:var(--rust)}
+.mi.off{opacity:.45}
+.mi small{display:block;color:var(--muted);font-size:12px}
+.pop{margin-top:10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:18px;height:3px;vertical-align:middle;margin-right:5px;border-radius:2px}
+/* prep */
+.cond{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.ci{background:var(--panel2);border-radius:12px;padding:12px 13px;font-size:14px}
+.ci b{display:block;margin-bottom:3px}
+.ci.ok b{color:var(--moss)}.ci.bad b{color:#f0a07c}.ci.info b{color:var(--sky)}
+.check{columns:2;column-gap:24px}
+@media (max-width:560px){.check{columns:1}}
+.check label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px dashed var(--line);cursor:pointer;break-inside:avoid}
+.check input{accent-color:var(--amber);width:18px;height:18px;margin-top:1px;flex:0 0 auto}
+.check .done{text-decoration:line-through;color:var(--muted)}
+.bar{height:8px;background:var(--panel2);border-radius:9px;overflow:hidden;margin:6px 0 12px}
+.bar div{height:100%;background:var(--amber);transition:width .3s}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+.add-custom{display:flex;gap:8px;margin-top:12px}
+.add-custom input{flex:1;background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit}
+footer{max-width:1100px;margin:0 auto;padding:0 18px 90px;color:var(--muted);font-size:12px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(30px);background:var(--amber);color:#1b1408;font-weight:600;padding:10px 16px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;z-index:30;font-size:14px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:29}
+
+/* weather */
+.wxbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid var(--amber);border-right-color:transparent;border-radius:50%;animation:sp 1s linear infinite;vertical-align:-1px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.alert{background:#3a2219;border:1px solid #6b3a26;border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:14px}
+.alert b{color:#f0a07c}
+.zones{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:760px){.zones{grid-template-columns:repeat(2,1fr)}}
+.zone{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.zone .zn{font-weight:600}
+.zone .zs{font-size:12px;color:var(--muted)}
+.zone .zt{font-family:Fraunces,serif;font-size:30px;margin:4px 0 0}
+.wdays{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+@media (max-width:760px){.wdays{display:flex;overflow-x:auto;scrollbar-width:none}.wday{flex:0 0 140px}}
+.wday{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:left;color:inherit;cursor:pointer;transition:.2s}
+.wday.on{border-color:var(--amber);background:#2b2216}
+.wday .dl{font-size:12px;color:var(--amber);font-weight:600}
+.wday .wi{font-size:28px;margin:4px 0}
+.wday .wt{font-size:13px}
+.wday .wp{font-size:12px;color:var(--sky);margin-top:4px}
+.conf{font-size:11px;font-weight:600;margin-top:4px}
+.ladder{display:flex;flex-direction:column;gap:10px}
+.lr{display:grid;grid-template-columns:130px 1fr 170px;gap:12px;align-items:center}
+@media (max-width:640px){.lr{grid-template-columns:96px 1fr}.lx{grid-column:2;font-size:11px;margin-top:-6px}}
+.ll b{display:block;font-size:14px}.ll span{font-size:11px;color:var(--muted)}
+.lt{position:relative;height:30px;background:var(--panel2);border-radius:8px}
+.lbar{position:absolute;top:11px;height:8px;border-radius:6px;background:linear-gradient(90deg,#8fb8d8,#f2b45a)}
+.lv{position:absolute;top:-1px;font-size:11px;transform:translateX(-110%);color:var(--sky)}
+.lv.hi{transform:translateX(10%);color:var(--amber)}
+.frz{position:absolute;top:0;bottom:0;border-left:1px dashed #8fb8d8}
+.frz span{position:absolute;bottom:-1px;left:3px;font-size:9px;color:#8fb8d8}
+.lx{font-size:12px;color:var(--muted)}
+.nws{background:var(--panel2);border-radius:12px;padding:10px 12px;font-size:13px;margin-top:12px}
+.nws b{display:block;color:var(--sky);margin-bottom:4px}.nws div{margin-top:4px}
+.ocard{background:var(--panel2);border-radius:14px;padding:12px 14px;margin-top:10px}
+.fl{font-size:13px;color:var(--amber);margin:6px 0 4px}
+.outfit{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+@media (max-width:640px){.outfit{grid-template-columns:1fr}}
+.oi{display:flex;gap:10px;background:var(--panel);border-radius:10px;padding:8px 10px;font-size:13px}
+.oi .oe{font-size:20px;line-height:1.2}
+.oi b{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.g101{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:10px}
+@media (max-width:640px){.g101{grid-template-columns:1fr}}
+.g101>div{background:var(--panel2);border-radius:12px;padding:12px}
+.g101 p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.wxchip{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--ink)}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas><div class="toast" id="toast"></div>
+<header><nav class="nav">
+  <a class="brand" href="#home"><svg viewBox="0 0 32 32"><path d="M2 26 L11 12 L16 19 L21 10 L30 26 Z" fill="#f2b45a"/><path d="M2 26 L11 16 L16 22 L21 15 L30 26 Z" fill="#7fb38a"/></svg>Smokies '26</a>
+  <div class="links" id="links"></div>
+</nav></header>
+<div class="tabbar" id="tabbar"></div>
+
+<main>
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <div class="hero">
+      <svg class="ridges" viewBox="0 0 1200 300" preserveAspectRatio="none" id="ridges"></svg>
+      <div class="in">
+        <div class="kick">Great Smoky Mountains · Nov 25–29</div>
+        <h1>A birthday in the high country.</h1>
+        <div class="cta"><a class="btn" href="#plan">See the plan</a><a class="btn ghost" href="#trails">Browse trails</a></div>
+      </div>
+      <div class="cdbox"><b id="cd">–</b><span id="cdl">days to go</span></div>
+    </div>
+    <a href="#weather" class="card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:inherit"><div><b>🌤 Live weather & what to wear</b><div class="muted" style="font-size:13px">Forecasts for town and the summits, plus outfit picks for every day</div></div><span class="btn">Open</span></a>
+    <div class="card"><div class="wx" id="wx-home"></div></div>
+    <div class="sec-h"><h2>Trip at a glance</h2><a href="#plan" class="muted">Full itinerary →</a></div>
+    <div class="glance" id="glance"></div>
+    <div class="sec-h"><h2>Highlights</h2><a href="#trails" class="muted">All trails →</a></div>
+    <div class="feat" id="feat"></div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="view" id="v-plan">
+    <div class="ph"><h1>Itinerary</h1><p>Pick a day, add or remove hikes, and watch the totals update. Your changes are saved in this browser.</p></div>
+    <div class="card"><div class="wx" id="wx-plan"></div></div>
+    <div class="plan">
+      <div class="dnav" id="dnav"></div>
+      <div class="card" id="day" style="margin:0"></div>
+    </div>
+    <div style="margin-top:12px"><button class="btn ghost" id="reset">Reset to original plan</button></div>
+  </section>
+
+  <!-- WEATHER -->
+  <section class="view" id="v-weather"></section>
+
+  <!-- TRAILS -->
+  <section class="view" id="v-trails">
+    <div class="ph"><h1>Trails</h1><p>Ten hikes picked for late November, from 1-mile strolls to an 11-mile summit day.</p></div>
+    <div class="tools">
+      <input type="search" id="q" placeholder="Search trails or areas…">
+      <div class="tabs" id="filters"></div>
+      <select id="sort"><option value="rt">Shortest first</option><option value="gain">Least climbing</option><option value="high">Highest point</option><option value="name">A–Z</option></select>
+    </div>
+    <div class="tgrid" id="tgrid"></div>
+  </section>
+
+  <!-- TRAIL PAGE -->
+  <section class="view" id="v-trail"></section>
+
+  <!-- MAP -->
+  <section class="view" id="v-map">
+    <div class="ph"><h1>Map</h1><p>Tap a trailhead or pick a trail from the list.</p></div>
+    <div class="mapwrap">
+      <div class="card" style="margin:0"><svg class="map" id="bigmap" viewBox="0 0 600 330"></svg>
+        <div class="legend"><span><i style="background:#c9c1a8"></i>Roads</span><span><i style="background:var(--ridge);height:6px"></i>Main crest / AT</span><span><i style="background:var(--amber)"></i>Trail (schematic)</span></div>
+        <div class="pop" id="mpop"></div>
+      </div>
+      <div class="card" style="margin:0"><div class="mlist" id="mlist"></div></div>
+    </div>
+  </section>
+
+  <!-- PREP -->
+  <section class="view" id="v-prep">
+    <div class="ph"><h1>Prep</h1><p>What's open that week, and what to pack.</p></div>
+    <div class="card">
+      <h2 style="font-size:20px;margin-bottom:10px">What's open Nov 25–29</h2>
+      <div class="cond">
+        <div class="ci ok"><b>Kuwohi Road: open through Nov 29</b>The 2026 season runs 4/1–11/29, so your whole trip fits. Snow or ice can still close it any day, so don't save it for Sunday.</div>
+        <div class="ci ok"><b>Roaring Fork: open through Nov 29</b>Grotto Falls and the motor nature trail drive are both on this road.</div>
+        <div class="ci bad"><b>Laurel Falls: closed</b>Rehab work is delayed into 2027. Skip it.</div>
+        <div class="ci ok"><b>Bullhead Trail: open daily</b>The Mon–Thu rehab closures end Nov 19.</div>
+        <div class="ci info"><b>Parking tag needed</b>You need one for any stop over 15 min: $5/day or $15/week. Federal passes don't cover it.</div>
+        <div class="ci info"><b>Also ends Nov 29</b>Little Greenbrier Rd closes after Nov 29. Parson Branch and Rich Mountain roads already closed on Nov 9.</div>
+      </div>
+      <div class="note"><b>Weather reality check:</b> Kuwohi is often 15–20°F colder than Gatlinburg, and Newfound Gap Road can close for snow on short notice. Check <a href="https://www.nps.gov/grsm/planyourvisit/conditions.htm">NPS conditions</a> each morning.</div>
+    </div>
+    <div class="card">
+      <h2 style="font-size:20px">Packing list</h2>
+      <div id="checkhead"></div>
+      <div class="check" id="check"></div>
+      <div class="add-custom"><input id="newitem" placeholder="Add your own item…"><button class="btn" id="additem">Add</button></div>
+    </div>
+  </section>
+</main>
+<footer>The map is schematic: road and trailhead positions are approximate, and trail lines are sketches, not real routes. Elevation profiles and summit temperatures are estimates, with temperatures assuming about 3.5°F colder per 1,000 ft. Sunset is about 5:25pm in late November. Always check <a href="https://www.nps.gov/grsm/planyourvisit/conditions.htm">NPS current conditions</a> and the <a href="https://www.nps.gov/grsm/planyourvisit/seasonalroads.htm">seasonal road schedule</a>.</footer>
+<script>
+
+// ---------- data ----------
+const TRAILS = [
+ {id:"alum", name:"Alum Cave → Alum Cave Bluffs", area:"Newfound Gap Rd", rt:4.4, gain:1150, high:4950, diff:"mod",
+  th:[35.6290,-83.4510], end:[35.6390,-83.4430], prof:[[0,3830],[1.3,4250],[1.5,4350],[2.2,4950]],
+  blurb:"The best mid-length hike in the park. You follow a creek, pass through Arch Rock (a natural stone tunnel with stairs), reach Inspiration Point, then the huge overhanging bluffs. Upper sections can ice over in late November.",
+  tip:"Get there by 8am. The lot is small and fills even off-season."},
+ {id:"leconte", name:"Alum Cave → Mt. LeConte summit", area:"Newfound Gap Rd", rt:11.0, gain:2800, high:6593, diff:"hard",
+  th:[35.6290,-83.4510], end:[35.6544,-83.4361], prof:[[0,3830],[1.5,4350],[2.2,4950],[3.5,5800],[5.0,6400],[5.5,6593]],
+  blurb:"The big-day version of Alum Cave: continue past the bluffs to LeConte's summit. Above the bluffs there are cable-assisted ledges, which get sketchy if they're icy.",
+  tip:"Only go if the forecast is dry. Turn around at the bluffs if the ledges are icy."},
+ {id:"kuwohi", name:"Kuwohi Observation Tower", area:"Kuwohi Rd", rt:1.0, gain:330, high:6643, diff:"easy",
+  th:[35.5568,-83.4960], end:[35.5628,-83.4985], prof:[[0,6311],[0.5,6643]],
+  blurb:"A short, steep paved walk to the tower on the highest point in Tennessee. On a clear day you get 360° views. On a cloudy day you're standing inside a cloud.",
+  tip:"Go at sunset (around 5:25pm late November) and bring a warm jacket. It's windy and cold up top."},
+ {id:"andrews", name:"Andrews Bald", area:"Kuwohi Rd", rt:3.6, gain:1100, high:5920, diff:"mod",
+  th:[35.5568,-83.4960], end:[35.5395,-83.4930], prof:[[0,6311],[0.8,5950],[1.6,5700],[1.8,5920]],
+  blurb:"A grassy high-elevation meadow with long views south into North Carolina. It's upside-down: downhill on the way out and uphill on the way back. Starts from the same lot as Kuwohi.",
+  tip:"Easy to combine with the tower for a half day up high."},
+ {id:"chimney", name:"Chimney Tops (to overlook)", area:"Newfound Gap Rd", rt:3.3, gain:1400, high:4720, diff:"hard",
+  th:[35.6355,-83.4740], end:[35.6311,-83.4800], prof:[[0,3450],[0.9,3800],[1.2,4100],[1.65,4720]],
+  blurb:"Short but relentless, mostly on rock and timber stairs. It ends at an overlook facing the twin rock pinnacles. The summit itself has been off-limits since the 2016 fire.",
+  tip:"A good short leg-burner before a long drive home."},
+ {id:"rainbow", name:"Rainbow Falls", area:"Cherokee Orchard / Roaring Fork", rt:5.4, gain:1500, high:4075, diff:"mod",
+  th:[35.6754,-83.4871], end:[35.6630,-83.4710], prof:[[0,2580],[1.0,3100],[2.0,3700],[2.7,4075]],
+  blurb:"A steady climb to an 80-ft waterfall, the tallest single drop in the park. It's close to Gatlinburg.",
+  tip:"Spray near the falls freezes into ice sculptures on cold days. The rocks get slick."},
+ {id:"grotto", name:"Grotto Falls", area:"Roaring Fork Motor Nature Trail", rt:2.6, gain:550, high:3600, diff:"easy",
+  th:[35.6812,-83.4625], end:[35.6720,-83.4580], prof:[[0,3100],[0.6,3300],[1.0,3450],[1.3,3600]],
+  blurb:"A gentle walk through old hemlock forest. The trail goes behind the waterfall, the only one in the park where you can do that.",
+  tip:"Pair it with the Roaring Fork drive. The road closes for the season after Nov 29."},
+ {id:"abrams", name:"Abrams Falls", area:"Cades Cove", rt:5.2, gain:650, high:2000, diff:"mod",
+  th:[35.5907,-83.8521], end:[35.5830,-83.8670], prof:[[0,1720],[0.5,1700],[1.0,2000],[1.6,1850],[2.0,1950],[2.6,1600]],
+  blurb:"A rolling creekside trail to a short, powerful waterfall with a big pool. The trailhead is partway around the Cades Cove loop.",
+  tip:"Drive the loop at sunrise for deer, turkey and sometimes bears, then hike."},
+ {id:"charlies", name:"Charlies Bunion (via AT)", area:"Newfound Gap", rt:8.0, gain:1640, high:6000, diff:"hard",
+  th:[35.6110,-83.4250], end:[35.6370,-83.3750], prof:[[0,5046],[1.7,5900],[2.7,5800],[3.4,6000],[4.0,5565]],
+  blurb:"Follows the Appalachian Trail along the crest to a dramatic rock outcrop. This is the most \"real mountains\" hike on the list.",
+  tip:"It's exposed and cold up high in November. Pick a clear day."},
+ {id:"spruce", name:"Spruce Flat Falls", area:"Tremont", rt:2.0, gain:400, high:2250, diff:"easy",
+  th:[35.6407,-83.6893], end:[35.6340,-83.6855], prof:[[0,1920],[0.5,2150],[1.0,2250]],
+  blurb:"A quiet, little-known trail to a pretty cascade. It starts at the Smokies' environmental-learning institute near Tremont.",
+  tip:"A good uncrowded stop on the way to or from Cades Cove."}
+];
+
+const DAYS = [
+ {label:"Wed 25", title:"Arrive & settle in", badge:"Travel day", stops:[
+  {t:"Afternoon", n:"Roll into Gatlinburg / Townsend", d:"Check in and grab groceries. Thursday is Thanksgiving, so a lot will be closed."},
+  {t:"Before dark", n:"Sugarlands Visitor Center", d:"Buy the $15 weekly parking tag and pick up a paper map. Cell service in the park is unreliable."},
+  {t:"Evening", n:"Low-key dinner", d:"Make sure your Thanksgiving dinner reservation is confirmed."}
+ ]},
+ {label:"Thu 26 🎂", title:"Birthday: high country", badge:"Your birthday + Thanksgiving", stops:[
+  {t:"8:00", n:"Alum Cave → Alum Cave Bluffs", d:"About 4.4 mi round trip. Feeling strong and the weather's dry? Push on to LeConte.", trail:"alum"},
+  {t:"Lunch", n:"Picnic at Newfound Gap", d:"The overlook sits right on the TN/NC line and the Appalachian Trail."},
+  {t:"~4:30", n:"Kuwohi Tower at sunset", d:"Highest point in Tennessee. Bring a thermos and something sweet for a mountaintop birthday moment.", trail:"kuwohi"},
+  {t:"Evening", n:"Thanksgiving / birthday dinner", d:"Book this soon. Holiday dinners in Gatlinburg and Pigeon Forge fill up."}
+ ], note:"Kuwohi is first because its road closes for the season after Nov 29, and weather can shut it any day before that. If Thursday is socked in, swap with Saturday."},
+ {label:"Fri 27", title:"Waterfalls & Roaring Fork", badge:"Last weekend Roaring Fork is open", stops:[
+  {t:"9:00", n:"Rainbow Falls", d:"An 80-ft drop. On a cold day, look for ice formations.", trail:"rainbow"},
+  {t:"Afternoon", n:"Roaring Fork Motor Nature Trail", d:"A slow one-way drive past old cabins and mills, with a stop at Grotto Falls to walk behind the waterfall.", trail:"grotto"},
+  {t:"Evening", n:"Avoid Pigeon Forge traffic", d:"It's Black Friday. The strip will be packed, so eat in Gatlinburg or near your stay."}
+ ]},
+ {label:"Sat 28", title:"Cades Cove & quiet trails", badge:"Wildlife day", stops:[
+  {t:"Sunrise", n:"Cades Cove Loop", d:"11-mile one-way drive. Best wildlife viewing is at first light. Expect stop-and-go."},
+  {t:"Mid-morning", n:"Abrams Falls", d:"Trailhead is about halfway around the loop.", trail:"abrams"},
+  {t:"Afternoon", n:"Spruce Flat Falls (optional)", d:"Short and uncrowded on the way back through Tremont.", trail:"spruce"},
+  {t:"Evening", n:"Townsend dinner", d:"The \"quiet side\" of the Smokies, much calmer than Gatlinburg."}
+ ]},
+ {label:"Sun 29", title:"One more climb, then home", badge:"Last day for Kuwohi Rd", stops:[
+  {t:"8:00", n:"Chimney Tops overlook", d:"Short, steep and done by 10.", trail:"chimney"},
+  {t:"Alt", n:"…or Andrews Bald", d:"If Thursday's Kuwohi sunset got clouded out, today is your last chance up there.", trail:"andrews"},
+  {t:"Late morning", n:"Head home", d:"Sunday after Thanksgiving is one of the heaviest travel days of the year. Leave early."}
+ ]}
+];
+
+const CHECK = [
+ "Weekly parking tag ($15)","Book Thanksgiving / birthday dinner","Microspikes or trail traction","Warm hat + gloves (Kuwohi is cold)",
+ "Insulated jacket + rain shell","Headlamps (dark ~5:30pm)","Thermos for sunset","Offline maps downloaded",
+ "Trekking poles","Snacks + 2L water each","Birthday treat for the summit 🎂","Check NPS conditions each morning"
+];
+
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const DLAB = {easy:"Easy", mod:"Moderate", hard:"Strenuous"};
+const T = id => TRAILS.find(t=>t.id===id);
+const store = {get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+               set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let sel="alum", filter="all", q="", sortBy="rt", pace=store.get("smk-pace",1), wx="clear", valleyT=50, curDay=1;
+const clone = o => JSON.parse(JSON.stringify(o));
+let plan = store.get("smk-plan", null) || clone(DAYS);
+const savePlan = () => store.set("smk-plan", plan);
+let extra = store.get("smk-extra", []);
+
+const ACCESS = {alum:"441",leconte:"441",chimney:"441",charlies:"441",kuwohi:"kuwohi",andrews:"kuwohi",rainbow:"low",grotto:"rf",abrams:"low",spruce:"low"};
+const WX = {
+  clear:{l:"☀️ Clear", msg:"Everything on the list is fair game."},
+  cloud:{l:"☁️ Clouds up high", msg:"<b>Views likely socked in</b> above ~5,500 ft. The trails are fine, but Kuwohi, Andrews Bald and Charlies Bunion lose their payoff. Do waterfalls instead."},
+  snow:{l:"❄️ Snow & ice", msg:"<b>Newfound Gap Rd and Kuwohi Rd often close</b> in snow, and Roaring Fork may too. Stick to Rainbow Falls, Abrams and Spruce Flat."}
+};
+function status(t){ const a=ACCESS[t.id];
+  if (wx==="snow" && (a==="441"||a==="kuwohi")) return {k:"closed", why:"road likely closed"};
+  if (wx==="snow" && a==="rf") return {k:"closed", why:"Roaring Fork may close"};
+  if (wx==="cloud" && t.high>=5500) return {k:"meh", why:"views likely hidden"};
+  return null; }
+const hours = t => (t.rt/2 + t.gain/1000*0.5) * pace;
+function fmtH(h){ const hh=Math.floor(h), mm=Math.round((h-hh)*60/5)*5; return mm===60?`${hh+1}h`:`${hh}h${mm?(" "+mm+"m"):""}`; }
+function fmtClock(mins){ const h=Math.floor(mins/60), m=Math.round(mins%60/5)*5; return `${((h+11)%12)+1}:${String(m%60).padStart(2,"0")}${h>=12?"pm":"am"}`; }
+function toast(msg){ const el=$("#toast"); el.textContent=msg; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),1800); }
+const cleanLabel = l => l.replace(/[^\w\s]/g,"").trim();
+
+// ---------- router ----------
+const PAGES=[["home","Home","🏠"],["plan","Plan","🗓"],["weather","Weather","🌤"],["trails","Trails","🥾"],["map","Map","🗺"],["prep","Prep","🎒"]];
+$("#links").innerHTML = PAGES.map(([k,l])=>`<a href="#${k}" data-k="${k}">${l}</a>`).join("");
+$("#tabbar").innerHTML = PAGES.map(([k,l,i])=>`<a href="#${k}" data-k="${k}"><span>${i}</span>${l}</a>`).join("");
+function route(){
+  let h = location.hash.slice(1) || "home", view=h;
+  if (h.startsWith("trail-") && T(h.slice(6))) { sel=h.slice(6); view="trail"; }
+  else if (!PAGES.some(p=>p[0]===h)) { h="home"; view="home"; }
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on", v.id==="v-"+view));
+  const nk = view==="trail" ? "trails" : view;
+  document.querySelectorAll("#links a,#tabbar a").forEach(a=>a.classList.toggle("on", a.dataset.k===nk));
+  ({home:renderHome, plan:renderPlan, weather:renderWeather, trails:renderTrails, trail:renderTrailPage, map:renderMapView, prep:renderPrep})[view]();
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", route);
+const go = h => { if (location.hash==="#"+h) route(); else location.hash=h; };
+
+// ---------- weather bar ----------
+function renderWx(el){
+  el.innerHTML = `<span class="muted" style="font-size:13px">Weather what-if:</span>` +
+    Object.entries(WX).map(([k,v])=>`<button class="tab ${wx===k?'on':''}" data-w="${k}">${v.l}</button>`).join("") +
+    `<div class="wxmsg">${WX[wx].msg}</div>`;
+  el.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{wx=b.dataset.w; route();});
+}
+
+// ---------- art ----------
+function ridges(seed, h=300, w=1200, layers=4, cols=["#7a4a52","#4a3a48","#2a3138","#16211d"]){
+  let s=""; for(let L=0;L<layers;L++){ const base=h*(.35+L*.17), amp=40+L*8; let d=`M0,${h} L0,${base}`;
+    for(let x=0;x<=w;x+=20){ const y=base - amp*(Math.sin(x/170+seed*1.3+L)*.6+Math.sin(x/53+seed*2.1+L*2)*.25+Math.sin(x/23+L)*.08); d+=` L${x},${y.toFixed(1)}`; }
+    s+=`<path d="${d} L${w},${h} Z" fill="${cols[L]}"/>`; } return s; }
+function trailArt(t){
+  const pal={easy:["#3e6b4f","#2c4f3b","#1c2a25"],mod:["#7d6a36","#4d4a2c","#1c2a25"],hard:["#8a4a32","#5a3427","#1c2a25"]}[t.diff];
+  const seed=t.rt*3.7+t.gain/300;
+  return `<svg class="art" viewBox="0 0 400 96" preserveAspectRatio="none"><rect width="400" height="96" fill="#22322c"/>${ridges(seed,96,400,3,pal)}
+  <text x="14" y="24" font-family="Fraunces,serif" font-size="15" font-weight="700" fill="#e9efe9">${t.high.toLocaleString()}′</text></svg>`;
+}
+
+// ---------- HOME ----------
+(function(){ const start=new Date(2026,10,25), end=new Date(2026,10,30), now=new Date(), days=Math.ceil((start-now)/864e5);
+  if (now>=end){$("#cd").textContent="✓";$("#cdl").textContent="trip done";}
+  else if (days<=0){$("#cd").textContent="Now";$("#cdl").textContent="enjoy it";}
+  else {$("#cd").textContent=days;$("#cdl").textContent=days===1?"day to go":"days to go";} })();
+$("#ridges").innerHTML = ridges(2);
+function dayStats(d){ const hk=d.stops.filter(s=>s.trail).map(s=>T(s.trail)); return {hk, mi:hk.reduce((a,t)=>a+t.rt,0), gain:hk.reduce((a,t)=>a+t.gain,0), hrs:hk.reduce((a,t)=>a+hours(t),0)}; }
+function renderHome(){
+  renderWx($("#wx-home"));
+  $("#glance").innerHTML = plan.map((d,i)=>{ const s=dayStats(d);
+    return `<button class="gday ${i===1?'bday':''}" data-i="${i}"><div class="dl">${d.label}</div><h3>${d.title}</h3><div class="m">${s.hk.length?`${s.hk.length} hike${s.hk.length>1?'s':''} · ${s.mi.toFixed(1)} mi`:"No hikes"}</div><div class="m" style="margin-top:6px">${(()=>{const t=dayAt("town",TRIP_DATES[i]),u=dayAt("summit",TRIP_DATES[i]);return `${t.code!=null?wmo(t.code)[0]:"🌡"} ${r(t.hi)}° town · ${r(u.hi)}° summit`;})()}</div></button>`;}).join("");
+  $("#glance").querySelectorAll(".gday").forEach(b=>b.onclick=()=>{curDay=+b.dataset.i; go("plan");});
+  $("#feat").innerHTML = ["alum","kuwohi","grotto"].map(id=>trailCard(T(id))).join("");
+  wireCards($("#feat"));
+}
+
+// ---------- PLAN ----------
+function renderPlan(){
+  renderWx($("#wx-plan"));
+  $("#dnav").innerHTML = plan.map((d,i)=>`<button class="${i===curDay?'on':''}" data-i="${i}">${d.label}<b>${d.title}</b></button>`).join("");
+  $("#dnav").querySelectorAll("button").forEach(b=>b.onclick=()=>{curDay=+b.dataset.i; renderPlan(); if(curDay===1) confetti();});
+  const d=plan[curDay], s=dayStats(d), bad=s.hk.filter(t=>status(t)?.k==="closed");
+  $("#day").innerHTML = `<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><h2 style="font-size:24px">${d.title}</h2><span class="badge">${d.badge}</span></div>
+   <div style="margin-top:8px">${wxChip(TRIP_DATES[curDay])} <button class="lnk" id="wearlnk">What to wear →</button></div>
+   <div class="totals"><span>🥾 <b>${s.mi.toFixed(1)}</b> mi</span><span>⛰ <b>${s.gain.toLocaleString()}</b> ft</span>
+     <span class="${s.hrs>6.5?'hot':''}">⏱ <b>${fmtH(s.hrs)}</b> on trail${s.hrs>6.5?" · that's a lot of daylight":""}</span>
+     ${bad.length?`<span class="hot">⚠ ${bad.length} hit by weather</span>`:""}</div>
+   <div class="tl">${d.stops.map((st,i)=>{ const t=st.trail&&T(st.trail), w=t&&status(t);
+     return `<div class="stop ${t?'hike':''} ${w?.k==='closed'?'off':''}"><div class="t">${st.t}</div><div><div class="n">${st.n}${w?`<span class="offtag">${w.why}</span>`:""}</div><div class="d">${st.d}</div>
+     ${t?`<button class="lnk" data-go="${st.trail}">Trail page →</button><button class="lnk mut" data-rm="${i}">Remove</button>`:""}</div></div>`;}).join("")}</div>
+   <div class="addrow"><select id="addsel"><option value="">+ Add a hike to this day…</option>${TRAILS.map(t=>`<option value="${t.id}">${t.name} (${t.rt} mi)${status(t)?.k==='closed'?' ⚠':''}</option>`).join("")}</select></div>
+   ${d.note?`<div class="note"><b>Why this order:</b> ${d.note}</div>`:""}`;
+  $("#wearlnk").onclick=()=>{wxDay=curDay; go("weather");};
+  $("#day").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go("trail-"+b.dataset.go));
+  $("#day").querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const s=d.stops.splice(+b.dataset.rm,1)[0]; savePlan(); renderPlan(); toast(`Removed ${T(s.trail).name.split(" →")[0]}`);});
+  $("#addsel").onchange=e=>{ if(e.target.value){ addTo(curDay,e.target.value); renderPlan(); } };
+}
+function addTo(di,id){
+  const t=T(id), d=plan[di];
+  if (d.stops.some(s=>s.trail===id)) { toast("Already on that day"); return; }
+  const i=d.stops.findIndex(s=>/Evening|Late morning|Head home/.test(s.t+s.n));
+  const stop={t:"Added", n:t.name, d:`${t.rt} mi RT · ${t.gain.toLocaleString()} ft gain. ${t.tip}`, trail:id};
+  i<0 ? d.stops.push(stop) : d.stops.splice(i,0,stop);
+  savePlan(); toast(`Added to ${cleanLabel(d.label)}`);
+}
+$("#reset").onclick=()=>{ plan=clone(DAYS); savePlan(); renderPlan(); toast("Plan reset"); };
+
+// ---------- TRAILS ----------
+function trailCard(t){ const w=status(t);
+  return `<button class="tc ${w?.k==='closed'?'off':''}" data-id="${t.id}">${trailArt(t)}<div class="b"><h3>${t.name}</h3><div class="m">${t.area}</div>
+   <div class="row"><span class="m">${t.rt} mi · ${t.gain.toLocaleString()} ft · ${fmtH(hours(t))}</span><span class="diff d-${t.diff}">${DLAB[t.diff]}</span></div>
+   ${w?`<div class="m warn" style="margin-top:6px">${w.why}</div>`:""}</div></button>`; }
+function wireCards(el){ el.querySelectorAll(".tc").forEach(b=>b.onclick=()=>go("trail-"+b.dataset.id)); }
+function renderTrails(){
+  const opts=[["all","All"],["easy","Easy"],["mod","Moderate"],["hard","Strenuous"]];
+  $("#filters").innerHTML = opts.map(([k,l])=>`<button class="tab ${filter===k?'on':''}" data-f="${k}">${l}</button>`).join("");
+  $("#filters").querySelectorAll(".tab").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderTrails();});
+  const list = TRAILS.filter(t=>(filter==="all"||t.diff===filter) && (t.name+" "+t.area).toLowerCase().includes(q.toLowerCase()))
+    .sort((a,b)=> sortBy==="name" ? a.name.localeCompare(b.name) : sortBy==="high" ? b.high-a.high : a[sortBy]-b[sortBy]);
+  $("#tgrid").innerHTML = list.length ? list.map(trailCard).join("") : `<p class="muted">No trails match. Try another search.</p>`;
+  wireCards($("#tgrid"));
+}
+$("#q").oninput=e=>{q=e.target.value; renderTrails();};
+$("#sort").onchange=e=>{sortBy=e.target.value; renderTrails();};
+
+// ---------- MAP ----------
+const B={w:-83.90,e:-83.28,n:35.73,s:35.47}, MW=600, MH=330, PAD=16, kx=Math.cos(35.6*Math.PI/180);
+const scl=Math.min((MW-2*PAD)/((B.e-B.w)*kx),(MH-2*PAD)/(B.n-B.s)), offX=(MW-(B.e-B.w)*kx*scl)/2, offY=(MH-(B.n-B.s)*scl)/2;
+const P=([lat,lon])=>[(lon-B.w)*kx*scl+offX,(B.n-lat)*scl+offY];
+const path=pts=>"M"+pts.map(p=>P(p).map(v=>v.toFixed(1)).join(",")).join(" L");
+const smooth=pts=>{const q=pts.map(P);let d=`M${q[0][0].toFixed(1)},${q[0][1].toFixed(1)}`;
+  for(let i=0;i<q.length-1;i++){const p0=q[i-1]||q[i],p1=q[i],p2=q[i+1],p3=q[i+2]||p2;
+  const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+  d+=` C${c1.map(v=>v.toFixed(1))} ${c2.map(v=>v.toFixed(1))} ${p2.map(v=>v.toFixed(1))}`;}return d;};
+const ROADS=[
+ {m:0,p:[[35.7143,-83.5102],[35.6853,-83.5369],[35.665,-83.515],[35.6370,-83.4935],[35.6355,-83.4740],[35.6290,-83.4510],[35.618,-83.437],[35.6110,-83.4250],[35.590,-83.400],[35.565,-83.360],[35.540,-83.330],[35.5130,-83.3060],[35.4845,-83.3150]]},
+ {m:1,p:[[35.6085,-83.4290],[35.598,-83.448],[35.585,-83.470],[35.570,-83.485],[35.5568,-83.4960]]},
+ {m:0,p:[[35.6853,-83.5369],[35.676,-83.560],[35.6580,-83.5830],[35.650,-83.620],[35.660,-83.650],[35.655,-83.690],[35.6575,-83.7115]]},
+ {m:1,p:[[35.6575,-83.7115],[35.672,-83.740],[35.6750,-83.7550]]},
+ {m:1,p:[[35.6575,-83.7115],[35.640,-83.735],[35.620,-83.760],[35.6040,-83.7740]]},
+ {m:1,p:[[35.6040,-83.7740],[35.603,-83.795],[35.600,-83.815],[35.595,-83.835],[35.5907,-83.8521],[35.583,-83.845],[35.580,-83.825],[35.585,-83.805],[35.592,-83.785],[35.6040,-83.7740]]},
+ {m:1,p:[[35.6575,-83.7115],[35.650,-83.700],[35.6407,-83.6893]]},
+ {m:1,p:[[35.7110,-83.5100],[35.698,-83.503],[35.6898,-83.4993],[35.6754,-83.4871],[35.6812,-83.4625],[35.690,-83.455],[35.700,-83.470],[35.7085,-83.4950]]}];
+const CREST=[[35.705,-83.257],[35.660,-83.320],[35.637,-83.375],[35.6110,-83.4250],[35.590,-83.468],[35.5628,-83.4985],[35.565,-83.567],[35.567,-83.640],[35.567,-83.709],[35.545,-83.790],[35.522,-83.856]];
+const TOWNS=[["Gatlinburg",[35.7143,-83.5102],6,-8],["Townsend",[35.6750,-83.7550],-24,-10],["Cherokee",[35.4845,-83.3150],8,4],["Cades Cove",[35.5900,-83.8100],-30,24],["Sugarlands",[35.6853,-83.5369],-72,4],["Newfound Gap",[35.6110,-83.4250],8,16],["Elkmont",[35.6580,-83.5830],-18,18]];
+const PEAKS=[["Mt. LeConte",[35.6544,-83.4361]],["Kuwohi",[35.5628,-83.4985]],["Thunderhead",[35.567,-83.709]],["Mt. Guyot",[35.705,-83.257]]];
+// a wiggly path between trailhead and destination so trails read as trails, not rulers
+function trailPath(t){ const a=P(t.th), b=P(t.end), dx=b[0]-a[0], dy=b[1]-a[1], L=Math.hypot(dx,dy)||1, nx=-dy/L, ny=dx/L; let d=`M${a[0].toFixed(1)},${a[1].toFixed(1)}`;
+  const seed=t.rt*2.3; for(let i=1;i<=24;i++){ const u=i/24, w=Math.sin(u*Math.PI)*(Math.sin(u*9+seed)*.12+Math.sin(u*4+seed*2)*.1)*L;
+    d+=` L${(a[0]+dx*u+nx*w).toFixed(1)},${(a[1]+dy*u+ny*w).toFixed(1)}`; } return d; }
+function drawMap(el, onPick){
+  let s=`<path class="crest" d="${smooth(CREST)}"/>`;
+  ROADS.forEach(r=>s+=`<path class="road ${r.m?'minor':''}" d="${path(r.p)}"/>`);
+  PEAKS.forEach(([n,c])=>{const[x,y]=P(c);s+=`<text class="peak" x="${x+5}" y="${y-5}">▲ ${n}</text>`;});
+  TOWNS.forEach(([n,c,dx,dy])=>{const[x,y]=P(c);s+=`<circle cx="${x}" cy="${y}" r="2.5" fill="#e9efe9"/><text class="town" x="${x+dx}" y="${y+dy}">${n}</text>`;});
+  TRAILS.forEach(t=>{ const w=status(t); s+=`<path class="trail ${t.id===sel?'on':''} ${w?.k==='closed'?'off':''}" id="tp-${el.id}-${t.id}" d="${trailPath(t)}"/>`; });
+  const seen={}; TRAILS.forEach(t=>{const k=t.th.join(); if(seen[k])return; seen[k]=1; const[x,y]=P(t.th), grp=TRAILS.filter(z=>z.th.join()===k);
+    s+=`<circle class="th ${T(sel).th.join()===k?'on':''} ${grp.every(z=>status(z)?.k==='closed')?'off':''}" cx="${x}" cy="${y}" r="5.5"/><circle class="hit" data-th="${k}" cx="${x}" cy="${y}" r="15"/>`;});
+  const [px,py]=P(T(sel).th);
+  s+=`<circle class="pulse" cx="${px}" cy="${py}" r="8"><animate attributeName="r" values="7;17;7" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0;.9" dur="1.8s" repeatCount="indefinite"/></circle><circle class="dot" r="0"/>`;
+  el.innerHTML=s;
+  el.querySelectorAll(".hit").forEach(h=>h.onclick=()=>{ const grp=TRAILS.filter(t=>t.th.join()===h.dataset.th), i=grp.findIndex(t=>t.id===sel);
+    onPick(grp[(i+1)%grp.length].id); if(grp.length>1) toast(`${grp.length} trails start here. Tap again to switch`); });
+  // animate selected trail drawing
+  const on=el.querySelector(".trail.on"); if(on){ const len=on.getTotalLength(); on.style.strokeDasharray=len; on.style.strokeDashoffset=len; on.getBoundingClientRect(); on.style.transition="stroke-dashoffset .8s ease"; on.style.strokeDashoffset=0; }
+}
+function mapDot(el, frac){ const d=el.querySelector(".dot"); if(frac==null){d.setAttribute("r",0);return;}
+  const p=el.querySelector(".trail.on"); const pt=p.getPointAtLength(p.getTotalLength()*frac); d.setAttribute("cx",pt.x); d.setAttribute("cy",pt.y); d.setAttribute("r",5); }
+function renderMapView(){
+  drawMap($("#bigmap"), id=>{sel=id; renderMapView();});
+  $("#mlist").innerHTML = TRAILS.map(t=>{const w=status(t); return `<button class="mi ${t.id===sel?'on':''} ${w?.k==='closed'?'off':''}" data-id="${t.id}"><div>${t.name}<small>${t.rt} mi · ${t.gain.toLocaleString()} ft${w?` · <span class="warn">${w.why}</span>`:""}</small></div><span class="diff d-${t.diff}">${DLAB[t.diff]}</span></button>`;}).join("");
+  $("#mlist").querySelectorAll(".mi").forEach(b=>b.onclick=()=>{sel=b.dataset.id; renderMapView();});
+  const t=T(sel);
+  $("#mpop").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><div><b style="font-family:Fraunces,serif;font-size:18px">${t.name}</b><div class="muted" style="font-size:13px">${t.area} · ${t.rt} mi · ${fmtH(hours(t))}</div></div><a class="btn" href="#trail-${t.id}">Open trail page →</a></div>`;
+}
+
+// ---------- TRAIL PAGE ----------
+const PW=560,PH=190,PL=44,PR=10,PT=14,PB=26; let prof=null;
+function buildProfile(t){ const k=t.prof, maxX=k[k.length-1][0], pts=[];
+  for(let i=0;i<=120;i++){ const x=maxX*i/120; let j=0; while(j<k.length-2&&x>k[j+1][0]) j++;
+    const[x0,y0]=k[j],[x1,y1]=k[j+1],u=(x-x0)/(x1-x0||1),e=u*u*(3-2*u),tex=Math.sin(i*1.7+t.rt)*12+Math.sin(i*.53)*18;
+    pts.push([x,y0+(y1-y0)*e+(i===0||i===120?0:tex)]); }
+  const ys=pts.map(p=>p[1]),lo=Math.floor((Math.min(...ys)-150)/250)*250,hi=Math.ceil((Math.max(...ys)+150)/250)*250;
+  return {pts,maxX,lo,hi,X:x=>PL+(x/maxX)*(PW-PL-PR),Y:y=>PT+(1-(y-lo)/(hi-lo))*(PH-PT-PB)}; }
+function profileSVG(t){ prof=buildProfile(t); const{pts,maxX,lo,hi,X,Y}=prof; let g=""; const step=(hi-lo)>1500?500:250;
+  for(let v=lo;v<=hi;v+=step) g+=`<line x1="${PL}" x2="${PW-PR}" y1="${Y(v)}" y2="${Y(v)}" stroke="#2a3b35"/><text x="${PL-6}" y="${Y(v)+4}" text-anchor="end" font-size="10" fill="#9db0a6">${v.toLocaleString()}</text>`;
+  for(let m=0;m<=maxX+1e-6;m+=maxX>3?1:.5) g+=`<text x="${X(m)}" y="${PH-8}" text-anchor="middle" font-size="10" fill="#9db0a6">${m} mi</text>`;
+  const line=pts.map((p,i)=>(i?"L":"M")+X(p[0]).toFixed(1)+","+Y(p[1]).toFixed(1)).join(" ");
+  return `<svg id="prof" viewBox="0 0 ${PW} ${PH}"><defs><linearGradient id="gf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2b45a" stop-opacity=".45"/><stop offset="1" stop-color="#f2b45a" stop-opacity="0"/></linearGradient></defs>
+   ${g}<path d="${line} L${X(maxX)},${PH-PB} L${PL},${PH-PB} Z" fill="url(#gf)"/>
+   <path d="${line}" fill="none" stroke="#f2b45a" stroke-width="2.2" stroke-dasharray="2000" stroke-dashoffset="2000"><animate attributeName="stroke-dashoffset" from="2000" to="0" dur=".9s" fill="freeze"/></path>
+   <text x="${PL+4}" y="${PT+8}" font-size="10" fill="#9db0a6">ft · outbound leg (approx.) · drag to explore</text>
+   <g id="scrub" style="display:none"><line id="sl" y1="${PT}" y2="${PH-PB}" stroke="#e9efe9" stroke-dasharray="3 3"/><circle id="sc" r="5" fill="#fff" stroke="#d9774b" stroke-width="2.5"/><rect id="sbg" rx="6" height="22" fill="#0f1714" stroke="#2a3b35"/><text id="st" font-size="11" fill="#e9efe9" font-weight="600"></text></g></svg>`; }
+function wireScrub(){ const svg=$("#prof"), g=$("#scrub"), mm=$("#minimap");
+  const move=e=>{ const r=svg.getBoundingClientRect(), vx=(e.clientX-r.left)/r.width*PW, frac=Math.max(0,Math.min(1,(vx-PL)/(PW-PL-PR))), [mx,el]=prof.pts[Math.round(frac*120)], x=prof.X(mx), y=prof.Y(el);
+    g.style.display=""; $("#sl").setAttribute("x1",x); $("#sl").setAttribute("x2",x); $("#sc").setAttribute("cx",x); $("#sc").setAttribute("cy",y);
+    const txt=`${mx.toFixed(1)} mi · ${Math.round(el/10)*10} ft`, tw=txt.length*6.2+12, tx=Math.min(Math.max(x-tw/2,PL),PW-PR-tw);
+    $("#sbg").setAttribute("x",tx); $("#sbg").setAttribute("y",PT+12); $("#sbg").setAttribute("width",tw); $("#st").setAttribute("x",tx+6); $("#st").setAttribute("y",PT+27); $("#st").textContent=txt;
+    mapDot(mm,frac); };
+  const leave=()=>{g.style.display="none"; mapDot(mm,null);};
+  svg.addEventListener("pointermove",move); svg.addEventListener("pointerdown",e=>{svg.setPointerCapture?.(e.pointerId);move(e);});
+  svg.addEventListener("pointerleave",leave); svg.addEventListener("pointerup",e=>{if(e.pointerType!=="mouse")leave();}); }
+function renderTempStart(){ const t=T(sel), st=Math.round(valleyT-3.5*(t.high-1300)/1000), h=hours(t);
+  $("#tv").textContent=`${st}°F`; $("#vl").textContent=`if it's ${valleyT}°F in Gatlinburg`;
+  $("#tn").innerHTML = st<=32?`<span class="warn">Below freezing. Expect ice; bring microspikes.</span>`:st<=40?"Cold. Bring gloves, a hat and a puffy.":"Comfortable with layers.";
+  $("#ls").textContent=fmtClock(17*60+25-h*60-30); $("#ht").textContent=fmtH(h); }
+function renderTrailPage(){
+  { const k=plan.findIndex(d=>d.stops.some(s=>s.trail===sel)); const ds=TRIP_DATES[k>=0?k:1]; if(!renderTrailPage.touched) valleyT=Math.round(dayAt("town",ds).hi); }
+  const t=T(sel), w=status(t), i=TRAILS.indexOf(t), prev=TRAILS[(i+TRAILS.length-1)%TRAILS.length], next=TRAILS[(i+1)%TRAILS.length];
+  const onDays=plan.map((d,k)=>d.stops.some(s=>s.trail===t.id)?k:-1).filter(k=>k>=0);
+  $("#v-trail").innerHTML = `
+   <div class="crumb"><a href="#trails">← All trails</a></div>
+   <div class="ph" style="padding-top:10px"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h1>${t.name}</h1><span class="diff d-${t.diff}">${DLAB[t.diff]}</span></div>
+     <p>${t.area}${w?` · <span class="warn">${w.why}</span>`:""}${onDays.length?` · <span style="color:var(--amber)">In your plan: ${onDays.map(k=>cleanLabel(plan[k].label)).join(", ")}</span>`:""}</p></div>
+   <div class="thero">
+     <div class="card" style="margin:0">
+       <div class="stats" style="margin-top:0">
+         <div class="stat"><b>${t.rt} mi</b><span>Round trip</span></div><div class="stat"><b>${t.gain.toLocaleString()}′</b><span>Elev. gain</span></div>
+         <div class="stat"><b>${t.high.toLocaleString()}′</b><span>High point</span></div><div class="stat"><b id="ht"></b><span>Est. time</span></div></div>
+       ${profileSVG(t)}
+       <div style="display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted);flex-wrap:wrap;margin-top:8px">Your pace:
+         ${[["Relaxed",1.25],["Steady",1],["Quick",.85]].map(([l,v])=>`<button class="tab ${pace===v?'on':''}" data-p="${v}">${l}</button>`).join("")}</div>
+       <p>${t.blurb}</p><div class="note"><b>Tip:</b> ${t.tip}</div>
+     </div>
+     <div>
+       <div class="card"><svg class="map" id="minimap" viewBox="0 0 600 330"></svg><div class="muted" style="font-size:12px;margin-top:6px">Drag along the elevation chart to follow the trail here.</div></div>
+       <div class="row2" style="margin-top:0">
+         <div class="mini"><div class="k">Temp at top · <a href="#weather" style="color:var(--sky)">forecast</a></div><div class="v" id="tv"></div><input type="range" id="vt" min="20" max="70" value="${valleyT}"><div style="font-size:12px" class="muted" id="vl"></div><div style="font-size:13px;margin-top:4px" id="tn"></div></div>
+         <div class="mini"><div class="k">Start by</div><div class="v" id="ls"></div><div style="font-size:13px" class="muted">to be back 30 min before sunset (~5:25pm)</div></div>
+       </div>
+       <div class="card"><div style="font-weight:600;margin-bottom:6px">Add to your plan</div><div class="adds" style="margin:0">${plan.map((d,k)=>`<button class="tab ${onDays.includes(k)?'on':''}" data-add="${k}">${d.label}</button>`).join("")}</div></div>
+     </div>
+   </div>
+   <div class="pager" style="margin-top:16px"><a class="btn ghost" href="#trail-${prev.id}">← ${prev.name.split(" (")[0]}</a><a class="btn ghost" href="#trail-${next.id}">${next.name.split(" (")[0]} →</a></div>`;
+  drawMap($("#minimap"), id=>go("trail-"+id));
+  $("#v-trail").querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{pace=+b.dataset.p; store.set("smk-pace",pace); renderTrailPage();});
+  $("#v-trail").querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{ const k=+b.dataset.add, d=plan[k], ix=d.stops.findIndex(s=>s.trail===t.id);
+    if(ix>=0){ d.stops.splice(ix,1); savePlan(); toast(`Removed from ${cleanLabel(d.label)}`);} else addTo(k,t.id); renderTrailPage(); });
+  $("#vt").oninput=e=>{valleyT=+e.target.value; renderTrailPage.touched=true; renderTempStart();};
+  renderTempStart(); wireScrub();
+}
+
+// ---------- PREP ----------
+function renderPrep(){
+  const items=[...CHECK,...extra], done=store.get("smk-check",{}), n=items.filter((_,i)=>done[i]).length;
+  $("#checkhead").innerHTML = `<div class="muted" style="font-size:13px;margin-top:8px">${n}/${items.length} packed</div><div class="bar"><div style="width:${n/items.length*100}%"></div></div>`;
+  $("#check").innerHTML = items.map((c,i)=>`<label><input type="checkbox" data-i="${i}" ${done[i]?"checked":""}><span class="${done[i]?'done':''}">${c}</span></label>`).join("");
+  $("#check").querySelectorAll("input").forEach(cb=>cb.onchange=()=>{ const d=store.get("smk-check",{}); d[cb.dataset.i]=cb.checked; store.set("smk-check",d); renderPrep();
+    if(items.every((_,i)=>d[i])){confetti(); toast("All packed. Have a great birthday 🎂");} });
+}
+function addItem(){ const v=$("#newitem").value.trim(); if(!v) return; extra.push(v); store.set("smk-extra",extra); $("#newitem").value=""; renderPrep(); }
+$("#additem").onclick=addItem; $("#newitem").onkeydown=e=>{ if(e.key==="Enter") addItem(); };
+
+// ---------- confetti ----------
+function confetti(){ const c=$("#confetti"),x=c.getContext("2d"); c.width=innerWidth; c.height=innerHeight; const cols=["#f2b45a","#d9774b","#7fb38a","#8fb8d8","#e9efe9"];
+  const ps=Array.from({length:110},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height*.4,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,r:Math.random()*6.28,s:4+Math.random()*5,c:cols[Math.floor(Math.random()*5)]}));
+  let f=0;(function tick(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.r+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore();});
+  if(++f<160)requestAnimationFrame(tick);else x.clearRect(0,0,c.width,c.height);})(); }
+
+
+// =====================================================================
+// WEATHER: live forecast (Open-Meteo), 10-yr typical (Open-Meteo archive),
+// NWS text forecasts + alerts, and a what-to-wear engine.
+// =====================================================================
+const TRIP_DATES = ["2026-11-25","2026-11-26","2026-11-27","2026-11-28","2026-11-29"];
+const ZONES = [
+  {id:"town",  name:"Gatlinburg",   sub:"Town",           lat:35.7143, lon:-83.5102, ft:1290},
+  {id:"cove",  name:"Cades Cove",   sub:"Valley",         lat:35.6010, lon:-83.8120, ft:1750},
+  {id:"gap",   name:"Newfound Gap", sub:"High ridge",     lat:35.6110, lon:-83.4250, ft:5046},
+  {id:"summit",name:"Kuwohi",       sub:"Highest summit", lat:35.5628, lon:-83.4985, ft:6643}
+];
+// Rough fallback if every API call fails and nothing is cached (labeled as such in the UI)
+const ROUGH = {town:{hi:55,lo:33,rain:35,snow:3}, cove:{hi:54,lo:29,rain:35,snow:3}, gap:{hi:41,lo:26,rain:40,snow:20}, summit:{hi:37,lo:23,rain:40,snow:25}};
+const WMO = {0:["☀️","Clear"],1:["🌤","Mostly clear"],2:["⛅","Partly cloudy"],3:["☁️","Overcast"],45:["🌫","Fog"],48:["🌫","Freezing fog"],
+ 51:["🌦","Light drizzle"],53:["🌦","Drizzle"],55:["🌧","Heavy drizzle"],56:["🌧","Freezing drizzle"],57:["🌧","Freezing drizzle"],
+ 61:["🌧","Light rain"],63:["🌧","Rain"],65:["🌧","Heavy rain"],66:["🌧","Freezing rain"],67:["🌧","Freezing rain"],
+ 71:["🌨","Light snow"],73:["🌨","Snow"],75:["❄️","Heavy snow"],77:["🌨","Snow grains"],80:["🌦","Showers"],81:["🌧","Showers"],82:["⛈","Heavy showers"],
+ 85:["🌨","Snow showers"],86:["❄️","Heavy snow showers"],95:["⛈","Thunderstorms"],96:["⛈","Storms + hail"],99:["⛈","Storms + hail"]};
+const wmo = c => WMO[c] || ["🌡",""];
+let W = store.get("smk-wx", {fc:null, fcAt:0, normals:null, nws:{}, nwsAt:0, alerts:[], err:null});
+let wxDay = 1, wxBusy = false;
+const saveW = () => store.set("smk-wx", W);
+const today = () => new Date().toLocaleDateString("en-CA",{timeZone:"America/New_York"});
+const daysOut = ds => Math.round((new Date(ds+"T12:00:00") - new Date(today()+"T12:00:00"))/864e5);
+const m = ft => Math.round(ft*0.3048);
+const r = v => v==null ? "–" : Math.round(v);
+function ago(ts){ if(!ts) return "never"; const mn=Math.round((Date.now()-ts)/6e4); return mn<1?"just now":mn<60?`${mn} min ago`:mn<1440?`${Math.round(mn/60)} h ago`:`${Math.round(mn/1440)} d ago`; }
+
+async function getJSON(u){ const res = await fetch(u); if(!res.ok) throw new Error(res.status+" "+u.split("?")[0]); return res.json(); }
+const qs = arr => arr.join(",");
+
+async function fetchForecast(){
+  const u = "https://api.open-meteo.com/v1/forecast?latitude="+qs(ZONES.map(z=>z.lat))+"&longitude="+qs(ZONES.map(z=>z.lon))+"&elevation="+qs(ZONES.map(z=>m(z.ft)))+
+   "&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,snowfall_sum,precipitation_probability_max,wind_speed_10m_max,wind_gusts_10m_max,sunrise,sunset"+
+   "&hourly=temperature_2m,apparent_temperature,precipitation_probability,weather_code,wind_speed_10m"+
+   "&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation"+
+   "&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America%2FNew_York&forecast_days=16";
+  const j = await getJSON(u); const arr = Array.isArray(j)?j:[j];
+  W.fc = {}; ZONES.forEach((z,i)=> W.fc[z.id] = arr[i]); W.fcAt = Date.now();
+}
+async function fetchNormals(){
+  const base = ZONES.map(z=>z.lat).join(",");
+  const mk = elev => "https://archive-api.open-meteo.com/v1/archive?latitude="+base+"&longitude="+qs(ZONES.map(z=>z.lon))+(elev?"&elevation="+qs(ZONES.map(z=>m(z.ft))):"")+
+    "&start_date=2015-11-25&end_date=2025-11-29&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=America%2FNew_York";
+  let j; try { j = await getJSON(mk(true)); } catch(e){ j = await getJSON(mk(false)); }
+  const arr = Array.isArray(j)?j:[j]; const N = {};
+  ZONES.forEach((z,i)=>{ const d=arr[i].daily, hi=[],lo=[]; let rain=0,snow=0,n=0, minLo=99, maxHi=-99;
+    d.time.forEach((t,k)=>{ const md=t.slice(5); if(md<"11-25"||md>"11-29"||d.temperature_2m_max[k]==null) return;
+      n++; hi.push(d.temperature_2m_max[k]); lo.push(d.temperature_2m_min[k]); minLo=Math.min(minLo,d.temperature_2m_min[k]); maxHi=Math.max(maxHi,d.temperature_2m_max[k]);
+      if((d.precipitation_sum[k]||0)>=0.04) rain++; if((d.snowfall_sum[k]||0)>0.05) snow++; });
+    const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
+    N[z.id] = {hi:avg(hi), lo:avg(lo), rain:rain/n*100, snow:snow/n*100, minLo, maxHi, n};
+  });
+  W.normals = N;
+}
+async function fetchNWS(){
+  const out = {}, alerts = [];
+  for (const z of ZONES.filter(z=>z.id==="town"||z.id==="gap")){
+    try { const p = await getJSON(`https://api.weather.gov/points/${z.lat},${z.lon}`); const f = await getJSON(p.properties.forecast);
+      out[z.id] = f.properties.periods.map(x=>({name:x.name, start:x.startTime.slice(0,10), day:x.isDaytime, temp:x.temperature, text:x.detailedForecast, short:x.shortForecast})); } catch(e){}
+    try { const a = await getJSON(`https://api.weather.gov/alerts/active?point=${z.lat},${z.lon}`);
+      a.features.forEach(f=>{ if(!alerts.some(x=>x.id===f.id)) alerts.push({id:f.id, event:f.properties.event, headline:f.properties.headline, sev:f.properties.severity, ends:f.properties.ends||f.properties.expires}); }); } catch(e){}
+  }
+  if (Object.keys(out).length) { W.nws = out; W.nwsAt = Date.now(); }
+  W.alerts = alerts;
+}
+async function refreshWeather(force){
+  if (wxBusy) return; wxBusy = true; W.err = null; paintStatus("Updating…");
+  const jobs = [];
+  if (force || Date.now()-W.fcAt > 30*6e4) jobs.push(fetchForecast().catch(e=>{W.err="Forecast: "+e.message;}));
+  if (!W.normals) jobs.push(fetchNormals().catch(e=>{W.err=(W.err?W.err+" · ":"")+"History: "+e.message;}));
+  if (force || Date.now()-W.nwsAt > 30*6e4) jobs.push(fetchNWS().catch(()=>{}));
+  await Promise.all(jobs); saveW(); wxBusy = false;
+  const v = location.hash.slice(1)||"home";
+  if (v==="weather") renderWeather(); else if (v==="plan") renderPlan(); else if (v==="home") renderHome(); else paintStatus();
+}
+// keep it fresh: on load, every 30 min while open, and when the tab comes back
+setInterval(()=>{ if(document.visibilityState==="visible") refreshWeather(false); }, 30*6e4);
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && Date.now()-W.fcAt>30*6e4) refreshWeather(false); });
+
+// ---- per day / per zone lookups ----
+function dayAt(zid, ds){
+  const f = W.fc?.[zid]?.daily, i = f ? f.time.indexOf(ds) : -1;
+  if (i>=0 && f.temperature_2m_max[i]!=null) return {src:"forecast", hi:f.temperature_2m_max[i], lo:f.temperature_2m_min[i], fhi:f.apparent_temperature_max[i], flo:f.apparent_temperature_min[i],
+     pop:f.precipitation_probability_max[i], precip:f.precipitation_sum[i], snow:f.snowfall_sum[i], wind:f.wind_speed_10m_max[i], gust:f.wind_gusts_10m_max[i], code:f.weather_code[i], sunset:f.sunset?.[i]};
+  const n = W.normals?.[zid] || ROUGH[zid], rough = !W.normals?.[zid];
+  return {src: rough?"rough":"typical", hi:n.hi, lo:n.lo, fhi:n.hi, flo:n.lo-4, pop:n.rain, precip:null, snow:null, snowChance:n.snow, wind:null, code:null, minLo:n.minLo, maxHi:n.maxHi};
+}
+function confidence(ds){ const d = daysOut(ds);
+  if (dayAt("town",ds).src!=="forecast") return {k:"typical", l:"Typical weather", c:"#8fb8d8", t:`${d} days out. Forecasts don't reach this far yet, so this is what the last 10 years looked like on this date. The live forecast takes over at 16 days.`};
+  if (d>7) return {k:"low", l:"Early trend", c:"#e7d27e", t:`${d} days out. The live forecast covers this date now but can swing 10°F+. Pay attention to the trend, not the exact numbers.`};
+  if (d>3) return {k:"mid", l:"Good forecast", c:"#9fd7ab", t:`${d} days out. Generally reliable for temperatures. Rain timing can still shift.`};
+  if (d>=0) return {k:"high", l:"High confidence", c:"#7fb38a", t:d===0?"Today's forecast.":`${d} day${d>1?"s":""} out. Pack based on this.`};
+  return {k:"past", l:"Past", c:"#9db0a6", t:"This day has passed."};
+}
+// temperature at any elevation on a day, interpolated along town → Newfound Gap → Kuwohi
+function atElev(ft, ds, key){ const L=["town","gap","summit"].map(id=>({ft:ZONES.find(z=>z.id===id).ft, v:dayAt(id,ds)[key]}));
+  if (ft<=L[0].ft) return L[0].v; for(let i=0;i<L.length-1;i++){ const a=L[i],b=L[i+1]; if(ft<=b.ft) return a.v+(b.v-a.v)*(ft-a.ft)/(b.ft-a.ft); } return L[2].v; }
+function hikeFeel(ft, ds){ // coldest realistic "feels like" on the trail: mostly midday high, some early-start chill
+  return 0.65*atElev(ft,ds,"fhi") + 0.35*atElev(ft,ds,"flo"); }
+
+// ---- what to wear ----
+function florida(T){ T=Math.round(T);
+  if (T>=70) return "Like a normal Florida winter day.";
+  if (T>=60) return "A cool West Palm morning. Hoodie weather.";
+  if (T>=50) return "Colder than almost any day back home.";
+  if (T>=40) return "About as cold as West Palm's coldest night of the year.";
+  if (T>=32) return "Colder than West Palm basically ever gets.";
+  return "Below freezing: ice on rocks and frozen puddles. Totally new territory for you."; }
+function outfit(o){ // o: {T, pop, snow, wind, high, town}
+  const {T,pop=0,snow=0,wind=0,high=0,town=false} = o, it=[];
+  const wet = pop>=40, icy = (snow||0)>0 || (T<=32 && pop>=30);
+  if (town){
+    it.push(["👕","Top", T<60?"Long sleeves + a sweater or flannel":"T-shirt with a light layer for evening"]);
+    it.push(["🧥","Jacket", T<40?"Your puffy jacket (it works in town too)":T<55?"Medium jacket or fleece":"Light jacket"]);
+    if (wet) it.push(["☔","Rain","Rain jacket or umbrella"]);
+    it.push(["👖","Legs","Jeans are fine in town" + (T<35?" (thermals underneath if you're outside a lot)":"")]);
+    it.push(["🧦","Socks", T<45?"Wool crew socks":"Any socks you like"]);
+    it.push(["👟","Shoes", wet?"Closed shoes that can handle puddles":"Closed sneakers. No sandals"]);
+    if (T<40) it.push(["🧤","Extras","Beanie + gloves for walking around after dark"]);
+    return it;
+  }
+  it.push(["👕","Base layer", T<60?"Long-sleeve synthetic or merino wool top. No cotton: it stays wet and chills you":"Synthetic short-sleeve tee. No cotton"]);
+  if (T<55) it.push(["🧶","Mid layer", T<35?"Warm fleece (200-weight) or light synthetic jacket":"Light fleece or quarter-zip"]);
+  if (T<42) it.push(["🧥","Insulation", T<25?"Warm puffy jacket. Put it on the moment you stop":"Packable puffy. Wear it at the summit and on breaks"]);
+  if (pop>=30) it.push(["🌧","Shell","Waterproof rain jacket with hood. Wear it before you're soaked"]);
+  else if (wind>=15 || high>=5000) it.push(["💨","Shell","Rain jacket as a windbreaker. Ridges get gusty"]);
+  it.push(["👖","Legs", "Synthetic hiking pants (not jeans, which stay wet and cold)" + (T<32?" + thermal leggings underneath":"") + (pop>=60?" + rain pants":"")]);
+  it.push(["🧦","Socks", (T<35||icy||wet)?"Heavyweight merino wool hiking socks + a dry spare pair in your pack":"Midweight merino wool hiking socks + a spare pair in your pack"]);
+  it.push(["🥾","Footwear", icy?"Waterproof hiking boots + microspikes for ice":wet?"Waterproof hiking boots or shoes":"Hiking boots or trail shoes with good grip"]);
+  if (T<45) it.push(["🧢","Head", "Warm beanie" + (T<30||wind>=20?" + neck gaiter (buff)":"")]);
+  if (T<48) it.push(["🧤","Hands", T<32?"Insulated gloves (+ thin liners if you have them)":"Light liner gloves"]);
+  if (T<40) it.push(["🔥","Extras","Hand warmers + a thermos of something hot"]);
+  return it;
+}
+function outfitHTML(it){ return `<div class="outfit">${it.map(([e,k,v])=>`<div class="oi"><span class="oe">${e}</span><div><b>${k}</b><div>${v}</div></div></div>`).join("")}</div>`; }
+
+// ---- small UI pieces used elsewhere ----
+function wxChip(ds){ const t=dayAt("town",ds), s=dayAt("summit",ds), ic=t.code!=null?wmo(t.code)[0]:"🗓";
+  return `<span class="wxchip" title="Town / Kuwohi summit">${ic} Town ${r(t.hi)}°/${r(t.lo)}° · Summit ${r(s.hi)}°/${r(s.lo)}°${t.pop!=null?` · ${r(t.pop)}% rain`:""}</span>`; }
+function paintStatus(msg){
+  document.querySelectorAll(".wxstatus").forEach(el=>{
+    el.innerHTML = msg ? `<span class="spin"></span> ${msg}` :
+      `${W.fcAt?`Forecast updated ${ago(W.fcAt)}`:"No live forecast yet"} · ${W.normals?"10-yr history loaded":"history pending"}${W.err?` · <span class="warn">${W.err}</span>`:""}`; }); }
+
+// ---- WEATHER PAGE ----
+function renderWeather(){
+  const ds = TRIP_DATES[wxDay], conf = confidence(ds), nowIn = TRIP_DATES.includes(today());
+  const el = $("#v-weather");
+  el.innerHTML = `
+  <div class="ph"><h1>Weather & what to wear</h1><p>Live forecasts for four elevations, from Gatlinburg (1,290 ft) up to Kuwohi (6,643 ft). It refreshes on its own every 30 minutes while the page is open and gets more accurate as the trip gets closer.</p></div>
+  <div class="card wxbar"><div class="wxstatus muted" style="font-size:13px"></div><button class="btn ghost" id="wxref">↻ Refresh</button></div>
+  ${W.alerts.length?W.alerts.map(a=>`<div class="alert"><b>⚠ ${a.event}</b><div>${a.headline||""}</div></div>`).join(""):""}
+
+  <div class="sec-h" style="margin-top:6px"><h2>${nowIn?"Right now":"Right now in the Smokies"}</h2><span class="muted" style="font-size:13px">${nowIn?"":"Live today, as a feel for the place"}</span></div>
+  <div class="zones">${ZONES.map(z=>{ const c=W.fc?.[z.id]?.current; return `<div class="zone"><div class="zs">${z.sub} · ${z.ft.toLocaleString()} ft</div><div class="zn">${z.name}</div>
+     ${c?`<div class="zt">${wmo(c.weather_code)[0]} ${r(c.temperature_2m)}°</div><div class="zs">Feels ${r(c.apparent_temperature)}° · wind ${r(c.wind_speed_10m)} mph</div>`:`<div class="zt muted">–</div><div class="zs">waiting for data</div>`}</div>`;}).join("")}</div>
+
+  <div class="sec-h"><h2>Your trip days</h2></div>
+  <div class="wdays">${TRIP_DATES.map((d,i)=>{ const t=dayAt("town",d), s=dayAt("summit",d), c=confidence(d), lab=DAYS[i].label;
+    return `<button class="wday ${i===wxDay?'on':''}" data-i="${i}"><div class="dl">${lab}</div><div class="wi">${t.code!=null?wmo(t.code)[0]:"📊"}</div>
+     <div class="wt"><b>${r(t.hi)}°</b> / ${r(t.lo)}° <span class="muted">town</span></div><div class="wt"><b>${r(s.hi)}°</b> / ${r(s.lo)}° <span class="muted">summit</span></div>
+     <div class="wp">💧 ${r(t.pop)}%</div><div class="conf" style="color:${c.c}">● ${c.l}</div></button>`;}).join("")}</div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><h2 style="font-size:22px">${DAYS[wxDay].label} · ${plan[wxDay].title}</h2><span class="conf" style="color:${conf.c}">● ${conf.l}</span></div>
+    <p class="muted" style="font-size:13px;margin:4px 0 12px">${conf.t}</p>
+    ${ladder(ds)}
+    ${nwsFor(ds)}
+    ${dayOutfits(wxDay)}
+  </div>
+
+  ${hourly()}
+  ${guide101()}`;
+  el.querySelectorAll(".wday").forEach(b=>b.onclick=()=>{wxDay=+b.dataset.i; renderWeather();});
+  $("#wxref").onclick=()=>refreshWeather(true);
+  el.querySelectorAll("[data-pack]").forEach(b=>b.onclick=()=>addGearToPacking(JSON.parse(decodeURIComponent(b.dataset.pack))));
+  paintStatus();
+}
+function ladder(ds){ // elevation vs temperature graphic
+  const rows = [...ZONES].sort((a,b)=>b.ft-a.ft).map(z=>({z, d:dayAt(z.id,ds)}));
+  const min = Math.min(...rows.map(x=>x.d.lo))-4, max = Math.max(...rows.map(x=>x.d.hi))+4, X=v=>((v-min)/(max-min)*100).toFixed(1);
+  const fz = 32>min && 32<max ? `<div class="frz" style="left:${X(32)}%"><span>32°F</span></div>` : "";
+  return `<div class="ladder">${rows.map(({z,d})=>`<div class="lr"><div class="ll"><b>${z.name}</b><span>${z.ft.toLocaleString()} ft</span></div>
+     <div class="lt">${fz}<div class="lbar" style="left:${X(d.lo)}%;width:${(X(d.hi)-X(d.lo))}%"></div><span class="lv" style="left:${X(d.lo)}%">${r(d.lo)}°</span><span class="lv hi" style="left:${X(d.hi)}%">${r(d.hi)}°</span></div>
+     <div class="lx">${d.code!=null?wmo(d.code)[0]+" "+wmo(d.code)[1]:d.src==="typical"?`💧${r(d.pop)}% · ❄️${r(d.snowChance)}%`:"rough avg"}${d.wind!=null?` · 💨${r(d.wind)}${d.gust?`–${r(d.gust)}`:""} mph`:""}${d.snow>0?` · ❄️ ${d.snow.toFixed(1)}″`:""}</div></div>`).join("")}</div>
+   <div class="muted" style="font-size:12px;margin-top:4px">Bars show the low → high temperature. ${rows[3].d.src==="typical"?`In the last 10 years, Nov 25–29 in Gatlinburg ranged from ${r(rows[3].d.minLo)}° to ${r(rows[3].d.maxHi)}°.`:"Wind chill at the summit can make it feel 10–15° colder still."}</div>`; }
+function nwsFor(ds){ const out=["town","gap"].map(id=>{ const p=(W.nws?.[id]||[]).filter(x=>x.start===ds); if(!p.length) return "";
+    return `<div class="nws"><b>National Weather Service · ${ZONES.find(z=>z.id===id).name}</b>${p.map(x=>`<div><i>${x.name}:</i> ${x.text}</div>`).join("")}</div>`;}).join("");
+  return out || ""; }
+function dayOutfits(i){ const ds=TRIP_DATES[i], d=plan[i], hikes=d.stops.filter(s=>s.trail).map(s=>T(s.trail));
+  const town=dayAt("town",ds), townT=town.flo+ (town.fhi-town.flo)*0.3;
+  let h = `<h3 style="font-size:18px;margin:16px 0 6px">What to wear</h3>`;
+  const gear = new Set();
+  hikes.forEach(t=>{ const Tm=hikeFeel(t.high,ds), top=dayAt(t.high>=5500?"summit":t.high>=3500?"gap":"town",ds);
+    const it=outfit({T:Tm, pop:top.pop, snow:top.snow, wind:top.wind||0, high:t.high}); it.forEach(x=>gear.add(x[2].split(".")[0]));
+    h += `<div class="ocard"><div class="oh"><div><b>🥾 ${t.name}</b><div class="muted" style="font-size:13px">Tops out at ${t.high.toLocaleString()} ft · feels about <b style="color:var(--ink)">${r(Tm)}°F</b> on the trail</div></div></div>
+      <div class="fl">🌴 ${florida(Tm)}</div>${outfitHTML(it)}</div>`; });
+  if (!hikes.length) h += `<p class="muted">No hikes planned this day.</p>`;
+  const tit = outfit({T:townT, pop:town.pop, town:true});
+  h += `<div class="ocard"><div class="oh"><div><b>🏘 In town / evening</b><div class="muted" style="font-size:13px">Gatlinburg feels about <b style="color:var(--ink)">${r(townT)}°F</b> in the evening</div></div></div><div class="fl">🌴 ${florida(townT)}</div>${outfitHTML(tit)}</div>`;
+  return h; }
+function hourly(){ const z=W.fc?.town?.hourly, s=W.fc?.summit?.hourly; if(!z) return "";
+  const now=new Date(), i0=z.time.findIndex(t=>new Date(t)>=new Date(now.getTime()-36e5)); if(i0<0) return "";
+  const idx=[...Array(24)].map((_,k)=>i0+k).filter(k=>k<z.time.length);
+  const all=[...idx.map(k=>z.temperature_2m[k]),...idx.map(k=>s.temperature_2m[k])], lo=Math.min(...all)-3, hi=Math.max(...all)+3;
+  const w=560,h=150,L=30,R=8,Tp=10,B=22, X=k=>L+k/(idx.length-1)*(w-L-R), Y=v=>Tp+(1-(v-lo)/(hi-lo))*(h-Tp-B);
+  const line=(arr,c)=>`<path d="${idx.map((k,j)=>(j?"L":"M")+X(j).toFixed(1)+","+Y(arr[k]).toFixed(1)).join(" ")}" fill="none" stroke="${c}" stroke-width="2.2"/>`;
+  let g=""; for(let v=Math.ceil(lo/10)*10; v<=hi; v+=10) g+=`<line x1="${L}" x2="${w-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="#2a3b35"/><text x="${L-4}" y="${Y(v)+3}" font-size="9" text-anchor="end" fill="#9db0a6">${v}°</text>`;
+  if (32>lo&&32<hi) g+=`<line x1="${L}" x2="${w-R}" y1="${Y(32)}" y2="${Y(32)}" stroke="#8fb8d8" stroke-dasharray="4 3"/><text x="${w-R}" y="${Y(32)-3}" font-size="9" text-anchor="end" fill="#8fb8d8">freezing</text>`;
+  idx.forEach((k,j)=>{ if(j%4===0) g+=`<text x="${X(j)}" y="${h-6}" font-size="9" text-anchor="middle" fill="#9db0a6">${new Date(z.time[k]).toLocaleTimeString([], {hour:"numeric"})}</text>`; });
+  const pops=idx.map((k,j)=>`<rect x="${X(j)-3}" y="${h-B-(z.precipitation_probability[k]||0)*0.3}" width="6" height="${(z.precipitation_probability[k]||0)*0.3}" fill="#8fb8d8" opacity=".35"/>`).join("");
+  return `<div class="card"><h2 style="font-size:20px">Next 24 hours</h2><div class="legend" style="margin:4px 0 8px"><span><i style="background:#f2b45a"></i>Gatlinburg</span><span><i style="background:#d9774b"></i>Kuwohi summit</span><span><i style="background:#8fb8d8;opacity:.5;height:8px"></i>Rain chance (town)</span></div>
+   <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:auto">${g}${pops}${line(z.temperature_2m,"#f2b45a")}${line(s.temperature_2m,"#d9774b")}</svg></div>`; }
+function guide101(){ return `<div class="card"><h2 style="font-size:20px">Cold-weather hiking 101 (for Floridians)</h2>
+  <div class="g101">
+   <div><b>🧅 Layer like an onion</b><p>Three thin layers beat one thick coat. <b>Base</b> (wicks sweat), <b>mid</b> (fleece, holds heat), <b>shell</b> (blocks wind and rain). Add or remove layers as you go.</p></div>
+   <div><b>🚫 No cotton on the trail</b><p>Cotton jeans, hoodies and socks soak up sweat and stay wet, and wet means cold, fast. Wear synthetic or merino wool. Cotton is fine in town.</p></div>
+   <div><b>🧦 Socks matter most</b><p>Wear <b>merino wool hiking socks</b> (Darn Tough, Smartwool, REI). They stay warm when damp and prevent blisters. Midweight for most days, heavyweight below freezing. Keep a dry spare pair in your pack, and never sleep in the socks you hiked in.</p></div>
+   <div><b>🥶 Start a little cold</b><p>If you're cozy at the trailhead, you'll be sweating in 10 minutes. Start slightly chilly, then layer up the moment you stop.</p></div>
+   <div><b>⛰ It gets colder as you climb</b><p>Roughly 3–5°F colder per 1,000 ft of elevation, plus wind. Kuwohi can be 20°F colder than Gatlinburg on the same afternoon.</p></div>
+   <div><b>🧊 Ice is the real danger</b><p>Shaded rock steps and wet trails freeze. Microspikes ($30–70) slip over your boots and make icy trails easy. Bring them if the summit is below freezing.</p></div>
+   <div><b>🛍 What to actually buy</b><p>Merino socks (2–3 pairs), a base-layer top, a packable puffy, a beanie and gloves, and microspikes. A fleece and a rain jacket if you don't already own them. Everything else you probably have.</p></div>
+   <div><b>📵 No signal in the park</b><p>This page saves the last forecast it loaded, so open it before you leave town each morning.</p></div>
+  </div><button class="btn" style="margin-top:12px" data-pack="${encodeURIComponent(JSON.stringify(["Merino hiking socks ×3","Long-sleeve base layer top","Fleece mid layer","Packable puffy jacket","Rain jacket","Synthetic hiking pants","Thermal leggings","Beanie","Gloves","Hand warmers"]))}">+ Add this gear to my packing list</button></div>`; }
+function addGearToPacking(list){ list.forEach(x=>{ if(![...CHECK,...extra].includes(x)) extra.push(x); }); store.set("smk-extra",extra); toast("Added to packing list"); }
+
+// kick off
+refreshWeather(false);
+route();
+</script></body></html>
