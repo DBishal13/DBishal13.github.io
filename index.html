@@ -3,1259 +3,821 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
-<script>
-  if(localStorage.getItem('theme') === 'light'){
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-</script>
-<title>Bishal Dhungana — Geospatial Data Scientist</title>
-<meta name="description" content="Geospatial Data Scientist working across AI/ML, LiDAR, agentic systems, and geospatial infrastructure for critical utility and hazard systems.">
-<link rel="preload" href="assets/fonts/schola-regular.woff2" as="font" type="font/woff2" crossorigin>
+<title>Bishal Dhungana — GIS Developer &amp; Administrator</title>
+<meta name="description" content="Bishal Dhungana: GIS Developer, GIS Administrator, open-source developer and geospatial data scientist.">
+<meta property="og:title" content="Bishal Dhungana — GIS Developer &amp; Administrator">
+<meta property="og:description" content="I build the GIS organizations run on: web apps, enterprise services, open-source tools and spatial AI.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  /* Century Schoolbook (TeX Gyre Schola, GUST Font License: assets/fonts/GUST-FONT-LICENSE.txt) */
-  @font-face{font-family:'Schoolbook'; src:url('assets/fonts/schola-regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap;}
-  @font-face{font-family:'Schoolbook'; src:url('assets/fonts/schola-italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap;}
-  @font-face{font-family:'Schoolbook'; src:url('assets/fonts/schola-bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap;}
-  @font-face{font-family:'Schoolbook'; src:url('assets/fonts/schola-bolditalic.woff2') format('woff2'); font-weight:700; font-style:italic; font-display:swap;}
-</style>
-<style>
-  :root{
-    --bg:#0c1210;
-    --surface:#141c19;
-    --surface-2:#1a2420;
-    --line: rgba(237,239,234,0.12);
-    --text:#f4f6f2;
-    --text-dim:#b7c1ba;
-    --amber:#ffb020;
-    --teal:#2dd4bf;
-    --on-accent:#0c1210;
-    --nav-bg: rgba(12,18,16,0.85);
-    --radius: 2px;
-    --maxw: 1440px;
-    color-scheme: dark;
-  }
-  :root[data-theme="light"]{
-    --bg:#f4f2ec;
-    --surface:#ffffff;
-    --surface-2:#eae7dc;
-    --line: rgba(20,32,28,0.12);
-    --text:#141f1a;
-    --text-dim:#4d5851;
-    --amber:#b8560a;
-    --teal:#1f8a7a;
-    --on-accent:#fbf7ee;
-    --nav-bg: rgba(244,242,236,0.85);
-    color-scheme: light;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth; overflow-x:hidden;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif;
-    line-height:1.65;
-    font-size:16px;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit; text-decoration:none;}
-  h1,h2,h3,h4{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-weight:600; letter-spacing:-0.01em;}
-  .mono{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif;}
-  .wrap{max-width:1600px; margin:0 auto; padding:0 14px;}
-  ::selection{background:var(--amber); color:var(--on-accent);}
-  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+/* Layout idea: a product site whose "product" is a GIS stack. The hero is an exploded 3D layer stack
+   (Data / Services / Apps / Intelligence = Open source / GIS Admin / GIS Dev / Data Science); each identity
+   then gets a feature block with its own mini interface, followed by a bento of real work and the full skills matrix. */
+:root{
+  --bg:#08090b;
+  --bg-2:#0e1013;
+  --panel:#111317;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --text:#ececee;
+  --mute:#9a9ca5;
+  --faint:#5f626b;
+  --dev:#5b8cff;     /* GIS developer */
+  --adm:#f3b04a;     /* GIS administrator */
+  --oss:#3ed39a;     /* open source */
+  --ds:#b190ff;      /* data science */
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --maxw:1200px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--dev);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+.mono{font-family:var(--mono)}
 
-  /* ---------- Nav ---------- */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background:var(--nav-bg); backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  nav .wrap{display:flex; align-items:center; justify-content:flex-end; height:64px;}
-  .nav-links{display:flex; gap:19px; list-style:none;}
-  .nav-links a{font-size:13.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--text-dim); transition:color .2s; white-space:nowrap;}
-  .nav-links a:hover{color:var(--amber);}
-  @media (max-width:980px){ .nav-links{display:none;} }
+/* nav */
+.nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(14px);background:rgba(8,9,11,.72);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
+.brand svg{width:22px;height:22px}
+.nav nav{display:flex;gap:22px;margin-left:auto;font-size:14px}
+.nav nav a{text-decoration:none;color:var(--mute);transition:color .15s}
+.nav nav a:hover{color:var(--text)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:8px 14px;border-radius:99px;text-decoration:none;border:1px solid var(--line-2);transition:background .15s,border-color .15s}
+.pill:hover{background:rgba(255,255,255,.06)}
+.pill.w{background:var(--text);color:#0a0a0c;border-color:var(--text)}
+.pill.w:hover{background:#fff}
+@media (max-width:860px){.nav nav{display:none}.nav .pill.sm{margin-left:auto}}
 
-  .nav-right{display:flex; align-items:center; gap:16px;}
-  .nepal-toggle{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:34px; height:34px; border:1px solid var(--line); border-radius:50%;
-    background:var(--surface-2); color:var(--text-dim); cursor:pointer; transition:.2s; flex-shrink:0;
-  }
-  .nepal-toggle:hover{border-color:var(--amber); color:var(--amber);}
-  .nepal-toggle__icon{display:none; line-height:0;}
-  :root:not([data-theme="light"]) .nepal-toggle__sun{display:flex;}
-  :root[data-theme="light"] .nepal-toggle__moon{display:flex;}
+/* hero */
+.hero{position:relative;padding:clamp(28px,5vw,56px) 0 24px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;background:
+  radial-gradient(40% 50% at 70% 40%,rgba(91,140,255,.16),transparent 70%),
+  radial-gradient(30% 40% at 85% 70%,rgba(177,144,255,.12),transparent 70%),
+  radial-gradient(30% 40% at 60% 85%,rgba(62,211,154,.08),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px 40px;align-items:center}
+@media (max-width:980px){.hero .wrap{grid-template-columns:1fr}}
+.badge{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:var(--mute);border:1px solid var(--line-2);border-radius:99px;padding:5px 12px 5px 6px;background:rgba(255,255,255,.03);text-decoration:none}
+.badge b{font-weight:500;color:var(--text);background:rgba(62,211,154,.14);color:var(--oss);border-radius:99px;padding:2px 8px;font-size:12px}
+.hero h1{font-size:clamp(42px,6vw,76px);line-height:1.02;letter-spacing:-.04em;font-weight:600;margin:22px 0 18px;text-wrap:balance}
+.hero h1 em.s{font-size:1.08em}
+.hero h1 .who{display:block;color:var(--mute);font-weight:500;font-size:.46em;letter-spacing:-.02em;margin-bottom:.35em}
+.role-line{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 14px var(--mono);margin-bottom:18px}
+.role-line span{display:inline-flex;align-items:center;gap:7px;color:var(--mute);transition:color .2s}
+.role-line span i{width:8px;height:8px;border-radius:2px;background:currentColor;opacity:.9}
+.role-line span.on{color:var(--text)}
+.role-line span[data-k="dev"] i{color:var(--dev)} .role-line span[data-k="adm"] i{color:var(--adm)}
+.role-line span[data-k="oss"] i{color:var(--oss)} .role-line span[data-k="ds"] i{color:var(--ds)}
+.lede{color:var(--mute);font-size:17.5px;max-width:52ch}
+.lede b{color:var(--text);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line)}
+@media (max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stats div{padding:16px 12px 0 0}
+.stats b{display:block;font-size:24px;font-weight:600;letter-spacing:-.02em}
+.stats span{font-size:12.5px;color:var(--mute)}
 
-  /* ---------- Hero ---------- */
-  .hero{
-    position:relative; padding:96px 0 56px; overflow:hidden;
-    border-bottom:1px solid var(--line);
-  }
-  .hero::before{
-    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:
-      radial-gradient(900px 500px at 15% -10%, rgba(255,176,32,0.10), transparent 60%),
-      radial-gradient(760px 640px at 88% 30%, rgba(45,212,191,0.14), transparent 62%),
-      radial-gradient(1100px 500px at 50% 115%, rgba(45,212,191,0.06), transparent 65%);
-  }
-  .hero canvas.bg-canvas{
-    position:absolute; inset:0; width:100%; height:100%; z-index:0;
-    opacity:0.5;
-  }
-  .hero .wrap{position:relative; z-index:1;}
-  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:36px; align-items:center;}
-  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
-  .hero-visual{position:relative; animation:floatY 8s ease-in-out infinite;}
-  .hero-visual canvas{
-    width:100%; aspect-ratio:6/5; display:block; touch-action:none; cursor:grab;
-    background:none; border:none;
-  }
-  .hero-visual canvas:active{cursor:grabbing;}
-  .scan-label{
-    position:absolute; bottom:8px; right:2px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:10.5px;
-    letter-spacing:0.06em; color:#7fc4bc; display:flex; align-items:center; gap:7px; text-transform:uppercase;
-    text-shadow:0 1px 6px rgba(0,0,0,0.8);
-  }
-  .scan-label::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fd68a; animation:pulse 1.6s infinite;}
-  .drag-hint{position:absolute; top:0; right:2px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:10px; color:#a9b3ac; opacity:0.55; text-shadow:0 1px 6px rgba(0,0,0,0.8);}
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.2;}}
-  @keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);}}
+/* exploded layer stack */
+.stackbox{position:relative;height:520px;display:flex;align-items:center;justify-content:center}
+@media (max-width:980px){.stackbox{height:auto;flex-direction:column;gap:0;padding-top:40px}}
+.scene{position:relative;width:340px;height:340px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-40deg);transition:transform .6s}
+@media (max-width:980px){.scene{width:230px;height:230px;margin:70px 0 80px}}
+.plane{position:absolute;inset:0;border-radius:18px;border:1px solid var(--c);background:linear-gradient(135deg,color-mix(in srgb,var(--c) 16%,rgba(14,16,19,.82)),rgba(14,16,19,.7));box-shadow:0 0 0 1px rgba(0,0,0,.4) inset,0 30px 60px -20px rgba(0,0,0,.7);transform:translateZ(calc(var(--z) * 1px));transition:transform .55s cubic-bezier(.2,.8,.2,1),opacity .4s,box-shadow .4s,border-color .4s;cursor:pointer;opacity:.78}
+.plane svg{position:absolute;inset:0;width:100%;height:100%}
+.plane.on{opacity:1;transform:translateZ(calc(var(--z) * 1px + 46px));box-shadow:0 0 0 1px var(--c),0 0 60px -6px color-mix(in srgb,var(--c) 70%,transparent),0 40px 60px -20px rgba(0,0,0,.8)}
+.stackbox.has-on .plane:not(.on){opacity:.42}
+.plane[data-k="oss"]{--c:var(--oss);--z:0}
+.plane[data-k="adm"]{--c:var(--adm);--z:78}
+.plane[data-k="dev"]{--c:var(--dev);--z:156}
+.plane[data-k="ds"]{--c:var(--ds);--z:234}
+@media (max-width:980px){.plane[data-k="adm"]{--z:44}.plane[data-k="dev"]{--z:88}.plane[data-k="ds"]{--z:132}}
+.toc{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:5}
+@media (max-width:980px){.toc{position:static;transform:none;flex-direction:row;flex-wrap:wrap;justify-content:center;margin-top:8px}}
+.toc button{display:flex;align-items:center;gap:10px;text-align:left;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:rgba(14,16,19,.75);backdrop-filter:blur(6px);font-size:13px;color:var(--mute);transition:border-color .2s,color .2s,background .2s;min-width:190px}
+@media (max-width:980px){.toc button{min-width:0}}
+.toc button i{width:10px;height:10px;border-radius:3px;background:var(--c);flex:none}
+.toc button small{display:block;font:11px var(--mono);color:var(--faint)}
+.toc button[aria-pressed="true"]{border-color:var(--c);color:var(--text);background:color-mix(in srgb,var(--c) 10%,rgba(14,16,19,.85))}
+@media (max-width:520px){.toc button small{display:none}}
+.heroWrap{position:relative}
+@media (max-width:980px){.heroWrap{margin-top:8px}}
+.stackcap{position:absolute;left:0;bottom:6px;font:12px var(--mono);color:var(--faint)}
+@media (max-width:980px){.stackcap{display:none}}
 
-  /* ---------- Floating domain badges ---------- */
-  .float-badge{
-    position:absolute; display:flex; align-items:center; gap:8px; padding:8px 13px;
-    background:rgba(20,28,25,0.55); border:1px solid rgba(237,239,234,0.16); border-radius:999px;
-    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:11.5px; letter-spacing:0.02em; color:var(--text);
-    box-shadow:0 14px 30px -14px rgba(0,0,0,0.6); pointer-events:none;
-    animation:floatY 6.5s ease-in-out infinite;
-  }
-  :root[data-theme="light"] .float-badge{background:rgba(255,255,255,0.65); border-color:rgba(20,32,28,0.14);}
-  .float-badge .dot{width:7px; height:7px; border-radius:50%; flex-shrink:0;}
-  .badge-ai{top:6%; left:1%; animation-delay:-1.2s; animation-duration:7.2s;}
-  .badge-ai .dot{background:#ffb020; box-shadow:0 0 8px rgba(255,176,32,0.8);}
-  .badge-cloud{top:58%; right:1%; animation-delay:-3.4s; animation-duration:8s;}
-  .badge-cloud .dot{background:#2dd4bf; box-shadow:0 0 8px rgba(45,212,191,0.8);}
-  .badge-cv{bottom:9%; left:2%; animation-delay:-5s; animation-duration:6.8s;}
-  .badge-cv .dot{background:#6ed7ff; box-shadow:0 0 8px rgba(110,215,255,0.8);}
-  @media (max-width:560px){ .float-badge{display:none;} }
-  @media (prefers-reduced-motion: reduce){ .hero-visual, .float-badge{animation:none;} }
-  .hero-name{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-weight:700; line-height:1.05; letter-spacing:-0.01em; font-size:clamp(48px, 6vw, 72px); margin-bottom:14px;}
-  .eyebrow{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:13px; color:var(--amber);
-    letter-spacing:0.06em; margin-bottom:22px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  }
-  .eyebrow span{min-width:0; overflow-wrap:break-word;}
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--amber); display:inline-block;}
-  .hero h1{
-    font-size:clamp(36px, 5.6vw, 56px); line-height:1.06; max-width:100%; margin-bottom:18px;
-  }
-  .hero h1 em{
-    font-style:normal; color:var(--amber);
-  }
-  .hero p.lede{
-    font-size:17px; color:var(--text-dim); max-width:900px; margin-bottom:20px;
-  }
-  .role-pills{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;}
-  .role-pills span{
-    font-size:12px; padding:7px 13px; border:1px solid var(--line); border-radius:999px;
-    color:var(--text-dim); background:rgba(255,255,255,0.02); letter-spacing:0.02em;
-  }
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px;}
-  .btn{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:14px; padding:12px 22px; border:1px solid var(--line);
-    border-radius:var(--radius); transition:.2s; display:inline-flex; align-items:center; gap:8px;
-  }
-  .btn-primary{background:var(--amber); color:var(--on-accent); border-color:var(--amber); font-weight:500;}
-  .btn-primary:hover{background:#ffc250;}
-  .btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+/* marquee of orgs */
+.orgs{display:block;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;color:var(--faint);font-size:14px}
+.orgs .wrap{display:flex;gap:12px 36px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.orgs span{color:var(--mute);font-weight:500;letter-spacing:-.01em}
+.orgs small{font:12px var(--mono);color:var(--faint)}
+@media (max-width:760px){.orgs{display:none}}
 
-  /* ---------- Section shell ---------- */
-  section{padding:48px 0; border-bottom:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px;}
-  .sec-tag{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:14.5px; color:var(--teal); letter-spacing:0.06em; text-transform:uppercase;}
-  .sec-head h2{font-size:32px;}
+/* sections */
+.sec{padding:clamp(48px,7vw,88px) 0}
+.eyebrow{font:500 12.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:10px}
+.eyebrow i{width:8px;height:8px;border-radius:2px;background:var(--c,var(--mute))}
+.h2{font-size:clamp(30px,4.2vw,50px);line-height:1.05;letter-spacing:-.035em;font-weight:600;margin:10px 0 10px;max-width:20ch;text-wrap:balance}
+.sub{color:var(--mute);font-size:17px;max-width:58ch}
 
-  /* ---------- Scroll reveal ---------- */
-  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
-  .reveal.visible{opacity:1; transform:none;}
-  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} }
+/* feature blocks */
+.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,64px);align-items:center;padding:clamp(36px,5vw,60px) 0;border-top:1px solid var(--line)}
+.feat:nth-of-type(even) .fx{order:-1}
+@media (max-width:900px){.feat{grid-template-columns:1fr}.feat:nth-of-type(even) .fx{order:0}}
+.feat h3{font-size:clamp(28px,3.4vw,42px);line-height:1.08;letter-spacing:-.03em;font-weight:600;margin:12px 0 12px;text-wrap:balance}
+.feat p.d{color:var(--mute);font-size:16.5px;max-width:52ch}
+.proofs{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.proofs li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:15.5px;color:#d7d8dc}
+.proofs li svg{width:16px;height:16px;margin-top:4px;color:var(--c)}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px}
+.tools span{font:12.5px var(--mono);padding:4px 9px;border-radius:7px;border:1px solid var(--line-2);color:var(--mute);background:rgba(255,255,255,.02)}
 
-  /* ---------- About ---------- */
-  .about-grid{display:grid; grid-template-columns:1fr; gap:32px;}
-  .about-body p{color:var(--text-dim); margin-bottom:12px; max-width:100%;}
-  .about-body strong{color:var(--text); font-weight:500;}
-  .location-tag{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:14px; color:var(--text-dim);
-    margin-top:16px; display:flex; gap:18px; flex-wrap:wrap;
-  }
+/* mini interfaces */
+.fx{position:relative;border-radius:16px;border:1px solid var(--line-2);background:linear-gradient(180deg,#14161b,#0f1114);box-shadow:0 40px 80px -40px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.6) inset;overflow:hidden}
+.fx::before{content:"";position:absolute;inset:-40% -20% auto auto;width:70%;height:90%;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 35%,transparent),transparent);opacity:.5;pointer-events:none}
+.fxbar{display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-bottom:1px solid var(--line);font:12px var(--mono);color:var(--faint);position:relative}
+.fxbar i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.12)}
+.fxbar span{margin-left:10px}
+.fxbody{position:relative;font:13px/1.7 var(--mono)}
+/* dev: code + map */
+.dev-ui{display:grid;grid-template-columns:1.05fr 1fr;min-height:330px}
+@media (max-width:560px){.dev-ui{grid-template-columns:1fr}}
+.code{padding:16px 16px;border-right:1px solid var(--line);white-space:pre;overflow:hidden;color:#c9ccd4;font-size:12.5px}
+.code .k{color:#c792ea}.code .f{color:#82aaff}.code .s{color:#c3e88d}.code .c{color:#5f626b}.code .n{color:#f78c6c}
+.minimap{position:relative;background:#0b0d10;min-height:260px}
+.minimap svg{position:absolute;inset:0;width:100%;height:100%}
+.minimap .tip{position:absolute;left:52%;top:30%;background:#1a1d23;border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;font:11.5px/1.4 var(--mono);color:var(--text);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.minimap .tip b{color:var(--dev);font-weight:500}
+/* admin: services console */
+.adm-ui table{width:100%;border-collapse:collapse;font:12.5px var(--mono)}
+.adm-ui th{text-align:left;font-weight:500;color:var(--faint);padding:10px 16px;border-bottom:1px solid var(--line)}
+.adm-ui td{padding:11px 16px;border-bottom:1px solid var(--line);color:#c9ccd4;white-space:nowrap}
+.adm-ui td.ok::before,.adm-ui td.warn::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;background:var(--oss);box-shadow:0 0 8px var(--oss)}
+.adm-ui td.warn::before{background:var(--adm);box-shadow:0 0 8px var(--adm)}
+.adm-ui .tw{overflow-x:auto}
+.adm-ui .foot{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.adm-ui .foot div{padding:14px 16px;border-right:1px solid var(--line)}
+.adm-ui .foot div:last-child{border-right:0}
+.adm-ui .foot b{display:block;font:600 20px var(--sans);color:var(--text)}
+.adm-ui .foot span{font-size:11.5px;color:var(--faint)}
+.spark{height:28px;margin-top:6px}
+/* oss: terminal */
+.term{padding:16px 18px;color:#c9ccd4;min-height:300px;white-space:pre-wrap;font-size:12.8px}
+.term .p{color:var(--oss)}.term .m{color:var(--faint)}.term .g{color:var(--oss)}.term .y{color:var(--adm)}
+.term .cur{display:inline-block;width:8px;height:15px;background:var(--text);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.pkgs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.pkgs a{padding:14px 16px;text-decoration:none;border-right:1px solid var(--line);font-size:13px;transition:background .2s}
+.pkgs a:last-child{border-right:0}
+.pkgs a:hover{background:rgba(62,211,154,.06)}
+.pkgs b{display:block;font:500 14px var(--mono);color:var(--text)}
+.pkgs span{color:var(--faint);font-size:12px}
+/* ds: detection */
+.ds-ui{display:grid;grid-template-columns:1.3fr 1fr}
+@media (max-width:560px){.ds-ui{grid-template-columns:1fr}}
+.det{position:relative;min-height:300px;background:#0b0d10;border-right:1px solid var(--line)}
+.det svg{position:absolute;inset:0;width:100%;height:100%}
+.metrics{padding:16px;display:flex;flex-direction:column;gap:14px;font:12px var(--mono);color:var(--faint)}
+.metrics .m b{display:flex;justify-content:space-between;color:var(--text);font:500 13px var(--mono);margin-bottom:6px}
+.metrics .bar{height:6px;border-radius:3px;background:rgba(255,255,255,.07);overflow:hidden}
+.metrics .bar i{display:block;height:100%;background:var(--ds);border-radius:3px;transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.fx.in .metrics .bar i{transform:scaleX(var(--v))}
+.metrics .archs{display:block;color:var(--mute);line-height:1.7}
+.metrics .note{color:var(--faint);font-size:11px;line-height:1.5;margin-top:auto}
 
-  /* ---------- Experience ---------- */
-  .role{padding:22px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:200px 1fr; gap:30px;}
-  .role:first-of-type{border-top:none;}
-  @media (max-width:760px){ .role{grid-template-columns:1fr; gap:10px;} }
-  .role-meta .dates{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:13.5px; color:var(--amber);}
-  .role-meta .org{color:var(--text-dim); font-size:15px; margin-top:4px; font-style:italic;}
-  .role-title{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:21px; margin-bottom:10px;}
-  .role ul{list-style:none;}
-  .role li{position:relative; padding-left:18px; margin-bottom:9px; color:var(--text-dim); font-size:16px;}
-  .role li::before{content:'—'; position:absolute; left:0; color:var(--teal);}
-  .role-sub{font-size:11.5px; color:var(--amber); text-transform:uppercase; letter-spacing:0.06em; margin:18px 0 8px;}
-  .role-sub:first-of-type{margin-top:0;}
+/* bento work */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:12px;margin-top:28px}
+@media (max-width:980px){.bento{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.bento{grid-template-columns:1fr;grid-auto-rows:200px}}
+.tile{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line-2);background:var(--panel);text-decoration:none;display:flex;flex-direction:column;justify-content:flex-end;isolation:isolate;transition:border-color .25s,transform .25s}
+.tile:hover{border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;z-index:-2;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .4s;filter:saturate(.9)}
+.tile:hover img{transform:scale(1.05);filter:saturate(1.1)}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(8,9,11,0) 30%,rgba(8,9,11,.92) 88%)}
+.tile.text::after{background:radial-gradient(80% 70% at 100% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 70%)}
+.tile.w2{grid-column:span 2}.tile.tall{grid-row:span 2}
+@media (max-width:560px){.tile.w2{grid-column:span 1}.tile.tall{grid-row:span 1}}
+.tile .tb{padding:18px}
+.tile .cat{display:flex;gap:6px;align-items:center;font:11.5px var(--mono);color:#c9ccd4;text-transform:uppercase;letter-spacing:.05em}
+.tile .cat i{width:7px;height:7px;border-radius:2px;background:var(--c)}
+.tile h4{font-size:21px;line-height:1.15;letter-spacing:-.02em;font-weight:600;margin-top:6px}
+.tile.tall h4{font-size:30px}
+.tile p{color:#b9bbc2;font-size:14px;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tile .go{position:absolute;right:14px;top:14px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(8,9,11,.6);border:1px solid var(--line-2);backdrop-filter:blur(6px);font-size:15px;transition:transform .25s,background .25s}
+.tile:hover .go{transform:rotate(-45deg);background:var(--text);color:#0a0a0c}
+.tile.text .glyph{position:absolute;right:18px;top:18px;width:64px;height:64px;color:var(--c);opacity:.9}
+.morelist{margin-top:18px;display:flex;justify-content:center}
 
-  /* ---------- Builds ---------- */
-  .sec-intro{color:var(--text-dim); font-size:16px; max-width:100%; margin-bottom:26px;}
-  .build{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:30px; margin-bottom:20px;}
-  .build:last-child{margin-bottom:0;}
-  .build-head{display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:12px; flex-wrap:wrap;}
-  .build h3{font-size:21px;}
-  .build .stack{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 18px;}
-  .build p.desc{color:var(--text-dim); font-size:17px; margin-bottom:0; max-width:100%;}
 
-  /* ---------- Filter tabs ---------- */
-  .filter-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:26px;}
-  .filter-tab{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:12.5px; padding:9px 16px; border:1px solid var(--line);
-    border-radius:999px; background:var(--surface-2); color:var(--text-dim); cursor:pointer; transition:.2s;
-    text-transform:uppercase; letter-spacing:0.04em;
-  }
-  .filter-tab:hover{border-color:var(--amber); color:var(--text);}
-  .filter-tab.active{background:var(--amber); color:var(--on-accent); border-color:var(--amber); font-weight:500;}
+/* skills: raster band stack */
+.composite{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:30px}
+.composite > span{font:12px var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.06em;margin-right:6px}
+.composite button{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;padding:7px 13px;border-radius:99px;border:1px solid var(--line-2);color:var(--mute);transition:all .2s}
+.composite button i{width:8px;height:8px;border-radius:2px;background:var(--c)}
+.composite button[aria-pressed="true"]{color:var(--text);border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.raster{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:24px 48px;align-items:center;margin-top:24px}
+.composite{position:relative;z-index:3}
+.rstack{padding-top:90px;z-index:1}
+@media (max-width:900px){.raster{grid-template-columns:1fr}}
+.rstack{position:relative;height:440px;display:flex;align-items:center;justify-content:center}
+@media (max-width:900px){.rstack{height:290px;padding-top:70px}}
+.rscene{position:relative;width:300px;height:300px;transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(-38deg)}
+@media (max-width:900px){.rscene{width:190px;height:190px}}
+.band3d{position:absolute;inset:0;border-radius:6px;border:1px solid rgba(255,255,255,.18);background-size:cover;transform:translateZ(calc(var(--z)*1px));opacity:.55;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .35s,box-shadow .35s,border-color .35s;cursor:pointer}
+.band3d.on{opacity:1;border-color:var(--c);transform:translateZ(calc(var(--z)*1px + 40px)) translate(-14px,-14px);box-shadow:0 0 0 1px var(--c),0 0 40px -6px var(--c)}
+.band3d.dim{opacity:.18}
+.band3d b{position:absolute;left:-2px;bottom:-22px;font:600 13px var(--mono);color:var(--c);white-space:nowrap}
+.bands{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+@media (max-width:560px){.bands{grid-template-columns:repeat(2,1fr)}}
+.bands button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);text-align:left;transition:border-color .2s,background .2s}
+.bands button small{font:11px var(--mono);color:var(--c)}
+.bands button span{font-size:13.5px;font-weight:500;line-height:1.25}
+.bands button[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,var(--bg-2))}
+.bands button.dim{opacity:.35}
+.bandpanel{margin-top:14px;border:1px solid var(--line-2);border-radius:14px;padding:20px;background:var(--bg-2);min-height:210px}
+.bandpanel .bh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.bandpanel h3{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.bandpanel .who{display:flex;gap:6px;flex-wrap:wrap}
+.bandpanel .who span{display:inline-flex;align-items:center;gap:6px;font:11.5px var(--mono);color:var(--mute)}
+.bandpanel .who i{width:7px;height:7px;border-radius:2px;background:var(--c)}
+.bandpanel p{color:var(--mute);font-size:15px;margin:6px 0 14px}
+.bandpanel .t{display:flex;flex-wrap:wrap;gap:6px}
+.bandpanel .t span{font-size:13.5px;padding:4px 10px;border-radius:7px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#d7d8dc}
+.bandpanel.multi .grp{margin-top:12px}
+.bandpanel.multi .grp b{display:block;font:500 12px var(--mono);color:var(--c);margin-bottom:6px}
 
-  /* ---------- Project grid (Builds) ---------- */
-  .project-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(320px,1fr)); gap:20px;}
-  .project-card{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:0;
-    display:flex; flex-direction:column; position:relative; overflow:hidden;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  }
-  .project-card::before{
-    content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s;
-    background:radial-gradient(480px circle at var(--mx,50%) var(--my,0%), rgba(255,176,32,0.10), transparent 45%);
-    z-index:1;
-  }
-  .project-card:hover::before{opacity:1;}
-  .project-card:hover{transform:translateY(-4px); border-color:var(--amber); box-shadow:0 24px 44px -26px rgba(0,0,0,0.55);}
-  .project-card.is-hidden{display:none;}
-  .project-card__thumb{width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-bottom:1px solid var(--line); background:var(--surface-2);}
-  .project-card__body{padding:26px; display:flex; flex-direction:column; flex:1;}
-  .project-card__top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;}
-  .project-card__cat{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:11px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em;}
-  .project-card h3{font-size:19.5px; margin-bottom:10px;}
-  .project-card p.desc{color:var(--text-dim); font-size:15px; margin-bottom:16px; flex:1;}
-  .project-card .stack{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;}
-  .project-card .stack .tag{font-size:12.5px; padding:5px 10px;}
-  .project-card__actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;}
-  .btn-sm{font-size:12.5px; padding:9px 14px;}
+/* experience */
+.xp{margin-top:24px;border-top:1px solid var(--line)}
+.job{display:grid;grid-template-columns:180px minmax(0,1fr);gap:4px 32px;padding:18px 0;border-bottom:1px solid var(--line)}
+@media (max-width:760px){.job{grid-template-columns:1fr}}
+.job .when{font:13px var(--mono);color:var(--faint);padding-top:4px}
+.job.cur .when{color:var(--oss)}
+.job h4{font-size:20px;font-weight:600;letter-spacing:-.015em}
+.job h4 span{color:var(--mute);font-weight:400}
+.job ul{list-style:none;margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.job li{position:relative;padding-left:18px;color:#c9ccd4;font-size:15px}
+.job li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:1px;background:var(--faint)}
+.job .tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.job .tags span{display:inline-flex;align-items:center;gap:6px;font:11.5px var(--mono);color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.job .tags i{width:7px;height:7px;border-radius:2px;background:var(--c)}
 
-  .live-badge{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:10.5px; color:#5fd68a; display:inline-flex; align-items:center; gap:6px;
-    text-transform:uppercase; letter-spacing:0.05em; flex-shrink:0;
-  }
-  .live-badge::before{content:''; width:6px; height:6px; border-radius:50%; background:#5fd68a; animation:pulse 1.6s infinite; flex-shrink:0;}
+/* education + contact */
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+@media (max-width:860px){.edu{grid-template-columns:1fr}}
+.card{border:1px solid var(--line-2);border-radius:16px;padding:22px;background:var(--bg-2)}
+.card span{font:12px var(--mono);color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.card b{display:block;font-size:18px;font-weight:600;letter-spacing:-.015em;margin:8px 0 6px}
+.card p{color:var(--mute);font-size:14.5px}
+.card a{color:var(--text)}
+.end{position:relative;overflow:hidden;text-align:center;padding:clamp(56px,8vw,100px) 0;border-top:1px solid var(--line)}
+.end::before{content:"";position:absolute;left:50%;top:0;width:900px;height:500px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(91,140,255,.18),transparent);pointer-events:none}
+.end .h2{margin-left:auto;margin-right:auto;font-size:clamp(38px,6vw,76px);max-width:16ch}
+.end .sub{margin:0 auto}
+.end .cta{justify-content:center}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;font:12.5px var(--mono);color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
-  /* ---------- Live GitHub feed ---------- */
-  .gh-live{margin-top:44px; padding-top:30px; border-top:1px dashed var(--line);}
-  .gh-live__head{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px;}
-  .gh-live__head h4{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:13px; color:var(--text-dim); text-transform:uppercase;
-    letter-spacing:0.05em; display:flex; align-items:center; gap:10px; font-weight:500;
-  }
-  .gh-live__meta{font-size:11.5px; color:var(--text-dim); opacity:0.65;}
-  .gh-live-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:14px;}
-  .gh-live-card{border:1px solid var(--line); border-radius:var(--radius); padding:0; background:var(--surface-2); transition:.2s; overflow:hidden;}
-  .gh-live-card:hover{border-color:var(--teal);}
-  .gh-live-card__thumb{width:100%; aspect-ratio:16/10; object-fit:cover; display:block; border-bottom:1px solid var(--line);}
-  .gh-live-card__body{padding:16px 18px;}
-  .gh-live-card h5{font-size:14.5px; margin-bottom:7px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-weight:500;}
-  .gh-live-card h5 a{color:var(--text);}
-  .gh-live-card h5 a:hover{color:var(--amber);}
-  .gh-live-card p{font-size:13px; color:var(--text-dim); margin-bottom:12px; line-height:1.55;}
-  .gh-live-card .meta{display:flex; justify-content:space-between; gap:10px; font-size:11px; color:var(--text-dim); font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; opacity:0.7;}
-  .gh-live-card .meta a{color:var(--teal);}
-  .gh-live-empty{font-size:13.5px; color:var(--text-dim); font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; opacity:0.65;}
-  .gh-live-card.is-working{border-style:dashed;}
-  .gh-live-card .working-badge{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:10.5px; color:var(--amber); text-transform:uppercase;
-    letter-spacing:0.05em; display:block; margin-bottom:8px;
-  }
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
 
-  /* ---------- Skills ---------- */
-  .skill-groups{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
-  @media (max-width:1150px){ .skill-groups{grid-template-columns:repeat(3,1fr);} }
-  @media (max-width:760px){ .skill-groups{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:520px){ .skill-groups{grid-template-columns:1fr;} }
-  .skill-group h4{font-size:15px; color:var(--teal); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-weight:500;}
-  .skill-group .tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .tag{
-    font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:14.5px; padding:7px 12px; background:var(--surface-2);
-    border:1px solid var(--line); border-radius:var(--radius); color:var(--text-dim);
-  }
-
-  /* ---------- Work grids ---------- */
-  .note{color:var(--text-dim); font-size:15.5px; margin-bottom:24px; max-width:100%;}
-  .work-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
-  @media (max-width:900px){ .work-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:600px){ .work-grid{grid-template-columns:1fr;} }
-  .work-card{background:var(--bg); padding:20px;}
-  .work-card .cat{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:11.5px; color:var(--teal); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;}
-  .work-card h4{font-size:16px; margin-bottom:7px; line-height:1.3;}
-  .work-card p{color:var(--text-dim); font-size:14.5px; line-height:1.55;}
-  @media (min-width:901px){ #systems .work-grid .work-card:last-child{grid-column:1 / -1;} }
-
-  /* ---------- Publications / Credentials ---------- */
-  .pub{padding:18px 0; border-top:1px solid var(--line); font-size:16.5px; color:var(--text-dim);}
-  .pub:first-child{border-top:none;}
-  .pub a{color:var(--amber);}
-  .pub .tag-status{font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:11.5px; text-transform:uppercase; color:var(--teal); margin-left:8px;}
-  .cred-list{columns:2; column-gap:40px;}
-  @media (max-width:600px){ .cred-list{columns:1;} }
-  .cred-list li{list-style:none; font-size:15.5px; color:var(--text-dim); padding:8px 0; border-bottom:1px solid var(--line); break-inside:avoid;}
-
-  /* ---------- Contact ---------- */
-  .contact-inner{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px;}
-  .contact h2{font-size:clamp(34px,5vw,50px); max-width:100%; margin-bottom:18px;}
-  .contact p{color:var(--text-dim); max-width:720px;}
-  .contact-links{display:flex; flex-direction:column; gap:10px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif; font-size:16px;}
-  .contact-links a{color:var(--text-dim); transition:.2s;}
-  .contact-links a:hover{color:var(--amber);}
-
-  footer{padding:18px 0; text-align:center;}
-  footer p{color:var(--text-dim); font-size:13.5px; font-family:'Schoolbook', 'Century Schoolbook', Georgia, serif;}
+/* phone compaction */
+@media (max-width:560px){
+  .dev-ui .code{display:none}
+  .minimap{min-height:200px}
+  .ds-ui .metrics{display:none}
+  .det{min-height:200px;border-right:0}
+  .term{min-height:0;font-size:11.5px}
+  .adm-ui .foot b{font-size:17px}
+  .feat .tools{margin-top:14px}
+  .proofs{gap:8px}
+  .rstack{height:230px;padding-top:44px}
+  .rscene{width:160px;height:160px}
+  .bands{display:flex;overflow-x:auto;gap:6px;scrollbar-width:none;margin:0 -18px;padding:0 18px}
+  .bands::-webkit-scrollbar{display:none}
+  .bands button{flex:none;max-width:170px}
+  .stackbox{padding-top:20px}
+  .scene{margin:50px 0 60px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}.plane,.scene{transition:none}.term .cur{animation:none}.metrics .bar i{transition:none}}
 </style>
 </head>
 <body>
 
-<nav>
+<header class="nav">
   <div class="wrap">
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#builds">Builds</a></li>
-        <li><a href="#systems">Systems</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener" style="color:var(--amber);">Resume ↓</a></li>
-      </ul>
-      <button class="nepal-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark mode">
-        <span class="nepal-toggle__icon nepal-toggle__sun" title="Light mode">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="17" height="17">
-            <path d="M12 2L13.16 7.65L17 3.34L15.18 8.82L20.66 7L16.35 10.84L22 12L16.35 13.16L20.66 17L15.18 15.18L17 20.66L13.16 16.35L12 22L10.84 16.35L7 20.66L8.82 15.18L3.34 17L7.65 13.16L2 12L7.65 10.84L3.34 7L8.82 8.82L7 3.34L10.84 7.65Z"></path>
-          </svg>
-        </span>
-        <span class="nepal-toggle__icon nepal-toggle__moon" title="Dark mode">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
-          </svg>
-        </span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <canvas class="bg-canvas" id="heroBg"></canvas>
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <div class="hero-name">Bishal Dhungana</div>
-      <div class="eyebrow mono"><span>26.7153° N, 80.0534° W — WEST PALM BEACH, FL</span></div>
-      <h1>Turning imagery and LiDAR into cloud systems that run <em>real infrastructure.</em></h1>
-      <p class="lede">Geospatial Data Scientist working end to end: computer vision on drone imagery and LiDAR (including a switch-state classification model I trained and deployed to production on AWS SageMaker), cloud pipelines and infrastructure-as-code, and the AI agents that tie it together, from field survey to production platforms protecting critical utility infrastructure.</p>
-      <div class="role-pills mono">
-        <span>Computer Vision</span><span>LiDAR / Point Clouds</span><span>Cloud &amp; AWS</span><span>Geospatial Data Engineering</span><span>Agentic AI</span>
-      </div>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
-        <a class="btn btn-ghost" href="#contact">Get in touch</a>
-        <a class="btn btn-ghost" href="https://github.com/DBishal13" target="_blank">GitHub ↗</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/dbishal" target="_blank">LinkedIn ↗</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <canvas id="pointCloud"></canvas>
-      <div class="scan-label">Simulated LiDAR scan</div>
-      <div class="drag-hint mono">drag to rotate</div>
-      <div class="float-badge badge-ai"><span class="dot"></span>AI Agents · LangGraph</div>
-      <div class="float-badge badge-cloud"><span class="dot"></span>Cloud · AWS Lambda / S3</div>
-      <div class="float-badge badge-cv"><span class="dot"></span>Computer Vision · PyTorch</div>
-    </div>
+    <a class="brand" href="#top" aria-label="Bishal Dhungana, home">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 21 8l-9 5-9-5z" fill="#5b8cff"/><path d="m3 12 9 5 9-5" stroke="#f3b04a" stroke-width="1.8"/><path d="m3 16 9 5 9-5" stroke="#3ed39a" stroke-width="1.8"/></svg>
+      Bishal Dhungana
+    </a>
+    <nav aria-label="Sections"><a href="#what">What I do</a><a href="#work">Work</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+    <a class="pill w sm" href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener">Resume</a>
   </div>
 </header>
 
-<section id="about">
+<section class="hero" id="top">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">01 — About</div>
-        <h2>Field-to-production, end to end</h2>
+    <div>
+      <a class="badge" href="#experience"><b>Now</b>GIS Developer · Construction →</a>
+      <h1><span class="who">Bishal Dhungana</span>I build the GIS <em class="s">organizations run on.</em></h1>
+      <div class="role-line" id="roleLine">
+        <span data-k="dev"><i></i>GIS Developer</span>
+        <span data-k="adm"><i></i>GIS Administrator</span>
+        <span data-k="oss"><i></i>Open-source developer</span>
+        <span data-k="ds"><i></i>Geospatial data scientist</span>
+      </div>
+      <p class="lede" id="lede">Web GIS apps, enterprise services, open-source tools and spatial AI, built and run in production. Built and run in production, from field survey in Nepal to utility-scale platforms in Florida.</p>
+      <div class="cta">
+        <a class="pill w" href="#work">See my work</a>
+        <a class="pill" href="https://github.com/DBishal13" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="pill" href="https://www.linkedin.com/in/dbishal" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
-    <div class="about-grid">
-      <div class="about-body">
-        <p><strong>I work at the intersection of geospatial engineering, applied AI, and cloud data platform engineering.</strong> Most recently I was a Data Scientist and supporting product owner at Florida Power &amp; Light, technical lead across their AI-based infrastructure inspection program: building the data pipelines and GIS applications behind it, and training and deploying a computer vision model to production. My background started in the field as a Geomatics Engineer in Nepal running survey teams and drone photogrammetry, then sharpened through flood-hazard research at Florida Atlantic University, which led to a peer-reviewed publication and ongoing work as a core contributor to <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" style="color:var(--amber);">PyWMP</a>, an open-source watershed modeling framework. Outside of work I build open-source geospatial AI tools, see Featured Builds below.</p>
-        <div class="location-tag">
-          <span>beesal13dh@gmail.com</span>
-          <span>FAA Part 107 — Remote Pilot</span>
-          <span>Available Immediately</span>
+
+    <div class="heroWrap">
+      <div class="stackbox" id="stackbox" aria-label="Interactive stack of four GIS layers, one per skill area">
+        <div class="scene" id="scene">
+          <div class="plane" data-k="oss" title="Data · Open source">
+            <svg viewBox="0 0 340 340" fill="none">
+              <g stroke="#3ed39a" stroke-opacity=".5"><path d="M30 120 140 70l120 40-30 110-140 30z"/><path d="M140 70l-20 160M30 120l230 -10M60 180l200 -20"/></g>
+              <g fill="#3ed39a">
+                <circle cx="60" cy="60" r="3"/><circle cx="90" cy="240" r="3"/><circle cx="200" cy="200" r="3"/><circle cx="280" cy="80" r="3"/><circle cx="250" cy="280" r="3"/><circle cx="160" cy="150" r="3"/><circle cx="300" cy="200" r="3"/><circle cx="40" cy="290" r="3"/>
+              </g>
+              <text x="22" y="320" fill="#3ed39a" font-family="Geist Mono, monospace" font-size="13">data · open source</text>
+            </svg>
+          </div>
+          <div class="plane" data-k="adm" title="Services · GIS administration">
+            <svg viewBox="0 0 340 340" fill="none">
+              <g stroke="#f3b04a" stroke-opacity=".55"><path d="M80 90 170 170 270 90M170 170v100M80 250l90-80 90 80"/></g>
+              <g fill="#14161b" stroke="#f3b04a"><rect x="52" y="70" width="56" height="38" rx="6"/><rect x="242" y="70" width="56" height="38" rx="6"/><rect x="142" y="150" width="56" height="38" rx="6"/><rect x="52" y="232" width="56" height="38" rx="6"/><rect x="242" y="232" width="56" height="38" rx="6"/><rect x="142" y="262" width="56" height="30" rx="6"/></g>
+              <g fill="#3ed39a"><circle cx="64" cy="82" r="3"/><circle cx="254" cy="82" r="3"/><circle cx="154" cy="162" r="3"/><circle cx="64" cy="244" r="3"/><circle cx="254" cy="244" r="3"/></g>
+              <text x="22" y="320" fill="#f3b04a" font-family="Geist Mono, monospace" font-size="13">services · enterprise</text>
+            </svg>
+          </div>
+          <div class="plane" data-k="dev" title="Apps · GIS development">
+            <svg viewBox="0 0 340 340" fill="none">
+              <rect x="30" y="34" width="280" height="250" rx="10" stroke="#5b8cff" stroke-opacity=".7"/>
+              <path d="M30 60h280" stroke="#5b8cff" stroke-opacity=".5"/>
+              <rect x="40" y="70" width="70" height="204" rx="6" fill="#5b8cff" fill-opacity=".14"/>
+              <g stroke="#5b8cff" stroke-opacity=".35"><path d="M120 120c40-30 90 20 180-10M120 180c60-20 100 30 180 0M120 240c50-25 110 15 180-5"/></g>
+              <g fill="#5b8cff"><circle cx="170" cy="140" r="6"/><circle cx="240" cy="200" r="6"/><circle cx="200" cy="250" r="6"/></g>
+              <g fill="#5b8cff" fill-opacity=".5"><rect x="48" y="82" width="54" height="8" rx="3"/><rect x="48" y="98" width="40" height="8" rx="3"/><rect x="48" y="114" width="48" height="8" rx="3"/></g>
+              <text x="22" y="320" fill="#5b8cff" font-family="Geist Mono, monospace" font-size="13">apps · web gis</text>
+            </svg>
+          </div>
+          <div class="plane" data-k="ds" title="Intelligence · Data science">
+            <svg viewBox="0 0 340 340" fill="none">
+              <defs><radialGradient id="hz"><stop offset="0" stop-color="#b190ff" stop-opacity=".55"/><stop offset="1" stop-color="#b190ff" stop-opacity="0"/></radialGradient></defs>
+              <circle cx="200" cy="140" r="110" fill="url(#hz)"/>
+              <g stroke="#b190ff" stroke-width="1.5"><rect x="70" y="80" width="70" height="110" rx="3"/><rect x="190" y="170" width="90" height="70" rx="3"/></g>
+              <g fill="#b190ff"><rect x="70" y="64" width="78" height="16" rx="2"/><rect x="190" y="154" width="70" height="16" rx="2"/></g>
+              <text x="74" y="76" fill="#0a0a0c" font-family="Geist Mono, monospace" font-size="11">asset 0.97</text>
+              <text x="194" y="166" fill="#0a0a0c" font-family="Geist Mono, monospace" font-size="11">risk 0.88</text>
+              <text x="22" y="320" fill="#b190ff" font-family="Geist Mono, monospace" font-size="13">intelligence · ml</text>
+            </svg>
+          </div>
+        </div>
+        <div class="toc" role="group" aria-label="Layers" id="toc">
+          <button type="button" data-k="ds" style="--c:var(--ds)" aria-pressed="false"><i></i><span>Intelligence<small>Geospatial data science</small></span></button>
+          <button type="button" data-k="dev" style="--c:var(--dev)" aria-pressed="false"><i></i><span>Apps<small>GIS development</small></span></button>
+          <button type="button" data-k="adm" style="--c:var(--adm)" aria-pressed="false"><i></i><span>Services<small>GIS administration</small></span></button>
+          <button type="button" data-k="oss" style="--c:var(--oss)" aria-pressed="false"><i></i><span>Data<small>Open source &amp; engineering</small></span></button>
         </div>
       </div>
+      <div class="stackcap">one stack · four layers · tap a layer</div>
     </div>
   </div>
 </section>
 
-<section id="experience">
+<div class="orgs">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">02 — Experience</div>
-        <h2>Professional experience</h2>
-      </div>
-    </div>
-
-    <div class="role reveal">
-      <div class="role-meta">
-        <div class="dates mono">APR 2025 — AUG 2026</div>
-        <div class="org">Florida Power &amp; Light - Contract, West Palm Beach, FL</div>
-      </div>
-      <div>
-        <div class="role-title">Data Scientist (Geospatial &amp; AI)</div>
-
-        <div class="role-sub mono">Program &amp; Vendor</div>
-        <ul>
-          <li>Defined ML scope and technical specs as data scientist/supporting product owner for a multi-million-dollar AI vendor engagement; authored RFP technical requirements and served as technical SME through development and benchmarking.</li>
-          <li>Evaluated ~20 vendor bids with a GPT-based scoring agent, then audited 3 external ML vendors post-award for licensing compliance and supported resolving CUDA/GPU and batch-processing mismatches against AWS SageMaker.</li>
-        </ul>
-
-        <div class="role-sub mono">Machine Learning</div>
-        <ul>
-          <li>Built and deployed an overhead switch-state (open/closed) classification model, training it locally then migrating to AWS (ECR, SageMaker) for production inference.</li>
-          <li>Contributed to testing and evaluating CV architectures (YOLO v8/v9/11, Faster/Mask R-CNN, EfficientDet, SSD, DETR/Deformable DETR, Detectron2, MMDetection, RT-DETR) against a precision/recall/F1 and image-scale evaluation methodology co-designed with the team, producing statistical evaluation reports for leadership; selected RT-DETR for transfer learning and standardized the approach for vendors.</li>
-          <li>Used Roboflow for annotation and data preparation on both production CV models, including a 6x augmentation pipeline (flips, brightness, and other transforms), train/test/validation splits, and YOLO-format export.</li>
-          <li>Co-developed an equipment detection and segmentation model (with a data scientist and software engineer) spanning 27-30 asset classes, evolving from object detection to segmentation.</li>
-        </ul>
-
-        <div class="role-sub mono">Data Engineering for AI</div>
-        <ul>
-          <li>Built an API-based metadata pipeline with spatial (10m/30ft) and temporal (30-day) joins matching 350K+ condition reports to an 8M-image catalog, enriching ~2M images with condition metadata.</li>
-          <li>Led the pipeline's move from ad hoc Python/GeoJSON scripts to an FME-to-PostGIS pipeline structuring 8M+ images and 65M+ associated annotations, with automatic time/version tracking via FME triggers. Designed the schema and cut 100+ metadata columns to ~50 with spatial indexing.</li>
-          <li>Designed the annotation-storage schema for multiple model versions, and set up the taxonomy as a feature service with editor logging and concurrent multi-user updates, plus a separate read-only REST API for internal teams and vendors, replacing a fragile Excel-based process.</li>
-        </ul>
-
-        <div class="role-sub mono">Product &amp; Analytics</div>
-        <ul>
-          <li>Built a Streamlit app (later migrated to Power BI) with REST APIs summarizing dataset availability and taxonomy patterns for leadership.</li>
-          <li>Acted as product owner for a dataset-creation plugin built with the enterprise IT team, defining filters, UI, and delivery logistics, and used it to deliver 300+ curated imagery datasets to vendors.</li>
-        </ul>
-
-        <div class="role-sub mono">Platform &amp; Infrastructure</div>
-        <ul>
-          <li>Designed an AWS CDK infrastructure-as-code framework with enterprise naming, tagging, and deployment patterns used across ML and application workloads.</li>
-          <li>Built a data integration platform (Python, SQL, DuckDB) with a FastAPI/React console, and manage the PostGIS databases and AWS (Lambda, S3, SageMaker) architecture behind it.</li>
-          <li>Conducted exploratory technical work evaluating Databricks for an in-progress migration of FPL's production model deployment pipeline.</li>
-        </ul>
-
-        <div class="role-sub mono">Applications</div>
-        <ul>
-          <li>Built and deployed GIS applications (ArcGIS Enterprise, Experience Builder, Dashboards, Utility Network) for infrastructure monitoring and disaster response, including spatial web portals used in real time during Hurricane Milton for structural impacts, outages, and crew deployment.</li>
-          <li>Built a storm-pilot deployment application in ArcGIS Experience Builder to manage internal and external UAV pilots, with real-time location tracking, multi-deployment coordination, time-of-deployment logging, and multi-level access for enterprise users.</li>
-          <li>Built a customer outreach site editor, a web app enabling non-GIS staff to update storm outreach locations in real time, removing a bottleneck previously dependent on GIS specialists processing Excel files.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="role reveal">
-      <div class="role-meta">
-        <div class="dates mono">SEP 2024 — MAR 2025</div>
-        <div class="org">Florida Power &amp; Light - Contract, Jupiter, FL</div>
-      </div>
-      <div>
-        <div class="role-title">Associate Geospatial Analyst</div>
-        <ul>
-          <li>Used AutoCAD Civil 3D for preliminary topography work supporting NextEra Energy infrastructure projects.</li>
-          <li>Led QA/QC of LiDAR-derived power grid data for infrastructure resilience work, including pole hardening.</li>
-          <li>Replaced a manual LAStools/Global Mapper workflow with an automated Python pipeline (PDAL, GeoPandas, ArcPy) handling coordinate transformations, validation, and QC, and deriving both high-resolution and coarser 10ft/30ft topo products for remote areas.</li>
-          <li>Built a Python tool (CLI and ArcGIS toolbox) for utility pole clearance measurement, converting LiDAR formats and performing 3D point cloud measurements to populate feature attributes, cutting project time from days to minutes.</li>
-          <li>Managed PostgreSQL/PostGIS databases, optimized Cloud-Optimized GeoTIFFs, and automated QA workflows in FME, ArcPy, and Model Builder to streamline data storage and validation.</li>
-          <li>Built a FastAPI sidecar for heavier geoprocessing and format conversion.</li>
-          <li>Built a suite of LiDAR-based transmission corridor tools: clearance and right-of-way mapping (GeoPandas, pykml, ArcPy); a point-cloud classification tool extracting pole height, length, top/bottom diameter, tilt, wire span, and communication attachment points, used on a Key West fiber attachment project and exported as visualized KML; a CLI for vegetation-density classification (low/medium/high) supporting vegetation management at FPL's Turkey Point nuclear site; and a terrain-model generation CLI (GDAL, PDAL, GeoPandas) built against corridor LiDAR.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="role reveal">
-      <div class="role-meta">
-        <div class="dates mono">JAN 2023 — AUG 2024</div>
-        <div class="org">Florida Atlantic University, Boca Raton, FL</div>
-      </div>
-      <div>
-        <div class="role-title">Research Assistant</div>
-        <ul>
-          <li>Conducted FEMA hydrologic and hydraulic (H&amp;H) flood risk assessments for 3 Florida communities using Python automation, part of FAU's $1.7M FEMA-funded CWR3 Watershed Master Planning Initiative to build a statewide planning template.</li>
-          <li>Built an automated ArcGIS Pro geoprocessing pipeline, cutting processing time by 50%.</li>
-          <li>Built a Python geocoding tool processing 3 million addresses, replacing a paid service; cut turnaround from 3 months to 1 week and saved $20K in licensing.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="role reveal">
-      <div class="role-meta">
-        <div class="dates mono">DEC 2020 — DEC 2022</div>
-        <div class="org">Freelance Consultant, Kathmandu, Nepal</div>
-      </div>
-      <div>
-        <div class="role-title">Geomatics Engineer</div>
-        <ul>
-          <li>Led survey teams for municipal road, control, and construction surveys, including GNSS landmark and UAV topographic/transmission-line surveys, and drone photogrammetry for orthomosaic mapping.</li>
-          <li>Used AutoCAD for construction and road survey drafting, including plan and profile drawings for municipal projects.</li>
-          <li>Designed municipal geodatabases (land use, soil, cadastral, resource maps) with topology and attribute rules.</li>
-          <li>Served as GIS expert for Nepal's Survey Department land-use hand-over program, training 40+ officials in spatial analysis and database management.</li>
-          <li>Digitized historical land records as part of a national land-use modernization effort, replacing manual paper-based archives.</li>
-        </ul>
-      </div>
-    </div>
+    <small>Work for and with</small>
+    <span>Florida Power &amp; Light</span><span>Florida Atlantic University</span><span>Survey Department of Nepal</span><span>Open source on PyPI</span>
   </div>
-</section>
+</div>
 
-<section id="builds">
+<main>
+<section class="sec" id="what" style="padding-bottom:0">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">03 — Featured Builds</div>
-        <h2>Self-directed AI &amp; geospatial projects</h2>
+    <div class="eyebrow rv">What I do</div>
+    <h2 class="h2 rv">Four roles, <em class="s">one stack.</em></h2>
+    <p class="sub rv">Most GIS work stalls at a handoff: data to services, services to apps, apps to models. I work every layer, so nothing waits on someone else.</p>
+
+    <!-- GIS DEVELOPER -->
+    <div class="feat" style="--c:var(--dev)" id="f-dev">
+      <div class="rv">
+        <div class="eyebrow"><i></i>01 · GIS Developer</div>
+        <h3>Web GIS apps people actually use, <em class="s">under pressure.</em></h3>
+        <p class="d">Custom web maps, Experience Builder apps, dashboards and the APIs behind them, built for field crews, operations teams and leadership.</p>
+        <ul class="proofs">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Spatial web portals used in real time during Hurricane Milton for impacts, outages and crew deployment.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Storm-pilot app tracking UAV pilots live, plus an editor that let non-GIS staff update outreach sites themselves.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Freelance: an offline-first field data collection app for a forestry client, and a 3M-address geocoder that replaced a paid service.</li>
+        </ul>
+        <div class="tools"><span>ArcGIS Experience Builder</span><span>JavaScript / TypeScript</span><span>React</span><span>MapLibre</span><span>FastAPI</span><span>Django + PostGIS</span><span>REST APIs</span></div>
+      </div>
+      <div class="fx rv" aria-hidden="true">
+        <div class="fxbar"><i></i><i></i><i></i><span>storm-ops/app.ts</span></div>
+        <div class="fxbody dev-ui">
+<div class="code"><span class="c">// live outage layer for the ops map</span>
+<span class="k">const</span> outages = <span class="k">new</span> <span class="f">FeatureLayer</span>({
+  url: <span class="s">"…/Outages/FeatureServer/0"</span>,
+  refreshInterval: <span class="n">0.5</span>,
+  renderer: <span class="f">severity</span>(<span class="s">"customers_out"</span>)
+});
+
+map.<span class="f">add</span>(outages);
+view.<span class="f">on</span>(<span class="s">"click"</span>, <span class="f">showCrew</span>);</div>
+          <div class="minimap">
+            <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+              <g stroke="#2a2f38" fill="none"><path d="M0 60 300 40M0 140 300 120M0 220 300 240M60 0 40 300M150 0 170 300M240 0 230 300"/></g>
+              <path d="M10 280c40-60 60-40 100-90s90-30 120-90 60-60 70-80" stroke="#5b8cff" stroke-opacity=".35" stroke-width="10" fill="none" stroke-linecap="round"/>
+              <g fill="#5b8cff"><circle cx="90" cy="200" r="16" fill-opacity=".18"/><circle cx="90" cy="200" r="5"/><circle cx="180" cy="110" r="26" fill-opacity=".18"/><circle cx="180" cy="110" r="6"/><circle cx="240" cy="190" r="12" fill-opacity=".18"/><circle cx="240" cy="190" r="4"/></g>
+              <g fill="#f3b04a"><path d="M200 150l6 10h-12z"/><path d="M120 240l6 10h-12z"/></g>
+            </svg>
+            <div class="tip"><b>Feeder 0412</b><br>1,284 out · crew 7 en route</div>
+          </div>
+        </div>
       </div>
     </div>
-    <p class="sec-intro reveal">Open-source contributions built outside of my employment, focused on hazard-resilient geospatial AI and critical infrastructure. Most ship with a live demo; nothing here requires an API key to try.</p>
 
-    <div class="filter-tabs reveal" role="tablist" aria-label="Filter projects by category">
-      <button class="filter-tab active" data-filter="all" type="button">All</button>
-      <button class="filter-tab" data-filter="agent" type="button">AI &amp; Agents</button>
-      <button class="filter-tab" data-filter="geo" type="button">Geospatial</button>
-      <button class="filter-tab" data-filter="web" type="button">Web Tools</button>
+    <!-- GIS ADMIN -->
+    <div class="feat" style="--c:var(--adm)" id="f-adm">
+      <div class="rv">
+        <div class="eyebrow"><i></i>02 · GIS Administrator</div>
+        <h3>Enterprise GIS that stays up, <em class="s">and stays clean.</em></h3>
+        <p class="d">ArcGIS Enterprise and Portal administration, feature services, multi-user editing and the PostgreSQL / PostGIS databases underneath.</p>
+        <ul class="proofs">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Published a taxonomy as a feature service with editor tracking and concurrent multi-user editing, plus a read-only REST API for vendors.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Moved 8M+ images and 65M+ annotations into an FME-to-PostGIS pipeline with versioning, cutting 100+ columns to ~50.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Ran PostgreSQL / PostGIS databases, Cloud-Optimized GeoTIFFs and automated QA in FME, ArcPy and ModelBuilder.</li>
+        </ul>
+        <div class="tools"><span>ArcGIS Enterprise</span><span>Portal &amp; Server</span><span>Enterprise geodatabase</span><span>Versioning</span><span>PostgreSQL / PostGIS</span><span>FME</span><span>ArcPy</span></div>
+      </div>
+      <div class="fx rv adm-ui" aria-hidden="true">
+        <div class="fxbar"><i></i><i></i><i></i><span>portal / services</span></div>
+        <div class="tw"><table>
+          <thead><tr><th>Service</th><th>Type</th><th>Editing</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Asset_Taxonomy</td><td>Feature</td><td>multi-user</td><td class="ok">running</td></tr>
+            <tr><td>Storm_Outreach</td><td>Feature</td><td>tracked</td><td class="ok">running</td></tr>
+            <tr><td>Imagery_Catalog</td><td>Map</td><td>read-only</td><td class="ok">running</td></tr>
+            <tr><td>Topo_COG_10ft</td><td>Image</td><td>—</td><td class="warn">rebuilding</td></tr>
+            <tr><td>Vendor_API</td><td>REST</td><td>read-only</td><td class="ok">running</td></tr>
+          </tbody>
+        </table></div>
+        <div class="foot">
+          <div><b>65M+</b><span>annotations</span></div>
+          <div><b>~50</b><span>columns, from 100+</span></div>
+          <div><b>8M+</b><span>images catalogued</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="project-grid" id="projectGrid"></div>
-    <p class="gh-live-empty reveal" id="filterEmpty" style="display:none; margin-top:14px;">No projects in this category yet.</p>
-
-    <div class="gh-live reveal">
-      <div class="gh-live__head">
-        <h4>Also shipped</h4>
-        <span class="gh-live__meta mono">Outside the core hazard/geospatial focus — still real, shipped work</span>
+    <!-- OPEN SOURCE -->
+    <div class="feat" style="--c:var(--oss)" id="f-oss">
+      <div class="rv">
+        <div class="eyebrow"><i></i>03 · Open-source developer</div>
+        <h3>Tools other GIS people <em class="s">pip install.</em></h3>
+        <p class="d">Published Python packages, an MCP server for AI agents, and core contributions to a flood modeling framework. Built in the open, documented, tested.</p>
+        <ul class="proofs">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg><span><b>road-centerline</b> on PyPI: CRS-aware road centerline extraction from polygons, worldwide.</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg><span><b>geomlint</b> on PyPI: CI-first validity, topology and CRS checks for vector data.</span></li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>One of four core contributors to PyWMP, an open-source flood modeling framework, and author of HazardMCP.</li>
+        </ul>
+        <div class="tools"><span>Python packaging</span><span>PyPI</span><span>GitHub Actions</span><span>Model Context Protocol</span><span>Docker</span><span>pytest</span></div>
       </div>
-      <div class="gh-live-grid" id="shippedGrid"></div>
+      <div class="fx rv" aria-hidden="true">
+        <div class="fxbar"><i></i><i></i><i></i><span>zsh — ~/projects</span></div>
+        <div class="fxbody term" id="term"></div>
+        <div class="pkgs">
+          <a href="https://pypi.org/project/road-centerline/" target="_blank" rel="noopener" tabindex="-1"><b>road-centerline</b><span>v0.2.0 · PyPI ↗</span></a>
+          <a href="https://pypi.org/project/geomlint/" target="_blank" rel="noopener" tabindex="-1"><b>geomlint</b><span>v0.1.1 · PyPI ↗</span></a>
+        </div>
+      </div>
     </div>
 
-    <div class="gh-live reveal">
-      <div class="gh-live__head">
-        <h4>Currently building</h4>
-        <span class="gh-live__meta mono">Private repos, in active development — details intentionally light</span>
+    <!-- DATA SCIENCE -->
+    <div class="feat" style="--c:var(--ds)" id="f-ds">
+      <div class="rv">
+        <div class="eyebrow"><i></i>04 · Geospatial data scientist</div>
+        <h3>Models that leave the notebook <em class="s">and go to work.</em></h3>
+        <p class="d">Computer vision for infrastructure, risk models and flood research, evaluated properly and deployed to production.</p>
+        <ul class="proofs">
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Trained and shipped a switch-state classifier to production on AWS SageMaker for a utility inspection program.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Benchmarked YOLO, RT-DETR, Detectron2 and more on precision, recall and F1; standardized the approach for vendors.</li>
+          <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 8 3 3 7-7"/></svg>Peer-reviewed flood hazard and social vulnerability research (ISPRS IJGI, 2024) and FEMA-funded H&amp;H assessments.</li>
+        </ul>
+        <div class="tools"><span>PyTorch</span><span>YOLO / RT-DETR</span><span>Detectron2</span><span>XGBoost</span><span>SageMaker</span><span>LangGraph</span><span>HEC-RAS</span></div>
       </div>
-      <div class="gh-live-grid" id="workingGrid"></div>
-    </div>
-
-    <div class="gh-live reveal">
-      <div class="gh-live__head">
-        <h4><span class="live-badge">Live</span> Straight from GitHub — auto-refreshes daily</h4>
-        <span class="gh-live__meta mono" id="ghLiveMeta"></span>
+      <div class="fx rv" aria-hidden="true" id="dsfx">
+        <div class="fxbar"><i></i><i></i><i></i><span>eval / rt-detr · val split</span></div>
+        <div class="fxbody ds-ui">
+          <div class="det">
+            <svg viewBox="0 0 320 300" preserveAspectRatio="xMidYMid slice">
+              <rect width="320" height="300" fill="#0b0d10"/>
+              <g stroke="#2a2f38"><path d="M0 230h320M0 260h320"/></g>
+              <g stroke="#555b66" stroke-width="3"><path d="M90 230V60M60 70h60M240 230V90M215 98h50"/></g>
+              <path d="M60 70C120 90 180 92 215 98M120 70c40 22 100 26 145 28" stroke="#3a4050" stroke-width="1.5" fill="none"/>
+              <g stroke="#b190ff" stroke-width="1.6" fill="none"><rect x="52" y="52" width="76" height="40" rx="2"/><rect x="206" y="82" width="66" height="34" rx="2"/><rect x="78" y="100" width="26" height="130" rx="2"/></g>
+              <g fill="#b190ff"><rect x="52" y="38" width="88" height="14"/><rect x="206" y="68" width="78" height="14"/><rect x="104" y="100" width="70" height="14"/></g>
+              <g fill="#0a0a0c" font-family="Geist Mono, monospace" font-size="10"><text x="56" y="49">crossarm 0.96</text><text x="210" y="79">switch 0.91</text><text x="108" y="111">pole 0.98</text></g>
+            </svg>
+          </div>
+          <div class="metrics">
+            <div class="m"><b>Benchmarked</b><span class="archs">YOLO v8 · v9 · 11<br>Faster / Mask R-CNN<br>EfficientDet · SSD<br>DETR · Deformable DETR<br>Detectron2 · MMDetection</span></div>
+            <div class="m"><b>Selected <span style="color:var(--ds)">RT-DETR</span></b><div class="bar"><i style="--v:1"></i></div></div>
+            <div class="m"><b>Deployed <span style="color:var(--ds)">AWS SageMaker</span></b><div class="bar"><i style="--v:1"></i></div></div>
+            <p class="note">Illustrative scene. Production imagery and metrics stay confidential.</p>
+          </div>
+        </div>
       </div>
-      <div class="gh-live-grid" id="ghLiveGrid"></div>
-      <p class="gh-live-empty" id="ghLiveEmpty" style="display:none;">Nothing new outside the projects above — check back after the next public repo ships.</p>
     </div>
   </div>
 </section>
 
-<section id="systems">
+<section class="sec" id="work">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">04 — Systems &amp; Platform Engineering</div>
-        <h2>What sits behind the models</h2>
-      </div>
-    </div>
-    <p class="sec-intro reveal">The Experience section above covers the program-level work; this is a few platform-layer components that don't fit neatly into a resume bullet.</p>
-    <div class="work-grid">
-      <div class="work-card reveal"><div class="cat">Cloud Infrastructure</div><h4>Cloud Infrastructure Components</h4><p>AWS CDK component framework with enterprise naming, tagging, and deployment abstractions for ML and app workloads.</p></div>
-      <div class="work-card reveal"><div class="cat">Computer Vision</div><h4>Utility Asset Detection Inference Service</h4><p>ONNX-based object detection package for utility equipment with COCO JSON output and optional visualization.</p></div>
-      <div class="work-card reveal"><div class="cat">Data Engineering</div><h4>Schema Migration Utility</h4><p>PostgreSQL schema migration CLI with source/target connection separation, dry runs, and preflight checks.</p></div>
-      <div class="work-card reveal"><div class="cat">Integration Toolkit</div><h4>API + Taxonomy Integration Toolkit</h4><p>Reusable package for API extraction, taxonomy joins, metadata patching, and downstream publishing automation.</p></div>
-    </div>
+    <div class="eyebrow rv">Selected work</div>
+    <h2 class="h2 rv">Open source, <em class="s">shipped and live.</em></h2>
+    <p class="sub rv">Built on my own time and free to try. Most run in the browser with no API key.</p>
+    <div class="bento" id="bento"></div>
+    <div class="morelist" id="more"></div>
   </div>
 </section>
 
-<section id="skills">
+<section class="sec" id="skills" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">05 — Toolkit</div>
-        <h2>What I build with</h2>
-      </div>
+    <div class="eyebrow rv">Skills</div>
+    <h2 class="h2 rv">Eight bands, <em class="s">one composite.</em></h2>
+    <p class="sub rv">Like a multiband raster: each band holds one kind of skill. Pick a band to read it, or a role to see its composite.</p>
+    <div class="composite rv" id="composite" role="group" aria-label="Show bands for a role">
+      <span>Composite</span>
+      <button type="button" data-k="dev" style="--c:var(--dev)" aria-pressed="false"><i></i>GIS Developer</button>
+      <button type="button" data-k="adm" style="--c:var(--adm)" aria-pressed="false"><i></i>GIS Admin</button>
+      <button type="button" data-k="oss" style="--c:var(--oss)" aria-pressed="false"><i></i>Open source</button>
+      <button type="button" data-k="ds" style="--c:var(--ds)" aria-pressed="false"><i></i>Data science</button>
     </div>
-    <div class="skill-groups">
-      <div class="skill-group reveal">
-        <h4>Machine Learning &amp; Computer Vision</h4>
-        <div class="tags">
-          <span class="tag">PyTorch</span><span class="tag">TensorFlow/Keras</span><span class="tag">Ultralytics</span><span class="tag">Roboflow</span>
-          <span class="tag">YOLO</span><span class="tag">RT-DETR</span><span class="tag">Detectron2</span>
-          <span class="tag">Faster/Mask R-CNN</span><span class="tag">EfficientDet</span><span class="tag">DETR</span><span class="tag">MMDetection</span>
-          <span class="tag">ResNet</span><span class="tag">XGBoost</span><span class="tag">OpenCV</span><span class="tag">ONNX</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Generative AI &amp; Agentic Systems</h4>
-        <div class="tags">
-          <span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">RAG</span>
-          <span class="tag">Model Context Protocol</span><span class="tag">FastMCP</span><span class="tag">Vector Databases</span>
-          <span class="tag">Ollama</span><span class="tag">Chroma</span><span class="tag">Hugging Face Transformers</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Data Engineering</h4>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">ETL/ELT Pipelines</span><span class="tag">PySpark</span>
-          <span class="tag">DuckDB</span><span class="tag">Databricks</span><span class="tag">Data Lakes</span><span class="tag">Parquet</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Geospatial</h4>
-        <div class="tags">
-          <span class="tag">ArcGIS Pro / Enterprise / Online</span><span class="tag">Utility Network</span><span class="tag">PostGIS</span>
-          <span class="tag">DuckDB Spatial</span><span class="tag">GDAL</span><span class="tag">PDAL</span><span class="tag">GeoPandas</span>
-          <span class="tag">Shapely</span><span class="tag">PyProj</span><span class="tag">LiDAR / Point Cloud</span><span class="tag">Global Mapper</span><span class="tag">LAStools</span><span class="tag">Overture Maps</span>
-          <span class="tag">Cloud-Optimized GeoTIFF</span><span class="tag">Folium</span><span class="tag">FME</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Drone &amp; Photogrammetry</h4>
-        <div class="tags">
-          <span class="tag">Pix4D</span><span class="tag">DroneDeploy</span><span class="tag">Agisoft Metashape</span>
-          <span class="tag">Orthomosaic Generation</span><span class="tag">Point Cloud Processing</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>CAD &amp; Survey Drafting</h4>
-        <div class="tags">
-          <span class="tag">AutoCAD</span><span class="tag">AutoCAD Civil 3D</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Cloud &amp; DevOps</h4>
-        <div class="tags">
-          <span class="tag">AWS Lambda</span><span class="tag">S3</span><span class="tag">SageMaker</span>
-          <span class="tag">ECR / ECS</span><span class="tag">AWS CDK</span><span class="tag">Docker</span>
-          <span class="tag">IAM</span><span class="tag">VPC / Network Security</span><span class="tag">CI/CD</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Software Engineering</h4>
-        <div class="tags">
-          <span class="tag">JavaScript / TypeScript</span><span class="tag">R</span><span class="tag">FastAPI</span><span class="tag">React</span><span class="tag">Streamlit</span><span class="tag">Power BI</span>
-        </div>
-      </div>
-      <div class="skill-group reveal">
-        <h4>Field</h4>
-        <div class="tags">
-          <span class="tag">GNSS / GPS Survey</span><span class="tag">UAV Survey (FAA Part 107)</span>
-          <span class="tag">Differential GNSS</span><span class="tag">Total Station and Leveling Survey</span><span class="tag">Geodatabase Design</span>
-        </div>
+    <div class="raster rv">
+      <div class="rstack" id="rstack" aria-hidden="true"><div class="rscene" id="rscene"></div></div>
+      <div class="rside">
+        <div class="bands" id="bands" role="tablist" aria-label="Skill bands"></div>
+        <div class="bandpanel" id="bandpanel" role="tabpanel" aria-live="polite"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="research">
+<section class="sec" id="experience" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">06 — Research &amp; Selected Work</div>
-        <h2>Publications &amp; academic projects</h2>
-      </div>
-    </div>
-    <p class="sec-intro reveal">Most of my professional work is confidential to the organizations I've supported; publications below are what I can share in full.</p>
-
-    <div class="reveal">
-      <div class="pub"><strong style="color:var(--text)">Dhungana, B.; Liu, W.</strong> Urban–Rural Exposure to Flood Hazard and Social Vulnerability in the Conterminous United States. <em>ISPRS Int. J. Geo-Inf.</em> 2024, 13, 339. <a href="https://doi.org/10.3390/ijgi13090339" target="_blank">doi.org/10.3390/ijgi13090339 ↗</a></div>
-      <div class="pub">One of four core contributors and one of seven named authors, <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank">PyWMP ↗</a>, an open-source Python framework for multi-fidelity 1D, 2D, and hybrid event-based flood modeling (Florida Atlantic University).<span class="tag-status">Manuscript in review</span></div>
+    <div class="eyebrow rv">Experience</div>
+    <h2 class="h2 rv">Where I've <em class="s">built it.</em></h2>
+    <div class="xp" id="xp"></div>
+    <div class="edu">
+      <div class="card rv"><span>Education</span><b>MSc Geosciences, GIS</b><p>Florida Atlantic University · 4.0 GPA<br>BSc Geomatics Engineering, Tribhuvan University</p></div>
+      <div class="card rv"><span>Research</span><b>Flood hazard &amp; social vulnerability</b><p>Dhungana &amp; Liu, ISPRS IJGI 2024 · <a href="https://doi.org/10.3390/ijgi13090339" target="_blank" rel="noopener">DOI ↗</a><br>PyWMP core contributor · <a href="https://dbishal13.github.io/pywmp_documentation/" target="_blank" rel="noopener">docs ↗</a></p></div>
+      <div class="card rv"><span>Certifications</span><b>FAA Part 107 remote pilot</b><p>NASA ARSET (12) · Esri (8) · DeepLearning.AI Machine Learning and Deep Learning specializations</p></div>
     </div>
   </div>
 </section>
+</main>
 
-<section id="credentials">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <div class="sec-tag">07 — Credentials</div>
-        <h2>Education &amp; certifications</h2>
-      </div>
-    </div>
-    <div class="about-body" style="margin-bottom:36px;">
-      <p><strong>MSc, Geosciences — GIS Concentration</strong> · Florida Atlantic University · 2023–2024</p>
-      <p><strong>BSc, Geomatics Engineering</strong> · Tribhuvan University, Nepal · 2016–2021</p>
-    </div>
-    <ul class="cred-list">
-      <li>The Rise of the AI Data Engineer Bootcamp (2026)</li>
-      <li>Machine Learning Specialization — DeepLearning.AI</li>
-      <li>Deep Learning Specialization — DeepLearning.AI</li>
-      <li>GIS Specialization — UC Davis</li>
-      <li>GIS Mapping &amp; Spatial Analysis — U. Toronto</li>
-      <li>Data Science with R — Johns Hopkins</li>
-      <li>Remote Sensing Image Acquisition &amp; Analysis — UNSW Canberra</li>
-      <li>Introduction to Databases — Meta</li>
-      <li>FAA Part 107 — Remote Pilot Certificate</li>
-    </ul>
-    <p style="color:var(--text-dim); font-size:14.5px; margin-top:18px; max-width:720px;"><strong style="color:var(--text);">NASA ARSET Certifications (12)</strong> — applied remote sensing training across climate risk assessment &amp; projection, disaster &amp; building-infrastructure risk modeling, wildfire and watershed impacts, ecosystem services, air quality (geostationary satellites &amp; environmental justice), water quality (inland lakes &amp; SeaDAS), soil moisture/drought, flood monitoring &amp; modeling, and urban heat vulnerability.</p>
-    <p style="color:var(--text-dim); font-size:14.5px; margin-top:10px; max-width:720px;"><strong style="color:var(--text);">Esri Training Certifications (8)</strong> — GIS Basics, Cartography, Spatial Data Science, Imagery Analysis, Spatial Analysis, GIS for Climate Action, GIS/BIM integration for AEC, and deep-learning object classification in ArcGIS Pro.</p>
-  </div>
-</section>
-
-<section id="contact" style="border-bottom:none;">
-  <div class="wrap contact-inner">
-    <div class="contact">
-      <div class="sec-tag" style="margin-bottom:16px;">08 — Contact</div>
-      <h2>Let's talk about what you're building.</h2>
-      <p>Open to Data Science, GIS/Geospatial Engineering, and Data/Platform roles. Based in West Palm Beach, FL.</p>
-    </div>
-    <div class="contact-links">
-      <a href="mailto:beesal13dh@gmail.com">beesal13dh@gmail.com</a>
-      <a href="https://www.linkedin.com/in/dbishal" target="_blank">linkedin.com/in/dbishal</a>
-      <a href="https://github.com/DBishal13" target="_blank">github.com/DBishal13</a>
+<section class="end" id="contact">
+  <div class="wrap" style="position:relative">
+    <div class="eyebrow" style="justify-content:center">Contact</div>
+    <h2 class="h2">Need GIS built, run <em class="s">or rescued?</em></h2>
+    <p class="sub">Apps, enterprise services, data pipelines or models. Tell me what you're working on.</p>
+    <div class="cta">
+      <a class="pill w" href="mailto:beesal13dh@gmail.com">beesal13dh@gmail.com</a>
+      <a class="pill" href="https://www.linkedin.com/in/dbishal" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="pill" href="https://github.com/DBishal13" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="pill" href="assets/Bishal-Dhungana-Resume.pdf" target="_blank" rel="noopener">Resume ↓</a>
     </div>
   </div>
 </section>
-
-<footer>
-  <p>© Bishal Dhungana</p>
-  <p>View count: <span id="gc-view-count">…</span></p>
-</footer>
+<footer><div class="wrap"><span>© Bishal Dhungana · West Palm Beach, FL</span><span>Views: <span id="gc-view-count">…</span></span></div></footer>
 
 <script>
 (function(){
-  "use strict";
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+"use strict";
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 
-  /* ---------- Theme toggle ---------- */
-  var themeToggle = document.getElementById('themeToggle');
-  if(themeToggle){
-    themeToggle.addEventListener('click', function(){
-      var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-      if(isLight){
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      }
-    });
+/* reveal */
+var rvs = document.querySelectorAll('.rv, .fx');
+if('IntersectionObserver' in window && !reduce){
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); if(e.target.id === 'f-oss-term') typeTerm(); } }); }, {threshold:.15});
+  rvs.forEach(function(el){ io.observe(el); });
+} else rvs.forEach(function(el){ el.classList.add('in'); });
+
+/* ===== layer stack ===== */
+var LEDE = {
+  dev:'I build <b>web GIS apps</b> people rely on under pressure: Experience Builder apps, custom web maps and the APIs behind them.',
+  adm:'I run <b>enterprise GIS</b>: ArcGIS Enterprise and Portal, feature services, multi-user editing and the PostGIS databases underneath.',
+  oss:'I publish <b>open-source GIS tools</b>: two packages on PyPI, an MCP server for AI agents, and core work on a flood modeling framework.',
+  ds:'I ship <b>spatial AI to production</b>: computer vision for infrastructure, risk models and peer-reviewed flood research.'
+};
+var BASE = $('lede').innerHTML, order = ['dev','adm','oss','ds'], idx = -1, timer = null, auto = !reduce;
+var box = $('stackbox'), planes = document.querySelectorAll('.plane'), tocBtns = document.querySelectorAll('#toc button'), roles = document.querySelectorAll('#roleLine span');
+function pick(k){
+  box.classList.toggle('has-on', !!k);
+  planes.forEach(function(p){ p.classList.toggle('on', p.dataset.k === k); });
+  tocBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.k === k)); });
+  roles.forEach(function(r){ r.classList.toggle('on', r.dataset.k === k); });
+  $('lede').innerHTML = k ? LEDE[k] : BASE;
+}
+function cycle(){ idx = (idx + 1) % order.length; pick(order[idx]); }
+function stopAuto(){ auto = false; clearInterval(timer); }
+planes.forEach(function(p){
+  p.addEventListener('mouseenter', function(){ stopAuto(); pick(p.dataset.k); });
+  p.addEventListener('click', function(){ stopAuto(); pick(p.dataset.k); document.getElementById('f-' + p.dataset.k).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'center'}); });
+});
+tocBtns.forEach(function(b){ b.addEventListener('click', function(){ stopAuto(); pick(b.dataset.k); }); b.addEventListener('mouseenter', function(){ stopAuto(); pick(b.dataset.k); }); });
+roles.forEach(function(r){ r.style.cursor = 'pointer'; r.addEventListener('click', function(){ stopAuto(); pick(r.dataset.k); }); });
+if(auto){ setTimeout(function(){ cycle(); timer = setInterval(cycle, 3200); }, 900); }
+// gentle tilt with the pointer
+var scene = $('scene');
+if(!reduce && window.matchMedia('(hover:hover)').matches){
+  box.addEventListener('pointermove', function(e){ var r = box.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+    scene.style.transform = 'rotateX(' + (58 - y*10) + 'deg) rotateZ(' + (-40 + x*14) + 'deg)'; });
+  box.addEventListener('pointerleave', function(){ scene.style.transform = ''; });
+}
+
+/* ===== terminal ===== */
+var termEl = $('term'); termEl.parentNode.id = 'f-oss-term';
+var LINES = [
+  ['<span class="p">❯</span> pip install road-centerline geomlint', 30],
+  ['<span class="m">Collecting road-centerline (0.2.0)</span>', 0],
+  ['<span class="m">Collecting geomlint (0.1.1)</span>', 0],
+  ['<span class="g">Successfully installed</span> geomlint-0.1.1 road-centerline-0.2.0', 0],
+  ['', 0],
+  ['<span class="p">❯</span> geomlint check parcels.gpkg', 30],
+  ['<span class="g">✓</span> 12,408 features · CRS EPSG:2236', 0],
+  ['<span class="y">!</span> 3 invalid geometries (self-intersection)', 0],
+  ['<span class="y">!</span> 1 layer with ambiguous CRS units', 0],
+  ['<span class="g">✓</span> topology: no gaps, no overlaps', 0],
+  ['', 0],
+  ['<span class="p">❯</span> road-centerline roads.shp -o centerlines.gpkg', 30],
+  ['<span class="g">✓</span> 2,931 centerlines written in 4.1s', 0]
+];
+var typed = false;
+function typeTerm(){
+  if(typed) return; typed = true;
+  if(reduce){ termEl.innerHTML = LINES.map(function(l){ return l[0]; }).join('\n') + '\n<span class="p">❯</span> <span class="cur"></span>'; return; }
+  var i = 0, out = '';
+  (function next(){
+    if(i >= LINES.length){ termEl.innerHTML = out + '<span class="p">❯</span> <span class="cur"></span>'; return; }
+    var l = LINES[i++];
+    if(l[1]){ // type the command
+      var plain = l[0].replace(/<[^>]+>/g,''), j = 0;
+      (function ch(){ j++; termEl.innerHTML = out + '<span class="p">❯</span>' + esc(plain.slice(1, j)) + '<span class="cur"></span>'; if(j <= plain.length) setTimeout(ch, l[1]); else { out += l[0] + '\n'; setTimeout(next, 350); } })();
+    } else { out += l[0] + '\n'; termEl.innerHTML = out + '<span class="cur"></span>'; setTimeout(next, 120); }
+  })();
+}
+termEl.innerHTML = '<span class="p">❯</span> <span class="cur"></span>';
+if(!('IntersectionObserver' in window) || reduce) typeTerm();
+
+/* ===== work bento ===== */
+var COLOR = {agent:'var(--ds)', geo:'var(--dev)', web:'var(--oss)'};
+var GLYPH = {
+  agent:'<svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><circle cx="14" cy="18" r="5"/><circle cx="48" cy="14" r="5"/><circle cx="32" cy="44" r="6"/><circle cx="52" cy="46" r="4"/><path d="M18 21l11 18M44 17 35 39M37 45h11M19 18h24"/></svg>',
+  geo:'<svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="32" cy="32" rx="26" ry="18"/><ellipse cx="34" cy="31" rx="16" ry="10"/><ellipse cx="36" cy="30" rx="6" ry="3.5"/></svg>',
+  pkg:'<svg class="glyph" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2"><path d="M32 6 56 19v26L32 58 8 45V19z"/><path d="M8 19l24 13 24-13M32 32v26"/></svg>'
+};
+var curated = [];
+fetch('assets/projects-curated.json', {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); }).then(function(d){
+  var ps = d.projects || [];
+  curated = ps.map(function(p){ return (p.repo ? p.repo.split('/').pop() : p.name).toLowerCase(); });
+  var flag = ps.filter(function(p){ return p.tier === 'flagship'; });
+  var PICK = ['thirty maps','surgeexposure','wildfire-copilot','geospatial data copilot','geomlint','geocoder'];
+  var withImg = PICK.map(function(n){ return flag.filter(function(p){ return p.thumbnail && p.name.toLowerCase().indexOf(n) === 0; })[0]; }).filter(Boolean), noImg = [];
+  var restCount = ps.filter(function(p){ return p.tier !== 'working'; }).length - withImg.length;
+  var sizes = ['w2 tall','w2','','','w2',''];
+  function href(p){ return p.live_url || p.docs_url || (p.repo ? 'https://github.com/' + p.repo : '#'); }
+  function cat(p){ return (p.category||[])[0] || 'geo'; }
+  function name(p){ return p.name.indexOf('Thirty Maps') === 0 ? '#30DayMapChallenge' : p.name; }
+  var html = withImg.map(function(p,i){
+    return '<a class="tile ' + (sizes[i]||'') + '" href="' + esc(href(p)) + '" target="_blank" rel="noopener" style="--c:' + COLOR[cat(p)] + '">' +
+      '<img src="' + esc(p.thumbnail) + '" alt="' + esc(name(p)) + ' screenshot" loading="lazy"><span class="go" aria-hidden="true">→</span>' +
+      '<div class="tb"><span class="cat"><i></i>' + esc(p.cat_label || '') + '</span><h4>' + esc(name(p)) + '</h4><p>' + esc(p.description) + '</p></div></a>';
+  }).join('');
+  html += noImg.map(function(p){
+    var isPkg = /pypi/i.test((p.stack||[]).join(' ')) , g = isPkg ? 'pkg' : (cat(p) === 'agent' ? 'agent' : 'geo');
+    return '<a class="tile text" href="' + esc(href(p)) + '" target="_blank" rel="noopener" style="--c:' + (isPkg ? 'var(--oss)' : COLOR[cat(p)]) + '">' + GLYPH[g] +
+      '<div class="tb"><span class="cat"><i></i>' + esc(isPkg ? 'Open source · PyPI' : (p.cat_label || '')) + '</span><h4>' + esc(name(p)) + '</h4><p>' + esc(p.description) + '</p></div></a>';
+  }).join('');
+  $('bento').innerHTML = html;
+  $('more').innerHTML = '<a class="pill" href="https://github.com/DBishal13" target="_blank" rel="noopener">+ ' + restCount + ' more on GitHub ↗</a>';
+}).catch(function(){});
+
+/* ===== skills: raster band stack ===== */
+var BANDS = [
+  ['Web GIS development','Apps, widgets and plugins people use day to day.','#5b8cff',['dev'],['ArcGIS Experience Builder','Custom widgets & plugins','ArcGIS Dashboards','Field Maps','Survey123','QuickCapture','MapLibre','Leaflet','d3 / WebGL','React','FastAPI','Django','REST APIs']],
+  ['GIS administration','The enterprise platform and the data under it.','#f3b04a',['adm'],['ArcGIS Enterprise','Portal & Server','ArcGIS Online','Feature services','Enterprise geodatabase','Versioning','Editor tracking','PostgreSQL / PostGIS']],
+  ['Desktop GIS & CAD','Analysis, automation and drafting.','#7fa3ff',['dev','adm','ds'],['ArcGIS Pro','ArcPy','ModelBuilder','QGIS','Global Mapper','Geocoding','Spatial analysis','AutoCAD','Civil 3D']],
+  ['Spatial data engineering','Pipelines that move and clean spatial data at scale.','#ffcf7a',['adm','oss'],['FME','GDAL / OGR','DuckDB Spatial','GeoPandas','Shapely','PyProj','Cloud-Optimized GeoTIFF','STAC','PySpark','Databricks','Airflow','Prefect']],
+  ['Languages & open source','Code that ships, packaged for others.','#3ed39a',['oss','dev'],['Python','SQL','JavaScript / TypeScript','R','PyPI packaging','CLI tools','pytest','GitHub Actions','Docker','Model Context Protocol']],
+  ['Machine learning & AI','Vision, prediction and agents.','#b190ff',['ds'],['PyTorch','YOLO','RT-DETR','Detectron2','MMDetection','Roboflow','ONNX','OpenCV','XGBoost','LangGraph','LangChain','RAG','Ollama']],
+  ['Cloud & DevOps','Where it all runs.','#d1b8ff',['adm','ds','dev'],['AWS SageMaker','Lambda','S3','ECR / ECS','AWS CDK','IAM / VPC','Kubernetes','Cloudflare Workers','CI/CD']],
+  ['Remote sensing & field','Where the data comes from.','#7ee0b8',['ds'],['LiDAR / point clouds','PDAL','LAStools','Sentinel-1 / 2','Landsat','Google Earth Engine','ENVI','ERDAS Imagine','Pix4D','Metashape','GNSS / RTK','Total station','UAV · FAA Part 107','HEC-RAS / HEC-HMS']]
+];
+var RNAME = {dev:'GIS Developer', adm:'GIS Admin', oss:'Open source', ds:'Data science'};
+function bandTex(hex, seed){
+  var N = 192, c = document.createElement('canvas'); c.width = c.height = N; var x = c.getContext('2d'), img = x.createImageData(N, N), d = img.data;
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  function h(i,j){ var s = Math.sin(i*127.1 + j*311.7 + seed*74.7)*43758.5453; return s - Math.floor(s); }
+  function vn(u,v){ var i=Math.floor(u), j=Math.floor(v), fu=u-i, fv=v-j; fu=fu*fu*(3-2*fu); fv=fv*fv*(3-2*fv);
+    var a=h(i,j), bb=h(i+1,j), cc=h(i,j+1), dd=h(i+1,j+1); return a+(bb-a)*fu+(cc-a)*fv+(a-bb-cc+dd)*fu*fv; }
+  function f(u,v){ var s=0, amp=.55, fr=1; for(var o=0;o<5;o++){ s+=vn(u*fr,v*fr)*amp; amp*=.5; fr*=2.1; } return s; }
+  var H = new Float32Array(N*N);
+  for(var j=0;j<N;j++) for(var i=0;i<N;i++) H[j*N+i] = f(i/N*5 + seed, j/N*5 - seed);
+  for(j=0;j<N;j++) for(i=0;i<N;i++){
+    var k = j*N+i, e = H[k], dx = H[j*N+Math.min(N-1,i+1)] - H[j*N+Math.max(0,i-1)], dy = H[Math.min(N-1,j+1)*N+i] - H[Math.max(0,j-1)*N+i];
+    var shade = Math.max(0, Math.min(1, .62 - dx*5 + dy*3));   // hillshade from the NW
+    var v = Math.max(.08, Math.min(1.1, e*.95)) * (.55 + .6*shade);
+    d[k*4] = Math.min(255, r*v); d[k*4+1] = Math.min(255, g*v); d[k*4+2] = Math.min(255, b*v); d[k*4+3] = 255;
   }
+  x.putImageData(img, 0, 0);
+  return c.toDataURL();
+}
+var rscene = $('rscene'), bandsEl = $('bands'), small = window.innerWidth <= 900;
+BANDS.forEach(function(B, i){
+  var d = document.createElement('div'); d.className = 'band3d'; d.dataset.i = i;
+  d.style.setProperty('--c', B[2]); d.style.setProperty('--z', (BANDS.length - 1 - i) * (small ? 14 : 26));
+  d.style.backgroundImage = 'url(' + bandTex(B[2], i*1.3 + .7) + ')';
+  d.innerHTML = '<b>B' + (i+1) + '</b>';
+  d.addEventListener('click', function(){ selBand(i); });
+  rscene.appendChild(d);
+  var btn = document.createElement('button'); btn.type = 'button'; btn.setAttribute('role','tab'); btn.style.setProperty('--c', B[2]); btn.id = 'band-' + i;
+  btn.innerHTML = '<small>B' + (i+1) + '</small><span>' + esc(B[0]) + '</span>';
+  btn.addEventListener('click', function(){ selBand(i); });
+  bandsEl.appendChild(btn);
+});
+function tools(B){ return '<div class="t">' + B[4].map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('') + '</div>'; }
+function selBand(i){
+  document.querySelectorAll('#composite button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+  document.querySelectorAll('.band3d').forEach(function(d){ d.classList.toggle('on', +d.dataset.i === i); d.classList.remove('dim'); });
+  document.querySelectorAll('#bands button').forEach(function(b,j){ b.setAttribute('aria-selected', String(j === i)); b.classList.remove('dim'); });
+  var B = BANDS[i], p = $('bandpanel'); p.classList.remove('multi');
+  p.innerHTML = '<div class="bh"><h3>B' + (i+1) + ' · ' + esc(B[0]) + '</h3><div class="who">' + B[3].map(function(k){ return '<span style="--c:var(--' + k + ')"><i></i>' + RNAME[k] + '</span>'; }).join('') + '</div></div><p>' + esc(B[1]) + '</p>' + tools(B);
+}
+function composite(k){
+  var idx = []; BANDS.forEach(function(B,i){ if(B[3].indexOf(k) > -1) idx.push(i); });
+  document.querySelectorAll('.band3d').forEach(function(d){ var on = idx.indexOf(+d.dataset.i) > -1; d.classList.toggle('on', on); d.classList.toggle('dim', !on); });
+  document.querySelectorAll('#bands button').forEach(function(b,j){ b.setAttribute('aria-selected', 'false'); b.classList.toggle('dim', idx.indexOf(j) === -1); });
+  var p = $('bandpanel'); p.classList.add('multi');
+  p.innerHTML = '<div class="bh"><h3>' + RNAME[k] + ' composite</h3><div class="who">' + idx.map(function(i){ return '<span style="--c:' + BANDS[i][2] + '"><i></i>B' + (i+1) + '</span>'; }).join('') + '</div></div>' +
+    idx.map(function(i){ return '<div class="grp" style="--c:' + BANDS[i][2] + '"><b>B' + (i+1) + ' · ' + esc(BANDS[i][0]) + '</b>' + tools(BANDS[i]) + '</div>'; }).join('');
+}
+document.querySelectorAll('#composite button').forEach(function(b){
+  b.addEventListener('click', function(){
+    var was = b.getAttribute('aria-pressed') === 'true';
+    if(was){ selBand(0); return; }
+    composite(b.dataset.k);
+    document.querySelectorAll('#composite button').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+  });
+});
+selBand(0);
 
-  /* ---------- Scroll reveal ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window && !reduceMotion){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else {
-    revealEls.forEach(function(el){ el.classList.add('visible'); });
-  }
-
-  /* ---------- Builds: helpers ---------- */
-  function timeAgo(iso){
-    if(!iso) return '';
-    var diff = Date.now() - new Date(iso).getTime();
-    var days = Math.floor(diff / 86400000);
-    if(days < 1) return 'today';
-    if(days === 1) return '1 day ago';
-    if(days < 30) return days + ' days ago';
-    var months = Math.floor(days / 30);
-    if(months < 12) return months + (months === 1 ? ' month ago' : ' months ago');
-    var years = Math.floor(months / 12);
-    return years + (years === 1 ? ' year ago' : ' years ago');
-  }
-  function esc(s){
-    return String(s == null ? '' : s).replace(/[&<>]/g, function(c){
-      return c === '&' ? '&amp;' : c === '<' ? '&lt;' : '&gt;';
-    });
-  }
-
-  /* ---------- Builds: curated projects (flagship / shipped / working) ---------- */
-  var curatedNames = [];
-  fetch('assets/projects-curated.json', {cache:'no-store'})
-    .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function(data){
-      var projects = data.projects || [];
-      curatedNames = projects.map(function(p){
-        var slug = p.repo ? p.repo.split('/').pop() : p.name;
-        return slug.toLowerCase();
-      });
-
-      var flagshipGrid = document.getElementById('projectGrid');
-      var shippedGrid = document.getElementById('shippedGrid');
-      var workingGrid = document.getElementById('workingGrid');
-
-      var flagship = projects.filter(function(p){ return p.tier === 'flagship'; });
-      var shipped = projects.filter(function(p){ return p.tier === 'shipped'; });
-      var working = projects.filter(function(p){ return p.tier === 'working'; });
-
-      if(flagshipGrid){
-        flagshipGrid.innerHTML = flagship.map(function(p){
-          var repoUrl = p.repo ? 'https://github.com/' + p.repo : null;
-          var actions = '';
-          if(p.live_url) actions += '<a class="btn btn-primary btn-sm" href="' + esc(p.live_url) + '" target="_blank">' + esc(p.live_label || 'Live Demo') + ' ↗</a>';
-          if(p.docs_url) actions += '<a class="btn btn-primary btn-sm" href="' + esc(p.docs_url) + '" target="_blank">' + esc(p.docs_label || 'Docs') + ' ↗</a>';
-          if(repoUrl) actions += '<a class="btn btn-ghost btn-sm" href="' + esc(repoUrl) + '" target="_blank">Repo ↗</a>';
-          var thumb = p.thumbnail ? '<img class="project-card__thumb" src="' + esc(p.thumbnail) + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' : '';
-          return '<article class="project-card reveal visible" data-cat="' + esc((p.category || []).join(' ')) + '">' +
-            thumb +
-            '<div class="project-card__body">' +
-            '<div class="project-card__top">' +
-              '<span class="project-card__cat">' + esc(p.cat_label || '') + '</span>' +
-              '<span class="live-badge"' + (p.live_url ? '' : ' style="display:none;"') + '>Live</span>' +
-            '</div>' +
-            '<h3>' + esc(p.name) + '</h3>' +
-            '<p class="desc">' + esc(p.description) + '</p>' +
-            '<div class="stack">' + (p.stack || []).map(function(t){ return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
-            '<div class="project-card__actions">' + actions + '</div>' +
-            '</div>' +
-          '</article>';
-        }).join('');
-      }
-
-      if(shippedGrid){
-        shippedGrid.innerHTML = shipped.map(function(p){
-          var repoUrl = p.repo ? 'https://github.com/' + p.repo : null;
-          var links = '';
-          if(repoUrl) links += '<a href="' + esc(repoUrl) + '" target="_blank">Repo ↗</a>';
-          if(p.live_url) links += '<a href="' + esc(p.live_url) + '" target="_blank">Live ↗</a>';
-          var thumb = p.thumbnail ? '<img class="gh-live-card__thumb" src="' + esc(p.thumbnail) + '" alt="' + esc(p.name) + ' screenshot" loading="lazy">' : '';
-          return '<div class="gh-live-card">' +
-            thumb +
-            '<div class="gh-live-card__body">' +
-            '<h5>' + (repoUrl ? '<a href="' + esc(repoUrl) + '" target="_blank">' + esc(p.name) + '</a>' : esc(p.name)) + '</h5>' +
-            '<p>' + esc(p.description) + '</p>' +
-            '<div class="meta">' + links + '</div>' +
-            '</div>' +
-          '</div>';
-        }).join('');
-      }
-
-      if(workingGrid){
-        workingGrid.innerHTML = working.map(function(p){
-          return '<div class="gh-live-card is-working">' +
-            '<div class="gh-live-card__body">' +
-            '<span class="working-badge">Private · In progress</span>' +
-            '<h5>' + esc(p.name) + '</h5>' +
-            '<p>' + esc(p.description) + '</p>' +
-            '</div>' +
-          '</div>';
-        }).join('');
-      }
-
-      /* filter tabs + hover spotlight, wired after flagship cards exist */
-      var filterTabs = document.querySelectorAll('.filter-tab');
-      var projectCards = document.querySelectorAll('.project-card');
-      var filterEmpty = document.getElementById('filterEmpty');
-      filterTabs.forEach(function(tab){
-        tab.addEventListener('click', function(){
-          filterTabs.forEach(function(t){ t.classList.remove('active'); });
-          tab.classList.add('active');
-          var filter = tab.getAttribute('data-filter');
-          var visible = 0;
-          projectCards.forEach(function(card){
-            var cats = (card.getAttribute('data-cat') || '').split(' ');
-            var show = filter === 'all' || cats.indexOf(filter) !== -1;
-            card.classList.toggle('is-hidden', !show);
-            if(show) visible++;
-          });
-          if(filterEmpty) filterEmpty.style.display = visible ? 'none' : 'block';
-        });
-      });
-      if(window.matchMedia('(hover: hover)').matches){
-        projectCards.forEach(function(card){
-          card.addEventListener('pointermove', function(e){
-            var rect = card.getBoundingClientRect();
-            card.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width * 100) + '%');
-            card.style.setProperty('--my', ((e.clientY - rect.top) / rect.height * 100) + '%');
-          });
-        });
-      }
-    })
-    .catch(function(){ /* curated list unavailable — sections stay empty, live feed below still works */ })
-    .finally(function(){
-      /* ---------- Builds: live GitHub feed (fallback for anything not yet curated) ---------- */
-      var ghGrid = document.getElementById('ghLiveGrid');
-      if(!ghGrid) return;
-      var EXTRA_EXCLUDE = ['pywmp_documentation'];
-
-      fetch('assets/projects.json', {cache:'no-store'})
-        .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); })
-        .then(function(data){
-          var repos = (data.repos || []).filter(function(r){
-            var n = r.name.toLowerCase();
-            return curatedNames.indexOf(n) === -1 && EXTRA_EXCLUDE.indexOf(n) === -1;
-          });
-
-          var metaEl = document.getElementById('ghLiveMeta');
-          if(metaEl && data.generated_at){ metaEl.textContent = 'Updated ' + timeAgo(data.generated_at); }
-
-          if(!repos.length){
-            document.getElementById('ghLiveEmpty').style.display = 'block';
-            return;
-          }
-
-          ghGrid.innerHTML = repos.slice(0, 6).map(function(r){
-            var desc = r.description || 'No description yet.';
-            var link = r.homepage || r.url;
-            var linkLabel = r.homepage ? 'Live ↗' : 'Repo ↗';
-            return '<div class="gh-live-card">' +
-              '<h5><a href="' + r.url + '" target="_blank">' + esc(r.name) + '</a></h5>' +
-              '<p>' + esc(desc) + '</p>' +
-              '<div class="meta"><span>' + esc(r.language || '—') + ' · ' + timeAgo(r.pushed_at) + '</span>' +
-              '<a href="' + link + '" target="_blank">' + linkLabel + '</a></div>' +
-            '</div>';
-          }).join('');
-        })
-        .catch(function(){
-          var emptyEl = document.getElementById('ghLiveEmpty');
-          if(emptyEl){ emptyEl.textContent = 'Live feed unavailable right now — browse everything on GitHub.'; emptyEl.style.display = 'block'; }
-        });
-    });
-
-  /* ---------- Hero background: drifting contour lines ---------- */
-  var bgCanvas = document.getElementById('heroBg');
-  if(bgCanvas){
-    var bgCtx = bgCanvas.getContext('2d');
-    var bgDpr = Math.min(window.devicePixelRatio || 1, 2);
-    var bgW, bgH, bgPhase = 0;
-    var mouseX = 0.5, mouseY = 0.5, targetMX = 0.5, targetMY = 0.5;
-
-    function sizeBg(){
-      var rect = bgCanvas.parentElement.getBoundingClientRect();
-      bgW = rect.width; bgH = rect.height;
-      bgCanvas.width = bgW * bgDpr;
-      bgCanvas.height = bgH * bgDpr;
-      bgCtx.setTransform(bgDpr, 0, 0, bgDpr, 0, 0);
-    }
-    sizeBg();
-    window.addEventListener('resize', sizeBg);
-    bgCanvas.parentElement.addEventListener('mousemove', function(e){
-      var rect = bgCanvas.parentElement.getBoundingClientRect();
-      targetMX = (e.clientX - rect.left) / rect.width;
-      targetMY = (e.clientY - rect.top) / rect.height;
-    });
-
-    var bands = [
-      {y:0.84, amp:24, freq:1.6, opacity:0.55, color:'45,212,191'},
-      {y:0.76, amp:28, freq:1.3, opacity:0.45, color:'45,212,191'},
-      {y:0.68, amp:32, freq:1.1, opacity:0.4, color:'45,212,191'},
-      {y:0.60, amp:26, freq:1.4, opacity:0.35, color:'255,176,32'},
-      {y:0.52, amp:30, freq:1.0, opacity:0.26, color:'45,212,191'},
-      {y:0.44, amp:22, freq:1.2, opacity:0.18, color:'45,212,191'}
-    ];
-
-    var gridSpacing = 34;
-
-    function drawGrid(){
-      var parallax = (mouseX - 0.5) * 10;
-      var offX = ((-mouseX*gridSpacing*0.4) % gridSpacing + gridSpacing) % gridSpacing;
-      var offY = ((-mouseY*gridSpacing*0.4) % gridSpacing + gridSpacing) % gridSpacing;
-      bgCtx.fillStyle = 'rgba(45,212,191,0.4)';
-      for(var gy = -gridSpacing + offY; gy < bgH + gridSpacing; gy += gridSpacing){
-        for(var gx = -gridSpacing + offX; gx < bgW + gridSpacing; gx += gridSpacing){
-          bgCtx.fillRect(gx + parallax*0.3, gy, 1.4, 1.4);
-        }
-      }
-    }
-
-    function drawSweep(){
-      var t = (bgPhase * 10) % 1; // 0..1 loop
-      var sweepX = t * (bgW + 400) - 200;
-      var grad = bgCtx.createLinearGradient(sweepX - 130, 0, sweepX + 130, 0);
-      grad.addColorStop(0, 'rgba(255,176,32,0)');
-      grad.addColorStop(0.5, 'rgba(255,176,32,0.10)');
-      grad.addColorStop(1, 'rgba(255,176,32,0)');
-      bgCtx.fillStyle = grad;
-      bgCtx.fillRect(0, 0, bgW, bgH);
-    }
-
-    /* ---------- Drone flyovers ---------- */
-    var drones = [];
-    var nextDroneAt = performance.now() + 1500 + Math.random()*2500;
-
-    function spawnDrone(now){
-      var dir = Math.random() < 0.5 ? 1 : -1;
-      drones.push({
-        x: dir === 1 ? -40 : bgW + 40,
-        y0: bgH * (0.08 + Math.random()*0.30),
-        dir: dir,
-        speed: 0.028 + Math.random()*0.018,
-        bobAmp: 6 + Math.random()*8,
-        bobFreq: 0.0016 + Math.random()*0.001,
-        spawnTime: now,
-        scale: 0.8 + Math.random()*0.6
-      });
-    }
-
-    function drawDrone(d, now){
-      var y = d.y0 + Math.sin((now - d.spawnTime) * d.bobFreq) * d.bobAmp;
-      var s = d.scale;
-      var facing = d.dir; // 1 = flying right, -1 = flying left
-      bgCtx.save();
-      bgCtx.translate(d.x, y);
-      bgCtx.scale(facing * s, s);
-      bgCtx.strokeStyle = 'rgba(200,225,220,0.42)';
-      bgCtx.lineWidth = 1;
-      // arms
-      [[-9,-7],[9,-7],[-9,7],[9,7]].forEach(function(arm){
-        bgCtx.beginPath();
-        bgCtx.moveTo(0,0);
-        bgCtx.lineTo(arm[0], arm[1]);
-        bgCtx.stroke();
-        bgCtx.beginPath();
-        bgCtx.arc(arm[0], arm[1], 2.6, 0, Math.PI*2);
-        bgCtx.strokeStyle = 'rgba(200,225,220,0.34)';
-        bgCtx.stroke();
-      });
-      // body
-      bgCtx.fillStyle = 'rgba(210,230,226,0.5)';
-      bgCtx.beginPath();
-      bgCtx.arc(0, 0, 2.4, 0, Math.PI*2);
-      bgCtx.fill();
-      // blinking anti-collision light
-      var blink = (Math.sin((now - d.spawnTime) * 0.01) + 1) / 2;
-      if(blink > 0.72){
-        bgCtx.fillStyle = 'rgba(255,120,90,' + (0.35 + blink*0.5).toFixed(2) + ')';
-        bgCtx.beginPath();
-        bgCtx.arc(0, 3, 1.6, 0, Math.PI*2);
-        bgCtx.fill();
-      }
-      bgCtx.restore();
-    }
-
-    function updateDrones(now, dt){
-      if(now >= nextDroneAt && drones.length < 2){
-        spawnDrone(now);
-        nextDroneAt = now + 9000 + Math.random()*9000;
-      }
-      drones = drones.filter(function(d){
-        d.x += d.dir * d.speed * dt;
-        return d.x > -60 && d.x < bgW + 60;
-      });
-    }
-
-    function drawBg(now){
-      bgCtx.clearRect(0,0,bgW,bgH);
-      drawGrid();
-      drawSweep();
-      var parallax = (mouseX - 0.5) * 18;
-      bands.forEach(function(b){
-        bgCtx.beginPath();
-        var baseY = b.y * bgH + (mouseY - 0.5) * 10;
-        for(var x = -20; x <= bgW + 20; x += 8){
-          var y = baseY + Math.sin((x/bgW)*Math.PI*2*b.freq + bgPhase + b.y*4) * b.amp;
-          if(x === -20) bgCtx.moveTo(x + parallax, y);
-          else bgCtx.lineTo(x + parallax, y);
-        }
-        bgCtx.strokeStyle = 'rgba(' + b.color + ',' + b.opacity + ')';
-        bgCtx.lineWidth = 1;
-        bgCtx.stroke();
-      });
-      drones.forEach(function(d){ drawDrone(d, now); });
-    }
-
-    if(reduceMotion){
-      drawBg(performance.now());
-    } else {
-      var lastT = performance.now();
-      (function loop(now){
-        now = now || performance.now();
-        var dt = Math.min(64, now - lastT);
-        lastT = now;
-        bgPhase += 0.0035;
-        mouseX += (targetMX - mouseX) * 0.04;
-        mouseY += (targetMY - mouseY) * 0.04;
-        updateDrones(now, dt);
-        drawBg(now);
-        requestAnimationFrame(loop);
-      })();
-    }
-  }
-
-  /* ---------- Point cloud: simulated LiDAR scan of a utility pole ---------- */
-  var pcCanvas = document.getElementById('pointCloud');
-  if(pcCanvas){
-    var pcCtx = pcCanvas.getContext('2d');
-    var pcDpr = Math.min(window.devicePixelRatio || 1, 2);
-    var pcW = 0, pcH = 0;
-
-    function sizePc(){
-      var rect = pcCanvas.getBoundingClientRect();
-      pcW = rect.width; pcH = rect.height;
-      pcCanvas.width = pcW * pcDpr;
-      pcCanvas.height = pcH * pcDpr;
-      pcCtx.setTransform(pcDpr, 0, 0, pcDpr, 0, 0);
-    }
-    sizePc();
-    window.addEventListener('resize', sizePc);
-
-    // Build point cloud: pole, crossarm, insulators, transformer can, plus ground/road/vegetation and wires
-    var points = [];
-    var i;
-
-    // vertical pole
-    for(i = 0; i < 260; i++){
-      var h = -1 + (i/259)*2;
-      var jitter = (Math.random()-0.5)*0.02;
-      var ang = Math.random()*Math.PI*2;
-      points.push({x:Math.cos(ang)*0.05+jitter, y:h, z:Math.sin(ang)*0.05, c:'pole'});
-    }
-
-    // crossarm
-    for(i = 0; i < 100; i++){
-      var t = (i/99 - 0.5) * 1.3;
-      points.push({x:t, y:0.62 + (Math.random()-0.5)*0.01, z:(Math.random()-0.5)*0.02, c:'arm'});
-    }
-
-    // insulators and conductors
-    [-0.5, 0, 0.5].forEach(function(px){
-      for(i = 0; i < 18; i++){
-        points.push({x:px+(Math.random()-0.5)*0.03, y:0.68 + (i/17)*0.14, z:(Math.random()-0.5)*0.03, c:'ins'});
-      }
-    });
-    var wireCount = 180;
-    for(i = 0; i < wireCount; i++){
-      var t = i/(wireCount-1);
-      var x = -0.65 + t * 1.3;
-      var y = 0.72 + Math.sin(t*Math.PI)*0.02;
-      points.push({x:x + (Math.random()-0.5)*0.01, y:y + (Math.random()-0.5)*0.01, z:0.035 + (Math.random()-0.5)*0.007, c:'conductor'});
-      points.push({x:x + (Math.random()-0.5)*0.01, y:y - 0.08 + (Math.random()-0.5)*0.01, z:0.015 + (Math.random()-0.5)*0.005, c:'comm'});
-      if(i % 12 === 0){
-        points.push({x:x + (Math.random()-0.5)*0.02, y:y + 0.03 + (Math.random()-0.5)*0.01, z:0.032 + (Math.random()-0.5)*0.008, c:'ins'});
-        points.push({x:x + (Math.random()-0.5)*0.02, y:y + 0.01 + (Math.random()-0.5)*0.01, z:0.028 + (Math.random()-0.5)*0.006, c:'ins'});
-      }
-    }
-
-    // transformer and hardware around the pole
-    for(i = 0; i < 130; i++){
-      var ang3 = Math.random()*Math.PI*2;
-      var hh = -0.35 + Math.random()*0.5;
-      points.push({x:0.18+Math.cos(ang3)*0.10, y:hh, z:0.10+Math.sin(ang3)*0.10, c:'tx'});
-    }
-
-    // ground plane
-    for(i = 0; i < 480; i++){
-      var gx = (Math.random()-0.5) * 1.9;
-      var gz = (Math.random()-0.5) * 1.9;
-      var gy = -1.02 + (Math.random()-0.5)*0.01;
-      points.push({x:gx, y:gy, z:gz, c:'ground'});
-    }
-
-    // road surface
-    for(i = 0; i < 90; i++){
-      var rx = -0.72 + Math.random()*1.44;
-      var rz = -0.16 + (Math.random()-0.5)*0.07;
-      points.push({x:rx, y:-1.01 + (Math.random()-0.5)*0.003, z:rz, c:'road'});
-    }
-
-    // vegetation clusters
-    for(i = 0; i < 300; i++){
-      var vx = -0.68 + Math.random()*1.36;
-      var vz = 0.15 + (Math.random()-0.5)*0.42;
-      var vy = -0.88 + Math.random()*0.24;
-      points.push({x:vx, y:vy, z:vz, c:'vegetation'});
-    }
-
-    var angle = 0.6, autoSpin = 0.0035, dragging = false, lastX = 0, velocity = 0;
-    var tiltX = -0.30;
-
-    pcCanvas.addEventListener('pointerdown', function(e){
-      dragging = true; lastX = e.clientX; velocity = 0;
-      pcCanvas.setPointerCapture(e.pointerId);
-    });
-    pcCanvas.addEventListener('pointermove', function(e){
-      if(!dragging) return;
-      var dx = e.clientX - lastX;
-      lastX = e.clientX;
-      velocity = dx * 0.008;
-      angle += velocity;
-    });
-    pcCanvas.addEventListener('pointerup', function(){ dragging = false; });
-    pcCanvas.addEventListener('pointercancel', function(){ dragging = false; });
-
-    function projected(){
-      var cos = Math.cos(angle), sin = Math.sin(angle);
-      var cosT = Math.cos(tiltX), sinT = Math.sin(tiltX);
-      var focal = 3.2, R = pcH * 0.42, cx = pcW/2, cy = pcH/2 + pcH*0.02;
-      var out = [];
-      for(var k = 0; k < points.length; k++){
-        var p = points[k];
-        var xr = p.x*cos + p.z*sin;
-        var zr = -p.x*sin + p.z*cos;
-        var yr = p.y*cosT - zr*sinT;
-        var zr2 = p.y*sinT + zr*cosT;
-        var scale = focal / (focal + zr2);
-        out.push({
-          x: cx + xr*scale*R,
-          y: cy - yr*scale*R,
-          scale: scale,
-          depth: zr2,
-          c: p.c
-        });
-      }
-      out.sort(function(a,b){ return b.depth - a.depth; });
-      return out;
-    }
-
-    var colorMap = {
-      pole: [255,176,32],
-      arm: [255,176,32],
-      ins: [244,246,242],
-      tx: [45,212,191],
-      conductor: [255,220,120],
-      comm: [110,215,255],
-      ground: [90,110,85],
-      road: [120,125,130],
-      vegetation: [72,158,74]
-    };
-
-    function drawPc(){
-      pcCtx.clearRect(0,0,pcW,pcH);
-      var pts = projected();
-      for(var k = 0; k < pts.length; k++){
-        var pt = pts[k];
-        var col = colorMap[pt.c];
-        var alpha = Math.max(0.25, Math.min(1, pt.scale));
-        var r = Math.max(0.6, 1.9 * pt.scale);
-        pcCtx.beginPath();
-        pcCtx.arc(pt.x, pt.y, r, 0, Math.PI*2);
-        pcCtx.fillStyle = 'rgba(' + col.join(',') + ',' + alpha + ')';
-        pcCtx.fill();
-      }
-    }
-
-    if(reduceMotion){
-      drawPc();
-    } else {
-      (function loopPc(){
-        if(!dragging){
-          velocity *= 0.94;
-          angle += autoSpin + velocity;
-        }
-        drawPc();
-        requestAnimationFrame(loopPc);
-      })();
-    }
-  }
-
+/* ===== experience ===== */
+var TAG = {dev:'GIS dev', adm:'GIS admin', oss:'Open source', ds:'Data science'};
+var JOBS = [
+  ['Now','GIS Developer','Construction',[
+    'Building web GIS applications, custom plugins and widgets for project teams.',
+    'Data workflows, dashboards and tooling for day-to-day project delivery.'],['dev','adm'],1],
+  ['2025 — 2026','Data Scientist, Geospatial & AI','Florida Power & Light · contract',[
+    'Technical lead on an AI-based infrastructure inspection program.',
+    'Trained and deployed a computer vision model to production in the cloud.',
+    'Built the data pipelines, databases and services behind it.',
+    'Web GIS apps for operations and storm response.'],['dev','adm','ds']],
+  ['2024 — 2025','Associate Geospatial Analyst','Florida Power & Light · contract',[
+    'LiDAR quality control and terrain products for grid resilience work.',
+    'Automated pipelines and measurement tools that cut manual work from days to minutes.',
+    'Spatial database administration and automated QA.'],['adm','dev','ds']],
+  ['2023 — 2024','Research Assistant','Florida Atlantic University',[
+    'Flood risk assessments and automated geoprocessing for watershed planning.',
+    'Peer-reviewed research and an open-source flood modeling framework.'],['ds','oss']],
+  ['Ongoing','GIS Developer','Freelance',[
+    'Field data collection apps, large-scale geocoding and custom GIS tools for clients.'],['dev','oss']],
+  ['2020 — 2022','Geomatics Engineer','Kathmandu, Nepal',[
+    'Led GNSS, total-station and drone survey crews.',
+    'Designed municipal geodatabases and trained government staff in GIS.'],['adm','dev']]
+];
+$('xp').innerHTML = JOBS.map(function(j){
+  return '<div class="job rv in' + (j[5] ? ' cur' : '') + '"><div class="when">' + esc(j[0]) + '</div><div><h4>' + esc(j[1]) + ' <span>· ' + esc(j[2]) + '</span></h4><ul>' +
+    j[3].map(function(b){ return '<li>' + esc(b) + '</li>'; }).join('') + '</ul><div class="tags">' + j[4].map(function(k){ return '<span style="--c:var(--' + k + ')"><i></i>' + TAG[k] + '</span>'; }).join('') + '</div></div></div>';
+}).join('');
 })();
 </script>
-
-<!-- Privacy-friendly visitor analytics (GoatCounter) -->
 <script data-goatcounter="https://gisus.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 fetch('https://gisus.goatcounter.com/counter/TOTAL.json')
@@ -1263,6 +825,5 @@ fetch('https://gisus.goatcounter.com/counter/TOTAL.json')
   .then(function(d){ document.getElementById('gc-view-count').textContent = d.count; })
   .catch(function(){});
 </script>
-
 </body>
 </html>
