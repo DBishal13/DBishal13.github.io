@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T00:56:20.891153Z",
+  "generated_at": "2026-11-24T23:02:28.065495Z",
   "repos": [
     {
       "name": "groundtruth",
@@ -26,7 +26,7 @@
       "homepage": "https://hazard-mcp.vercel.app",
       "language": "Python",
       "pushed_at": "2026-11-05T22:56:34Z",
-      "stars": 1
+      "stars": 2
     },
     {
       "name": "arset-catalog",
